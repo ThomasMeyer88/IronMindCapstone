@@ -38,5 +38,5 @@ public class ClientWithRoles extends Client implements UserDetails {
             return true;
         }
     }
-}
+
 
