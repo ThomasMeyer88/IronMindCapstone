@@ -3,6 +3,7 @@ package com.ironmind.ferrus.model;
 
 import javax.persistence.*;
 
+
 @Entity
 @Table(name="users")
 public class Client {
@@ -76,7 +77,7 @@ public class Client {
         password = copy.password;
     }
 
-
+    public Client(){}
 
 
     public String getName() {
