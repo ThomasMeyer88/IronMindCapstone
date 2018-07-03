@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/header"></head>
+
+<body>
+
+<br />
+
+<div class="container">
+    <form th:action="@{/newexercise}" method="post" th:object="${exercise}">
+        Name:
+        <input th:field="*{name}" />
+        <br />
+        Muscle:
+        <input th:field="*{muscle}" />
+        <br />
+        <input type="submit" />
+    </form>
+</div>
+
+</body>
+</html>
