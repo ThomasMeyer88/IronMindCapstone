@@ -3,11 +3,11 @@
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.codeup</groupId>
-	<artifactId>blog</artifactId>
+	<artifactId>Ironmind</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
-	<name>blog</name>
-	<description>Project to learn Spring boot</description>
+	<name>Ironmind</name>
+	<description>Capstone Project</description>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -106,3 +106,6 @@
 		</pluginRepository>
 	</pluginRepositories>
 </project>
+
+
+
