@@ -1,9 +1,28 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="partials/header :: header" />
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/header :: header(${'posts'})" />
+
 <body>
 <div th:replace="partials/navbar :: navbar"></div>
+<br/>
+<br/>
+<div class="jumbotron">
+    <h1>Welcome to Ironmind!</h1>
+    <p class="lead">Track your workouts </p>
+    <p><a class="btn btn-lg btn-success" href="#" role="button">Get started today</a></p>
+</div>
 
+
+</div> <!-- /container -->
+<div class="row">
+    <div class=" card col-lg-4 coach">
+        <h2>Are you a coach?</h2>
+        <p>See if you qualify to be a coach with IronMind. </p>
+        <p><a class="btn btn-primary" href="#" role="button">Check Here &raquo;</a></p>
+    </div>
+
+
+</div>
 
 
 </body>
