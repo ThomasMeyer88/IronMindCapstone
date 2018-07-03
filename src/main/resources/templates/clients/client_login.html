@@ -5,6 +5,7 @@
 <h1>Login</h1>
 
 <div class="container">
+    <h5 th:text="${error}"></h5>
     <form th:action="@{/client_login}" method="post">
         <input class="form-control" id="username" name="username" type="text" placeholder="Username"/>
         <br />

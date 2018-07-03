@@ -77,6 +77,11 @@ public class Client {
         password = copy.password;
     }
 
+    public Client(String username, String password){
+        this.username = username;
+        this.password = password;
+    }
+
     public Client(){}
 
 

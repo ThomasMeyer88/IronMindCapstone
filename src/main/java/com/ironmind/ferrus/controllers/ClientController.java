@@ -3,6 +3,7 @@ package com.ironmind.ferrus.controllers;
 import com.ironmind.ferrus.model.Client;
 import com.ironmind.ferrus.repositiories.ClientRepositories;
 import com.ironmind.ferrus.repositiories.Clients;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -18,11 +19,14 @@ public class ClientController {
     private PasswordEncoder passwordEncoder;
     private final ClientRepositories clientDao;
 
+
     public ClientController(Clients clients, PasswordEncoder passwordEncoder, ClientRepositories clientDao){
         this.clients = clients;
         this.passwordEncoder = passwordEncoder;
         this.clientDao = clientDao;
     }
+
+
 
 
     @GetMapping("/client_registration")
@@ -39,15 +43,23 @@ public class ClientController {
         return "redirect:/client_login";
     }
 
-    @GetMapping("/client_profile_page/{id}")
-    public String showProfile(@PathVariable long id, Model model){
-        model.addAttribute("Client", clientDao.findOne(id));
+    @GetMapping("/client_profile_page")
+    public String clientPage(Model view){
+
+        Client clientSession = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        view.addAttribute("client", clientSession);
         return "clients/client_profile_page";
     }
 
+//    @GetMapping("/client_profile_page/{id}")
+//    public String showProfile(@PathVariable long id, Model model){
+//        model.addAttribute("Client", clientDao.findOne(id));
+//        return "clients/client_profile_page";
+//    }
+
     @GetMapping("/client_profile_page/{id}/edit")
     public String viewEdit(@PathVariable long id, Model model){
-        model.addAttribute("Client", clientDao.findOne(id));
+        model.addAttribute("client", clientDao.findOne(id));
         return "clients/edit";
     }
 
@@ -56,6 +68,7 @@ public class ClientController {
         clientDao.save(client);
         return "redirect:/client_profile_page";
     }
+
 
 
 
