@@ -1,3 +1,36 @@
-body{
-    background-color: cadetblue;
+html, body {
+    text-align: center;
 }
+
+body{
+    /*background-color: palegreen;*/
+
+    /*background: url("john3.jpeg") no-repeat;*/
+    background-image: url("/images/Gym.jpg");
+    background-size:100% 100vh;
+    background-repeat:no-repeat;
+
+
+}
+@media (min-width: 992px) {
+    .navbar {
+        height:30px;
+    }
+}
+.nav-link{
+    color: ghostwhite;
+    font-size: 20px;
+    font-family:"Lucida Grande","monospace";
+}
+
+.jumbotron{
+    margin-top: 25px;
+    background-color: transparent;
+    color: aliceblue;
+}
+
+.pic{
+    margin-top: 55px;
+}
+
+
