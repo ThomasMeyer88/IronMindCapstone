@@ -65,7 +65,20 @@ public class ClientController {
 
     @PostMapping("/client_profile_page/{id}/edit")
     public String updateProfile(@PathVariable long id, @ModelAttribute Client client){
+        Client clientSession = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        clientSession.setEmail(client.getEmail());
+        String hash = passwordEncoder.encode(client.getPassword());
+        client.setPassword(hash);
+//        clientSession.setPassword(client.getPassword());
+        clientSession.setUsername(client.getUsername());
+        clientSession.setName(client.getName());
         clientDao.save(client);
+        return "redirect:/client_profile_page/";
+    }
+
+    @PostMapping("/client_profile_page/{id}/delete")
+    public String delete(@PathVariable long id){
+        clientDao.delete(id);
         return "redirect:/client_profile_page";
     }
 
