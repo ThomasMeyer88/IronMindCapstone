@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/header :: header" />
+<body>
+<h1>Login</h1>
+
+<div class="container">
+    <form th:action="@{/client_login}" method="post">
+        <input class="form-control" id="username" name="username" type="text" placeholder="Username"/>
+        <br />
+        <input class="form-control" id="password" name="password" type="password" placeholder="Password"/>
+        <br />
+        <input class="btn btn-primary" type="submit" value="Log In" />
+    </form>
+</div>
+
+</body>
+</html>
