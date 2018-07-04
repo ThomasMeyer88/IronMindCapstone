@@ -133,5 +133,19 @@ public class ExerciseController {
         return "redirect:/exercises/" + day;
     }
 
-
+    @RequestMapping(value = "/deleteset/{name}/{day}", method = RequestMethod.POST)
+    public String deleteSet(@PathVariable long day, @PathVariable String name, @RequestParam long id, @RequestParam long setId, Model view){
+        SubSet checkSet = setDao.getSets().findOne(setId);
+        //I am checking the workSet to see if it has an subsets
+        //connected to it.  If not I delete the workSet from the database
+        WorkSet checkWork = checkSet.getWorkSet();
+        setDao.getSets().delete(checkSet.getId());
+        List<SubSet> subSets = setDao.getSets().findAllByWorkSet_Id(checkWork.getId());
+        if(subSets.size() == 0){
+            workDao.getWork().delete(checkWork.getId());
+        }
+        view.addAttribute("dropId", id);
+        System.out.println(id);
+        return "redirect:/exercises/" + name + "/" + day;
+    }
 }

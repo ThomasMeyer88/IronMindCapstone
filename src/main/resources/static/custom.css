@@ -91,11 +91,13 @@ body{
     font-size: 1em;
     float: left;
     text-align: center;
+    margin-left: 1em;
 }
 .searchItem p {
     font-size: 0.8em;
     color: slategrey;
     text-align: right;
+    margin-right: 0.5em;
 }
 
 .builder{
@@ -116,12 +118,15 @@ body{
     float: left;
     font-size: 1.5em;
     border-bottom: 1px solid black;
+    text-align: center;
+    padding-top: 0.2em;
 }
 
 .buildDrop{
     width: 298px;
     background-color: gainsboro;
     margin:0;
+
 
 }
 
@@ -130,6 +135,7 @@ body{
     width: 298px;
     background-color: gainsboro;
     padding: 0;
+
 }
 
 .buildDrop ul li{
@@ -139,9 +145,10 @@ body{
 }
 
 .buildDrop input[type=text]{
-    background-color: gray;
-    border-color: gray;
+    background-color: lightgray;
+    border-color: lightgray;
     width: 40px;
+    text-align: center;
 }
 
 .dropBtn{
@@ -199,6 +206,10 @@ body{
     margin: 0;
     padding: 0;
     height: 20px;
+    border-bottom: 1px silver;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
 }
 
 
