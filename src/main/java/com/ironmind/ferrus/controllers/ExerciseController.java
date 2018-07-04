@@ -66,6 +66,20 @@ public class ExerciseController {
         return("exercises/exercises");
     }
 
+    @GetMapping("/exercises/{name}/{day}/{id}")
+    public String exerciseUpdateIndex(@PathVariable int day, @PathVariable String name, @PathVariable long id, Model view){
+        template temp = tempDao.getTemplates().findByProgram_IdAndDay(3, day);
+        List<WorkSet> daySet = workDao.getWork().findAllByTemplate(temp);
+        SubSet subSet = new SubSet(0, 0, " ", null);
+        view.addAttribute("dropId", id);
+        view.addAttribute("workSets", daySet);
+        view.addAttribute("subSet", subSet);
+        view.addAttribute("exercises", exerciseService.getExercises().findAll());
+        view.addAttribute("day", day);
+        view.addAttribute("name", name);
+        return("exercises/exercises");
+    }
+
     @GetMapping("/newexercise")
     public String create(Model view){
         Exercise exercise = new Exercise(" ", " ");
@@ -125,16 +139,30 @@ public class ExerciseController {
         }
     }
 
-    @RequestMapping(value = "/editplan/{day}", method = RequestMethod.POST)
-    public String getTest(@PathVariable long day, @RequestParam int id, @RequestParam int weight, @RequestParam int reps,
-                          @RequestParam int sets) {
+    @RequestMapping(value = "/editset/{name}/{day}", method = RequestMethod.POST)
+    public String editSet(@PathVariable long day, @PathVariable String name, @RequestParam long id, @RequestParam long setId,
+                          @RequestParam int weight, @RequestParam int reps){
+        SubSet editSet = setDao.getSets().findOne(setId);
+        editSet.setWeight(weight);
+        editSet.setReps(reps);
+        setDao.getSets().save(editSet);
+        return "redirect:/exercises/" + name + "/" + day + "/" + id;
 
-
-        return "redirect:/exercises/" + day;
     }
 
+    @RequestMapping(value = "/copyset/{name}/{day}", method = RequestMethod.POST)
+    public String getTest(@PathVariable long day, @PathVariable String name, @RequestParam long id, @RequestParam long setId) {
+        SubSet copySet = setDao.getSets().findOne(setId);
+        SubSet saveSet = new SubSet(copySet.getWeight(), copySet.getReps(), copySet.getExerciseName(), copySet.getWorkSet());
+        setDao.getSets().save(saveSet);
+        return "redirect:/exercises/" + name + "/" + day + "/" + id;
+
+    }
+
+
+
     @RequestMapping(value = "/deleteset/{name}/{day}", method = RequestMethod.POST)
-    public String deleteSet(@PathVariable long day, @PathVariable String name, @RequestParam long id, @RequestParam long setId, Model view){
+    public String deleteSet(@PathVariable long day, @PathVariable String name, @RequestParam long id, @RequestParam long setId){
         SubSet checkSet = setDao.getSets().findOne(setId);
         //I am checking the workSet to see if it has an subsets
         //connected to it.  If not I delete the workSet from the database
@@ -144,8 +172,6 @@ public class ExerciseController {
         if(subSets.size() == 0){
             workDao.getWork().delete(checkWork.getId());
         }
-        view.addAttribute("dropId", id);
-        System.out.println(id);
-        return "redirect:/exercises/" + name + "/" + day;
+        return "redirect:/exercises/" + name + "/" + day + "/" + id;
     }
 }

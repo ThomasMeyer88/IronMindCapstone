@@ -47,8 +47,9 @@
             <button onclick="dropdown(this.id)" th:id="${workSet.id}"  class="dropBtn"></button>
         <div class="buildDrop" style="display:none" th:id="${workSet}">
             <ul th:each="subSet : ${workSet.subSets}">
-                <form th:action="@{/editplan/} + ${name} + @{/} + ${day}" method = "post">
+                <form th:action="@{/editset/} + ${name} + @{/} + ${day}" method = "post">
                     <input th:value="${workSet.id}" name = "id" type="hidden"/>
+                    <input th:value="${subSet.id}" name = "setId" type="hidden" />
                     <li>Weight: <input th:value="${subSet.weight}" type="text" name = "weight" /></li>
                     <li>Reps: <input th:value="${subSet.reps}" type="text" name ="reps" /></li>
                     <input type="submit" value=" " class="dropBtnEdit" />
@@ -58,8 +59,9 @@
                     <input th:value="${subSet.id}" name = "setId" type="hidden" />
                     <input type="submit" value=" " class="dropBtnDel" />
                 </form>
-                <form>
+                <form th:action="@{/copyset/} + ${name} + @{/} + ${day}" method="post">
                     <input th:value="${workSet.id}" name = "id" type="hidden"/>
+                    <input th:value="${subSet.id}" name = "setId" type="hidden" />
 
                     <input type="submit" value=" " class="dropBtnCopy"  />
                 </form>
