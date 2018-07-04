@@ -100,24 +100,9 @@ public class ClientController {
 
     @GetMapping("/client_progress/{id}")
     public String viewProgress(@PathVariable long id, Model view){
-        Client client = clientDao.findOne(id);
-        List<CompletedSet> completedSetList = compDao.getCompSets().findAllByClient_Id(id);
-        view.addAttribute("compSets", completedSetList);
-        List<Exercise> exercises = exerciseService.getExercises().findAll();
-        List<CompletedSet> maxLifts = new ArrayList<>();
-        for(Exercise exer: exercises){
-            List<CompletedSet> completedSet = compDao.getCompSets().findAllByExerciseIdOrderByEstimated1RMDesc(exer.getId());
-            if(completedSet.size() > 0) {
-                maxLifts.add(completedSet.get(0));
-            }
-        }
-        view.addAttribute("ERM", maxLifts);
+        List<CompletedSet> completedSets = compDao.getCompSets().findAllByExerciseIdAndClient_Id(1, id);
+        view.addAttribute("sets", completedSets);
         return "clients/client_progress";
     }
-
-
-
-
-
 
 }
