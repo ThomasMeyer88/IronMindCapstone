@@ -122,6 +122,9 @@
 
     function drop(ev) {
         ev.preventDefault();
+        if(document.getElementById("builder").innerHTML == "<h3>Drag an exercise over to begin</h3>"){
+            document.getElementById("builder").innerHTML = "";
+        }
         data = ev.dataTransfer.getData("text");
         var nodeCopy = document.getElementById(data).cloneNode(true);
         nodeCopy.id = "newId"; /* We cannot use the same ID */
@@ -161,8 +164,17 @@
         }
     }
 
+    function builderDisplay(builder){
+        if(builder == 0){
+            document.getElementById("builder").innerHTML = "<h3>Drag an exercise over to begin</h3>";
+        }
+    }
+
+    var builder = document.getElementById("builder").children.length;
+    console.log(builder);
     var stickyDrop = document.getElementById("dropCheck").value;
     console.log(stickyDrop);
+    builderDisplay(builder);
     document.onload(dropdown(stickyDrop));
 </script>
 </html>

@@ -57,6 +57,9 @@ public class ExerciseController {
     public String dayLog(@PathVariable int day, @PathVariable String name, Model view){
         template temp = tempDao.getTemplates().findByProgram_IdAndDay(3, day);
         List<WorkSet> daySet = workDao.getWork().findAllByTemplate(temp);
+        if(daySet.size() == 0){
+            view.addAttribute("done", "You've finished all of today's sets!");
+        }
         view.addAttribute("workSets", daySet);
         view.addAttribute("name", name);
         view.addAttribute("day",day);
