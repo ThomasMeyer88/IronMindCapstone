@@ -10,6 +10,9 @@
     <h1 class="dayHeader"><output th:text="${name}"></output></h1>
 <h3 class="dayHeader"> Workouts for day:  <output th:text ="${day}"></output></h3>
     <div class="searchContainer" >
+        <div class="searchBar">
+            <input type="text" placeholder="Search" id="searchEx"/>
+        </div>
     <div th:each="exercise : ${exercises}">
         <div class="setForm" draggable="true" ondragstart="drag(event)" th:id = "${exercise.name}">
             <div>
@@ -73,7 +76,26 @@
     var increment = 0;
     var name = "name";
     var subSet = document.getElementById("set1");
+    var search = document.getElementById("searchEx");
+    search.addEventListener("keyup", runSearch, false);
+
+    function runSearch(){
+        var search = document.getElementById("searchEx").value.toString();
+        Array.from(document.getElementsByClassName("setForm")).forEach(
+            function(element, index, array) {
+                var string = element.id.toString();
+                console.log(string);
+                if(string.toLowerCase().includes(search.toLowerCase())){
+                    element.style.display = "block"
+                } else {
+                    element.style.display = "none";
+                }
+            }
+        );
+    }
+
     console.log(subSet);
+
     function allowDrop(ev) {
         ev.preventDefault();
     }
