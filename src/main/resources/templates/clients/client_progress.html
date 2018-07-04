@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/header :: header" />
+
+<body>
+
+    <div style="width: 40%; float: left">
+        <div th:each="completedSet : ${compSets}">
+            <h5 th:text="${completedSet.day}"></h5>
+            <h6 th:text="${completedSet.exerciseName}"></h6>
+            <h6 th:text="${completedSet.totalweight}"></h6>
+        </div>
+    </div>
+    <div style="width: 40%; float: left">
+        <div th:each="completedSet : ${ERM}">
+            <h3 th:text="${completedSet.exerciseName}"></h3>
+            <h4 th:text="${completedSet.estimated1RM}"></h4>
+        </div>
+    </div>
+
+</body>
+</html>

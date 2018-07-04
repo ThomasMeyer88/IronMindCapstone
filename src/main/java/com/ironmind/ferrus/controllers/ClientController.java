@@ -1,6 +1,10 @@
 package com.ironmind.ferrus.controllers;
 
+import com.ironmind.ferrus.Services.*;
 import com.ironmind.ferrus.model.Client;
+import com.ironmind.ferrus.model.CompletedSet;
+import com.ironmind.ferrus.model.Exercise;
+import com.ironmind.ferrus.model.programService;
 import com.ironmind.ferrus.repositiories.ClientRepositories;
 import com.ironmind.ferrus.repositiories.Clients;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,22 +16,34 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Controller
 public class ClientController {
     private Clients clients;
     private PasswordEncoder passwordEncoder;
     private final ClientRepositories clientDao;
+    private ExerciseService exerciseService;
+    private workSetService workDao;
+    private templateService tempDao;
+    private subSetService setDao;
+    private programService programDao;
+    private completedSetService compDao;
 
 
-    public ClientController(Clients clients, PasswordEncoder passwordEncoder, ClientRepositories clientDao){
+    public ClientController(Clients clients, PasswordEncoder passwordEncoder, ClientRepositories clientDao, ExerciseService exerciseService, workSetService workDao, templateService tempDao, subSetService setDao, programService programDao, completedSetService compDao) {
         this.clients = clients;
         this.passwordEncoder = passwordEncoder;
         this.clientDao = clientDao;
+        this.exerciseService = exerciseService;
+        this.workDao = workDao;
+        this.tempDao = tempDao;
+        this.setDao = setDao;
+        this.programDao = programDao;
+        this.compDao = compDao;
     }
-
-
-
 
     @GetMapping("/client_registration")
     public String showSignUpForm(Model model){
@@ -80,6 +96,23 @@ public class ClientController {
     public String delete(@PathVariable long id){
         clientDao.delete(id);
         return "redirect:/client_profile_page";
+    }
+
+    @GetMapping("/client_progress/{id}")
+    public String viewProgress(@PathVariable long id, Model view){
+        Client client = clientDao.findOne(id);
+        List<CompletedSet> completedSetList = compDao.getCompSets().findAllByClient_Id(id);
+        view.addAttribute("compSets", completedSetList);
+        List<Exercise> exercises = exerciseService.getExercises().findAll();
+        List<CompletedSet> maxLifts = new ArrayList<>();
+        for(Exercise exer: exercises){
+            List<CompletedSet> completedSet = compDao.getCompSets().findAllByExerciseIdOrderByEstimated1RMDesc(exer.getId());
+            if(completedSet.size() > 0) {
+                maxLifts.add(completedSet.get(0));
+            }
+        }
+        view.addAttribute("ERM", maxLifts);
+        return "clients/client_progress";
     }
 
 
