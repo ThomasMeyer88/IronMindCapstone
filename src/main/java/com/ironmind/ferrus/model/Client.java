@@ -45,6 +45,9 @@ public class Client {
     @OneToMany (mappedBy = "client")
     private List<Program> programs;
 
+    @OneToMany (mappedBy = "client")
+    private List<CompletedSet> completedSets;
+
     public Client(Long id, String name, String username, String email, String password, Long height, Long weight, String sex, String imgurl, String bio, String coach_id){
         this.id = id;
         this.name = name;
@@ -177,5 +180,21 @@ public class Client {
 
     public void setCoach_id(String coach_id) {
         this.coach_id = coach_id;
+    }
+
+    public List<Program> getPrograms() {
+        return programs;
+    }
+
+    public void setPrograms(List<Program> programs) {
+        this.programs = programs;
+    }
+
+    public List<CompletedSet> getCompletedSets() {
+        return completedSets;
+    }
+
+    public void setCompletedSets(List<CompletedSet> completedSets) {
+        this.completedSets = completedSets;
     }
 }

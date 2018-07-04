@@ -2,12 +2,10 @@ package com.ironmind.ferrus.controllers;
 
 
 
-import com.ironmind.ferrus.Services.ExerciseService;
-import com.ironmind.ferrus.Services.subSetService;
-import com.ironmind.ferrus.Services.templateService;
-import com.ironmind.ferrus.Services.workSetService;
+import com.ironmind.ferrus.Services.*;
 import com.ironmind.ferrus.model.*;
 import com.ironmind.ferrus.repositiories.ClientRepositories;
+import com.sun.xml.internal.ws.api.pipe.FiberContextSwitchInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -24,18 +22,21 @@ public class ExerciseController {
     private templateService tempDao;
     private subSetService setDao;
     private programService programDao;
+    private completedSetService compDao;
     private ClientRepositories clientDao;
 
     @Autowired
     public ExerciseController
             (ExerciseService exerciseService, workSetService work, templateService tempDao,
-             subSetService setDao, programService programService, ClientRepositories clientDao){
+             subSetService setDao, programService programService, ClientRepositories clientDao,
+             completedSetService compDao){
         this.exerciseService = exerciseService;
         this.workDao = work;
         this.tempDao = tempDao;
         this.setDao = setDao;
         this.programDao = programService;
         this.clientDao = clientDao;
+        this.compDao = compDao;
 
     }
 
@@ -50,6 +51,16 @@ public class ExerciseController {
             }
         }
         return("posts/index");
+    }
+
+    @GetMapping("/log/{name}/{day}")
+    public String dayLog(@PathVariable int day, @PathVariable String name, Model view){
+        template temp = tempDao.getTemplates().findByProgram_IdAndDay(3, day);
+        List<WorkSet> daySet = workDao.getWork().findAllByTemplate(temp);
+        view.addAttribute("workSets", daySet);
+        view.addAttribute("name", name);
+        view.addAttribute("day",day);
+        return("exercises/log");
     }
 
     @GetMapping("/exercises/{name}/{day}")
