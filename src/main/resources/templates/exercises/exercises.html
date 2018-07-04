@@ -6,14 +6,14 @@
 
 <body class="plannerBody">
 <nav th:replace="partials/navbar::navbar"></nav>
+
 <div class="plannerContainer">
     <h1 class="dayHeader"><output th:text="${name}"></output></h1>
-<h3 class="dayHeader"> Workouts for day:  <output th:text ="${day}"></output></h3>
+    <h3 class="dayHeader"> Workouts for day:  <output th:text ="${day}"></output></h3>
     <div class="searchContainer" >
-        <div class="searchBar">
-            <input type="text" placeholder="Search" id="searchEx"/>
-        </div>
-    <div th:each="exercise : ${exercises}">
+            <input type="text" placeholder="Search" id="searchEx" class="searchBar"/>
+        <div class="scrollable">
+             <div th:each="exercise : ${exercises}">
         <div class="setForm" draggable="true" ondragstart="drag(event)" th:id = "${exercise.name}">
             <div>
                 <div class = "searchItem">
@@ -38,7 +38,7 @@
             </div>
         </div>
     </div>
-</div>
+        </div>
 </div>
 
 <div class="builder" id="builder" ondrop="drop(event)" ondragover="allowDrop(event)">
@@ -65,6 +65,7 @@
     </div>
 
 </div>
+</div>
 
 
 </body>
@@ -84,10 +85,17 @@
         Array.from(document.getElementsByClassName("setForm")).forEach(
             function(element, index, array) {
                 var string = element.id.toString();
+                console.log(element.childNodes[1].childNodes[1]);
+                console.log(element.childNodes[1].childNodes[1].childNodes[3]);
+                var stringDos = element.childNodes[1].childNodes[1].childNodes[3].textContent.toString();
+
                 console.log(string);
                 if(string.toLowerCase().includes(search.toLowerCase())){
-                    element.style.display = "block"
-                } else {
+                    element.style.display = "block";
+                } else if(stringDos.toLowerCase().includes(search.toLowerCase())) {
+                    element.style.display = "block";
+                }
+                else {
                     element.style.display = "none";
                 }
             }

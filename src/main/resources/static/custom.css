@@ -15,6 +15,7 @@ body{
 .plannerBody{
     padding: 0;
     margin: 0;
+    background-image: none;
     background-color: white;
 }
 
@@ -60,12 +61,18 @@ body{
 /*<div style="overflow-y: scroll; height:400px;">*/
 
 .searchContainer{
-    overflow-y: scroll;
     height: 300px;
     width: 250px;
     border: 1px solid gray;
     align-content: center;
     float: left;
+    padding: 0;
+    margin-right: 3.8%;
+}
+
+.scrollable{
+    overflow-y: scroll;
+    height: 270px;
 
 }
 
@@ -186,6 +193,13 @@ body{
 
 }
 
+.searchBar{
+    width: 248px;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    height: 20px;
+}
 
 
 
