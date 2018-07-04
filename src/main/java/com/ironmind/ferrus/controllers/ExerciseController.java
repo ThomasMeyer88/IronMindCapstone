@@ -170,6 +170,24 @@ public class ExerciseController {
 
     }
 
+    @RequestMapping(value = "/logset/{name}/{day}", method= RequestMethod.POST)
+    public String logSet(@PathVariable long day, @PathVariable String name, @RequestParam long id, @RequestParam long setId){
+        SubSet subSet = setDao.getSets().findOne(setId);
+        Client clientSession = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        Exercise exercise = exerciseService.getExercises().findByName(subSet.getExerciseName());
+        CompletedSet logSet = new CompletedSet(subSet.getExerciseName(), day, exercise.getId(), subSet.getWeight(), subSet.getReps(), clientSession);
+        logSet.setEstimated1RM(subSet.getReps(), subSet.getWeight());
+        compDao.getCompSets().save(logSet);
+        WorkSet checkWork = subSet.getWorkSet();
+        setDao.getSets().delete(setId);
+        List<SubSet> subSets = setDao.getSets().findAllByWorkSet_Id(checkWork.getId());
+        if(subSets.size() == 0){
+            workDao.getWork().delete(checkWork.getId());
+        }
+        return "redirect:/log/" + name + "/" + day;
+    }
+
 
 
     @RequestMapping(value = "/deleteset/{name}/{day}", method = RequestMethod.POST)

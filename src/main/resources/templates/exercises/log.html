@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/header">
+
+</head>
+<input th:value="${dropId}" id="dropCheck" type="hidden"/>
+<body class="plannerBody" style="align-content: center">
+<!--<nav th:replace="partials/navbar::navbar"></nav>-->
+
+<div class="plannerContainer">
+    <h1 class="dayHeader"><output th:text="${name}"></output></h1>
+    <h3 class="dayHeader"> sets for day:  <output th:text ="${day}"></output></h3>
+    <div class="builder" id="builder" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <div th:each="workSet :${workSets}">
+            <h3 class = "buildItem" th:text="${workSet.exerciseName}"></h3>
+            <button onclick="dropdown(this.id)" th:id="${workSet.id}"  class="dropBtn"></button>
+            <div class="buildDrop" style="display:none" th:id="${workSet}">
+                <ul th:each="subSet : ${workSet.subSets}">
+                    <form th:action="@{/logset/} + ${name} + @{/} + ${day}" method = "post">
+                        <input th:value="${workSet.id}" name = "id" type="hidden"/>
+                        <input th:value="${subSet.id}" name = "setId" type="hidden" />
+                        <li>Weight: <output th:text="${subSet.weight}"></output></li>
+                        <li>Reps: <output th:text="${subSet.reps}"></output></li>
+                        <input type="submit" value=" " class="dropBtnCpy" />
+                    </form>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+</body>
+
+<script>
+    "use strict";
+
+    function dropdown(id){
+        if(document.getElementById(id).nextElementSibling.style.display == "none") {
+            document.getElementById(id).nextElementSibling.style.display = "inline-block";
+        }
+        else{
+            document.getElementById(id).nextElementSibling.style.display="none";
+        }
+    }
+
+    var stickyDrop = document.getElementById("dropCheck").value;
+    console.log(stickyDrop);
+    document.onload(dropdown(stickyDrop));
+</script>
+</html>

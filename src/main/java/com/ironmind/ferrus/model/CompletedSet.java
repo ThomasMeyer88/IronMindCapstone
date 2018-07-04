@@ -26,7 +26,7 @@ public class CompletedSet {
     @Column(nullable = false)
     private long totalweight;
 
-    @Column(nullable = false)
+    @Column
     private long estimated1RM;
 
     @ManyToOne
@@ -42,7 +42,6 @@ public class CompletedSet {
         this.weight = weight;
         this.reps = reps;
         this.totalweight = (weight * reps);
-        this.estimated1RM = (weight * (1 + (reps/30)));
         this.client = client;
     }
 
@@ -116,5 +115,14 @@ public class CompletedSet {
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    public void setEstimated1RM(long reps, long weight){
+        System.out.println("reps and weight are " + reps + " " + weight);
+        double factor = ((reps*10)/30);
+        factor /= 10;
+        factor += 1;
+        double erm = factor * weight;
+        this.estimated1RM = (long) erm;
     }
 }
