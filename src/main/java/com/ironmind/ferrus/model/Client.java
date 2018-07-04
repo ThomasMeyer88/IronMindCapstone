@@ -2,6 +2,7 @@ package com.ironmind.ferrus.model;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -41,6 +42,9 @@ public class Client {
     @Column()
     private String coach_id;
 
+    @OneToMany (mappedBy = "client")
+    private List<Program> programs;
+
     public Client(Long id, String name, String username, String email, String password, Long height, Long weight, String sex, String imgurl, String bio, String coach_id){
         this.id = id;
         this.name = name;
@@ -54,6 +58,8 @@ public class Client {
         this.bio = bio;
         this.coach_id = coach_id;
     }
+
+
 
     public Client(Long id, String name, String username, String email, String password){
         this.id = id;
