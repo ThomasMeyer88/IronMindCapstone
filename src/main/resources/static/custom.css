@@ -8,15 +8,16 @@ body{
     /*background: url("john3.jpeg") no-repeat;*/
     background-image: url("/images/Gym.jpg");
     background-size:100% 100vh;
-    background-repeat:no-repeat;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
 
 
 }
 .plannerBody{
     padding: 0;
     margin: 0;
-    background-image: none;
-    background-color: white;
+
 }
 
 .plannerContainer{
@@ -25,17 +26,24 @@ body{
     margin-top: 5%;
     min-height: 100%;
     padding: 1em;
+    background-color: whitesmoke;
+    height: 500px;
+
 }
 
 .dayHeader{
     width: 100%;
     text-align: center;
     font-family: "Lucida Grande", "monospace";
-    font-size: 2em;
+    font-size: 1.5em;
     color: darkblue;
     border-bottom: 1px solid gray;
-    height: 2em;
-    padding: 0;
+    height: 1.5em;
+    padding-top: 0.2em;
+}
+
+.dayHeader h1{
+    color: darkblue;
 }
 @media (min-width: 992px) {
     .navbar {
@@ -67,7 +75,7 @@ body{
     align-content: center;
     float: left;
     padding: 0;
-    margin-right: 3.8%;
+    margin-right: 2%;
 }
 
 .scrollable{
@@ -103,15 +111,14 @@ body{
 .builder{
     float: left;
     margin-left: 50px;
-    height: 450px;
-    width: 300px;
+    height: 350px;
+    width: 450px;
     border: 1px solid black;
     overflow-y: scroll;
-
 }
 
 .buildItem{
-    width: 250px;
+    width: 400px;
     background-color: slategray;
     margin: 0;
     height: 1.6em;
@@ -123,7 +130,7 @@ body{
 }
 
 .buildDrop{
-    width: 298px;
+    width: 448px;
     background-color: gainsboro;
     margin:0;
 
@@ -132,14 +139,14 @@ body{
 
 .buildDrop ul{
     list-style: none;
-    width: 298px;
+    width: 448px;
     background-color: gainsboro;
     padding: 0;
 
 }
 
 .buildDrop ul li{
-    width: 100px;
+    width: 150px;
     float: left;
     padding: 0;
 }
@@ -162,7 +169,7 @@ body{
     border-bottom: 1px solid black;
     border-left: 0;
     border-right: 0;
-    border-top: 0;
+    border-top: 1px solid black;
 
 }
 
