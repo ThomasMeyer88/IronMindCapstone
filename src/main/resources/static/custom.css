@@ -12,6 +12,30 @@ body{
 
 
 }
+.plannerBody{
+    padding: 0;
+    margin: 0;
+    background-color: white;
+}
+
+.plannerContainer{
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 5%;
+    min-height: 100%;
+    padding: 1em;
+}
+
+.dayHeader{
+    width: 100%;
+    text-align: center;
+    font-family: "Lucida Grande", "monospace";
+    font-size: 2em;
+    color: darkblue;
+    border-bottom: 1px solid gray;
+    height: 2em;
+    padding: 0;
+}
 @media (min-width: 992px) {
     .navbar {
         height:30px;
@@ -38,23 +62,33 @@ body{
 .searchContainer{
     overflow-y: scroll;
     height: 300px;
-    width: 150px;
-    border: 1px solid black;
+    width: 250px;
+    border: 1px solid gray;
     align-content: center;
     float: left;
 
 }
 
 .searchItem{
-    overflow-y: scroll;
-    width: 300px;
-    margin-top: 0;
+    width: 250px;
+    margin-top: 0.5em;
     margin-bottom: 0;
-    background-color: lightgray;
+    background-color: gainsboro;
     border: 1px solid black;
-    box-shadow: inset darkblue 3px 3px 3px;
+    text-align: left;
+    height: 1.5em;
+    padding: 0.1em;
+}
+
+.searchItem h3{
+    font-size: 1em;
+    float: left;
     text-align: center;
-    height: 2em;
+}
+.searchItem p {
+    font-size: 0.8em;
+    color: slategrey;
+    text-align: right;
 }
 
 .builder{
@@ -62,51 +96,98 @@ body{
     margin-left: 50px;
     height: 450px;
     width: 300px;
-    border: 3px solid black;
+    border: 1px solid black;
     overflow-y: scroll;
 
 }
 
 .buildItem{
-    width: 300px;
-    background-color: gray;
-    margin-top: 0;
-    margin-bottom: 0;
-    border: 1px solid black;
-    height: 2em;
+    width: 250px;
+    background-color: slategray;
+    margin: 0;
+    height: 1.6em;
+    float: left;
     font-size: 1.5em;
+    border-bottom: 1px solid black;
 }
 
-.setForm{
-    float: left;
+.buildDrop{
+    width: 298px;
+    background-color: gainsboro;
+    margin:0;
+
 }
 
-.setForm ul{
+.buildDrop ul{
     list-style: none;
+    width: 298px;
+    background-color: gainsboro;
+    padding: 0;
 }
 
-.setForm ul li{
+.buildDrop ul li{
+    width: 100px;
+    float: left;
+    padding: 0;
+}
+
+.buildDrop input[type=text]{
+    background-color: gray;
+    border-color: gray;
+    width: 40px;
+}
+
+.dropBtn{
+    width: 48px;
+    background-image: url("images/drop.png");
+    height: 38px;
+    background-size: 45px;
+    background-color: slategrey;
+    display: inline-block;
+    float: left;
+    border-bottom: 1px solid black;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+
+}
+
+.dropBtnEdit{
+    background-image: url("images/edit.png");
+    height: 1.3em;
+    background-size: 1.3em;
+    background-color: gainsboro;
+    border: 1px solid black;
+    display: inline-block;
+    margin: 5px;
     float: left;
 }
 
-.setForm input{
-    border: none;
+.dropBtnDel{
+    background-image: url("images/delete.png");
+    height: 1.3em;
+    background-size: 1.3em;
+    background-color: gainsboro;
+    border: 1px solid black;
+    display: inline-block;
+    margin: 5px;
+    float: left;
 }
 
-.setFormItems {
-    height: 1.5em;
-    width: 1em;
-    margin-left: 1.5em;
-    margin-right: 1em;
-    background-color: gray;
+.dropBtnCopy{
+    background-image: url("images/save.png");
+    height: 1.3em;
+    background-size: 1.3em;
+    background-color: gainsboro;
+    border: 1px solid black;
+    display: inline-block;
+    margin: 5px;
+    float: left;
+
 }
 
-.setFormItemsBig {
-    height: 1.5em;
-    width: 2em;
-    margin-right: 1.5em;
-    margin-left: 1.5em;
-    background-color: gray;
-}
+
+
+
 
 
