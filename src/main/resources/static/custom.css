@@ -219,7 +219,32 @@ body{
     border-right: 0;
 }
 
+.grid-container {
+    display: grid;
+    height: 100%;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas: ". . . ." ". . . ." ". . . coach";
+}
 
+.coach {
+    grid-area: coach;
 
+}
 
+#tagline{
+    margin-bottom: 40px;
+}
 
+h4{
+
+    color: dodgerblue;
+}
+
+p{
+    color: #fff;
+}
+
+#standards{
+    color: black;
+}
