@@ -13,8 +13,12 @@ public class template {
     private int day;
 
 
-    @OneToMany
+    @OneToMany(mappedBy = "template")
     private List<WorkSet> WorkSets;
+
+    @ManyToOne
+    @JoinColumn
+    private Program program;
 
 
     public template(){};
@@ -44,5 +48,21 @@ public class template {
 
     public void setWorkSets(List<WorkSet> workSets) {
         WorkSets = workSets;
+    }
+
+    public Program getProgram() {
+        return program;
+    }
+
+    public void setProgram(Program program) {
+        this.program = program;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

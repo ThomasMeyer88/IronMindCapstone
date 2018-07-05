@@ -11,8 +11,12 @@ public interface WorkSets extends CrudRepository<WorkSet, Long> {
 
     WorkSet findById(long id);
 
+    WorkSet findByTemplate_Id(long id);
+
     List<WorkSet> findAllById(long id);
     List<WorkSet> findAllByTemplate(template temp);
+
+    WorkSet findByTemplate_IdAndExerciseName(long id, String name);
 
 
 

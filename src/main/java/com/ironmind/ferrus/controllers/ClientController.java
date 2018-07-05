@@ -1,6 +1,10 @@
 package com.ironmind.ferrus.controllers;
 
+import com.ironmind.ferrus.Services.*;
 import com.ironmind.ferrus.model.Client;
+import com.ironmind.ferrus.model.CompletedSet;
+import com.ironmind.ferrus.model.Exercise;
+import com.ironmind.ferrus.model.programService;
 import com.ironmind.ferrus.repositiories.ClientRepositories;
 import com.ironmind.ferrus.repositiories.Clients;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,22 +16,34 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Controller
 public class ClientController {
     private Clients clients;
     private PasswordEncoder passwordEncoder;
     private final ClientRepositories clientDao;
+    private ExerciseService exerciseService;
+    private workSetService workDao;
+    private templateService tempDao;
+    private subSetService setDao;
+    private programService programDao;
+    private completedSetService compDao;
 
 
-    public ClientController(Clients clients, PasswordEncoder passwordEncoder, ClientRepositories clientDao){
+    public ClientController(Clients clients, PasswordEncoder passwordEncoder, ClientRepositories clientDao, ExerciseService exerciseService, workSetService workDao, templateService tempDao, subSetService setDao, programService programDao, completedSetService compDao) {
         this.clients = clients;
         this.passwordEncoder = passwordEncoder;
         this.clientDao = clientDao;
+        this.exerciseService = exerciseService;
+        this.workDao = workDao;
+        this.tempDao = tempDao;
+        this.setDao = setDao;
+        this.programDao = programDao;
+        this.compDao = compDao;
     }
-
-
-
 
     @GetMapping("/client_registration")
     public String showSignUpForm(Model model){
@@ -82,9 +98,11 @@ public class ClientController {
         return "redirect:/client_profile_page";
     }
 
-
-
-
-
+    @GetMapping("/client_progress/{id}")
+    public String viewProgress(@PathVariable long id, Model view){
+        List<CompletedSet> completedSets = compDao.getCompSets().findAllByExerciseIdAndClient_Id(1, id);
+        view.addAttribute("sets", completedSets);
+        return "clients/client_progress";
+    }
 
 }

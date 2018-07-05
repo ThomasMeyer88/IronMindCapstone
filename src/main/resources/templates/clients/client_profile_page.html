@@ -12,6 +12,10 @@
 <form class="form-group" th:action="@{/client_profile_page/{id}/edit(id=${client.id})}" method="get">
     <button type="submit" class="btn btn-warning btn-block btn-md" id="edit" name="edit">Edit Profile</button>
 </form>
+    <form class="form-group" th:action="@{/client_progress/{id}(id=${client.id})}" method="get">
+        <button type="submit" class="btn btn-primary btn-block btn-md" id="progress" name="progress">View Progress</button>
+    </form>
+
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>

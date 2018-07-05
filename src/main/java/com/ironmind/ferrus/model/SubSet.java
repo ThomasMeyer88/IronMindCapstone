@@ -38,6 +38,7 @@ public class SubSet {
         this.workSet = WorkSet;
     }
 
+
     public int getWeight() {
         return weight;
     }
