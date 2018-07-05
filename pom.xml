@@ -7,7 +7,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>Ironmind</name>
-	<description>Project to learn Spring boot</description>
+	<description>Capstone Project</description>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -106,3 +106,6 @@
 		</pluginRepository>
 	</pluginRepositories>
 </project>
+
+
+
