@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/header">
+
+</head>
+<input th:value="${dropId}" id="dropCheck" type="hidden"/>
+<body class="plannerBody">
+<!--<nav th:replace="partials/navbar::navbar"></nav>-->
+
+<div class="plannerContainer">
+    <h1 class="dayHeader"><output th:text="${name}"></output></h1>
+    <h3 class="dayHeader"> Workouts for day:  <output th:text ="${day}"></output></h3>
+    <div class="searchContainer" >
+            <input type="text" placeholder="Search" id="searchEx" class="searchBar"/>
+        <div class="scrollable">
+             <div th:each="exercise : ${exercises}">
+        <div class="setForm" draggable="true" ondragstart="drag(event)" th:id = "${exercise.name}">
+            <div>
+                <div class = "searchItem">
+                    <h3 th:text="${exercise.name}"></h3>
+                    <p th:text="${exercise.muscle}"></p>
+                </div>
+                <input th:value="*{exercise.name}" type="hidden" />
+                <div style="display: none" >
+                    <h3 th:text="${exercise.name}" class = "buildItem" ></h3>
+                        <button onclick="dropdown(this.id)" id = "drop" style="float: left" class="dropBtn"></button>
+                    <div class="buildDrop" style="display:none">
+                        <ul>
+                            <form th:action="@{/createplan/} + ${name} + @{/} + ${day}" method = "post" th:object="${subSet}">
+                                <input th:value="${exerciseName}" th:field="*{exerciseName}" type="hidden" />
+                                <li>Weight: <input th:value="${weight}" th:field="*{weight}" type="text" /></li>
+                                <li>Reps: <input th:value="${reps}" th:field="*{reps}" type="text" /></li>
+                                <input type="submit" value=" " class="dropBtnCopy"/>
+                            </form>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+</div>
+
+<div class="builder" id="builder" ondrop="drop(event)" ondragover="allowDrop(event)">
+    <div th:each="workSet :${workSets}">
+        <h3 class = "buildItem" th:text="${workSet.exerciseName}"></h3>
+            <button onclick="dropdown(this.id)" th:id="${workSet.id}"  class="dropBtn"></button>
+        <div class="buildDrop" style="display:none" th:id="${workSet}">
+            <ul th:each="subSet : ${workSet.subSets}">
+                <form th:action="@{/editset/} + ${name} + @{/} + ${day}" method = "post">
+                    <input th:value="${workSet.id}" name = "id" type="hidden"/>
+                    <input th:value="${subSet.id}" name = "setId" type="hidden" />
+                    <li>Weight: <input th:value="${subSet.weight}" type="text" name = "weight" /></li>
+                    <li>Reps: <input th:value="${subSet.reps}" type="text" name ="reps" /></li>
+                    <input type="submit" value=" " class="dropBtnEdit" />
+                </form>
+                <form th:action="@{/deleteset/} + ${name} + @{/} + ${day}" method="post">
+                    <input th:value="${workSet.id}" name = "id" type="hidden"/>
+                    <input th:value="${subSet.id}" name = "setId" type="hidden" />
+                    <input type="submit" value=" " class="dropBtnDel" />
+                </form>
+                <form th:action="@{/copyset/} + ${name} + @{/} + ${day}" method="post">
+                    <input th:value="${workSet.id}" name = "id" type="hidden"/>
+                    <input th:value="${subSet.id}" name = "setId" type="hidden" />
+
+                    <input type="submit" value=" " class="dropBtnCopy"  />
+                </form>
+            </ul>
+        </div>
+
+    </div>
+
+</div>
+</div>
+
+
+</body>
+
+<script>
+    "use strict";
+
+    var data;
+    var increment = 0;
+    var name = "name";
+    var subSet = document.getElementById("set1");
+    var search = document.getElementById("searchEx");
+    search.addEventListener("keyup", runSearch, false);
+
+    function runSearch(){
+        var search = document.getElementById("searchEx").value.toString();
+        Array.from(document.getElementsByClassName("setForm")).forEach(
+            function(element, index, array) {
+                var string = element.id.toString();
+                console.log(element.childNodes[1].childNodes[1]);
+                console.log(element.childNodes[1].childNodes[1].childNodes[3]);
+                var stringDos = element.childNodes[1].childNodes[1].childNodes[3].textContent.toString();
+
+                console.log(string);
+                if(string.toLowerCase().includes(search.toLowerCase())){
+                    element.style.display = "block";
+                } else if(stringDos.toLowerCase().includes(search.toLowerCase())) {
+                    element.style.display = "block";
+                }
+                else {
+                    element.style.display = "none";
+                }
+            }
+        );
+    }
+
+    console.log(subSet);
+
+    function allowDrop(ev) {
+        ev.preventDefault();
+    }
+
+    function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+        var copy = document.getElementById(data);
+        increment++;
+    }
+
+    function drop(ev) {
+        ev.preventDefault();
+        if(document.getElementById("builder").innerHTML == "<h3>Drag an exercise over to begin</h3>"){
+            document.getElementById("builder").innerHTML = "";
+        }
+        data = ev.dataTransfer.getData("text");
+        var nodeCopy = document.getElementById(data).cloneNode(true);
+        nodeCopy.id = "newId"; /* We cannot use the same ID */
+        ev.target.appendChild(nodeCopy);
+
+        //to hide the search header when moved
+        var a = nodeCopy.childNodes[1].childNodes[1];
+        a.style.display = "none";
+        console.log(a);
+
+        //to show the build header after move
+        var b = nodeCopy.childNodes[1].childNodes[5];
+        b.style.display = "inline-block";
+        console.log(b);
+
+        //to pull the exercise name
+        var string = nodeCopy.childNodes[1].childNodes[3];
+        console.log(string);
+
+        var dropdown = b.childNodes[3];
+        dropdown.id = "drop" + increment;
+        console.log(dropdown);
+
+        //to transfer name data
+        var targetvalue = b.childNodes[5].childNodes[1].childNodes[1].childNodes[1];
+        targetvalue.value = string.value;
+        console.log(string.value);
+        console.log(targetvalue);
+    }
+
+    function dropdown(id){
+        if(document.getElementById(id).nextElementSibling.style.display == "none") {
+            document.getElementById(id).nextElementSibling.style.display = "inline-block";
+        }
+        else{
+            document.getElementById(id).nextElementSibling.style.display="none";
+        }
+    }
+
+    function builderDisplay(builder){
+        if(builder == 0){
+            document.getElementById("builder").innerHTML = "<h3>Drag an exercise over to begin</h3>";
+        }
+    }
+
+    var builder = document.getElementById("builder").children.length;
+    console.log(builder);
+    var stickyDrop = document.getElementById("dropCheck").value;
+    console.log(stickyDrop);
+    builderDisplay(builder);
+    document.onload(dropdown(stickyDrop));
+</script>
+</html>

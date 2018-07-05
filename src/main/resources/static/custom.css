@@ -8,9 +8,42 @@ body{
     /*background: url("john3.jpeg") no-repeat;*/
     background-image: url("/images/Gym.jpg");
     background-size:100% 100vh;
-    background-repeat:no-repeat;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 
 
+
+}
+.plannerBody{
+    padding: 0;
+    margin: 0;
+
+}
+
+.plannerContainer{
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 5%;
+    min-height: 100%;
+    padding: 1em;
+    background-color: whitesmoke;
+    height: 500px;
+
+}
+
+.dayHeader{
+    width: 100%;
+    text-align: center;
+    font-family: "Lucida Grande", "monospace";
+    font-size: 1.5em;
+    color: darkblue;
+    border-bottom: 1px solid gray;
+    height: 1.5em;
+    padding-top: 0.2em;
+}
+
+.dayHeader h1{
+    color: darkblue;
 }
 @media (min-width: 992px) {
     .navbar {
@@ -32,5 +65,161 @@ body{
 .pic{
     margin-top: 55px;
 }
+
+/*<div style="overflow-y: scroll; height:400px;">*/
+
+.searchContainer{
+    height: 300px;
+    width: 250px;
+    border: 1px solid gray;
+    align-content: center;
+    float: left;
+    padding: 0;
+    margin-right: 2%;
+}
+
+.scrollable{
+    overflow-y: scroll;
+    height: 270px;
+
+}
+
+.searchItem{
+    width: 250px;
+    margin-top: 0.5em;
+    margin-bottom: 0;
+    background-color: gainsboro;
+    border: 1px solid black;
+    text-align: left;
+    height: 1.5em;
+    padding: 0.1em;
+}
+
+.searchItem h3{
+    font-size: 1em;
+    float: left;
+    text-align: center;
+    margin-left: 1em;
+}
+.searchItem p {
+    font-size: 0.8em;
+    color: slategrey;
+    text-align: right;
+    margin-right: 0.5em;
+}
+
+.builder{
+    float: left;
+    margin-left: 50px;
+    height: 350px;
+    width: 450px;
+    border: 1px solid black;
+    overflow-y: scroll;
+}
+
+.buildItem{
+    width: 400px;
+    background-color: slategray;
+    margin: 0;
+    height: 1.6em;
+    float: left;
+    font-size: 1.5em;
+    border-bottom: 1px solid black;
+    text-align: center;
+    padding-top: 0.2em;
+}
+
+.buildDrop{
+    width: 448px;
+    background-color: gainsboro;
+    margin:0;
+
+
+}
+
+.buildDrop ul{
+    list-style: none;
+    width: 448px;
+    background-color: gainsboro;
+    padding: 0;
+
+}
+
+.buildDrop ul li{
+    width: 150px;
+    float: left;
+    padding: 0;
+}
+
+.buildDrop input[type=text]{
+    background-color: lightgray;
+    border-color: lightgray;
+    width: 40px;
+    text-align: center;
+}
+
+.dropBtn{
+    width: 48px;
+    background-image: url("images/drop.png");
+    height: 38px;
+    background-size: 45px;
+    background-color: slategrey;
+    display: inline-block;
+    float: left;
+    border-bottom: 1px solid black;
+    border-left: 0;
+    border-right: 0;
+    border-top: 1px solid black;
+
+}
+
+.dropBtnEdit{
+    background-image: url("images/edit.png");
+    height: 1.3em;
+    background-size: 1.3em;
+    background-color: gainsboro;
+    border: 1px solid black;
+    display: inline-block;
+    margin: 5px;
+    float: left;
+}
+
+.dropBtnDel{
+    background-image: url("images/delete.png");
+    height: 1.3em;
+    background-size: 1.3em;
+    background-color: gainsboro;
+    border: 1px solid black;
+    display: inline-block;
+    margin: 5px;
+    float: left;
+}
+
+.dropBtnCopy{
+    background-image: url("images/save.png");
+    height: 1.3em;
+    background-size: 1.3em;
+    background-color: gainsboro;
+    border: 1px solid black;
+    display: inline-block;
+    margin: 5px;
+    float: left;
+
+}
+
+.searchBar{
+    width: 248px;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    height: 20px;
+    border-bottom: 1px silver;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+}
+
+
+
 
 

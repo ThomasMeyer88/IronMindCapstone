@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+        <!--Load the AJAX API-->
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    </head>
+
+<body>
+
+
+
+<div id="chart_div"></div>
+
+<div style="width: 40%; float: left">
+       <div th:each="set : ${sets}">
+           <h1 th:text="${set.exerciseName}"></h1>
+           <h2 th:text="${set.estimated1RM}"></h2>
+       </div>
+</div>
+</body>
+
+<script>
+    google.charts.load('current', {packages: ['corechart', 'line']});
+    google.charts.setOnLoadCallback(drawTrendlines);
+
+    function drawTrendlines() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('number', 'X');
+        data.addColumn('number', 'Max');
+
+        data.addRows([
+            [0, 0],    [1, 10],   [2, 23],  [3, 17],   [4, 18],  [5, 9]
+        ]);
+        data.addRows([
+            [6,22]
+        ]);
+
+        var options = {
+            hAxis: {
+                title: 'Time'
+            },
+            vAxis: {
+                title: 'Popularity'
+            },
+            colors: ['#AB0D06', '#007329'],
+            trendlines: {
+                0: {type: 'exponential', color: '#333', opacity: 1},
+                1: {type: 'linear', color: '#111', opacity: .3}
+            }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    }
+</script>
+</html>
