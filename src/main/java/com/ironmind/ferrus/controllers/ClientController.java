@@ -3,9 +3,7 @@ package com.ironmind.ferrus.controllers;
 import com.ironmind.ferrus.Services.*;
 import com.ironmind.ferrus.model.Client;
 import com.ironmind.ferrus.model.CompletedSet;
-import com.ironmind.ferrus.model.Exercise;
 import com.ironmind.ferrus.model.programService;
-import com.ironmind.ferrus.repositiories.ClientRepositories;
 import com.ironmind.ferrus.repositiories.Clients;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
@@ -16,15 +14,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
 @Controller
 public class ClientController {
-    private Clients clients;
+    private Clients clientDao;
     private PasswordEncoder passwordEncoder;
-    private final ClientRepositories clientDao;
     private ExerciseService exerciseService;
     private workSetService workDao;
     private templateService tempDao;
@@ -33,10 +29,9 @@ public class ClientController {
     private completedSetService compDao;
 
 
-    public ClientController(Clients clients, PasswordEncoder passwordEncoder, ClientRepositories clientDao, ExerciseService exerciseService, workSetService workDao, templateService tempDao, subSetService setDao, programService programDao, completedSetService compDao) {
-        this.clients = clients;
-        this.passwordEncoder = passwordEncoder;
+    public ClientController(Clients clientDao, PasswordEncoder passwordEncoder, ExerciseService exerciseService, workSetService workDao, templateService tempDao, subSetService setDao, programService programDao, completedSetService compDao) {
         this.clientDao = clientDao;
+        this.passwordEncoder = passwordEncoder;
         this.exerciseService = exerciseService;
         this.workDao = workDao;
         this.tempDao = tempDao;
@@ -55,7 +50,7 @@ public class ClientController {
     public String saveClient(@ModelAttribute Client client){
         String hash = passwordEncoder.encode(client.getPassword());
         client.setPassword(hash);
-        clients.save(client);
+        clientDao.save(client);
         return "redirect:/client_login";
     }
 
@@ -88,6 +83,7 @@ public class ClientController {
 //        clientSession.setPassword(client.getPassword());
         clientSession.setUsername(client.getUsername());
         clientSession.setName(client.getName());
+        clientSession.setPhonenumber(client.getPhonenumber());
         clientDao.save(client);
         return "redirect:/client_profile_page/";
     }

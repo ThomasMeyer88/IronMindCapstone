@@ -4,8 +4,7 @@ package com.ironmind.ferrus.controllers;
 
 import com.ironmind.ferrus.Services.*;
 import com.ironmind.ferrus.model.*;
-import com.ironmind.ferrus.repositiories.ClientRepositories;
-import com.sun.xml.internal.ws.api.pipe.FiberContextSwitchInterceptor;
+import com.ironmind.ferrus.repositiories.Clients;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -23,35 +22,23 @@ public class ExerciseController {
     private subSetService setDao;
     private programService programDao;
     private completedSetService compDao;
-    private ClientRepositories clientDao;
+    private Clients clientDao;
 
     @Autowired
-    public ExerciseController
-            (ExerciseService exerciseService, workSetService work, templateService tempDao,
-             subSetService setDao, programService programService, ClientRepositories clientDao,
-             completedSetService compDao){
+    public ExerciseController(ExerciseService exerciseService, workSetService workDao, templateService tempDao, subSetService setDao, programService programDao, completedSetService compDao, Clients clientDao) {
         this.exerciseService = exerciseService;
-        this.workDao = work;
+        this.workDao = workDao;
         this.tempDao = tempDao;
         this.setDao = setDao;
-        this.programDao = programService;
-        this.clientDao = clientDao;
+        this.programDao = programDao;
         this.compDao = compDao;
-
+        this.clientDao = clientDao;
     }
 
-    @GetMapping("/tests")
-    public String tests(Model view){
-        List<WorkSet> workSets = workDao.getWork().findAll();
-        for (WorkSet workSet : workSets) {
-            System.out.println(workSet.getId());
-            List<SubSet> subSets = workSet.getSubSets();
-            for (SubSet subSet : subSets) {
-                System.out.println("Subset is here" + subSet.getId());
-            }
-        }
-        return("posts/index");
-    }
+
+
+
+
 
     @GetMapping("/log/{name}/{day}")
     public String dayLog(@PathVariable int day, @PathVariable String name, Model view){
