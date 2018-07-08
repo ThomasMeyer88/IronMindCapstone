@@ -3,13 +3,13 @@ html, body {
 }
 
 body{
-    /*background-color: palegreen;*/
+    background-color: white;
 
     /*background: url("john3.jpeg") no-repeat;*/
-    background-image: url("/images/Gym.jpg");
-    background-size:100% 100vh;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    /*background-image: url("/images/Gym.jpg");*/
+    /*background-size:100% 100vh;*/
+    /*background-repeat: no-repeat;*/
+    /*background-attachment: fixed;*/
 
 
 
@@ -45,26 +45,26 @@ body{
 .dayHeader h1{
     color: darkblue;
 }
-@media (min-width: 992px) {
-    .navbar {
-        height:30px;
-    }
-}
+/*@media (min-width: 992px) {*/
+    /*.navbar {*/
+        /*height:30px;*/
+    /*}*/
+/*}*/
 .nav-link{
-    color: ghostwhite;
+    color: black;
     font-size: 20px;
     font-family:"Lucida Grande","monospace";
 }
 
-.jumbotron{
-    margin-top: 25px;
-    background-color: transparent;
-    color: aliceblue;
-}
+/*.jumbotron{*/
+    /*margin-top: 25px;*/
+    /*background-color: transparent;*/
+    /*color: aliceblue;*/
+/*}*/
 
-.pic{
-    margin-top: 55px;
-}
+/*.pic{*/
+    /*margin-top: 30px;*/
+/*}*/
 
 /*<div style="overflow-y: scroll; height:400px;">*/
 
@@ -227,24 +227,201 @@ body{
     grid-template-areas: ". . . ." ". . . ." ". . . coach";
 }
 
-.coach {
-    grid-area: coach;
 
-}
 
 #tagline{
     margin-bottom: 40px;
 }
 
-h4{
 
-    color: dodgerblue;
-}
 
-p{
-    color: #fff;
-}
+
 
 #standards{
     color: black;
 }
+/* general styles */
+html, body {
+    height: 100%;
+    width: 100%;
+}
+/* padded section */
+.pad-section {
+    padding: 50px 0;
+}
+.pad-section img {
+    width: 100%;
+}
+/* vertical-centered text */
+.text-vcenter {
+    display: table-cell;
+    text-align: center;
+    /*vertical-align: middle;*/
+}
+.text-vcenter h1 {
+    font-size: 4.5em;
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+}
+/* additional sections */
+#home {
+    background: url(/images/workout2.jpg) no-repeat center center fixed;
+    display: table;
+    height: 50%;
+    position: relative;
+    width: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+#about {
+}
+#services {
+    background-color: #ffffff;
+    color: #306d9f;
+
+}
+#services .iconz {
+    border: 2px solid #306d9f;
+    border-radius: 50%;
+    display: inline-block;
+    font-size: 60px;
+    height: 140px;
+    line-height: 140px;
+    text-align: center;
+    vertical-align: middle;
+    width: 140px;
+}
+#information {
+    background: url(/images/gym.jpg) no-repeat center center fixed;
+    display: table;
+    height: 50%;
+    position: relative;
+    width: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    color: #306d9f;
+}
+#information .panel {
+    opacity: 0.85;
+}
+
+#coach{
+    background-color: lightgrey;
+}
+
+.testimonial {
+    display: table-cell;
+    vertical-align: middle;
+}
+#logo{
+    height: auto;
+    width: 200px;
+}
+
+.headline{
+    color: #ffffff;
+}
+/*client progress*/
+
+ /*body {*/
+     /*font-size: .875rem;*/
+ /*}*/
+
+.feather {
+    width: 16px;
+    height: 16px;
+    vertical-align: text-bottom;
+}
+
+/*
+ * Sidebar
+ */
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100; /* Behind the navbar */
+    padding: 0;
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+}
+
+.sidebar-sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 48px; /* Height of navbar */
+    height: calc(100vh - 48px);
+    padding-top: 2rem;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+}
+
+.sidebar .nav-link {
+    font-weight: 500;
+    color: #333;
+}
+
+.sidebar .nav-link .feather {
+    margin-right: 4px;
+    color: #999;
+}
+
+.sidebar .nav-link.active {
+    color: #007bff;
+}
+
+.sidebar .nav-link:hover .feather,
+.sidebar .nav-link.active .feather {
+    color: inherit;
+}
+
+.sidebar-heading {
+    font-size: .75rem;
+    text-transform: uppercase;
+}
+
+/*
+ * Navbar
+ */
+
+.navbar-brand {
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    font-size: 1rem;
+    background-color: rgba(0, 0, 0, .25);
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
+}
+
+.navbar .form-control {
+    padding: .75rem 1rem;
+    border-width: 0;
+    border-radius: 0;
+}
+
+.form-control-dark {
+    color: #fff;
+    background-color: rgba(255, 255, 255, .1);
+    border-color: rgba(255, 255, 255, .1);
+}
+
+.form-control-dark:focus {
+    border-color: transparent;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
+}
+
+/*
+ * Utilities
+ */
+
+.border-top { border-top: 1px solid #e5e5e5; }
+.border-bottom { border-bottom: 1px solid #e5e5e5; }
+/*#myChart{*/
+    /*width: 150%;*/
+    /*height: auto;*/
+/*}*/

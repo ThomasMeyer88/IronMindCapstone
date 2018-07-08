@@ -101,6 +101,8 @@ public class ClientController {
     @GetMapping("/client_progress/{id}")
     public String viewProgress(@PathVariable long id, Model view){
         List<CompletedSet> completedSets = compDao.getCompSets().findAllByExerciseIdAndClient_Id(1, id);
+        List<Exercise> exercises = exerciseService.getExercises().findAll();
+        view.addAttribute("exerciseList", exercises);
         view.addAttribute("sets", completedSets);
         return "clients/client_progress";
     }
