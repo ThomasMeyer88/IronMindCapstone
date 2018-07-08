@@ -14,6 +14,9 @@ public class Program {
     @Column
     private String name;
 
+    @Column
+    private long programDays;
+
     @ManyToOne
     @JoinColumn
     private Client client;
@@ -25,6 +28,12 @@ public class Program {
 
     public Program(String name, Client client) {
         this.name = name;
+        this.client = client;
+    }
+
+    public Program(String name, Long programDays, Client client){
+        this.name = name;
+        this.programDays = programDays;
         this.client = client;
     }
 
@@ -62,5 +71,13 @@ public class Program {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public long getProgramDays() {
+        return programDays;
+    }
+
+    public void setProgramDays(long programDays) {
+        this.programDays = programDays;
     }
 }
