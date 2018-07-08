@@ -4,6 +4,7 @@ import com.ironmind.ferrus.Services.*;
 import com.ironmind.ferrus.model.Client;
 import com.ironmind.ferrus.model.CompletedSet;
 import com.ironmind.ferrus.Services.programService;
+import com.ironmind.ferrus.model.Exercise;
 import com.ironmind.ferrus.repositiories.ClientRepositories;
 import com.ironmind.ferrus.repositiories.Clients;
 import org.springframework.security.core.context.SecurityContextHolder;
