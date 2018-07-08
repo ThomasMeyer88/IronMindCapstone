@@ -14,10 +14,33 @@
 
 <div style="width: 40%; float: left">
        <div th:each="set : ${sets}">
-           <h1 th:text="${set.exerciseName}"></h1>
-           <h2 th:text="${set.estimated1RM}"></h2>
+           <input th:value="${set.day}" class="day" type="hidden"/>
+           <input th:value="${set.estimated1RM}" type="hidden" />
        </div>
 </div>
+
+<!--<div>-->
+    <!--<div>-->
+        <!--<input value="1" type="hidden" class="day"/>-->
+        <!--<input value="100" type="hidden" />-->
+        <!--<input value="2" type="hidden" class="day"/>-->
+        <!--<input value="150" type="hidden" />-->
+        <!--<input value="3" type="hidden" class="day"/>-->
+        <!--<input value="185" type="hidden" />-->
+        <!--<input value="4" type="hidden" class="day"/>-->
+        <!--<input value="220" type="hidden" />-->
+        <!--<input value="5" type="hidden" class="day"/>-->
+        <!--<input value="170" type="hidden" />-->
+        <!--<input value="6" type="hidden" class="day"/>-->
+        <!--<input value="165" type="hidden" />-->
+        <!--<input value="7" type="hidden" class="day"/>-->
+        <!--<input value="190" type="hidden" />-->
+        <!--<input value="8" type="hidden" class="day"/>-->
+        <!--<input value="205" type="hidden" />-->
+        <!--<input value="9" type="hidden" class="day"/>-->
+        <!--<input value="225" type="hidden" />-->
+    <!--</div>-->
+<!--</div>-->
 </body>
 
 <script>
@@ -26,22 +49,37 @@
 
     function drawTrendlines() {
         var data = new google.visualization.DataTable();
-        data.addColumn('number', 'X');
-        data.addColumn('number', 'Max');
+        data.addColumn('number', 'Day');
+        data.addColumn('number', 'ERM');
 
         data.addRows([
-            [0, 0],    [1, 10],   [2, 23],  [3, 17],   [4, 18],  [5, 9]
+            [0, 0]
         ]);
-        data.addRows([
-            [6,22]
-        ]);
+
+
+        Array.from(document.getElementsByClassName("day")).forEach(
+            function(element, index, array) {
+               var day = Number(element.value);
+               console.log(element.value);
+               var weight = Number(element.nextElementSibling.value);
+
+               data.addRows([[day, weight]]);
+
+
+            }
+        );
+
+        console.log(data);
+        // data.addRows([
+        //     [6,22]
+        // ]);
 
         var options = {
             hAxis: {
-                title: 'Time'
+                title: 'Day'
             },
             vAxis: {
-                title: 'Popularity'
+                title: 'Weight(lbs)'
             },
             colors: ['#AB0D06', '#007329'],
             trendlines: {

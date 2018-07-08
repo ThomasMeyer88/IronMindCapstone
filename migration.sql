@@ -22,5 +22,6 @@ drop table template;
 drop table template_work_sets;
 
 insert into programs (name, client_id) VALUES ('test', 1);
+insert into programs (id, name, client_id) VALUES (4, 'testing', 1);
 
 select * from users;
