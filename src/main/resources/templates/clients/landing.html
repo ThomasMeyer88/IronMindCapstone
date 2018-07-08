@@ -1,28 +1,103 @@
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="partials/header :: header(${'posts'})" />
-
+<head th:replace="partials/header :: header" />
 <body>
 <div th:replace="partials/navbar :: navbar"></div>
 <br/>
 <br/>
-<div class="jumbotron">
-    <h1>Welcome to Ironmind!</h1>
-    <p class="lead">Track your workouts </p>
-    <p><a class="btn btn-lg btn-success" href="#" role="button">Get started today</a></p>
-</div>
+<div id="home" class="home">
 
+    <div class="text-vcenter">
+        <!--<h1>Ironmind</h1>-->
+        <img id="logo" src="/images/llogo.png" />
+<br/>
+<br/>
+        <h2 class="headline">Become the strongest version of yourself.</h2>
 
-</div> <!-- /container -->
-<div class="row">
-    <div class=" card col-lg-4 coach">
-        <h2>Are you a coach?</h2>
-        <p>See if you qualify to be a coach with IronMind. </p>
-        <p><a class="btn btn-primary" href="#" role="button">Check Here &raquo;</a></p>
     </div>
-
-
 </div>
+
+
+
+<!-- third section - Services -->
+<div id="services" class="pad-section">
+    <div class="container">
+        <h2 class="text-center">Features</h2> <hr />
+        <div class="row text-center">
+            <div class="col-sm-3 col-xs-6">
+                <i class="far fa-calendar-alt iconz"> </i>
+                <h4>Planning</h4>
+                <p>Plan your workouts by the month and get notifications when its time to workout.</p>
+            </div>
+            <div class="col-sm-3 col-xs-6">
+                <i class="fas fa-pencil-alt iconz"> </i>
+                <h4>Custom Workouts</h4>
+                <p> You can create a workout from scratch or use one of our pre-made workout templates.</p>
+            </div>
+            <div class="col-sm-3 col-xs-6">
+                <i class="fas fa-chart-line iconz"> </i>
+                <h4>Track your Progress</h4>
+                <p>See if your on track to a better body with our intuitive progress tracking features.</p>
+            </div>
+            <div class="col-sm-3 col-xs-6">
+                <i class="fas fa-user-alt iconz"> </i>
+                <h4>Coaching</h4>
+                <p>Your coach works with you on a daily basis to keep you motivated and on track. They're your secret weapon to hit any goal, no matter what it is.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- fourth section - Information -->
+<div id="information" class="pad-section">
+    <div class="container">
+        <div class="row">
+            <div class=" testimonial col-sm-6">
+                <div class=" card panel panel-default">
+                    <div class="panel-body card-text lead">
+  Ironmind has change my life and has really helped me keep track of all my workouts. its cool to have seen the transformation. its the best thing ever
+                    </div>
+                    <div class=" card-title panel-heading">
+                        <h2 class="panel-title">John W</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial col-sm-6">
+                <div class=" card panel panel-default">
+                    <div class="panel-body card-text lead">
+                        Omg. Im going to to all my friends about ironmind it is the super coolest best thing in the world and i would recommend it to anyone
+                    </div>
+                    <div class="card-title panel-heading">
+                        <h2 class="panel-title">Tom M</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /fourth section -->
+<!-- fifth section -->
+<div id="coach" class="pad-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <h3>Are you a coach?</h3>
+                <h4>See if you have what it takes to be a coach with us.</h4>
+        <p><a class="btn btn-primary" href="#" role="button">Check Here &raquo;</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /fifth section -->
+
+
+
+
+
+<div th:replace="partials/footer :: footer"></div>
+
+
 
 
 </body>

@@ -1,19 +1,133 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-        <!--Load the AJAX API-->
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
-    </head>
+<head th:replace="partials/header :: header" />
 
 <body>
 
 
+<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+    <a class="navbar-brand col-sm-3 col-md-2 " href="#"><img  src="/images/llogo.png" height="70" width="70" class="pic" /></a>
 
-<div id="chart_div"></div>
+    <ul class="navbar-nav px-3">
 
-<div style="width: 40%; float: left">
+        <li class="nav-item text-nowrap">
+            <a class="nav-link" href="#">Sign out</a>
+        </li>
+    </ul>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+            <div class="sidebar-sticky">
+                <br/>
+
+
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                    <li class="nav-item">
+                        <a class="nav-link " href="#">
+                            <span data-feather="home"></span>
+                            Dashboard
+                        </a>
+                        <a class="nav-link" href="#">
+                            <span data-feather="file"></span>
+                            Workout Plans
+                        </a>
+                    </li>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="book"></span>
+                            Workout Log
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="activity"></span>
+                            Your Progress
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="calendar"></span>
+                            Schedule
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="user"></span>
+                            Coach
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="settings"></span>
+                            Edit Profile
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+                <h1 class="h2">Progress Report</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <select name="Exercise">
+                        <option value="nochange" disabled="true" selected="selected">Statistic Type</option>
+                                <option>1 Rep Max</option>
+                                <option>Volume</option>
+                    </select>
+                            <br/>
+
+
+
+                    <form  th:action="@{/client_progress/} + ${id}" th:object="${optionSearchs}" method="post" onchange="this.form.submit()">
+                    <select name="Exercise">
+                        <option value="nochange" disabled="true" selected="selected">Exercises</option>
+                            <div th:each="exercise : ${exerciseList}">
+                                <option th:text="${exercise.name}" th:value="${exercise.id}" name="exercise"></option>
+                            </div>
+                    </select>
+
+                    </form>
+                </div>
+                </div>
+
+
+
+
+
+<!--</div>-->
+<div id="chart_div" >
+            <canvas class="my-4" id="myChart" width="900" height="380">
+
+<div style="width: 100%; float: left">
        <div th:each="set : ${sets}">
+<<<<<<< HEAD
+           <input th:value="${set.day}" type="hidden" class="day"/>
+           <input th:value="${set.estimated1RM}" type="hidden" />
+       </div>
+</div>
+            </canvas>
+</div>
+ </main>
+    </div>
+</div>
+
+
+        <form th:action="@{/client_progress/{id}}" method="post">
+            <input type="hidden" th:value="thursday" name="day"/>
+
+        </form>
+
+
+
+
+=======
            <input th:value="${set.day}" class="day" type="hidden"/>
            <input th:value="${set.estimated1RM}" type="hidden" />
        </div>
@@ -42,13 +156,38 @@
     <!--</div>-->
 <!--</div>-->
 </body>
+>>>>>>> 244ec74adccc6e1ab950e8caeb143cc899405dc2
 
 <script>
+    "use strict";
     google.charts.load('current', {packages: ['corechart', 'line']});
     google.charts.setOnLoadCallback(drawTrendlines);
 
     function drawTrendlines() {
         var data = new google.visualization.DataTable();
+<<<<<<< HEAD
+        //day and one rep max
+        data.addColumn('number', 'day');
+        data.addColumn('number', 'ERM');
+
+        data.addRows([
+            [0,0]
+        ]);
+
+        Array.from(document.getElementsByClassName("day")).forEach(
+            function(element){
+                var day = Number(element.value);
+                console.log(element.value);
+                var weight = Number(element.nextElementSibling.value);
+
+                data.addRows([[day,weight]]);
+            }
+
+
+        );
+
+        console.log(data);
+=======
         data.addColumn('number', 'Day');
         data.addColumn('number', 'ERM');
 
@@ -73,13 +212,18 @@
         // data.addRows([
         //     [6,22]
         // ]);
+>>>>>>> 244ec74adccc6e1ab950e8caeb143cc899405dc2
 
         var options = {
             hAxis: {
                 title: 'Day'
             },
             vAxis: {
+<<<<<<< HEAD
+                title: 'One Rep Max'
+=======
                 title: 'Weight(lbs)'
+>>>>>>> 244ec74adccc6e1ab950e8caeb143cc899405dc2
             },
             colors: ['#AB0D06', '#007329'],
             trendlines: {
@@ -92,4 +236,11 @@
         chart.draw(data, options);
     }
 </script>
+
+
+<div th:replace="partials/footer :: footer"></div>
+
+
+
+</body>
 </html>
