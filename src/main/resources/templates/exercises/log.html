@@ -1,8 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="partials/header">
+<head th:replace="partials/header :: header" />
 
-</head>
+
+
+<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+    <a class="navbar-brand col-sm-3 col-md-2 " href="#"><img  src="/images/llogo.png" height="70" width="70" class="pic" /></a>
+
+    <ul class="navbar-nav px-3">
+
+        <li class="nav-item text-nowrap">
+            <a class="nav-link" href="#">Sign out</a>
+        </li>
+    </ul>
+</nav>
+
 <input th:value="${dropId}" id="dropCheck" type="hidden"/>
 <body class="plannerBody" style="align-content: center">
 <!--<nav th:replace="partials/navbar::navbar"></nav>-->
@@ -17,6 +29,8 @@
             <button onclick="dropdown(this.id)" th:id="${workSet.id}"  class="dropBtn"></button>
             <div class="buildDrop" style="display:none" th:id="${workSet}">
                 <ul th:each="subSet : ${workSet.subSets}">
+
+
                     <form th:action="@{/logset/} + ${name} + @{/} + ${day}" method = "post">
                         <input th:value="${workSet.id}" name = "id" type="hidden"/>
                         <input th:value="${subSet.id}" name = "setId" type="hidden" />
@@ -24,6 +38,18 @@
                         <li>Reps: <output th:text="${subSet.reps}"></output></li>
                         <input type="submit" value=" " class="dropBtnCpy" />
                     </form>
+
+
+
+                    <!--<form th:action="@{/deleteset/} + ${name} + @{/} + ${day}" method="post">-->
+                        <!--<input th:value="${workSet.id}" name = "id" type="hidden"/>-->
+                        <!--<input th:value="${subSet.id}" name = "setId" type="hidden" />-->
+                        <!--<input type="submit" value=" " class="dropBtnDel" />-->
+                    <!--</form>-->
+
+
+
+
                 </ul>
             </div>
 
@@ -37,7 +63,11 @@
 <script>
     "use strict";
 
+    var stickyDrop = document.getElementById("dropCheck").value;
+
     function dropdown(id){
+        console.log(id);
+        console.log(document.getElementById(id));
         if(document.getElementById(id).nextElementSibling.style.display == "none") {
             document.getElementById(id).nextElementSibling.style.display = "inline-block";
         }
@@ -45,6 +75,7 @@
             document.getElementById(id).nextElementSibling.style.display="none";
         }
     }
+
     function showState(state){
         console.log(state);
         var text = state.innerText.toString();
@@ -57,7 +88,8 @@
     }
     var state = document.getElementById("state");
     var stickyDrop = document.getElementById("dropCheck").value;
-    console.log(stickyDrop);
+
+    dropdown(stickyDrop);
     document.onload(showState(state));
 
     document.onload(dropdown(stickyDrop));

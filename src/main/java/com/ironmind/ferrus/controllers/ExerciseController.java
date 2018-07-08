@@ -65,6 +65,20 @@ public class ExerciseController {
         return("exercises/log");
     }
 
+    @GetMapping("/log/{name}/{day}/{id}")
+    public String dayLogDropDown(@PathVariable int day, @PathVariable String name, @PathVariable long id, Model view){
+        template temp = tempDao.getTemplates().findByProgram_IdAndDay(3, day);
+        List<WorkSet> daySet = workDao.getWork().findAllByTemplate(temp);
+        if(daySet.size() == 0){
+            view.addAttribute("done", "You've finished all of today's sets!");
+        }
+        view.addAttribute("dropId", id);
+        view.addAttribute("workSets", daySet);
+        view.addAttribute("name", name);
+        view.addAttribute("day",day);
+        return("exercises/log");
+    }
+
     @GetMapping("/exercises/{name}/{day}")
     public String exercisesIndex(@PathVariable int day, @PathVariable String name, Model view){
         template temp = tempDao.getTemplates().findByProgram_IdAndDay(3, day);
@@ -178,7 +192,7 @@ public class ExerciseController {
         Client clientSession = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         Exercise exercise = exerciseService.getExercises().findByName(subSet.getExerciseName());
-        CompletedSet logSet = new CompletedSet(subSet.getExerciseName(), day, exercise.getId(), subSet.getWeight(), subSet.getReps(), clientSession);
+        CompletedSet logSet = new CompletedSet(subSet.getExerciseName(), day, exercise.getId(), subSet.getWeight(),     subSet.getReps(), clientSession);
         logSet.setEstimated1RM(subSet.getReps(), subSet.getWeight());
         compDao.getCompSets().save(logSet);
         WorkSet checkWork = subSet.getWorkSet();
@@ -187,10 +201,25 @@ public class ExerciseController {
         if(subSets.size() == 0){
             workDao.getWork().delete(checkWork.getId());
         }
-        return "redirect:/log/" + name + "/" + day;
+        return "redirect:/log/" + name + "/" + day + "/" + id;
     }
 
 
+
+
+//    @RequestMapping(value = "/logset/{name}/{day}", method = RequestMethod.POST)
+//    public String deleteLogset(@PathVariable long day, @PathVariable String name, @RequestParam long id, @RequestParam long setId){
+//        SubSet checkSet = setDao.getSets().findOne(setId);
+//        //I am checking the workSet to see if it has an subsets
+//        //connected to it.  If not I delete the workSet from the database
+//        WorkSet checkWork = checkSet.getWorkSet();
+//        setDao.getSets().delete(checkSet.getId());
+//        List<SubSet> subSets = setDao.getSets().findAllByWorkSet_Id(checkWork.getId());
+//        if(subSets.size() == 0){
+//            workDao.getWork().delete(checkWork.getId());
+//        }
+//        return "redirect:/log/" + name + "/" + day ;
+//    }
 
     @RequestMapping(value = "/deleteset/{name}/{day}", method = RequestMethod.POST)
     public String deleteSet(@PathVariable long day, @PathVariable String name, @RequestParam long id, @RequestParam long setId){

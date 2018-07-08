@@ -196,7 +196,7 @@ body{
 }
 
 .dropBtnCopy{
-    background-image: url("images/save.png");
+    background: url("images/save.png");
     height: 1.3em;
     background-size: 1.3em;
     background-color: gainsboro;
