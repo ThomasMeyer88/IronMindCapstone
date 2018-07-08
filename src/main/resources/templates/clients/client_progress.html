@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+        <!--Load the AJAX API-->
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    </head>
+
+<body>
+
+
+
+<div id="chart_div"></div>
+
+<div style="width: 40%; float: left">
+       <div th:each="set : ${sets}">
+           <input th:value="${set.day}" class="day" type="hidden"/>
+           <input th:value="${set.estimated1RM}" type="hidden" />
+       </div>
+</div>
+
+<!--<div>-->
+    <!--<div>-->
+        <!--<input value="1" type="hidden" class="day"/>-->
+        <!--<input value="100" type="hidden" />-->
+        <!--<input value="2" type="hidden" class="day"/>-->
+        <!--<input value="150" type="hidden" />-->
+        <!--<input value="3" type="hidden" class="day"/>-->
+        <!--<input value="185" type="hidden" />-->
+        <!--<input value="4" type="hidden" class="day"/>-->
+        <!--<input value="220" type="hidden" />-->
+        <!--<input value="5" type="hidden" class="day"/>-->
+        <!--<input value="170" type="hidden" />-->
+        <!--<input value="6" type="hidden" class="day"/>-->
+        <!--<input value="165" type="hidden" />-->
+        <!--<input value="7" type="hidden" class="day"/>-->
+        <!--<input value="190" type="hidden" />-->
+        <!--<input value="8" type="hidden" class="day"/>-->
+        <!--<input value="205" type="hidden" />-->
+        <!--<input value="9" type="hidden" class="day"/>-->
+        <!--<input value="225" type="hidden" />-->
+    <!--</div>-->
+<!--</div>-->
+</body>
+
+<script>
+    google.charts.load('current', {packages: ['corechart', 'line']});
+    google.charts.setOnLoadCallback(drawTrendlines);
+
+    function drawTrendlines() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('number', 'Day');
+        data.addColumn('number', 'ERM');
+
+        data.addRows([
+            [0, 0]
+        ]);
+
+
+        Array.from(document.getElementsByClassName("day")).forEach(
+            function(element, index, array) {
+               var day = Number(element.value);
+               console.log(element.value);
+               var weight = Number(element.nextElementSibling.value);
+
+               data.addRows([[day, weight]]);
+
+
+            }
+        );
+
+        console.log(data);
+        // data.addRows([
+        //     [6,22]
+        // ]);
+
+        var options = {
+            hAxis: {
+                title: 'Day'
+            },
+            vAxis: {
+                title: 'Weight(lbs)'
+            },
+            colors: ['#AB0D06', '#007329'],
+            trendlines: {
+                0: {type: 'exponential', color: '#333', opacity: 1},
+                1: {type: 'linear', color: '#111', opacity: .3}
+            }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    }
+</script>
+</html>
