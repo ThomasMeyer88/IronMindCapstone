@@ -35,6 +35,13 @@ public class CompletedSet {
 
     public CompletedSet(){};
 
+    public CompletedSet(long day, long exerciseId, long totalweight, long estimated1RM){
+        this.day = day;
+        this.exerciseId = exerciseId;
+        this.totalweight = totalweight;
+        this.estimated1RM = estimated1RM;
+    }
+
     public CompletedSet(String exerciseName, long day, long exerciseId, long weight, long reps, Client client) {
         this.exerciseName = exerciseName;
         this.day = day;

@@ -7,12 +7,14 @@ import com.ironmind.ferrus.Services.programService;
 import com.ironmind.ferrus.model.Exercise;
 import com.ironmind.ferrus.repositiories.ClientRepositories;
 import com.ironmind.ferrus.repositiories.Clients;
+import org.springframework.security.access.method.P;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -96,24 +98,41 @@ public class ClientController {
 
     @GetMapping("/client_progress/{id}")
     public String viewProgress(@PathVariable long id, Model view){
-        List<CompletedSet> completedSets = compDao.getCompSets().findAllByExerciseIdAndClient_Id(1, id);
         List<Exercise> exercises = exerciseService.getExercises().findAll();
         view.addAttribute("exerciseList", exercises);
-        view.addAttribute("sets", completedSets);
         return "clients/client_progress";
     }
 
     @RequestMapping(value = "/client_progress/{id}", method = RequestMethod.POST)
-    public String switchProgress(@PathVariable long id, @RequestParam long exercise){
-        return "redirect:/client_progress/" + id + "/" + exercise;
+    public String switchProgress(@PathVariable long id, @RequestParam long exerciseId){
+        System.out.println("Id = " + exerciseId);
+        return "redirect:/client_progress/" + id + "/" + exerciseId;
     }
 
-    @GetMapping("/client_progress/{id}/{exercise}")
-    public String viewSwitchProgress(@PathVariable long id, long exercise, Model view){
-        List<CompletedSet> completedSets = compDao.getCompSets().findAllByExerciseIdAndClient_Id(exercise,id);
+    @GetMapping("/client_progress/{id}/{Exercise}")
+    public String viewSwitchProgress(@PathVariable long id, @PathVariable long Exercise, Model view){
+        List<CompletedSet> maxes = new ArrayList<>();
+        List<CompletedSet> volume = new ArrayList<>();
+        for(long i = 0; i < 180; i++){
+            long volSum = 0;
+
+            List<CompletedSet> max = compDao.getCompSets().findAllByClient_IdAndExerciseIdAndDayOrderByEstimated1RMDesc(id, Exercise, i);
+            for(int x = 0; x < max.size(); x++){
+                volSum += max.get(x).getTotalweight();
+            }
+            try {
+                CompletedSet volSet = new CompletedSet(max.get(0).getDay(), max.get(0).getExerciseId(), volSum, max.get(0).getEstimated1RM());
+                volume.add(volSet);
+                maxes.add(max.get(0));
+                max.clear();
+            } catch (IndexOutOfBoundsException e){
+                System.out.println(e.getMessage());
+            }
+        }
+
         List<Exercise> exercises = exerciseService.getExercises().findAll();
         view.addAttribute("exerciseList", exercises);
-        view.addAttribute("sets", completedSets);
+        view.addAttribute("sets", volume);
         return "clients/client_progress";
     }
 
