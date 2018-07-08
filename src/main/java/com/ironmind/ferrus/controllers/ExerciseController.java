@@ -4,7 +4,7 @@ package com.ironmind.ferrus.controllers;
 
 import com.ironmind.ferrus.Services.*;
 import com.ironmind.ferrus.model.*;
-import com.ironmind.ferrus.repositiories.Clients;
+import com.ironmind.ferrus.repositiories.ClientRepositories;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -22,23 +22,35 @@ public class ExerciseController {
     private subSetService setDao;
     private programService programDao;
     private completedSetService compDao;
-    private Clients clientDao;
+    private ClientRepositories clientDao;
 
     @Autowired
-    public ExerciseController(ExerciseService exerciseService, workSetService workDao, templateService tempDao, subSetService setDao, programService programDao, completedSetService compDao, Clients clientDao) {
+    public ExerciseController
+            (ExerciseService exerciseService, workSetService work, templateService tempDao,
+             subSetService setDao, programService programService, ClientRepositories clientDao,
+             completedSetService compDao){
         this.exerciseService = exerciseService;
-        this.workDao = workDao;
+        this.workDao = work;
         this.tempDao = tempDao;
         this.setDao = setDao;
-        this.programDao = programDao;
-        this.compDao = compDao;
+        this.programDao = programService;
         this.clientDao = clientDao;
+        this.compDao = compDao;
+
     }
 
-
-
-
-
+    @GetMapping("/tests")
+    public String tests(Model view){
+        List<WorkSet> workSets = workDao.getWork().findAll();
+        for (WorkSet workSet : workSets) {
+            System.out.println(workSet.getId());
+            List<SubSet> subSets = workSet.getSubSets();
+            for (SubSet subSet : subSets) {
+                System.out.println("Subset is here" + subSet.getId());
+            }
+        }
+        return("posts/index");
+    }
 
     @GetMapping("/log/{name}/{day}")
     public String dayLog(@PathVariable int day, @PathVariable String name, Model view){

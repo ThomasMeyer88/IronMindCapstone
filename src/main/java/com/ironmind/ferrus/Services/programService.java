@@ -1,4 +1,4 @@
-package com.ironmind.ferrus.model;
+package com.ironmind.ferrus.Services;
 
 import com.ironmind.ferrus.repositiories.Programs;
 import org.springframework.beans.factory.annotation.Autowired;

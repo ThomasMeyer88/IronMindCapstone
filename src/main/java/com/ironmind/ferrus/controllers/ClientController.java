@@ -3,24 +3,24 @@ package com.ironmind.ferrus.controllers;
 import com.ironmind.ferrus.Services.*;
 import com.ironmind.ferrus.model.Client;
 import com.ironmind.ferrus.model.CompletedSet;
-import com.ironmind.ferrus.model.programService;
+import com.ironmind.ferrus.Services.programService;
+import com.ironmind.ferrus.model.Exercise;
+import com.ironmind.ferrus.repositiories.ClientRepositories;
 import com.ironmind.ferrus.repositiories.Clients;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 
 @Controller
 public class ClientController {
-    private Clients clientDao;
+    private Clients clients;
     private PasswordEncoder passwordEncoder;
+    private final ClientRepositories clientDao;
     private ExerciseService exerciseService;
     private workSetService workDao;
     private templateService tempDao;
@@ -29,9 +29,10 @@ public class ClientController {
     private completedSetService compDao;
 
 
-    public ClientController(Clients clientDao, PasswordEncoder passwordEncoder, ExerciseService exerciseService, workSetService workDao, templateService tempDao, subSetService setDao, programService programDao, completedSetService compDao) {
-        this.clientDao = clientDao;
+    public ClientController(Clients clients, PasswordEncoder passwordEncoder, ClientRepositories clientDao, ExerciseService exerciseService, workSetService workDao, templateService tempDao, subSetService setDao, programService programDao, completedSetService compDao) {
+        this.clients = clients;
         this.passwordEncoder = passwordEncoder;
+        this.clientDao = clientDao;
         this.exerciseService = exerciseService;
         this.workDao = workDao;
         this.tempDao = tempDao;
@@ -50,7 +51,7 @@ public class ClientController {
     public String saveClient(@ModelAttribute Client client){
         String hash = passwordEncoder.encode(client.getPassword());
         client.setPassword(hash);
-        clientDao.save(client);
+        clients.save(client);
         return "redirect:/client_login";
     }
 
@@ -83,7 +84,6 @@ public class ClientController {
 //        clientSession.setPassword(client.getPassword());
         clientSession.setUsername(client.getUsername());
         clientSession.setName(client.getName());
-        clientSession.setPhonenumber(client.getPhonenumber());
         clientDao.save(client);
         return "redirect:/client_profile_page/";
     }
@@ -97,6 +97,22 @@ public class ClientController {
     @GetMapping("/client_progress/{id}")
     public String viewProgress(@PathVariable long id, Model view){
         List<CompletedSet> completedSets = compDao.getCompSets().findAllByExerciseIdAndClient_Id(1, id);
+        List<Exercise> exercises = exerciseService.getExercises().findAll();
+        view.addAttribute("exerciseList", exercises);
+        view.addAttribute("sets", completedSets);
+        return "clients/client_progress";
+    }
+
+    @RequestMapping(value = "/client_progress/{id}", method = RequestMethod.POST)
+    public String switchProgress(@PathVariable long id, @RequestParam long exercise){
+        return "redirect:/client_progress/" + id + "/" + exercise;
+    }
+
+    @GetMapping("/client_progress/{id}/{exercise}")
+    public String viewSwitchProgress(@PathVariable long id, long exercise, Model view){
+        List<CompletedSet> completedSets = compDao.getCompSets().findAllByExerciseIdAndClient_Id(exercise,id);
+        List<Exercise> exercises = exerciseService.getExercises().findAll();
+        view.addAttribute("exerciseList", exercises);
         view.addAttribute("sets", completedSets);
         return "clients/client_progress";
     }
