@@ -81,22 +81,27 @@
                                 <option>Volume</option>
                     </select>
                             <br/>
+
+
+
+                    <form  th:action="@{/client_progress/} + ${id}" th:object="${optionSearchs}" method="post" onchange="this.form.submit()">
                     <select name="Exercise">
                         <option value="nochange" disabled="true" selected="selected">Exercises</option>
                             <div th:each="exercise : ${exerciseList}">
-                                <option th:text="${exercise.name}" th:value="${exercise.id}"></option>
+                                <option th:text="${exercise.name}" th:value="${exercise.id}" name="exercise"></option>
                             </div>
                     </select>
 
+                    </form>
+                </div>
+                </div>
 
-                </div>
-                </div>
 
 
 
 
 <!--</div>-->
-<div id="chart_div">
+<div id="chart_div" >
             <canvas class="my-4" id="myChart" width="900" height="380">
 
 <div style="width: 100%; float: left">
@@ -168,23 +173,11 @@
         chart.draw(data, options);
     }
 </script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 
 
+<div th:replace="partials/footer :: footer"></div>
 
 
-<script src="../../assets/js/vendor/jquery-slim.min.js"> </script>
-
-
-
-<script src="../../assets/js/vendor/popper.min.js"></script>
-<script src="../../dist/js/bootstrap.min.js"></script>
-
-<!-- Icons -->
-<script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
-<script>
-    feather.replace()
-</script>
 
 </body>
 </html>

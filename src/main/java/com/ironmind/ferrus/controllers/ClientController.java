@@ -11,10 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,6 +98,20 @@ public class ClientController {
     @GetMapping("/client_progress/{id}")
     public String viewProgress(@PathVariable long id, Model view){
         List<CompletedSet> completedSets = compDao.getCompSets().findAllByExerciseIdAndClient_Id(1, id);
+        List<Exercise> exercises = exerciseService.getExercises().findAll();
+        view.addAttribute("exerciseList", exercises);
+        view.addAttribute("sets", completedSets);
+        return "clients/client_progress";
+    }
+
+    @RequestMapping(value = "/client_progress/{id}", method = RequestMethod.POST)
+    public String switchProgress(@PathVariable long id, @RequestParam long exercise){
+        return "redirect:/client_progress/" + id + "/" + exercise;
+    }
+
+    @GetMapping("/client_progress/{id}/{exercise}")
+    public String viewSwitchProgress(@PathVariable long id, long exercise, Model view){
+        List<CompletedSet> completedSets = compDao.getCompSets().findAllByExerciseIdAndClient_Id(exercise,id);
         List<Exercise> exercises = exerciseService.getExercises().findAll();
         view.addAttribute("exerciseList", exercises);
         view.addAttribute("sets", completedSets);
