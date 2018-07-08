@@ -3,8 +3,7 @@ package com.ironmind.ferrus.controllers;
 import com.ironmind.ferrus.Services.*;
 import com.ironmind.ferrus.model.Client;
 import com.ironmind.ferrus.model.CompletedSet;
-import com.ironmind.ferrus.model.Exercise;
-import com.ironmind.ferrus.model.programService;
+import com.ironmind.ferrus.Services.programService;
 import com.ironmind.ferrus.repositiories.ClientRepositories;
 import com.ironmind.ferrus.repositiories.Clients;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,7 +12,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 

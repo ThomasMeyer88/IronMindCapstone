@@ -5,7 +5,6 @@ package com.ironmind.ferrus.controllers;
 import com.ironmind.ferrus.Services.*;
 import com.ironmind.ferrus.model.*;
 import com.ironmind.ferrus.repositiories.ClientRepositories;
-import com.sun.xml.internal.ws.api.pipe.FiberContextSwitchInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;

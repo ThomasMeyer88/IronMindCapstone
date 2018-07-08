@@ -22,6 +22,7 @@
             <div class="sidebar-sticky">
                 <br/>
 
+
                 <ul class="nav flex-column">
                     <li class="nav-item">
                     <li class="nav-item">
@@ -106,6 +107,7 @@
 
 <div style="width: 100%; float: left">
        <div th:each="set : ${sets}">
+<<<<<<< HEAD
            <input th:value="${set.day}" type="hidden" class="day"/>
            <input th:value="${set.estimated1RM}" type="hidden" />
        </div>
@@ -125,6 +127,36 @@
 
 
 
+=======
+           <input th:value="${set.day}" class="day" type="hidden"/>
+           <input th:value="${set.estimated1RM}" type="hidden" />
+       </div>
+</div>
+
+<!--<div>-->
+    <!--<div>-->
+        <!--<input value="1" type="hidden" class="day"/>-->
+        <!--<input value="100" type="hidden" />-->
+        <!--<input value="2" type="hidden" class="day"/>-->
+        <!--<input value="150" type="hidden" />-->
+        <!--<input value="3" type="hidden" class="day"/>-->
+        <!--<input value="185" type="hidden" />-->
+        <!--<input value="4" type="hidden" class="day"/>-->
+        <!--<input value="220" type="hidden" />-->
+        <!--<input value="5" type="hidden" class="day"/>-->
+        <!--<input value="170" type="hidden" />-->
+        <!--<input value="6" type="hidden" class="day"/>-->
+        <!--<input value="165" type="hidden" />-->
+        <!--<input value="7" type="hidden" class="day"/>-->
+        <!--<input value="190" type="hidden" />-->
+        <!--<input value="8" type="hidden" class="day"/>-->
+        <!--<input value="205" type="hidden" />-->
+        <!--<input value="9" type="hidden" class="day"/>-->
+        <!--<input value="225" type="hidden" />-->
+    <!--</div>-->
+<!--</div>-->
+</body>
+>>>>>>> 244ec74adccc6e1ab950e8caeb143cc899405dc2
 
 <script>
     "use strict";
@@ -133,6 +165,7 @@
 
     function drawTrendlines() {
         var data = new google.visualization.DataTable();
+<<<<<<< HEAD
         //day and one rep max
         data.addColumn('number', 'day');
         data.addColumn('number', 'ERM');
@@ -154,13 +187,43 @@
         );
 
         console.log(data);
+=======
+        data.addColumn('number', 'Day');
+        data.addColumn('number', 'ERM');
+
+        data.addRows([
+            [0, 0]
+        ]);
+
+
+        Array.from(document.getElementsByClassName("day")).forEach(
+            function(element, index, array) {
+               var day = Number(element.value);
+               console.log(element.value);
+               var weight = Number(element.nextElementSibling.value);
+
+               data.addRows([[day, weight]]);
+
+
+            }
+        );
+
+        console.log(data);
+        // data.addRows([
+        //     [6,22]
+        // ]);
+>>>>>>> 244ec74adccc6e1ab950e8caeb143cc899405dc2
 
         var options = {
             hAxis: {
                 title: 'Day'
             },
             vAxis: {
+<<<<<<< HEAD
                 title: 'One Rep Max'
+=======
+                title: 'Weight(lbs)'
+>>>>>>> 244ec74adccc6e1ab950e8caeb143cc899405dc2
             },
             colors: ['#AB0D06', '#007329'],
             trendlines: {
