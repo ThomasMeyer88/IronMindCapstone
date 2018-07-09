@@ -19,6 +19,10 @@
         <button type="submit" class="btn btn-primary btn-block btn-md" id="progress" name="progress">View Progress</button>
     </form>
 
+    <form class="form-group" th:action="@{/exercises/{id}(id=${client.id})}" method="get">
+        <button type="submit" class="btn btn-primary btn-block btn-md" id="plan" name="plan">Update Program</button>
+    </form>
+
 </div>
     <footer th:replace="partials/footer :: footer" />
 </body>

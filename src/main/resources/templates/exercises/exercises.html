@@ -83,7 +83,7 @@
 
 <div id="calender" class="calenderModel" style="display: none">
     <div onclick="closeCalender()">Close!</div>
-    <form th:action="@{/exercises/} + ${name}" method="post">
+    <form th:action="@{/exercises/} + ${progId}" method="post">
         <div class="day" id="baseDay" th:each="day: ${days}">
             <input name="daychoice" type="submit" th:value="${day}" />
         </div>
@@ -112,7 +112,7 @@
                         <button onclick="dropdown(this.id)" id = "drop" style="float: left" class="dropBtn"></button>
                     <div class="buildDrop" style="display:none">
                         <ul>
-                            <form th:action="@{/createplan/} + ${name} + @{/} + ${day}" method = "post" th:object="${subSet}">
+                            <form th:action="@{/createplan/} + ${progId} + @{/} + ${day}" method = "post" th:object="${subSet}">
                                 <input th:value="${exerciseName}" th:field="*{exerciseName}" type="hidden" />
                                 <li>Weight: <input th:value="${weight}" th:field="*{weight}" type="text" /></li>
                                 <li>Reps: <input th:value="${reps}" th:field="*{reps}" type="text" /></li>
@@ -133,21 +133,21 @@
             <button onclick="dropdown(this.id)" th:id="${workSet.id}"  class="dropBtn"></button>
         <div class="buildDrop" style="display:none" th:id="${workSet}">
             <ul th:each="subSet : ${workSet.subSets}">
-                <form th:action="@{/editset/} + ${name} + @{/} + ${day}" method = "post">
+                <form th:action="@{/editset/} + ${progId} + @{/} + ${day}" method = "post">
                     <input th:value="${workSet.id}" name = "id" type="hidden"/>
                     <input th:value="${subSet.id}" name = "setId" type="hidden" />
                     <li>Weight: <input th:value="${subSet.weight}" type="text" name = "weight" /></li>
                     <li>Reps: <input th:value="${subSet.reps}" type="text" name ="reps" /></li>
                     <input type="submit" value=" " class="dropBtnEdit" />
                 </form>
-                <form th:action="@{/deleteset/} + ${name} + @{/} + ${day}" method="post">
+                <form th:action="@{/deleteset/} + ${progId} + @{/} + ${day}" method="post">
                     <input th:value="${workSet.id}" name = "id" type="hidden"/>
                     <input th:value="${subSet.id}" name = "setId" type="hidden" />
                     <input type="submit" value=" " class="dropBtnDel" />
                 </form>
 
                     <input type="submit" value=" " class="dropBtnCopy"  />
-                <form th:action="@{/copyset/} + ${name} + @{/} + ${day}" method="post">
+                <form th:action="@{/copyset/} + ${progId} + @{/} + ${day}" method="post">
                     <input th:value="${workSet.id}" name = "id" type="hidden"/>
                     <input th:value="${subSet.id}" name = "setId" type="hidden" />
                 </form>
