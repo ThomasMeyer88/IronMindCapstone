@@ -160,21 +160,21 @@ public class ExerciseController {
         System.out.println(subSet.getExerciseName());
         Client clientSession = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Program program = programDao.getPrograms().findByClient_IdAndId(clientSession.getId(), id);
+        SubSet newSub = new SubSet();
+        newSub.setWeight(subSet.getWeight());
+        newSub.setReps(subSet.getReps());
+        newSub.setExerciseName(subSet.getExerciseName());
         try{
             try {
-                String name = program.getName();
-
-                //Program program = programDao.getPrograms().findByClient_IdAndName(clientSession.getId(), name);
-                System.out.println("First try program " + program.getId());
+                System.out.println("Program ID is " + program.getId());
                 template temp = tempDao.getTemplates().findByProgram_IdAndDay(program.getId(), (int)day);
-                System.out.println("First try temp " + temp.getId());
+                System.out.println("Template ID is " + temp.getId());
                 WorkSet work = workDao.getWork().findByTemplate_IdAndExerciseName(temp.getId(), subSet.getExerciseName());
+                System.out.println(subSet.getExerciseName());
                 work.setTemplate(temp);
-                System.out.println("Work ID AND TEMPLATE");
-                System.out.println(work.getId() + " " + work.getTemplate());
-                subSet.setWorkSet(work);
-                setDao.getSets().save(subSet);
-                System.out.println(subSet.getWorkSet().getTemplate());
+                System.out.println("Work ID is " + work.getId() + " Temp id is " + temp.getId());
+                newSub.setWorkSet(work);
+                setDao.getSets().save(newSub);
                 return "redirect:/exercises/" + id + "/" + day;
             } catch (NullPointerException e) {
                 String name = program.getName();
@@ -182,11 +182,11 @@ public class ExerciseController {
                 System.out.println("First try program " + program.getId());
                 template temp = tempDao.getTemplates().findByProgram_IdAndDay(program.getId(), (int)day);
                 System.out.println("First try temp " + temp.getId());
-                WorkSet work = new WorkSet(subSet.getExerciseName(), exerciseService.getExercises().findByName(subSet.getExerciseName()));
+                WorkSet work = new WorkSet(newSub.getExerciseName(), exerciseService.getExercises().findByName(subSet.getExerciseName()));
                 work.setTemplate(temp);
                 workDao.getWork().save(work);
-                subSet.setWorkSet(work);
-                setDao.getSets().save(subSet);
+                newSub.setWorkSet(work);
+                setDao.getSets().save(newSub);
                 return "redirect:/exercises/" + id + "/" + day;
             }
 
@@ -194,11 +194,11 @@ public class ExerciseController {
             template temp = new template((int)day);
             temp.setProgram(program);
             tempDao.getTemplates().save(temp);
-            WorkSet work = new WorkSet(subSet.getExerciseName(),exerciseService.getExercises().findByName(subSet.getExerciseName()));
+            WorkSet work = new WorkSet(newSub.getExerciseName(),exerciseService.getExercises().findByName(subSet.getExerciseName()));
             work.setTemplate(temp);
             workDao.getWork().save(work);
-            subSet.setWorkSet(work);
-            setDao.getSets().save(subSet);
+            newSub.setWorkSet(work);
+            setDao.getSets().save(newSub);
             return "redirect:/exercises/" + id + "/" + day;
         }
     }
