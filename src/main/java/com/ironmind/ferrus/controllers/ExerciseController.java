@@ -53,8 +53,15 @@ public class ExerciseController {
         return("posts/index");
     }
 
+    @GetMapping("/logplan/{id}")
+    public String loadLog(@PathVariable long id){
+        List<Program> programs = programDao.getPrograms().findAllByClient_Id(id);
+        String name = programs.get(0).getName();
+        return "redirect:/log/" + name + "/1";
+    }
     @GetMapping("/log/{name}/{day}")
     public String dayLog(@PathVariable int day, @PathVariable String name, Model view){
+
         template temp = tempDao.getTemplates().findByProgram_IdAndDay(3, day);
         List<WorkSet> daySet = workDao.getWork().findAllByTemplate(temp);
         if(daySet.size() == 0){
