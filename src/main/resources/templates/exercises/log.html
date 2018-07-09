@@ -31,7 +31,7 @@
                 <ul th:each="subSet : ${workSet.subSets}">
 
 
-                    <form th:action="@{/logset/} + ${name} + @{/} + ${day}" method = "post">
+                    <form th:action="@{/logset/} + ${progId} + @{/} + ${day}" method = "post">
                         <input th:value="${workSet.id}" name = "id" type="hidden"/>
                         <input th:value="${subSet.id}" name = "setId" type="hidden" />
                         <li>Weight: <output th:text="${subSet.weight}"></output></li>

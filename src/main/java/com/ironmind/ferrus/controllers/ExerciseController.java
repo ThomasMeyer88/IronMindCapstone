@@ -54,36 +54,42 @@ public class ExerciseController {
     }
 
     @GetMapping("/logplan/{id}")
-    public String loadLog(@PathVariable long id){
+    public String loadLog(@PathVariable long id, Model view){
         List<Program> programs = programDao.getPrograms().findAllByClient_Id(id);
         String name = programs.get(0).getName();
-        return "redirect:/log/" + name + "/1";
-    }
-    @GetMapping("/log/{name}/{day}")
-    public String dayLog(@PathVariable int day, @PathVariable String name, Model view){
+        view.addAttribute("progId", id);
 
-        template temp = tempDao.getTemplates().findByProgram_IdAndDay(3, day);
+        return "redirect:/log/" + id + "/1";
+    }
+    @GetMapping("/log/{id}/{day}")
+    public String dayLog(@PathVariable int day, @PathVariable long id, Model view){
+        Program program = programDao.getPrograms().findById(id);
+        template temp = tempDao.getTemplates().findByProgram_IdAndDay(id, day);
         List<WorkSet> daySet = workDao.getWork().findAllByTemplate(temp);
         if(daySet.size() == 0){
             view.addAttribute("done", "You've finished all of today's sets!");
         }
         view.addAttribute("workSets", daySet);
-        view.addAttribute("name", name);
+        view.addAttribute("name", program.getName());
         view.addAttribute("day",day);
+        view.addAttribute("progId", id);
         return("exercises/log");
     }
 
-    @GetMapping("/log/{name}/{day}/{id}")
-    public String dayLogDropDown(@PathVariable int day, @PathVariable String name, @PathVariable long id, Model view){
-        template temp = tempDao.getTemplates().findByProgram_IdAndDay(3, day);
+    @GetMapping("/log/{progId}/{day}/{id}")
+    public String dayLogDropDown(@PathVariable int day, @PathVariable long progId, @PathVariable long id, Model view){
+        Program program = programDao.getPrograms().findById(progId);
+        template temp = tempDao.getTemplates().findByProgram_IdAndDay(progId, day);
         List<WorkSet> daySet = workDao.getWork().findAllByTemplate(temp);
         if(daySet.size() == 0){
             view.addAttribute("done", "You've finished all of today's sets!");
         }
         view.addAttribute("dropId", id);
         view.addAttribute("workSets", daySet);
-        view.addAttribute("name", name);
+        view.addAttribute("name", program.getName());
         view.addAttribute("day",day);
+        view.addAttribute("progId", progId);
+
         return("exercises/log");
     }
 
