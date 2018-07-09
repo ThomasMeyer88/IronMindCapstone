@@ -133,11 +133,11 @@
                     <input th:value="${subSet.id}" name = "setId" type="hidden" />
                     <input type="submit" value=" " class="dropBtnDel" />
                 </form>
+
+                    <input type="submit" value=" " class="dropBtnCopy"  />
                 <form th:action="@{/copyset/} + ${name} + @{/} + ${day}" method="post">
                     <input th:value="${workSet.id}" name = "id" type="hidden"/>
                     <input th:value="${subSet.id}" name = "setId" type="hidden" />
-
-                    <input type="submit" value=" " class="dropBtnCopy"  />
                 </form>
             </ul>
         </div>
