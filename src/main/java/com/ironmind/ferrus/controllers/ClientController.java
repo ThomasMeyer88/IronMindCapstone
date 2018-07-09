@@ -55,6 +55,8 @@ public class ClientController {
         return "redirect:/client_login";
     }
 
+
+
     @GetMapping("/client_profile_page")
     public String clientPage(Model view){
 
