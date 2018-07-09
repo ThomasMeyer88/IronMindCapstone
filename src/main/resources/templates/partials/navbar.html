@@ -1,7 +1,4 @@
 
-
-
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head></head>
@@ -29,14 +26,15 @@
     <div class="navbar-collapse collapse w-100 dual-collapse2 order-3 ">
         <ul class="navbar-nav mr-auto text-center">
             <li class="nav-item">
-                <a class="nav-link" href="/posts">Login</a>
+                <a class="nav-link" href="/client_login">Login</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" sec:authorize="!isAuthenticated()" href="/sign-up">Sign-Up</a>
+                <a class="nav-link" sec:authorize="!isAuthenticated()" href="/client_registration">Sign-Up</a>
             </li>
-            <li><form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post">-->
-                <button class="btn-link btn" style="margin-top: 8px">Logout</button>
-            </form></li>
+            <li>
+                <form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post">
+                    <button class="btn-link btn" style="margin-top: 8px">Logout</button>
+                </form></li>
 
         </ul>
     </div>

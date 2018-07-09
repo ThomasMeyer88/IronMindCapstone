@@ -29,6 +29,9 @@
     <form class="form-group" th:action="@{/exercises/{id}(id=${client.id})}" method="get">
         <button type="submit" class="btn btn-primary btn-block btn-md" id="plan" name="plan">Update Program</button>
     </form>
+    <form class="form-group" th:action="@{/logplan/{id}(id=${client.id})}" method="get">
+        <button type="submit" class="btn btn-primary btn-block btn-md" id="log" name="log">Log Worksets</button>
+    </form>
 
 </div>
     <footer th:replace="partials/footer :: footer" />
