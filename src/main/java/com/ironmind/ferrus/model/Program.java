@@ -11,11 +11,11 @@ public class Program {
     @GeneratedValue
     private long id;
 
-    @Column
+    @Column(nullable = false, length = 100)
     private String name;
 
-    @Column
-    private long programDays;
+    @Column(nullable = false, length = 100)
+    private Long programDays;
 
     @ManyToOne
     @JoinColumn
@@ -29,6 +29,11 @@ public class Program {
     public Program(String name, Client client) {
         this.name = name;
         this.client = client;
+    }
+
+    public Program(String name, Long programDays){
+        this.name=name;
+        this.programDays=programDays;
     }
 
     public Program(String name, Long programDays, Client client){

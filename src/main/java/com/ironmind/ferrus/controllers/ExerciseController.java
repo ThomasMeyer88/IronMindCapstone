@@ -4,13 +4,14 @@ package com.ironmind.ferrus.controllers;
 
 import com.ironmind.ferrus.Services.*;
 import com.ironmind.ferrus.model.*;
-import com.ironmind.ferrus.repositiories.ClientRepositories;
+import com.ironmind.ferrus.repositiories.Clients;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -22,12 +23,12 @@ public class ExerciseController {
     private subSetService setDao;
     private programService programDao;
     private completedSetService compDao;
-    private ClientRepositories clientDao;
+    private Clients clientDao;
 
     @Autowired
     public ExerciseController
             (ExerciseService exerciseService, workSetService work, templateService tempDao,
-             subSetService setDao, programService programService, ClientRepositories clientDao,
+             subSetService setDao, programService programService, Clients clientDao,
              completedSetService compDao){
         this.exerciseService = exerciseService;
         this.workDao = work;
@@ -68,9 +69,18 @@ public class ExerciseController {
     @GetMapping("/exercises/{name}/{day}")
     public String exercisesIndex(@PathVariable int day, @PathVariable String name, Model view){
         template temp = tempDao.getTemplates().findByProgram_IdAndDay(3, day);
+        Client clientSession = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        Program program = programDao.getPrograms().findByClient_IdAndName(clientSession.getId(), name);
+        long days = program.getProgramDays();
+        List<Long> progDays = new ArrayList<>();
+        for(long i = 1; i <= days; i++){
+            progDays.add(i);
+        }
         List<WorkSet> daySet = workDao.getWork().findAllByTemplate(temp);
         System.out.println(daySet.size());
         SubSet subSet = new SubSet(0, 0, " ", null);
+        view.addAttribute("days", progDays);
         view.addAttribute("workSets", daySet);
         view.addAttribute("subSet", subSet);
         view.addAttribute("exercises", exerciseService.getExercises().findAll());
@@ -78,6 +88,17 @@ public class ExerciseController {
         view.addAttribute("name", name);
         return("exercises/exercises");
     }
+
+    @RequestMapping(value="/exercises/{name}", method = RequestMethod.POST)
+    public String workoutForDays(@PathVariable String name, @RequestParam int daychoice){
+        return "redirect:/exercises/" + name + "/" + daychoice;
+    }
+
+//    @GetMapping("/exercises/{name}/{day}")
+//    public String workoutForDays(@PathVariable String name, @PathVariable int day, Model view){
+//        view.addAttribute("day", day);
+//        return "/exercises" + name + "/" + day;
+//    }
 
     @GetMapping("/exercises/{name}/{day}/{id}")
     public String exerciseUpdateIndex(@PathVariable int day, @PathVariable String name, @PathVariable long id, Model view){
@@ -205,4 +226,6 @@ public class ExerciseController {
         }
         return "redirect:/exercises/" + name + "/" + day + "/" + id;
     }
+
+
 }

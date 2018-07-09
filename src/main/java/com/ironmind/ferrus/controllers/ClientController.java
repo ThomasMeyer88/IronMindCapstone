@@ -5,7 +5,7 @@ import com.ironmind.ferrus.model.Client;
 import com.ironmind.ferrus.model.CompletedSet;
 import com.ironmind.ferrus.Services.programService;
 import com.ironmind.ferrus.model.Exercise;
-import com.ironmind.ferrus.repositiories.ClientRepositories;
+import com.ironmind.ferrus.model.Program;
 import com.ironmind.ferrus.repositiories.Clients;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
@@ -18,9 +18,8 @@ import java.util.List;
 
 @Controller
 public class ClientController {
-    private Clients clients;
+    private Clients clientDao;
     private PasswordEncoder passwordEncoder;
-    private final ClientRepositories clientDao;
     private ExerciseService exerciseService;
     private workSetService workDao;
     private templateService tempDao;
@@ -28,11 +27,9 @@ public class ClientController {
     private programService programDao;
     private completedSetService compDao;
 
-
-    public ClientController(Clients clients, PasswordEncoder passwordEncoder, ClientRepositories clientDao, ExerciseService exerciseService, workSetService workDao, templateService tempDao, subSetService setDao, programService programDao, completedSetService compDao) {
-        this.clients = clients;
-        this.passwordEncoder = passwordEncoder;
+    public ClientController(Clients clientDao, PasswordEncoder passwordEncoder, ExerciseService exerciseService, workSetService workDao, templateService tempDao, subSetService setDao, programService programDao, completedSetService compDao) {
         this.clientDao = clientDao;
+        this.passwordEncoder = passwordEncoder;
         this.exerciseService = exerciseService;
         this.workDao = workDao;
         this.tempDao = tempDao;
@@ -40,6 +37,7 @@ public class ClientController {
         this.programDao = programDao;
         this.compDao = compDao;
     }
+
 
     @GetMapping("/client_registration")
     public String showSignUpForm(Model model){
@@ -51,7 +49,7 @@ public class ClientController {
     public String saveClient(@ModelAttribute Client client){
         String hash = passwordEncoder.encode(client.getPassword());
         client.setPassword(hash);
-        clients.save(client);
+        clientDao.save(client);
         return "redirect:/client_login";
     }
 
@@ -62,12 +60,6 @@ public class ClientController {
         view.addAttribute("client", clientSession);
         return "clients/client_profile_page";
     }
-
-//    @GetMapping("/client_profile_page/{id}")
-//    public String showProfile(@PathVariable long id, Model model){
-//        model.addAttribute("Client", clientDao.findOne(id));
-//        return "clients/client_profile_page";
-//    }
 
     @GetMapping("/client_profile_page/{id}/edit")
     public String viewEdit(@PathVariable long id, Model model){
@@ -81,7 +73,6 @@ public class ClientController {
         clientSession.setEmail(client.getEmail());
         String hash = passwordEncoder.encode(client.getPassword());
         client.setPassword(hash);
-//        clientSession.setPassword(client.getPassword());
         clientSession.setUsername(client.getUsername());
         clientSession.setName(client.getName());
         clientDao.save(client);
@@ -116,5 +107,25 @@ public class ClientController {
         view.addAttribute("sets", completedSets);
         return "clients/client_progress";
     }
+
+    @GetMapping("/client_profile_page/create_program")
+    public String viewCreateProgram(Model view){
+
+        Program create = new Program("enter name here", new Client());
+        create.setProgramDays(0);
+        view.addAttribute("program", create);
+        return "clients/create_program";
+    }
+
+    @PostMapping("/client_profile_page/create_program")
+    public String CreateProgram(Program program){
+        Client clientSession = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        program.setClient(clientSession);
+        program.setName(program.getName());
+        program.setProgramDays(program.getProgramDays());
+        programDao.getPrograms().save(program);
+        return "redirect:/client_profile_page";
+    }
+
 
 }
