@@ -79,6 +79,7 @@
                         <option value="nochange" disabled="disabled" selected="selected">Statistic Type</option>
                                 <option value="1">1 Rep Max</option>
                                 <option value="2">Volume</option>
+                                <option value="3">Total Reps</option>
                     </select>
                             <br/>
                     <form  th:action="@{/client_progress/} + ${id}" method="post">
@@ -100,6 +101,7 @@
            <input th:value="${set.day}" type="hidden" class="day"/>
            <input th:value="${set.estimated1RM}" type="hidden" />
            <input th:value="${set.totalweight}" type="hidden" />
+           <input th:value="${set.reps}" type="hidden" />
        </div>
 </div>
             </canvas>
@@ -121,9 +123,10 @@
         data.addColumn('number', 'day');
         data.addColumn('number', 'ERM');
         data.addColumn('number', 'Volume');
+        data.addColumn('number', 'Reps');
 
         data.addRows([
-            [0,0,0]
+            [0,0,0,0]
         ]);
 
         Array.from(document.getElementsByClassName("day")).forEach(
@@ -133,8 +136,9 @@
 
                var weight = Number(element.nextElementSibling.value);
                var volume = Number(element.nextElementSibling.nextElementSibling.value);
+               var reps = Number(element.nextElementSibling.nextElementSibling.nextElementSibling.value);
 
-               data.addRows([[day, weight, volume]]);
+               data.addRows([[day, weight, volume, reps]]);
 
 
             }
@@ -150,7 +154,7 @@
                 title: 'Day'
             },
             vAxis: {
-                title: 'Weight(lbs)'
+                title: 'All Data'
             },
             colors: ['#AB0D06', '#007329'],
             trendlines: {
@@ -166,16 +170,22 @@
             if(document.getElementById("choice").value == 1) {
                 console.log("clicked 1");
                 var view = new google.visualization.DataView(data);
-
-                view.hideColumns([2]);
+                options.vAxis.title = "Estimated 1 Rep Max (lbs)";
+                view.hideColumns([2,3]);
                 chart.draw(view, options);
             }
             if(document.getElementById("choice").value == 2) {
-                var view = new google.visualization.DataView(data);
-
-                view.hideColumns([1]);
+                view = new google.visualization.DataView(data);
+                options.vAxis.title = "Total Weight Lifted (lbs)";
+                view.hideColumns([1,3]);
                 chart.draw(view, options);
 
+            }
+            if(document.getElementById("choice").value == 3){
+                view = new google.visualization.DataView(data);
+                options.vAxis.title = "Reps Completed";
+                view.hideColumns([1,2]);
+                chart.draw(view,options);
             }
         };
 

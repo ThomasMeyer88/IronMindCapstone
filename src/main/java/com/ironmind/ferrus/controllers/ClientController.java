@@ -113,16 +113,20 @@ public class ClientController {
     public String viewSwitchProgress(@PathVariable long id, @PathVariable long Exercise, Model view){
         List<CompletedSet> maxes = new ArrayList<>();
         List<CompletedSet> volume = new ArrayList<>();
+
         for(long i = 0; i < 180; i++){
             long volSum = 0;
-
+            long repSum = 0;
             List<CompletedSet> max = compDao.getCompSets().findAllByClient_IdAndExerciseIdAndDayOrderByEstimated1RMDesc(id, Exercise, i);
             for(int x = 0; x < max.size(); x++){
                 volSum += max.get(x).getTotalweight();
+                repSum += max.get(x).getReps();
             }
             try {
                 CompletedSet volSet = new CompletedSet(max.get(0).getDay(), max.get(0).getExerciseId(), volSum, max.get(0).getEstimated1RM());
+                volSet.setReps(repSum);
                 volume.add(volSet);
+
                 maxes.add(max.get(0));
                 max.clear();
             } catch (IndexOutOfBoundsException e){
