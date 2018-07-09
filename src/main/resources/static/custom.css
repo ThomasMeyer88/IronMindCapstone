@@ -4,6 +4,7 @@ html, body {
 
 body{
     background-color: white;
+    z-index: 1;
 
     /*background: url("john3.jpeg") no-repeat;*/
     /*background-image: url("/images/Gym.jpg");*/
@@ -425,3 +426,34 @@ html, body {
     /*width: 150%;*/
     /*height: auto;*/
 /*}*/
+
+.calenderModel{
+    width: 422px;
+    max-height: 275px;
+    overflow-y: scroll;
+    border: 1px solid black;
+    position: absolute;
+    background-color: lightblue;
+    z-index: 2;
+    display: none;
+    margin: 10% 10% 10% 33.5%;
+}
+
+.day{
+    float: left;
+    height: 60px;
+    width: 60px;
+    border: 1px solid black;
+    background-color: papayawhip;
+    text-align: left;
+}
+
+.day input{
+    background-color: papayawhip;
+    border: none;
+    padding-bottom: 35px;
+    padding-right:40px;
+    height: 58px;
+    width: 58px;
+
+}

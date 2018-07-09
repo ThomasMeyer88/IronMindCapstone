@@ -81,9 +81,21 @@
 <body class="plannerBody">
 <!--<nav th:replace="partials/navbar::navbar"></nav>-->
 
+<div id="calender" class="calenderModel" style="display: none">
+    <div onclick="closeCalender()">Close!</div>
+    <form th:action="@{/exercises/} + ${name}" method="post">
+        <div class="day" id="baseDay" th:each="day: ${days}">
+            <input name="daychoice" type="submit" th:value="${day}" />
+        </div>
+    </form>
+</div>
+
 <div class="plannerContainer">
     <h1 class="dayHeader"><output th:text="${name}"></output></h1>
     <h3 class="dayHeader"> Workouts for day:  <output th:text ="${day}"></output></h3>
+    <p onclick="myCalender()">Calendar</p>
+
+
     <div class="searchContainer" >
             <input type="text" placeholder="Search" id="searchEx" class="searchBar"/>
         <div class="scrollable">
@@ -154,7 +166,7 @@
 
 
 
-<script>
+<script th:inline="javascript">
     "use strict";
 
     var data;
@@ -248,12 +260,27 @@
         }
     }
 
+    function myCalender(){
+        document.getElementById("calender").style.display = "block";
+    }
+
+    function closeCalender(){
+        document.getElementById("calender").style.display = "none";
+    }
+
     var builder = document.getElementById("builder").children.length;
     console.log(builder);
     var stickyDrop = document.getElementById("dropCheck").value;
     console.log(stickyDrop);
     builderDisplay(builder);
-    document.onload(dropdown(stickyDrop));
+
+    dropdown(dropId);
+
+
+
+
+
+
 </script>
 </body>
     </div>

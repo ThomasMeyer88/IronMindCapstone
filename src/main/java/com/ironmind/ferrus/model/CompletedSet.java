@@ -29,11 +29,21 @@ public class CompletedSet {
     @Column
     private long estimated1RM;
 
+    @Column(nullable = false, columnDefinition = "int default 0")
+    private long intensity;
+
     @ManyToOne
     @JoinColumn
     private Client client;
 
     public CompletedSet(){};
+
+    public CompletedSet(long day, long exerciseId, long totalweight, long estimated1RM){
+        this.day = day;
+        this.exerciseId = exerciseId;
+        this.totalweight = totalweight;
+        this.estimated1RM = estimated1RM;
+    }
 
     public CompletedSet(String exerciseName, long day, long exerciseId, long weight, long reps, Client client) {
         this.exerciseName = exerciseName;
@@ -124,5 +134,13 @@ public class CompletedSet {
         factor += 1;
         double erm = factor * weight;
         this.estimated1RM = (long) erm;
+    }
+
+    public long getIntensity() {
+        return intensity;
+    }
+
+    public void setIntensity(long intensity) {
+        this.intensity = intensity;
     }
 }

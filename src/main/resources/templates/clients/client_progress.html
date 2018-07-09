@@ -75,17 +75,19 @@
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
                 <h1 class="h2">Progress Report</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
-                    <select name="Exercise">
-                        <option value="nochange" disabled="true" selected="selected">Statistic Type</option>
-                                <option>1 Rep Max</option>
-                                <option>Volume</option>
+                    <select name="Exercise" id="choice">
+                        <option value="nochange" disabled="disabled" selected="selected">Statistic Type</option>
+                                <option value="1">1 Rep Max</option>
+                                <option value="2">Volume</option>
+                                <option value="3">Total Reps</option>
+                                <option value="4">Intensity</option>
                     </select>
                             <br/>
-                    <form  th:action="@{/client_progress/} + ${id}" th:object="${optionSearchs}" method="post" onchange="this.form.submit()">
-                    <select name="Exercise">
-                        <option value="nochange" disabled="true" selected="selected">Exercises</option>
+                    <form  th:action="@{/client_progress/} + ${id}" method="post">
+                    <select name="exerciseId" onchange="this.form.submit()">
+                        <option value="nochange" disabled="disabled" selected="selected">Exercises</option>
                             <div th:each="exercise : ${exerciseList}">
-                                <option th:text="${exercise.name}" th:value="${exercise.id}" name="exercise"></option>
+                                <option th:text="${exercise.name}" th:value="${exercise.id}"></option>
                             </div>
                     </select>
 
@@ -99,6 +101,9 @@
        <div th:each="set : ${sets}">
            <input th:value="${set.day}" type="hidden" class="day"/>
            <input th:value="${set.estimated1RM}" type="hidden" />
+           <input th:value="${set.totalweight}" type="hidden" />
+           <input th:value="${set.reps}" type="hidden" />
+           <input th:value="${set.intensity}" type="hidden" />
        </div>
 </div>
             </canvas>
@@ -113,22 +118,30 @@
     google.charts.setOnLoadCallback(drawTrendlines);
 
     function drawTrendlines() {
+
         var data = new google.visualization.DataTable();
+
         //day and one rep max
         data.addColumn('number', 'day');
         data.addColumn('number', 'ERM');
+        data.addColumn('number', 'Volume');
+        data.addColumn('number', 'Reps');
+        data.addColumn('number', 'Intensity');
 
         data.addRows([
-            [0,0]
+            [0,0,0,0,0]
         ]);
 
         Array.from(document.getElementsByClassName("day")).forEach(
             function(element, index, array) {
                var day = Number(element.value);
                console.log(element.value);
-               var weight = Number(element.nextElementSibling.value);
 
-               data.addRows([[day, weight]]);
+               var weight = Number(element.nextElementSibling.value);
+               var volume = Number(element.nextElementSibling.nextElementSibling.value);
+               var reps = Number(element.nextElementSibling.nextElementSibling.nextElementSibling.value);
+               var intensity = Number(element.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.value);
+               data.addRows([[day, weight, volume, reps, intensity]]);
 
 
             }
@@ -144,18 +157,51 @@
                 title: 'Day'
             },
             vAxis: {
-                title: 'Weight(lbs)'
+                title: 'All Data'
             },
             colors: ['#AB0D06', '#007329'],
             trendlines: {
-                0: {type: 'exponential', color: '#333', opacity: 1},
+                0: {type: 'linear', color: '#333', opacity: .5},
                 1: {type: 'linear', color: '#111', opacity: .3}
             }
         };
 
         var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
         chart.draw(data, options);
+
+        document.getElementById("choice").onchange = function(){
+            if(document.getElementById("choice").value == 1) {
+                console.log("clicked 1");
+                var view = new google.visualization.DataView(data);
+                options.vAxis.title = "Estimated 1 Rep Max (lbs)";
+
+                view.hideColumns([2,3,4]);
+                chart.draw(view, options);
+            }
+            if(document.getElementById("choice").value == 2) {
+                view = new google.visualization.DataView(data);
+                options.vAxis.title = "Total Weight Lifted (lbs)";
+                view.hideColumns([1,3,4]);
+                chart.draw(view, options);
+
+            }
+            if(document.getElementById("choice").value == 3){
+                view = new google.visualization.DataView(data);
+                options.vAxis.title = "Reps Completed";
+                view.hideColumns([1,2,4]);
+                chart.draw(view,options);
+            }
+            if(document.getElementById("choice").value == 4){
+                view = new google.visualization.DataView(data);
+                options.vAxis.title = "Average Intensity";
+                view.hideColumns([1,2,3]);
+                chart.draw(view,options);
+            }
+        };
+
+        // chart.draw(data, options);
     }
+
 </script>
 
 

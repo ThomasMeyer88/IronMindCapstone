@@ -12,6 +12,9 @@ public class Client {
     @GeneratedValue
     private Long id;
 
+    @Column
+    private Long coachId;
+
     @Column(nullable = false, length = 100)
     private String name;
 
@@ -34,13 +37,18 @@ public class Client {
     private String sex;
 
     @Column(length = 100)
+    private Long phonenumber;
+
+    @Column(length = 100)
     private String imgurl;
 
     @Column(length = 1000)
     private String bio;
 
+
+
     @Column()
-    private String coach_id;
+    private boolean isCoach;
 
     @OneToMany (mappedBy = "client")
     private List<Program> programs;
@@ -48,19 +56,7 @@ public class Client {
     @OneToMany (mappedBy = "client")
     private List<CompletedSet> completedSets;
 
-    public Client(Long id, String name, String username, String email, String password, Long height, Long weight, String sex, String imgurl, String bio, String coach_id){
-        this.id = id;
-        this.name = name;
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.height = height;
-        this.weight = weight;
-        this.sex = sex;
-        this.imgurl = imgurl;
-        this.bio = bio;
-        this.coach_id = coach_id;
-    }
+
 
 
 
@@ -72,11 +68,12 @@ public class Client {
         this.password = password;
     }
 
-    public Client(String name, String username, String email, String password){
+    public Client(String name, String username, String email, String password, Long phonenumber){
         this.name = name;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.phonenumber = phonenumber;
     }
 
     public Client(Client copy){
@@ -174,13 +171,8 @@ public class Client {
         this.bio = bio;
     }
 
-    public String getCoach_id() {
-        return coach_id;
-    }
 
-    public void setCoach_id(String coach_id) {
-        this.coach_id = coach_id;
-    }
+
 
     public List<Program> getPrograms() {
         return programs;
@@ -194,7 +186,32 @@ public class Client {
         return completedSets;
     }
 
+
     public void setCompletedSets(List<CompletedSet> completedSets) {
         this.completedSets = completedSets;
+    }
+
+    public Long getCoachId() {
+        return coachId;
+    }
+
+    public void setCoachId(Long coachId) {
+        this.coachId = coachId;
+    }
+
+    public boolean isCoach() {
+        return isCoach;
+    }
+
+    public void setCoach(boolean coach) {
+        isCoach = coach;
+    }
+
+    public Long getPhonenumber() {
+        return phonenumber;
+    }
+
+    public void setPhonenumber(Long phonenumber) {
+        this.phonenumber = phonenumber;
     }
 }
