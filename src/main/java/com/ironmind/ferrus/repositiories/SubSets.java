@@ -9,4 +9,5 @@ public interface SubSets extends CrudRepository<SubSet, Long> {
     List<SubSet> findAll();
 
     List<SubSet> findAllByWorkSet_Id(long id);
+
 }
