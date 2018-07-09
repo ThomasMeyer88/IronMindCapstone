@@ -125,8 +125,8 @@ public class ExerciseController {
 //    }
 
     @GetMapping("/exercises/{progId}/{day}/{id}")
-    public String exerciseUpdateIndex(@PathVariable int day, @PathVariable Long progId, @PathVariable long id, Model view){
-        Program program = programDao.getPrograms().findOne(progId);
+    public String exerciseUpdateIndex(@PathVariable int day, @PathVariable long progId, @PathVariable long id, Model view){
+        Program program = programDao.getPrograms().findById(progId);
         template temp = tempDao.getTemplates().findByProgram_IdAndDay(progId, day);
         List<WorkSet> daySet = workDao.getWork().findAllByTemplate(temp);
         SubSet subSet = new SubSet(0, 0, " ", null);
@@ -137,6 +137,7 @@ public class ExerciseController {
         view.addAttribute("day", day);
         view.addAttribute("name", program.getName());
         view.addAttribute("progId", program.getId());
+
         return("exercises/exercises");
     }
 
@@ -210,7 +211,7 @@ public class ExerciseController {
         editSet.setWeight(weight);
         editSet.setReps(reps);
         setDao.getSets().save(editSet);
-        return "redirect:/exercises/" + id + "/" + day + "/" + id;
+        return "redirect:/exercises/" + progId + "/" + day + "/" + id;
 
     }
 
@@ -263,6 +264,7 @@ public class ExerciseController {
         SubSet checkSet = setDao.getSets().findOne(setId);
         //I am checking the workSet to see if it has an subsets
         //connected to it.  If not I delete the workSet from the database
+        System.out.println(id);
         WorkSet checkWork = checkSet.getWorkSet();
         setDao.getSets().delete(checkSet.getId());
         List<SubSet> subSets = setDao.getSets().findAllByWorkSet_Id(checkWork.getId());
