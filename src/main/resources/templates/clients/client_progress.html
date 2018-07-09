@@ -4,6 +4,7 @@
 
 <body>
 
+<input th:value="${selectId}" id="selector" type="hidden" />
 
 <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
     <a class="navbar-brand col-sm-3 col-md-2 " href="#"><img  src="/images/llogo.png" height="70" width="70" class="pic" /></a>
@@ -86,9 +87,9 @@
                             <br/>
                     <form  th:action="@{/client_progress/} + ${id}" method="post">
                     <select name="exerciseId" onchange="this.form.submit()">
-                        <option value="nochange" disabled="disabled" selected="selected">Exercises</option>
+                        <option value="nochange" disabled="disabled" selected="selected" id="defaultOption">Exercises</option>
                             <div th:each="exercise : ${exerciseList}">
-                                <option th:text="${exercise.name}" th:value="${exercise.id}"></option>
+                                <option th:text="${exercise.name}" th:value="${exercise.id}" th:id="${exercise.id}"></option>
                             </div>
                     </select>
 
@@ -115,6 +116,15 @@
 
 <script>
     "use strict";
+    var id = document.getElementById("selector").value;
+    function select(id){
+        if(id > 0){
+            document.getElementById("defaultOption").selected = "none";
+            document.getElementById(id).selected = "selected";
+        }
+    }
+
+    select(id);
     google.charts.load('current', {packages: ['corechart', 'line']});
     google.charts.setOnLoadCallback(drawTrendlines);
 
