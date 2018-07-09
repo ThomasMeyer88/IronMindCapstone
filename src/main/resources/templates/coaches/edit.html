@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="partials/header :: header" />
-
 <body>
 
 <div class="container">
-    <form th:action="@{/client_profile_page/{id}/edit(id=${client.id})}" method="post" th:object="${client}">
+    <form th:action="@{/coach_profile_page/{id}/edit(id=${coach.id})}" method="post" th:object="${Coach}">
         <h1 class="my-4 text-center">Edit Profile</h1>
         <div class="form-group">
             <label for="name">Name</label>
@@ -20,6 +19,11 @@
         <div class="form-group">
             <label for="username">Email</label>
             <input class="form-control" type="text" id="email" th:field="*{email}" />
+        </div>
+
+        <div class="form-group">
+            <label for="description"> Bio</label>
+            <textarea name="bio" id="description" cols="30" rows="10" th:field="*{bio}"></textarea>
         </div>
 
         <div class="form-group">
@@ -53,11 +57,4 @@
     </div>
 </div>
 </body>
-<script>
-    "use strict";
-
-    $('#myModal').on('shown.bs.modal', function () {
-        $('#myInput').trigger('focus')
-    })
-</script>
 </html>
