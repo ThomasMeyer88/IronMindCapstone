@@ -81,6 +81,7 @@
                                 <option value="2">Volume</option>
                                 <option value="3">Total Reps</option>
                                 <option value="4">Intensity</option>
+                                <option value="5">Volume and Intensity</option>
                     </select>
                             <br/>
                     <form  th:action="@{/client_progress/} + ${id}" method="post">
@@ -138,7 +139,7 @@
                console.log(element.value);
 
                var weight = Number(element.nextElementSibling.value);
-               var volume = Number(element.nextElementSibling.nextElementSibling.value);
+               var volume = (Number(element.nextElementSibling.nextElementSibling.value))/100;
                var reps = Number(element.nextElementSibling.nextElementSibling.nextElementSibling.value);
                var intensity = Number(element.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.value);
                data.addRows([[day, weight, volume, reps, intensity]]);
@@ -180,7 +181,7 @@
             }
             if(document.getElementById("choice").value == 2) {
                 view = new google.visualization.DataView(data);
-                options.vAxis.title = "Total Weight Lifted (lbs)";
+                options.vAxis.title = "Total Weight Lifted";
                 view.hideColumns([1,3,4]);
                 chart.draw(view, options);
 
@@ -195,6 +196,12 @@
                 view = new google.visualization.DataView(data);
                 options.vAxis.title = "Average Intensity";
                 view.hideColumns([1,2,3]);
+                chart.draw(view,options);
+            }
+            if(document.getElementById("choice").value == 5){
+                view = new google.visualization.DataView(data);
+                options.vAxis.title = "Volume and Average Intensity";
+                view.hideColumns([1,3]);
                 chart.draw(view,options);
             }
         };
