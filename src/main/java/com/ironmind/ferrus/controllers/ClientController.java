@@ -144,6 +144,7 @@ public class ClientController {
         List<Exercise> exercises = exerciseService.getExercises().findAll();
         view.addAttribute("exerciseList", exercises);
         view.addAttribute("sets", volume);
+        view.addAttribute("selectId", Exercise);
         return "clients/client_progress";
     }
 

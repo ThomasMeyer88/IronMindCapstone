@@ -15,7 +15,6 @@ public interface CompletedSets extends CrudRepository<CompletedSet,Long>{
 
     List<CompletedSet> findAllByExerciseIdOrderByEstimated1RMDesc(long id);
 
-    List<CompletedSet> findAllByExerciseIdAndClient_IdAndDay(long id, long exerId, long clientid);
     List<CompletedSet> findAllByClient_IdAndExerciseIdAndDayOrderByEstimated1RMDesc(long clientId, long id, long day);
 
 }

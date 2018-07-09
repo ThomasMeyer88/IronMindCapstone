@@ -58,10 +58,10 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="settings"></span>
-                            Edit Profile
-                        </a>
+                        <form class="nav-link" th:action="@{/client_profile_page/{id}/edit(id=${client.id})}" method="get">
+                            <span type="submit" id="edit" name="edit">Edit Profile</span>
+                        </form>
+
                     </li>
 
                 </ul>
@@ -234,9 +234,11 @@
         var string = nodeCopy.childNodes[1].childNodes[3];
         console.log(string);
 
-        var dropdown = b.childNodes[3];
-        dropdown.id = "drop" + increment;
-        console.log(dropdown);
+        var drop = b.childNodes[3];
+        drop.id = "drop" + increment;
+        console.log(drop);
+        dropdown(drop.id);
+
 
         //to transfer name data
         var targetvalue = b.childNodes[5].childNodes[1].childNodes[1].childNodes[1];
@@ -275,7 +277,6 @@
     builderDisplay(builder);
 
     dropdown(dropId);
-
 
 
 

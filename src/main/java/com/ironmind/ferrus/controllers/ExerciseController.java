@@ -189,7 +189,8 @@ public class ExerciseController {
                 System.out.println("Work ID is " + work.getId() + " Temp id is " + temp.getId());
                 newSub.setWorkSet(work);
                 setDao.getSets().save(newSub);
-                return "redirect:/exercises/" + id + "/" + day;
+                long dropid = work.getId();
+                return "redirect:/exercises/" + id + "/" + day + "/" + dropid;
             } catch (NullPointerException e) {
                 String name = program.getName();
                 //Program program = programDao.getPrograms().findByClient_IdAndName(clientSession.getId(), name);
@@ -201,7 +202,8 @@ public class ExerciseController {
                 workDao.getWork().save(work);
                 newSub.setWorkSet(work);
                 setDao.getSets().save(newSub);
-                return "redirect:/exercises/" + id + "/" + day;
+                long dropid = work.getId();
+                return "redirect:/exercises/" + id + "/" + day + "/" + dropid;
             }
 
         } catch (NullPointerException e){
@@ -213,7 +215,8 @@ public class ExerciseController {
             workDao.getWork().save(work);
             newSub.setWorkSet(work);
             setDao.getSets().save(newSub);
-            return "redirect:/exercises/" + id + "/" + day;
+            long dropid = work.getId();
+            return "redirect:/exercises/" + id + "/" + day + "/" + dropid;
         }
     }
 
