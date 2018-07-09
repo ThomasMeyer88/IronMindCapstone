@@ -30,3 +30,5 @@ select * from users;
 
 insert into completedsets (day, estimated1rm, exercise_id, exercise_name, reps, totalweight, weight, client_id)
 VALUES (1, 200, 1, 'Deadlift', 20, 2000, 100, 1);
+
+describe users;

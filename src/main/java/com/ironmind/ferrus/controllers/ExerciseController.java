@@ -80,12 +80,21 @@ public class ExerciseController {
         return("exercises/log");
     }
 
-    @GetMapping("/exercises/{name}/{day}")
-    public String exercisesIndex(@PathVariable int day, @PathVariable String name, Model view){
-        template temp = tempDao.getTemplates().findByProgram_IdAndDay(3, day);
+    @GetMapping("/exercises/{id}")
+    public String loadProgram(@PathVariable long id, Model view){
+        List<Program> program = programDao.getPrograms().findAllByClient_Id(id);
+        long progId = program.get(0).getId();
+        view.addAttribute("progId", id);
+        return "redirect:/exercises/" + progId + "/1";
+    }
+
+    @GetMapping("/exercises/{id}/{day}")
+    public String exercisesIndex(@PathVariable int day, @PathVariable long id, Model view){
+        Program program = programDao.getPrograms().findOne(id);
+        template temp = tempDao.getTemplates().findByProgram_IdAndDay(id, day);
         Client clientSession = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        Program program = programDao.getPrograms().findByClient_IdAndName(clientSession.getId(), name);
+        //Program program = programDao.getPrograms().findByClient_IdAndName(clientSession.getId(), name);
         long days = program.getProgramDays();
         List<Long> progDays = new ArrayList<>();
         for(long i = 1; i <= days; i++){
@@ -99,13 +108,14 @@ public class ExerciseController {
         view.addAttribute("subSet", subSet);
         view.addAttribute("exercises", exerciseService.getExercises().findAll());
         view.addAttribute("day", day);
-        view.addAttribute("name", name);
+        view.addAttribute("name", program.getName());
+        view.addAttribute("progId", program.getId());
         return("exercises/exercises");
     }
 
-    @RequestMapping(value="/exercises/{name}", method = RequestMethod.POST)
-    public String workoutForDays(@PathVariable String name, @RequestParam int daychoice){
-        return "redirect:/exercises/" + name + "/" + daychoice;
+    @RequestMapping(value="/exercises/{id}", method = RequestMethod.POST)
+    public String workoutForDays(@PathVariable Long id, @RequestParam int daychoice){
+        return "redirect:/exercises/" + id + "/" + daychoice;
     }
 
 //    @GetMapping("/exercises/{name}/{day}")
@@ -114,9 +124,10 @@ public class ExerciseController {
 //        return "/exercises" + name + "/" + day;
 //    }
 
-    @GetMapping("/exercises/{name}/{day}/{id}")
-    public String exerciseUpdateIndex(@PathVariable int day, @PathVariable String name, @PathVariable long id, Model view){
-        template temp = tempDao.getTemplates().findByProgram_IdAndDay(3, day);
+    @GetMapping("/exercises/{progId}/{day}/{id}")
+    public String exerciseUpdateIndex(@PathVariable int day, @PathVariable Long progId, @PathVariable long id, Model view){
+        Program program = programDao.getPrograms().findOne(progId);
+        template temp = tempDao.getTemplates().findByProgram_IdAndDay(progId, day);
         List<WorkSet> daySet = workDao.getWork().findAllByTemplate(temp);
         SubSet subSet = new SubSet(0, 0, " ", null);
         view.addAttribute("dropId", id);
@@ -124,7 +135,8 @@ public class ExerciseController {
         view.addAttribute("subSet", subSet);
         view.addAttribute("exercises", exerciseService.getExercises().findAll());
         view.addAttribute("day", day);
-        view.addAttribute("name", name);
+        view.addAttribute("name", program.getName());
+        view.addAttribute("progId", program.getId());
         return("exercises/exercises");
     }
 
@@ -143,13 +155,16 @@ public class ExerciseController {
         return "redirect:/exercises";
     }
 
-    @PostMapping("/createplan/{name}/{day}")
-    public String createDay(@PathVariable long day, @PathVariable String name, SubSet subSet){
+    @PostMapping("/createplan/{id}/{day}")
+    public String createDay(@PathVariable long day, @PathVariable long id, SubSet subSet){
         System.out.println(subSet.getExerciseName());
         Client clientSession = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         try{
             try {
-                Program program = programDao.getPrograms().findByClient_IdAndName(clientSession.getId(), name);
+                Program program = programDao.getPrograms().findOne(id);
+                String name = program.getName();
+
+                //Program program = programDao.getPrograms().findByClient_IdAndName(clientSession.getId(), name);
                 System.out.println("First try program " + program.getId());
                 template temp = tempDao.getTemplates().findByProgram_IdAndDay(program.getId(), (int)day);
                 System.out.println("First try temp " + temp.getId());
@@ -160,9 +175,11 @@ public class ExerciseController {
                 subSet.setWorkSet(work);
                 setDao.getSets().save(subSet);
                 System.out.println(subSet.getWorkSet().getTemplate());
-                return "redirect:/exercises/" + name + "/" + day;
+                return "redirect:/exercises/" + id + "/" + day;
             } catch (NullPointerException e) {
-                Program program = programDao.getPrograms().findByClient_IdAndName(clientSession.getId(), name);
+                Program program = programDao.getPrograms().findOne(id);
+                String name = program.getName();
+                //Program program = programDao.getPrograms().findByClient_IdAndName(clientSession.getId(), name);
                 System.out.println("First try program " + program.getId());
                 template temp = tempDao.getTemplates().findByProgram_IdAndDay(program.getId(), (int)day);
                 System.out.println("First try temp " + temp.getId());
@@ -171,44 +188,44 @@ public class ExerciseController {
                 workDao.getWork().save(work);
                 subSet.setWorkSet(work);
                 setDao.getSets().save(subSet);
-                return "redirect:/exercises/" + name + "/" + day;
+                return "redirect:/exercises/" + id + "/" + day;
             }
 
         } catch (NullPointerException e){
             template temp = new template((int)day);
-            temp.setProgram(programDao.getPrograms().findByClient_IdAndName(clientSession.getId(), name));
+            temp.setProgram(programDao.getPrograms().findByClient_IdAndName(clientSession.getId(), " "));
             tempDao.getTemplates().save(temp);
             WorkSet work = new WorkSet(subSet.getExerciseName(),exerciseService.getExercises().findByName(subSet.getExerciseName()));
             work.setTemplate(temp);
             workDao.getWork().save(work);
             subSet.setWorkSet(work);
             setDao.getSets().save(subSet);
-            return "redirect:/exercises/" + name + "/" + day;
+            return "redirect:/exercises/" + id + "/" + day;
         }
     }
 
-    @RequestMapping(value = "/editset/{name}/{day}", method = RequestMethod.POST)
-    public String editSet(@PathVariable long day, @PathVariable String name, @RequestParam long id, @RequestParam long setId,
+    @RequestMapping(value = "/editset/{progId}/{day}", method = RequestMethod.POST)
+    public String editSet(@PathVariable long day, @PathVariable long progId, @RequestParam long id, @RequestParam long setId,
                           @RequestParam int weight, @RequestParam int reps){
         SubSet editSet = setDao.getSets().findOne(setId);
         editSet.setWeight(weight);
         editSet.setReps(reps);
         setDao.getSets().save(editSet);
-        return "redirect:/exercises/" + name + "/" + day + "/" + id;
+        return "redirect:/exercises/" + id + "/" + day + "/" + id;
 
     }
 
-    @RequestMapping(value = "/copyset/{name}/{day}", method = RequestMethod.POST)
-    public String getTest(@PathVariable long day, @PathVariable String name, @RequestParam long id, @RequestParam long setId) {
+    @RequestMapping(value = "/copyset/{progId}/{day}", method = RequestMethod.POST)
+    public String getTest(@PathVariable long day, @PathVariable long progId, @RequestParam long id, @RequestParam long setId) {
         SubSet copySet = setDao.getSets().findOne(setId);
         SubSet saveSet = new SubSet(copySet.getWeight(), copySet.getReps(), copySet.getExerciseName(), copySet.getWorkSet());
         setDao.getSets().save(saveSet);
-        return "redirect:/exercises/" + name + "/" + day + "/" + id;
+        return "redirect:/exercises/" + progId + "/" + day + "/" + id;
 
     }
 
-    @RequestMapping(value = "/logset/{name}/{day}", method= RequestMethod.POST)
-    public String logSet(@PathVariable long day, @PathVariable String name, @RequestParam long id, @RequestParam long setId){
+    @RequestMapping(value = "/logset/{progId}/{day}", method= RequestMethod.POST)
+    public String logSet(@PathVariable long day, @PathVariable long progId, @RequestParam long id, @RequestParam long setId){
         SubSet subSet = setDao.getSets().findOne(setId);
         Client clientSession = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -222,7 +239,7 @@ public class ExerciseController {
         if(subSets.size() == 0){
             workDao.getWork().delete(checkWork.getId());
         }
-        return "redirect:/log/" + name + "/" + day + "/" + id;
+        return "redirect:/log/" + progId + "/" + day + "/" + id;
     }
 
 
@@ -242,8 +259,8 @@ public class ExerciseController {
 //        return "redirect:/log/" + name + "/" + day ;
 //    }
 
-    @RequestMapping(value = "/deleteset/{name}/{day}", method = RequestMethod.POST)
-    public String deleteSet(@PathVariable long day, @PathVariable String name, @RequestParam long id, @RequestParam long setId){
+    @RequestMapping(value = "/deleteset/{progId}/{day}", method = RequestMethod.POST)
+    public String deleteSet(@PathVariable long day, @PathVariable long progId, @RequestParam long id, @RequestParam long setId){
         SubSet checkSet = setDao.getSets().findOne(setId);
         //I am checking the workSet to see if it has an subsets
         //connected to it.  If not I delete the workSet from the database
@@ -253,7 +270,7 @@ public class ExerciseController {
         if(subSets.size() == 0){
             workDao.getWork().delete(checkWork.getId());
         }
-        return "redirect:/exercises/" + name + "/" + day + "/" + id;
+        return "redirect:/exercises/" + progId + "/" + day + "/" + id;
     }
 
 

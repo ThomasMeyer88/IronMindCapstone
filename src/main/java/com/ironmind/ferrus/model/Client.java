@@ -47,7 +47,7 @@ public class Client {
 
 
 
-    @Column()
+    @Column(nullable = false, columnDefinition = "bit default false")
     private boolean isCoach;
 
     @OneToMany (mappedBy = "client")

@@ -5,8 +5,14 @@
 
 <h1 class="client_profile">Greetings, <span th:text="${client.username}">!</span></h1>
 <div class="container">
+
     <form class="form-group" action="#" method="get">
        <button type="submit" class="btn btn-primary btn-block btn-md" id="createplan" name="createplan">Create a plan</button>
+    </form>
+
+
+    <form class="form-group" th:action="@{/client_profile_page/create_program}" method="get">
+        <button type="submit" class="btn btn-primary btn-block btn-md" id="createplan" name="createplan">Create a program</button>
     </form>
 
 
@@ -18,6 +24,10 @@
 
     <form class="form-group" th:action="@{/client_progress/{id}(id=${client.id})}" method="get">
         <button type="submit" class="btn btn-primary btn-block btn-md" id="progress" name="progress">View Progress</button>
+    </form>
+
+    <form class="form-group" th:action="@{/exercises/{id}(id=${client.id})}" method="get">
+        <button type="submit" class="btn btn-primary btn-block btn-md" id="plan" name="plan">Update Program</button>
     </form>
 
 </div>
