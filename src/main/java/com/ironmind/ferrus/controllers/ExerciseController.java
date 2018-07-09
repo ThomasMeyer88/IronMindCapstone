@@ -159,9 +159,9 @@ public class ExerciseController {
     public String createDay(@PathVariable long day, @PathVariable long id, SubSet subSet){
         System.out.println(subSet.getExerciseName());
         Client clientSession = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Program program = programDao.getPrograms().findByClient_IdAndId(clientSession.getId(), id);
         try{
             try {
-                Program program = programDao.getPrograms().findById(id);
                 String name = program.getName();
 
                 //Program program = programDao.getPrograms().findByClient_IdAndName(clientSession.getId(), name);
@@ -177,7 +177,6 @@ public class ExerciseController {
                 System.out.println(subSet.getWorkSet().getTemplate());
                 return "redirect:/exercises/" + id + "/" + day;
             } catch (NullPointerException e) {
-                Program program = programDao.getPrograms().findById(id);
                 String name = program.getName();
                 //Program program = programDao.getPrograms().findByClient_IdAndName(clientSession.getId(), name);
                 System.out.println("First try program " + program.getId());
@@ -193,7 +192,7 @@ public class ExerciseController {
 
         } catch (NullPointerException e){
             template temp = new template((int)day);
-            temp.setProgram(programDao.getPrograms().findByClient_IdAndId(clientSession.getId(), id));
+            temp.setProgram(program);
             tempDao.getTemplates().save(temp);
             WorkSet work = new WorkSet(subSet.getExerciseName(),exerciseService.getExercises().findByName(subSet.getExerciseName()));
             work.setTemplate(temp);
