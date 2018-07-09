@@ -10,7 +10,7 @@ import java.util.List;
 public interface CompletedSets extends CrudRepository<CompletedSet,Long>{
 
 
-    List<CompletedSet> findAllByExerciseIdAndClient_Id(long id, long clientid);
+    List<CompletedSet> findAllByExerciseIdAndClient_IdOrderByEstimated1RMDesc(long id, long clientid);
     List<CompletedSet> findAllByClient_Id(long id);
 
     List<CompletedSet> findAllByExerciseIdOrderByEstimated1RMDesc(long id);

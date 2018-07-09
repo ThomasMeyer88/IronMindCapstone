@@ -113,24 +113,40 @@ public class ClientController {
     public String viewSwitchProgress(@PathVariable long id, @PathVariable long Exercise, Model view){
         List<CompletedSet> maxes = new ArrayList<>();
         List<CompletedSet> volume = new ArrayList<>();
+        List<CompletedSet> absMax = compDao.getCompSets().findAllByExerciseIdAndClient_IdOrderByEstimated1RMDesc(Exercise, id);
 
         for(long i = 0; i < 180; i++){
             long volSum = 0;
             long repSum = 0;
+            long intensity = 0;
+            long intSum = 0;
             List<CompletedSet> max = compDao.getCompSets().findAllByClient_IdAndExerciseIdAndDayOrderByEstimated1RMDesc(id, Exercise, i);
             for(int x = 0; x < max.size(); x++){
                 volSum += max.get(x).getTotalweight();
                 repSum += max.get(x).getReps();
+                intensity = (max.get(x).getEstimated1RM()*100)/absMax.get(0).getEstimated1RM();
+                intSum += intensity;
             }
             try {
                 CompletedSet volSet = new CompletedSet(max.get(0).getDay(), max.get(0).getExerciseId(), volSum, max.get(0).getEstimated1RM());
+
+                if(max.size() > 0) {
+                    intensity = intSum / max.size();
+                    System.out.println(intensity);
+                } else {
+                    intensity = 0;
+                }
+                    volSet.setIntensity(intensity);
+
+
+
                 volSet.setReps(repSum);
                 volume.add(volSet);
 
                 maxes.add(max.get(0));
                 max.clear();
             } catch (IndexOutOfBoundsException e){
-                System.out.println(e.getMessage());
+
             }
         }
 

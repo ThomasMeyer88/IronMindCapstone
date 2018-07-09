@@ -29,6 +29,9 @@ public class CompletedSet {
     @Column
     private long estimated1RM;
 
+    @Column(nullable = false, columnDefinition = "int default 0")
+    private long intensity;
+
     @ManyToOne
     @JoinColumn
     private Client client;
@@ -131,5 +134,13 @@ public class CompletedSet {
         factor += 1;
         double erm = factor * weight;
         this.estimated1RM = (long) erm;
+    }
+
+    public long getIntensity() {
+        return intensity;
+    }
+
+    public void setIntensity(long intensity) {
+        this.intensity = intensity;
     }
 }
