@@ -2,7 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="partials/header :: header" />
 <body>
-<div th:replace="partials/navbar :: navbar"></div>
 
 <h1 class="client_profile">Login</h1>
 
@@ -16,6 +15,6 @@
         <input class="btn btn-primary" type="submit" value="Log In" />
     </form>
 </div>
-
+<footer th:replace="partials/footer :: footer" />
 </body>
 </html>

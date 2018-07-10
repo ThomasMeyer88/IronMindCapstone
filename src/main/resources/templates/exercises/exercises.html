@@ -1,17 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:replace="partials/header">
 </head>
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                <h1 class="h2">Planning</h1>
-                <div class="btn-toolbar mb-2 mb-md-0">
-                </div>
-            </div>
-        </main>
-<input th:value="${dropId}" id="dropCheck" type="hidden"/>
 <body class="plannerBody">
-<!--<nav th:replace="partials/navbar::navbar"></nav>-->
+<div th:replace="partials/profilenavbar :: profilenavbar" />
+<div th:replace="partials/sidebar :: sidebar" />
 
 <div id="calender" class="calenderModel" style="display: none">
     <div onclick="closeCalender()">Close!</div>
@@ -22,7 +15,7 @@
     </form>
 </div>
 
-<div class="plannerContainer">
+<div class="plannerContainer container-fluid">
     <h1 class="dayHeader"><output th:text="${name}"></output></h1>
     <h3 class="dayHeader"> Workouts for day:  <output th:text ="${day}"></output></h3>
     <p onclick="myCalender()">Calendar</p>
@@ -211,5 +204,6 @@
     dropdown(dropId);
 
 </script>
+<footer th:replace="partials/footer :: footer" />
 </body>
 </html>

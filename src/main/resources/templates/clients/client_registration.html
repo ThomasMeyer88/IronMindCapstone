@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="partials/header :: header" />
 <body>
+
 <h1 class="client_profile">Register an account!</h1>
 <div class="container">
     <form th:action="@{/client_registration}" method="POST" th:object="${client}">
