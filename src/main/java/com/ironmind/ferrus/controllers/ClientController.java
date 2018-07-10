@@ -51,16 +51,31 @@ public class ClientController {
     public String saveClient(@ModelAttribute Client client){
         String hash = passwordEncoder.encode(client.getPassword());
         client.setPassword(hash);
+        client.setRole("Client");
         clientDao.save(client);
         return "redirect:/client_login";
     }
 
     @GetMapping("/client_profile_page")
     public String clientPage(Model view){
-
         Client clientSession = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        view.addAttribute("client", clientSession);
-        return "clients/client_profile_page";
+        System.out.println(clientSession.getRole());
+        System.out.println(clientSession.getEmail());
+        Client test = clientDao.findOne(clientSession.getId());
+        clientSession.setRole(test.getRole());
+        if (clientSession.getRole().equals("Coach")){
+                view.addAttribute("client", clientSession);
+                System.out.println("is a coach");
+                return "coaches/coach_profile";
+        }else{
+                view.addAttribute("client", clientSession);
+                return "clients/client_profile_page";
+            }
+    }
+
+    @GetMapping("/coach_profile")
+    public String coachPage(Model view){
+        return "coaches/coach_profile";
     }
 
     @GetMapping("/client_profile_page/{id}/edit")

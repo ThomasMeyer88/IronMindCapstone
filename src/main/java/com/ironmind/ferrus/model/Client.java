@@ -46,9 +46,10 @@ public class Client {
     private String bio;
 
 
+    @Column(nullable = false)
+    private String role;
 
-    @Column(nullable = false, columnDefinition = "bit default false")
-    private boolean isCoach;
+
 
     @OneToMany (mappedBy = "client")
     private List<Program> programs;
@@ -199,13 +200,7 @@ public class Client {
         this.coachId = coachId;
     }
 
-    public boolean isCoach() {
-        return isCoach;
-    }
 
-    public void setCoach(boolean coach) {
-        isCoach = coach;
-    }
 
     public Long getPhonenumber() {
         return phonenumber;
@@ -213,5 +208,13 @@ public class Client {
 
     public void setPhonenumber(Long phonenumber) {
         this.phonenumber = phonenumber;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }
