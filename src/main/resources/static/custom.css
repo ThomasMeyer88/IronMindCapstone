@@ -475,7 +475,7 @@ html, body {
     position: absolute;
     transform: translate(-50%, -50%);
     box-sizing: border-box;
-    padding: 70px 30px;
+    padding: 55px 30px;
 }
 
 .avatar{
@@ -537,4 +537,12 @@ html, body {
     background-size: cover;
     background: url("images/weights1.jpg") center;
     font-family: sans-serif;
+}
+
+.loginbody a{
+    text-decoration: none;
+    font-size: 12px;
+    line-height: 20px;
+    color: darkgray;
+
 }
