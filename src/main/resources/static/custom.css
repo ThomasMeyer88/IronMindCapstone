@@ -475,7 +475,47 @@ html, body {
     position: absolute;
     transform: translate(-50%, -50%);
     box-sizing: border-box;
-    padding: 55px 30px;
+    padding: 40px 30px;
+}
+
+.registerbox{
+    width: 320px;
+    height: 600px;
+    background: #000;
+    color: #fff;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 40px 30px;
+}
+
+.coachregisterbox{
+    width: 320px;
+    height: 720px;
+    background: #000;
+    color: #fff;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 40px 30px;
+}
+
+.registerbody{
+    width: 320px;
+    height: 380px;
+    background: #000;
+    color: #fff;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 80px 30px;
+
 }
 
 .avatar{
@@ -499,13 +539,54 @@ html, body {
     padding: 0;
     font-weight: bold;
 }
+.registerbox p{
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+}
+
+.coachregisterbox p{
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+}
 
 .loginbox input{
     width: 100%;
     margin-bottom: 20px;
 }
 
+.registerbox input{
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.coachregisterbox input{
+    width: 100%;
+    margin-bottom: 20px;
+}
+
 .loginbox input[type="text"], input[type="password"]{
+    border: none;
+    border-bottom: 1px solid #fff;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: #fff;
+    font-size: 16px;
+}
+
+.registerbox input[type="text"], input[type="password"]{
+    border: none;
+    border-bottom: 1px solid #fff;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: #fff;
+    font-size: 16px;
+}
+
+.coachregisterbox input[type="text"], input[type="password"]{
     border: none;
     border-bottom: 1px solid #fff;
     background: transparent;
@@ -525,7 +606,39 @@ html, body {
     border-radius: 20px;
 }
 
+.registerbox input[type="submit"]{
+    border:none;
+    outline: none;
+    height: 40px;
+    background: #fb2525;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
+}
+
+.coachregisterbox input[type="submit"]{
+    border:none;
+    outline: none;
+    height: 40px;
+    background: #fb2525;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
+}
+
 .loginbox input[type="submit"]:hover{
+    cursor: pointer;
+    background: #ffc107;
+    color: #000;
+}
+
+.registerbox input[type="submit"]:hover{
+    cursor: pointer;
+    background: #ffc107;
+    color: #000;
+}
+
+.coachregisterbox input[type="submit"]:hover{
     cursor: pointer;
     background: #ffc107;
     color: #000;
@@ -539,10 +652,24 @@ html, body {
     font-family: sans-serif;
 }
 
+.registerbody{
+    margin: 0;
+    padding: 0;
+    background-size: cover;
+    background: url("images/weights1.jpg") center;
+    font-family: sans-serif;
+}
+
 .loginbody a{
     text-decoration: none;
     font-size: 12px;
     line-height: 20px;
     color: darkgray;
+}
 
+.registerbody a{
+    text-decoration: none;
+    font-size: 12px;
+    line-height: 20px;
+    color: darkgray;
 }
