@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <head></head>
+<link rel="stylesheet" type="text/css" href="/custom.css" />
 <body>
 <div th:fragment="sidebar" class="container-fluid">
     <div class="row">
@@ -10,34 +11,28 @@
 
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                    <li class="nav-item">
-                        <a class="nav-link " href="#">
+                        <a class="nav-link " href="/">
                             <span data-feather="home"></span>
                             Dashboard
                         </a>
-                        <a class="nav-link" href="#">
+                    </li>
+                    <li>
+                        <form class="form-group nav-link" th:action="@{/exercises/{id}(id=${client.id})}" method="get">
                             <span data-feather="file"></span>
-                            Workout Plans
-                        </a>
-                    </li>
+                            <button type="submit" class="sideBarButtons" id="plan" name="plan">Program</button>
+                        </form>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <form class="form-group nav-link" th:action="@{/logplan/{id}(id=${client.id})}" method="get">
                             <span data-feather="book"></span>
-                            Workout Log
-                        </a>
+                            <button type="submit" class="sideBarButtons" id="log" name="log">Log Worksets</button>
+                        </form>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <form class="form-group nav-link" th:action="@{/client_progress/{id}(id=${client.id})}" method="get">
                             <span data-feather="activity"></span>
-                            Your Progress
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="calendar"></span>
-                            Schedule
-                        </a>
+                            <button type="submit" class="sideBarButtons" id="progress" name="progress">View Progress</button>
+                        </form>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">
@@ -46,17 +41,17 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <form class="form-group nav-link" th:action="@{/client_profile_page/{id}/edit(id=${client.id})}" method="get">
                             <span data-feather="settings"></span>
-                            Edit Profile
-                        </a>
+                            <button class="sideBarButtons" type="submit" id="edit" name="edit">Edit Profile</button>
+                        </form>
                     </li>
-
                 </ul>
 
             </div>
         </nav>
     </div>
     </div>
+
 </body>
 </html>

@@ -457,3 +457,12 @@ html, body {
     width: 58px;
 
 }
+
+.sideBarButtons{
+    border: none;
+    background-color: #F8F9FA;
+}
+
+.nav-link{
+    margin: 0px;
+}

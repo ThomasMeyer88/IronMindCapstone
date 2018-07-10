@@ -31,10 +31,14 @@
             <li class="nav-item">
                 <a class="nav-link" sec:authorize="!isAuthenticated()" href="/client_registration">Sign-Up</a>
             </li>
-            <li>
-                <form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post">
-                    <button class="btn-link btn" style="margin-top: 8px">Logout</button>
-                </form></li>
+            <li class="nav-item">
+                <a class="nav-link" sec:authorize="isAuthenticated()" href="/client_login?logout">Logout</a>
+            </li>
+            <!--<li>-->
+                <!--<form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post">-->
+                    <!--<button class="btn-link btn" style="margin-top: 8px">Logout</button>-->
+                <!--</form>-->
+            <!--</li>-->
 
         </ul>
     </div>
