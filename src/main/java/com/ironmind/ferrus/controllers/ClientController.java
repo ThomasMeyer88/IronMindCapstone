@@ -1,11 +1,8 @@
 package com.ironmind.ferrus.controllers;
 
 import com.ironmind.ferrus.Services.*;
-import com.ironmind.ferrus.model.Client;
-import com.ironmind.ferrus.model.CompletedSet;
+import com.ironmind.ferrus.model.*;
 import com.ironmind.ferrus.Services.programService;
-import com.ironmind.ferrus.model.Exercise;
-import com.ironmind.ferrus.model.Program;
 import com.ironmind.ferrus.repositiories.Clients;
 import org.springframework.security.access.method.P;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -54,6 +51,8 @@ public class ClientController {
         clientDao.save(client);
         return "redirect:/client_login";
     }
+
+
 
     @GetMapping("/client_profile_page")
     public String clientPage(Model view){
@@ -166,6 +165,4 @@ public class ClientController {
         programDao.getPrograms().save(program);
         return "redirect:/client_profile_page";
     }
-
-
 }
