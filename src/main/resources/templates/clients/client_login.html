@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="partials/header :: header"/>
+
 <body class="loginbody">
+
+
 
 <div class="loginbox">
     <h1 class="logintitle">Login Here</h1>
     <form th:action="@{/client_login}" method="post">
+
         <p>Username</p>
         <input type="text" id="username" name="username" placeholder="Enter Username" />
         <p>Password</p>
@@ -14,6 +18,7 @@
         <a href="/client_registration">Don't have an account?</a>
         <br/>
         <a href="/coaches_registration">Register as a coach.</a>
+
     </form>
 </div>
 
