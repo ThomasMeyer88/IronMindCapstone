@@ -21,7 +21,11 @@ public class CoachController {
     public CoachController(Clients coachDao, PasswordEncoder passwordEncoder) {
         this.coachDao = coachDao;
         this.passwordEncoder = passwordEncoder;
+
+
     }
+
+
 
     @GetMapping("/coaches_registration")
     public String showSignUpForm(Model view){
@@ -33,19 +37,19 @@ public class CoachController {
     public String saveCoach(@ModelAttribute Client coach){
         String hash = passwordEncoder.encode(coach.getPassword());
         coach.setPassword(hash);
-        coach.setCoach(true);
+        coach.setRole("Coach");
         coachDao.save(coach);
         return "redirect:/client_login";
 
     }
 
-    @GetMapping("/coach_profile_page/{id}/edit")
+    @GetMapping("/coach_profile/{id}/edit")
     public String showEditPage(@PathVariable Long id, Model view){
         view.addAttribute("coach", coachDao.findOne(id));
         return "coaches/edit";
     }
 
-    @PostMapping("/coach_profile_page/{id}/edit")
+    @PostMapping("/coach_profile/{id}/edit")
     public String updateProfile(@PathVariable Long id, @ModelAttribute Client coach){
         Client coachSession = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         coachSession.setEmail(coach.getEmail());
@@ -56,13 +60,13 @@ public class CoachController {
         coachSession.setBio(coach.getBio());
         coachSession.setPhonenumber(coach.getPhonenumber());
         coachDao.save(coach);
-        return "redirect:/coaches_profile_page";
+        return "redirect:/coaches_profile";
     }
 
-    @PostMapping("/coach_profile_page/{id}/delete")
+    @PostMapping("/coach_profile/{id}/delete")
     public String delete(@PathVariable long id){
         coachDao.delete(id);
-        return "redirect:/coach_profile_page";
+        return "redirect:/coach_profile";
     }
 
     @GetMapping("/coach_list")
