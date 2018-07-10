@@ -466,6 +466,7 @@ html, body {
 }
 
 .loginbox{
+    border-radius: 25px;
     width: 320px;
     height: 380px;
     background: #000;
@@ -479,6 +480,7 @@ html, body {
 }
 
 .registerbox{
+    border-radius: 25px;
     width: 320px;
     height: 600px;
     background: #000;
@@ -492,8 +494,25 @@ html, body {
 }
 
 .coachregisterbox{
+    border-radius: 25px;
     width: 320px;
-    height: 720px;
+    height: 500px;
+    background: #000;
+    color: #fff;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 40px 30px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+}
+
+.editbox{
+    border-radius: 25px;
+    width: 320px;
+    height: 600px;
     background: #000;
     color: #fff;
     top: 50%;
@@ -516,6 +535,19 @@ html, body {
     box-sizing: border-box;
     padding: 80px 30px;
 
+}
+
+.editbody{
+    width: 320px;
+    height: 380px;
+    background: #000;
+    color: #fff;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 80px 30px;
 }
 
 .avatar{
@@ -551,6 +583,12 @@ html, body {
     font-weight: bold;
 }
 
+.editbox p{
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+}
+
 .loginbox input{
     width: 100%;
     margin-bottom: 20px;
@@ -562,6 +600,11 @@ html, body {
 }
 
 .coachregisterbox input{
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.editbox input{
     width: 100%;
     margin-bottom: 20px;
 }
@@ -596,11 +639,21 @@ html, body {
     font-size: 16px;
 }
 
+.editbox input[type="text"], input[type="password"]{
+    border: none;
+    border-bottom: 1px solid #fff;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: #fff;
+    font-size: 16px;
+}
+
 .loginbox input[type="submit"]{
     border:none;
     outline: none;
     height: 40px;
-    background: #fb2525;
+    background: #46bf44;
     color: #fff;
     font-size: 18px;
     border-radius: 20px;
@@ -610,7 +663,7 @@ html, body {
     border:none;
     outline: none;
     height: 40px;
-    background: #fb2525;
+    background: #46bf44;
     color: #fff;
     font-size: 18px;
     border-radius: 20px;
@@ -620,7 +673,17 @@ html, body {
     border:none;
     outline: none;
     height: 40px;
-    background: #fb2525;
+    background: #46bf44;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
+}
+
+.editbox input[type="submit"]{
+    border:none;
+    outline: none;
+    height: 40px;
+    background: #46bf44;
     color: #fff;
     font-size: 18px;
     border-radius: 20px;
@@ -644,6 +707,12 @@ html, body {
     color: #000;
 }
 
+.editbox input[type="submit"]:hover{
+    cursor: pointer;
+    background: #ffc107;
+    color: #000;
+}
+
 .loginbody{
     margin: 0;
     padding: 0;
@@ -653,6 +722,14 @@ html, body {
 }
 
 .registerbody{
+    margin: 0;
+    padding: 0;
+    background-size: cover;
+    background: url("images/weights1.jpg") center;
+    font-family: sans-serif;
+}
+
+.editbody{
     margin: 0;
     padding: 0;
     background-size: cover;
@@ -672,4 +749,15 @@ html, body {
     font-size: 12px;
     line-height: 20px;
     color: darkgray;
+}
+
+.editbody a{
+    text-decoration: none;
+    font-size: 12px;
+    line-height: 20px;
+    color: darkgray;
+}
+
+textarea{
+    resize: none;
 }

@@ -6,7 +6,7 @@
 <div class="registerbox">
     <h1 class="logintitle">Start here</h1>
     <form th:action="@{/client_registration}" method="post" th:object="${client}">
-        <p>Username</p>
+        <p>Full Name</p>
         <input type="text" id="name" name="name" th:field="*{name}" placeholder="Enter Full Name"/>
         <p>Username</p>
         <input type="text" id="username" name="username" th:field="*{username}" placeholder="Enter Username"/>
