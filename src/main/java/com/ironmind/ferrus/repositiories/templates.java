@@ -10,6 +10,9 @@ public interface templates extends CrudRepository<template, Long> {
 
     List<template> findAllByDay(int day);
 
+    List<template> findAllByProgram_Id(long id);
+
+
     template findByProgram_Id(long id);
 
     template findByProgram_IdAndDay(long id, int day);

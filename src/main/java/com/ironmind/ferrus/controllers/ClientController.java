@@ -1,11 +1,8 @@
 package com.ironmind.ferrus.controllers;
 
 import com.ironmind.ferrus.Services.*;
-import com.ironmind.ferrus.model.Client;
-import com.ironmind.ferrus.model.CompletedSet;
+import com.ironmind.ferrus.model.*;
 import com.ironmind.ferrus.Services.programService;
-import com.ironmind.ferrus.model.Exercise;
-import com.ironmind.ferrus.model.Program;
 import com.ironmind.ferrus.repositiories.Clients;
 import org.springframework.security.access.method.P;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -181,6 +178,53 @@ public class ClientController {
         programDao.getPrograms().save(program);
         return "redirect:/client_profile_page";
     }
+    @PostMapping("/client_profile_page/{progId}/{id}")
+    public String assignProgram(@PathVariable long id, @PathVariable long progId){
+        Client clientSession = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Program program = programDao.getPrograms().findById(progId);
+        Program newProgram = new Program();
+        newProgram.setProgramDays(program.getProgramDays());
+        newProgram.setName(program.getName());
+        newProgram.setClient(clientDao.findOne(id));
+        programDao.getPrograms().save(newProgram);
 
+        List<template> templates = tempDao.getTemplates().findAllByProgram_Id(progId);
+
+        for(template temp: templates){
+            template newTemp = new template();
+            newTemp.setDay(newTemp.getDay());
+            newTemp.setProgram(newProgram);
+            tempDao.getTemplates().save(newTemp);
+            List<WorkSet> workSets = workDao.getWork().findAllByTemplate(temp);
+
+            for(WorkSet work: workSets){
+                WorkSet wS = new WorkSet();
+                wS.setTemplate(newTemp);
+                wS.setExercise(work.getExercise());
+                wS.setExerciseName(work.getExerciseName());
+                workDao.getWork().save(wS);
+                List<SubSet> sets = setDao.getSets().findAllByWorkSet_Id(work.getId());
+                for(SubSet set: sets){
+                    SubSet newSet = new SubSet();
+                    newSet.setExerciseName(set.getExerciseName());
+                    newSet.setReps(set.getReps());
+                    newSet.setWeight(set.getWeight());
+                    newSet.setWorkSet(wS);
+                    setDao.getSets().save(newSet);
+                }
+
+            }
+        }
+
+        return "coaches/coach_profile";
+    }
 
 }
+//    coach dashboard
+//coach-client view
+//        Add partials to views-nah
+//        Create a program-
+//        Have a list of programs
+//        Have a list of clients
+//        ---Be able to designate a program to a client
+//        Each client view is everything except edit profile for that that client

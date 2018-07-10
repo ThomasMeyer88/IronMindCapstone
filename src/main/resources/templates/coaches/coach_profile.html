@@ -6,6 +6,15 @@
 <div th:replace="partials/profilenavbar :: profilenavbar" ></div>
 <div th:replace="partials/sidebar :: sidebar" ></div>
 
+
+<div style="margin-left: 500px">
+    <form th:action="@{/1/1}" method="post">
+        <input type="submit" value="clickme" />
+    </form>
+</div>
+
 <div th:replace="partials/footer :: footer"> </div>
+
+
 </body>
 </html>
