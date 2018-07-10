@@ -2,37 +2,14 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:replace="partials/header :: header" />
 <body>
-<head th:replace="partials/profilenavbar :: profilenavbar" />
-<head th:replace="partials/sidebar :: sidebar" />
+<div th:replace="partials/profilenavbar :: profilenavbar"/>
+<div th:replace="partials/sidebar :: sidebar"/>
 
 <h1 class="client_profile">Greetings, <span th:text="${client.username}">!</span></h1>
 <div class="container">
 
-    <form class="form-group" action="#" method="get">
-       <button type="submit" class="btn btn-primary btn-block btn-md" id="createplan" name="createplan">Create a plan</button>
-    </form>
-
-
     <form class="form-group" th:action="@{/client_profile_page/create_program}" method="get">
         <button type="submit" class="btn btn-primary btn-block btn-md" id="createplan" name="createplan">Create a program</button>
-    </form>
-
-
-
-    <form class="form-group" th:action="@{/client_profile_page/{id}/edit(id=${client.id})}" method="get">
-        <button type="submit" class="btn btn-warning btn-block btn-md" id="edit" name="edit">Edit Profile</button>
-    </form>
-
-
-    <form class="form-group" th:action="@{/client_progress/{id}(id=${client.id})}" method="get">
-        <button type="submit" class="btn btn-primary btn-block btn-md" id="progress" name="progress">View Progress</button>
-    </form>
-
-    <form class="form-group" th:action="@{/exercises/{id}(id=${client.id})}" method="get">
-        <button type="submit" class="btn btn-primary btn-block btn-md" id="plan" name="plan">Update Program</button>
-    </form>
-    <form class="form-group" th:action="@{/logplan/{id}(id=${client.id})}" method="get">
-        <button type="submit" class="btn btn-primary btn-block btn-md" id="log" name="log">Log Worksets</button>
     </form>
 
 </div>

@@ -1,21 +1,27 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="partials/header :: header"/>
-<body>
-<div th:replace="partials/navbar :: navbar"></div>
 
-<h1 class="client_profile">Login</h1>
+<body class="loginbody">
 
-<div class="container">
-    <h5 th:text="${error}"></h5>
+
+
+<div class="loginbox">
+    <h1 class="logintitle">Login Here</h1>
     <form th:action="@{/client_login}" method="post">
-        <input class="form-control" id="username" name="username" type="text" placeholder="Username"/>
+
+        <p>Username</p>
+        <input type="text" id="username" name="username" placeholder="Enter Username" />
+        <p>Password</p>
+        <input type="password" id="password" name="password" placeholder="Enter Password" />
+        <input type="submit" value="Log in"/>
+        <a href="/client_registration">Don't have an account?</a>
         <br/>
-        <input class="form-control" id="password" name="password" type="password" placeholder="Password"/>
-        <br/>
-        <input class="btn btn-primary" type="submit" value="Log In"/>
+        <a href="/coaches_registration">Register as a coach.</a>
+
     </form>
 </div>
 
+<footer th:replace="partials/footer :: footer"/>
 </body>
 </html>
