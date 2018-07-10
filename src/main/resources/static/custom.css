@@ -511,7 +511,7 @@ html, body {
 
 .editbox{
     border-radius: 25px;
-    width: 320px;
+    width: 500px;
     height: 600px;
     background: #000;
     color: #fff;
@@ -761,3 +761,5 @@ html, body {
 textarea{
     resize: none;
 }
+
+
