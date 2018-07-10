@@ -16,76 +16,81 @@
 </div>
 
 <div class="plannerContainer container-fluid">
-    <h1 class="dayHeader">
-        <output th:text="${name}"></output>
-    </h1>
-    <h3 class="dayHeader"> Workouts for day:
-        <output th:text="${day}"></output>
-    </h3>
-    <p onclick="myCalender()">Calendar</p>
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+
+        <h1 class="dayHeader">
+            <output th:text="${name}"></output>
+        </h1>
+        <h3 class="dayHeader"> Workouts for day:
+            <output th:text="${day}"></output>
+        </h3>
+        <p onclick="myCalender()">Calendar</p>
 
 
-    <div class="searchContainer">
-        <input type="text" placeholder="Search" id="searchEx" class="searchBar"/>
-        <div class="scrollable">
-            <div th:each="exercise : ${exercises}">
-                <div class="setForm" draggable="true" ondragstart="drag(event)" th:id="${exercise.name}">
-                    <div>
-                        <div class="searchItem">
-                            <h3 th:text="${exercise.name}"></h3>
-                            <p th:text="${exercise.muscle}"></p>
-                        </div>
-                        <input th:value="*{exercise.name}" type="hidden"/>
-                        <div style="display: none">
-                            <h3 th:text="${exercise.name}" class="buildItem"></h3>
-                            <button onclick="dropdown(this.id)" id="drop" style="float: left" class="dropBtn"></button>
-                            <div class="buildDrop" style="display:none">
-                                <ul>
-                                    <form th:action="@{/createplan/} + ${progId} + @{/} + ${day}" method="post"
-                                          th:object="${subSet}">
-                                        <input th:value="${exerciseName}" th:field="*{exerciseName}" type="hidden"/>
-                                        <li>Weight: <input th:value="${weight}" th:field="*{weight}" type="text"/></li>
-                                        <li>Reps: <input th:value="${reps}" th:field="*{reps}" type="text"/></li>
-                                        <input type="submit" value=" " class="dropBtnCopy"/>
-                                    </form>
-                                </ul>
+        <div class="searchContainer">
+            <input type="text" placeholder="Search" id="searchEx" class="searchBar"/>
+            <div class="scrollable">
+                <div th:each="exercise : ${exercises}">
+                    <div class="setForm" draggable="true" ondragstart="drag(event)" th:id="${exercise.name}">
+                        <div>
+                            <div class="searchItem">
+                                <h3 th:text="${exercise.name}"></h3>
+                                <p th:text="${exercise.muscle}"></p>
+                            </div>
+                            <input th:value="*{exercise.name}" type="hidden"/>
+                            <div style="display: none">
+                                <h3 th:text="${exercise.name}" class="buildItem"></h3>
+                                <button onclick="dropdown(this.id)" id="drop" style="float: left"
+                                        class="dropBtn"></button>
+                                <div class="buildDrop" style="display:none">
+                                    <ul>
+                                        <form th:action="@{/createplan/} + ${progId} + @{/} + ${day}" method="post"
+                                              th:object="${subSet}">
+                                            <input th:value="${exerciseName}" th:field="*{exerciseName}" type="hidden"/>
+                                            <li>Weight: <input th:value="${weight}" th:field="*{weight}" type="text"/>
+                                            </li>
+                                            <li>Reps: <input th:value="${reps}" th:field="*{reps}" type="text"/></li>
+                                            <input type="submit" value=" " class="dropBtnCopy"/>
+                                        </form>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="builder" id="builder" ondrop="drop(event)" ondragover="allowDrop(event)">
-        <div th:each="workSet :${workSets}">
-            <h3 class="buildItem" th:text="${workSet.exerciseName}"></h3>
-            <button onclick="dropdown(this.id)" th:id="${workSet.id}" class="dropBtn"></button>
-            <div class="buildDrop" style="display:none" th:id="${workSet}">
-                <ul th:each="subSet : ${workSet.subSets}">
-                    <form th:action="@{/editset/} + ${progId} + @{/} + ${day}" method="post">
-                        <input th:value="${workSet.id}" name="id" type="hidden"/>
-                        <input th:value="${subSet.id}" name="setId" type="hidden"/>
-                        <li>Weight: <input th:value="${subSet.weight}" type="text" name="weight"/></li>
-                        <li>Reps: <input th:value="${subSet.reps}" type="text" name="reps"/></li>
-                        <input type="submit" value=" " class="dropBtnEdit"/>
-                    </form>
-                    <form th:action="@{/deleteset/} + ${progId} + @{/} + ${day}" method="post">
-                        <input th:value="${workSet.id}" name="id" type="hidden"/>
-                        <input th:value="${subSet.id}" name="setId" type="hidden"/>
-                        <input type="submit" value=" " class="dropBtnDel"/>
-                    </form>
-                    <form th:action="@{/copyset/} + ${progId} + @{/} + ${day}" method="post">
-                        <input type="submit" value=" " class="dropBtnCopy"/>
-                        <input th:value="${workSet.id}" name="id" type="hidden"/>
-                        <input th:value="${subSet.id}" name="setId" type="hidden"/>
-                    </form>
-                </ul>
+        <div class="builder" id="builder" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div th:each="workSet :${workSets}">
+                <h3 class="buildItem" th:text="${workSet.exerciseName}"></h3>
+                <button onclick="dropdown(this.id)" th:id="${workSet.id}" class="dropBtn"></button>
+                <div class="buildDrop" style="display:none" th:id="${workSet}">
+                    <ul th:each="subSet : ${workSet.subSets}">
+                        <form th:action="@{/editset/} + ${progId} + @{/} + ${day}" method="post">
+                            <input th:value="${workSet.id}" name="id" type="hidden"/>
+                            <input th:value="${subSet.id}" name="setId" type="hidden"/>
+                            <li>Weight: <input th:value="${subSet.weight}" type="text" name="weight"/></li>
+                            <li>Reps: <input th:value="${subSet.reps}" type="text" name="reps"/></li>
+                            <input type="submit" value=" " class="dropBtnEdit"/>
+                        </form>
+                        <form th:action="@{/deleteset/} + ${progId} + @{/} + ${day}" method="post">
+                            <input th:value="${workSet.id}" name="id" type="hidden"/>
+                            <input th:value="${subSet.id}" name="setId" type="hidden"/>
+                            <input type="submit" value=" " class="dropBtnDel"/>
+                        </form>
+                        <form th:action="@{/copyset/} + ${progId} + @{/} + ${day}" method="post">
+                            <input type="submit" value=" " class="dropBtnCopy"/>
+                            <input th:value="${workSet.id}" name="id" type="hidden"/>
+                            <input th:value="${subSet.id}" name="setId" type="hidden"/>
+                        </form>
+                    </ul>
+                </div>
+
             </div>
 
         </div>
-
-    </div>
+    </main>
 </div>
 
 
