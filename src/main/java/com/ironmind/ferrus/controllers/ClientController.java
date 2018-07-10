@@ -4,6 +4,7 @@ import com.ironmind.ferrus.Services.*;
 import com.ironmind.ferrus.model.*;
 import com.ironmind.ferrus.Services.programService;
 import com.ironmind.ferrus.repositiories.Clients;
+import com.ironmind.ferrus.repositiories.Programs;
 import org.springframework.security.access.method.P;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
@@ -63,6 +64,8 @@ public class ClientController {
         if (clientSession.getRole().equals("Coach")){
                 view.addAttribute("client", clientSession);
                 System.out.println("is a coach");
+            List<Program> program = programDao.getPrograms().findAllByClient_Id(clientSession.getId());
+                view.addAttribute("programs", program);
                 return "coaches/coach_profile";
         }else{
                 view.addAttribute("client", clientSession);
@@ -178,7 +181,7 @@ public class ClientController {
         programDao.getPrograms().save(program);
         return "redirect:/client_profile_page";
     }
-    @PostMapping("/client_profile_page/{progId}/{id}")
+    @PostMapping("/coach_profile/{progId}/{id}")
     public String assignProgram(@PathVariable long id, @PathVariable long progId){
         Client clientSession = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Program program = programDao.getPrograms().findById(progId);
@@ -218,6 +221,7 @@ public class ClientController {
 
         return "coaches/coach_profile";
     }
+
 
 }
 //    coach dashboard

@@ -1,17 +1,35 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:replace="partials/header :: header" />
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/header :: header"/>
+
 <body>
 
 <div th:replace="partials/profilenavbar :: profilenavbar" ></div>
 <div th:replace="partials/sidebar :: sidebar" ></div>
 
 
+<form th:action="@{/client_profile_page}" method="post">
+    <select name="exerciseId" onchange="this.form.submit()">
+        <option value="nochange" disabled="disabled" selected="selected" id="defaultOption">
+            programs
+        </option>
+        <div th:each="program : ${programs}">
+            <option th:value="${program.id}" th:text="${program.name}">
+
+            </option>
+        </div>
+    </select>
+
+</form>
+
 <div style="margin-left: 500px">
-    <form th:action="@{/1/1}" method="post">
+    <form th:action="@{coach_profile/1/1}" method="post">
         <input type="submit" value="clickme" />
     </form>
 </div>
+
+
+
 
 <div th:replace="partials/footer :: footer"> </div>
 
