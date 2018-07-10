@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head></head>
-<link rel="stylesheet" type="text/css" href="/custom.css" />
+<link rel="stylesheet" type="text/css" href="/custom.css"/>
 <body>
 <div th:fragment="sidebar" class="container-fluid">
     <div class="row">
@@ -17,21 +17,25 @@
                         </a>
                     </li>
                     <li>
-                        <form class="form-group nav-link" sec:authorize="isAuthenticated()" th:action="@{/exercises/{id}(id=${#authentication.principal.id})}" method="get">
+                        <form class="form-group nav-link" sec:authorize="isAuthenticated()"
+                              th:action="@{/exercises/{id}(id=${#authentication.principal.id})}" method="get">
                             <span data-feather="file"></span>
                             <button type="submit" class="sideBarButtons" id="plan" name="plan">Program</button>
                         </form>
                     </li>
                     <li class="nav-item">
-                        <form class="form-group nav-link" sec:authorize="isAuthenticated()" th:action="@{/logplan/{id}(id=${#authentication.principal.id})}" method="get">
+                        <form class="form-group nav-link" sec:authorize="isAuthenticated()"
+                              th:action="@{/logplan/{id}(id=${#authentication.principal.id})}" method="get">
                             <span data-feather="book"></span>
                             <button type="submit" class="sideBarButtons" id="log" name="log">Log Worksets</button>
                         </form>
                     </li>
                     <li class="nav-item">
-                        <form class="form-group nav-link" sec:authorize="isAuthenticated()" th:action="@{/client_progress/{id}(id=${#authentication.principal.id})}" method="get">
+                        <form class="form-group nav-link" sec:authorize="isAuthenticated()"
+                              th:action="@{/client_progress/{id}(id=${#authentication.principal.id})}" method="get">
                             <span data-feather="activity"></span>
-                            <button type="submit" class="sideBarButtons" id="progress" name="progress">View Progress</button>
+                            <button type="submit" class="sideBarButtons" id="progress" name="progress">View Progress
+                            </button>
                         </form>
                     </li>
                     <li class="nav-item">
@@ -41,7 +45,9 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <form class="form-group nav-link" sec:authorize="isAuthenticated()" th:action="@{/client_profile_page/{id}/edit(id=${#authentication.principal.id})}" method="get">
+                        <form class="form-group nav-link" sec:authorize="isAuthenticated()"
+                              th:action="@{/client_profile_page/{id}/edit(id=${#authentication.principal.id})}"
+                              method="get">
                             <span data-feather="settings"></span>
                             <button class="sideBarButtons" type="submit" id="edit" name="edit">Edit Profile</button>
                         </form>
@@ -51,7 +57,7 @@
             </div>
         </nav>
     </div>
-    </div>
+</div>
 
 </body>
 </html>

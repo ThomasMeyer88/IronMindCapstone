@@ -3,91 +3,90 @@
 <head th:replace="partials/header">
 </head>
 <body class="plannerBody">
-<div th:replace="partials/profilenavbar :: profilenavbar" />
-<div th:replace="partials/sidebar :: sidebar" />
+<div th:replace="partials/profilenavbar :: profilenavbar"/>
+<div th:replace="partials/sidebar :: sidebar"/>
 
 <div id="calender" class="calenderModel" style="display: none">
     <div onclick="closeCalender()">Close!</div>
     <form th:action="@{/exercises/} + ${progId}" method="post">
         <div class="day" id="baseDay" th:each="day: ${days}">
-            <input name="daychoice" type="submit" th:value="${day}" />
+            <input name="daychoice" type="submit" th:value="${day}"/>
         </div>
     </form>
 </div>
 
 <div class="plannerContainer container-fluid">
-    <h1 class="dayHeader"><output th:text="${name}"></output></h1>
-    <h3 class="dayHeader"> Workouts for day:  <output th:text ="${day}"></output></h3>
+    <h1 class="dayHeader">
+        <output th:text="${name}"></output>
+    </h1>
+    <h3 class="dayHeader"> Workouts for day:
+        <output th:text="${day}"></output>
+    </h3>
     <p onclick="myCalender()">Calendar</p>
 
 
-    <div class="searchContainer" >
-            <input type="text" placeholder="Search" id="searchEx" class="searchBar"/>
+    <div class="searchContainer">
+        <input type="text" placeholder="Search" id="searchEx" class="searchBar"/>
         <div class="scrollable">
-             <div th:each="exercise : ${exercises}">
-        <div class="setForm" draggable="true" ondragstart="drag(event)" th:id = "${exercise.name}">
-            <div>
-                <div class = "searchItem">
-                    <h3 th:text="${exercise.name}"></h3>
-                    <p th:text="${exercise.muscle}"></p>
-                </div>
-                <input th:value="*{exercise.name}" type="hidden" />
-                <div style="display: none" >
-                    <h3 th:text="${exercise.name}" class = "buildItem" ></h3>
-                        <button onclick="dropdown(this.id)" id = "drop" style="float: left" class="dropBtn"></button>
-                    <div class="buildDrop" style="display:none">
-                        <ul>
-                            <form th:action="@{/createplan/} + ${progId} + @{/} + ${day}" method = "post" th:object="${subSet}">
-                                <input th:value="${exerciseName}" th:field="*{exerciseName}" type="hidden" />
-                                <li>Weight: <input th:value="${weight}" th:field="*{weight}" type="text" /></li>
-                                <li>Reps: <input th:value="${reps}" th:field="*{reps}" type="text" /></li>
-                                <input type="submit" value=" " class="dropBtnCopy"/>
-                            </form>
-                        </ul>
+            <div th:each="exercise : ${exercises}">
+                <div class="setForm" draggable="true" ondragstart="drag(event)" th:id="${exercise.name}">
+                    <div>
+                        <div class="searchItem">
+                            <h3 th:text="${exercise.name}"></h3>
+                            <p th:text="${exercise.muscle}"></p>
+                        </div>
+                        <input th:value="*{exercise.name}" type="hidden"/>
+                        <div style="display: none">
+                            <h3 th:text="${exercise.name}" class="buildItem"></h3>
+                            <button onclick="dropdown(this.id)" id="drop" style="float: left" class="dropBtn"></button>
+                            <div class="buildDrop" style="display:none">
+                                <ul>
+                                    <form th:action="@{/createplan/} + ${progId} + @{/} + ${day}" method="post"
+                                          th:object="${subSet}">
+                                        <input th:value="${exerciseName}" th:field="*{exerciseName}" type="hidden"/>
+                                        <li>Weight: <input th:value="${weight}" th:field="*{weight}" type="text"/></li>
+                                        <li>Reps: <input th:value="${reps}" th:field="*{reps}" type="text"/></li>
+                                        <input type="submit" value=" " class="dropBtnCopy"/>
+                                    </form>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-        </div>
-</div>
 
-<div class="builder" id="builder" ondrop="drop(event)" ondragover="allowDrop(event)">
-    <div th:each="workSet :${workSets}">
-        <h3 class = "buildItem" th:text="${workSet.exerciseName}"></h3>
-            <button onclick="dropdown(this.id)" th:id="${workSet.id}"  class="dropBtn"></button>
-        <div class="buildDrop" style="display:none" th:id="${workSet}">
-            <ul th:each="subSet : ${workSet.subSets}">
-                <form th:action="@{/editset/} + ${progId} + @{/} + ${day}" method = "post">
-                    <input th:value="${workSet.id}" name = "id" type="hidden"/>
-                    <input th:value="${subSet.id}" name = "setId" type="hidden" />
-                    <li>Weight: <input th:value="${subSet.weight}" type="text" name = "weight" /></li>
-                    <li>Reps: <input th:value="${subSet.reps}" type="text" name ="reps" /></li>
-                    <input type="submit" value=" " class="dropBtnEdit" />
-                </form>
-                <form th:action="@{/deleteset/} + ${progId} + @{/} + ${day}" method="post">
-                    <input th:value="${workSet.id}" name = "id" type="hidden"/>
-                    <input th:value="${subSet.id}" name = "setId" type="hidden" />
-                    <input type="submit" value=" " class="dropBtnDel" />
-                </form>
-                <form th:action="@{/copyset/} + ${progId} + @{/} + ${day}" method="post">
-                    <input type="submit" value=" " class="dropBtnCopy"  />
-                    <input th:value="${workSet.id}" name = "id" type="hidden"/>
-                    <input th:value="${subSet.id}" name = "setId" type="hidden" />
-                </form>
-            </ul>
+    <div class="builder" id="builder" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <div th:each="workSet :${workSets}">
+            <h3 class="buildItem" th:text="${workSet.exerciseName}"></h3>
+            <button onclick="dropdown(this.id)" th:id="${workSet.id}" class="dropBtn"></button>
+            <div class="buildDrop" style="display:none" th:id="${workSet}">
+                <ul th:each="subSet : ${workSet.subSets}">
+                    <form th:action="@{/editset/} + ${progId} + @{/} + ${day}" method="post">
+                        <input th:value="${workSet.id}" name="id" type="hidden"/>
+                        <input th:value="${subSet.id}" name="setId" type="hidden"/>
+                        <li>Weight: <input th:value="${subSet.weight}" type="text" name="weight"/></li>
+                        <li>Reps: <input th:value="${subSet.reps}" type="text" name="reps"/></li>
+                        <input type="submit" value=" " class="dropBtnEdit"/>
+                    </form>
+                    <form th:action="@{/deleteset/} + ${progId} + @{/} + ${day}" method="post">
+                        <input th:value="${workSet.id}" name="id" type="hidden"/>
+                        <input th:value="${subSet.id}" name="setId" type="hidden"/>
+                        <input type="submit" value=" " class="dropBtnDel"/>
+                    </form>
+                    <form th:action="@{/copyset/} + ${progId} + @{/} + ${day}" method="post">
+                        <input type="submit" value=" " class="dropBtnCopy"/>
+                        <input th:value="${workSet.id}" name="id" type="hidden"/>
+                        <input th:value="${subSet.id}" name="setId" type="hidden"/>
+                    </form>
+                </ul>
+            </div>
+
         </div>
 
     </div>
-
 </div>
-</div>
-
-
-
-
-
-
 
 
 <script th:inline="javascript">
@@ -101,19 +100,19 @@
     var search = document.getElementById("searchEx");
     search.addEventListener("keyup", runSearch, false);
 
-    function runSearch(){
+    function runSearch() {
         var search = document.getElementById("searchEx").value.toString();
         Array.from(document.getElementsByClassName("setForm")).forEach(
-            function(element, index, array) {
+            function (element, index, array) {
                 var string = element.id.toString();
                 console.log(element.childNodes[1].childNodes[1]);
                 console.log(element.childNodes[1].childNodes[1].childNodes[3]);
                 var stringDos = element.childNodes[1].childNodes[1].childNodes[3].textContent.toString();
 
                 console.log(string);
-                if(string.toLowerCase().includes(search.toLowerCase())){
+                if (string.toLowerCase().includes(search.toLowerCase())) {
                     element.style.display = "block";
-                } else if(stringDos.toLowerCase().includes(search.toLowerCase())) {
+                } else if (stringDos.toLowerCase().includes(search.toLowerCase())) {
                     element.style.display = "block";
                 }
                 else {
@@ -137,12 +136,13 @@
 
     function drop(ev) {
         ev.preventDefault();
-        if(document.getElementById("builder").innerHTML == "<h3>Drag an exercise over to begin</h3>"){
+        if (document.getElementById("builder").innerHTML == "<h3>Drag an exercise over to begin</h3>") {
             document.getElementById("builder").innerHTML = "";
         }
         data = ev.dataTransfer.getData("text");
         var nodeCopy = document.getElementById(data).cloneNode(true);
-        nodeCopy.id = "newId"; /* We cannot use the same ID */
+        nodeCopy.id = "newId";
+        /* We cannot use the same ID */
         ev.target.appendChild(nodeCopy);
 
         //to hide the search header when moved
@@ -172,26 +172,26 @@
         console.log(targetvalue);
     }
 
-    function dropdown(id){
-        if(document.getElementById(id).nextElementSibling.style.display == "none") {
+    function dropdown(id) {
+        if (document.getElementById(id).nextElementSibling.style.display == "none") {
             document.getElementById(id).nextElementSibling.style.display = "inline-block";
         }
-        else{
-            document.getElementById(id).nextElementSibling.style.display="none";
+        else {
+            document.getElementById(id).nextElementSibling.style.display = "none";
         }
     }
 
-    function builderDisplay(builder){
-        if(builder == 0){
+    function builderDisplay(builder) {
+        if (builder == 0) {
             document.getElementById("builder").innerHTML = "<h3>Drag an exercise over to begin</h3>";
         }
     }
 
-    function myCalender(){
+    function myCalender() {
         document.getElementById("calender").style.display = "block";
     }
 
-    function closeCalender(){
+    function closeCalender() {
         document.getElementById("calender").style.display = "none";
     }
 
@@ -204,6 +204,6 @@
     dropdown(dropId);
 
 </script>
-<footer th:replace="partials/footer :: footer" />
+<footer th:replace="partials/footer :: footer"/>
 </body>
 </html>

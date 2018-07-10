@@ -1,50 +1,59 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:replace="partials/header :: header" />
+<head th:replace="partials/header :: header"/>
 
 <body class="plannerBody" style="align-content: center">
-<div th:replace="partials/profilenavbar :: profilenavbar" />
-<div th:replace="partials/sidebar :: sidebar" />
+<div th:replace="partials/profilenavbar :: profilenavbar"/>
+<div th:replace="partials/sidebar :: sidebar"/>
 
 <div class="plannerContainer container-fluid">
-    <h1 class="dayHeader"><output th:text="${name}"></output></h1>
-    <h3 class="dayHeader"> sets for day:  <output th:text ="${day}"></output></h3>
-    <div class="builder" id="builder" ondrop="drop(event)" ondragover="allowDrop(event)">
-        <h3 class = "buildItem" th:text="${done}" style="display: none" id="state"></h3>
-        <div th:each="workSet :${workSets}">
-            <h3 class = "buildItem" th:text="${workSet.exerciseName}"></h3>
-            <button onclick="dropdown(this.id)" th:id="${workSet.id}"  class="dropBtn"></button>
-            <div class="buildDrop" style="display:none" th:id="${workSet}">
-                <ul th:each="subSet : ${workSet.subSets}">
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+        <!--<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">-->
+        <h1 class="dayHeader">
+            <output th:text="${name}"></output>
+        </h1>
+        <h3 class="dayHeader"> sets for day:
+            <output th:text="${day}"></output>
+        </h3>
+        <div class="builder" id="builder" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <h3 class="buildItem" th:text="${done}" style="display: none" id="state"></h3>
+            <div th:each="workSet :${workSets}">
+                <h3 class="buildItem" th:text="${workSet.exerciseName}"></h3>
+                <button onclick="dropdown(this.id)" th:id="${workSet.id}" class="dropBtn"></button>
+                <div class="buildDrop" style="display:none" th:id="${workSet}">
+                    <ul th:each="subSet : ${workSet.subSets}">
 
 
-                    <form th:action="@{/logset/} + ${progId} + @{/} + ${day}" method = "post">
-                        <input th:value="${workSet.id}" name = "id" type="hidden"/>
-                        <input th:value="${subSet.id}" name = "setId" type="hidden" />
-                        <li>Weight: <output th:text="${subSet.weight}"></output></li>
-                        <li>Reps: <output th:text="${subSet.reps}"></output></li>
-                        <input type="submit" value=" " class="dropBtnCpy" />
-                    </form>
+                        <form th:action="@{/logset/} + ${progId} + @{/} + ${day}" method="post">
+                            <input th:value="${workSet.id}" name="id" type="hidden"/>
+                            <input th:value="${subSet.id}" name="setId" type="hidden"/>
+                            <li>Weight:
+                                <output th:text="${subSet.weight}"></output>
+                            </li>
+                            <li>Reps:
+                                <output th:text="${subSet.reps}"></output>
+                            </li>
+                            <input type="submit" value=" " class="dropBtnCpy"/>
+                        </form>
 
 
-
-                    <!--<form th:action="@{/deleteset/} + ${name} + @{/} + ${day}" method="post">-->
+                        <!--<form th:action="@{/deleteset/} + ${name} + @{/} + ${day}" method="post">-->
                         <!--<input th:value="${workSet.id}" name = "id" type="hidden"/>-->
                         <!--<input th:value="${subSet.id}" name = "setId" type="hidden" />-->
                         <!--<input type="submit" value=" " class="dropBtnDel" />-->
-                    <!--</form>-->
+                        <!--</form>-->
 
 
+                    </ul>
+                </div>
 
-
-                </ul>
             </div>
-
         </div>
-    </div>
+        <!--</div>-->
+    </main>
 </div>
 
-<footer th:replace="partials/footer :: footer" />
+<footer th:replace="partials/footer :: footer"/>
 
 </body>
 
@@ -53,27 +62,28 @@
 
     var stickyDrop = document.getElementById("dropCheck").value;
 
-    function dropdown(id){
+    function dropdown(id) {
         console.log(id);
         console.log(document.getElementById(id));
-        if(document.getElementById(id).nextElementSibling.style.display == "none") {
+        if (document.getElementById(id).nextElementSibling.style.display == "none") {
             document.getElementById(id).nextElementSibling.style.display = "inline-block";
         }
-        else{
-            document.getElementById(id).nextElementSibling.style.display="none";
+        else {
+            document.getElementById(id).nextElementSibling.style.display = "none";
         }
     }
 
-    function showState(state){
+    function showState(state) {
         console.log(state);
         var text = state.innerText.toString();
         console.log(text);
-        if(text.includes("finished")){
+        if (text.includes("finished")) {
             state.style.display = "block";
             state.style.backgroundColor = "gold";
             state.style.width = "448px";
         }
     }
+
     var state = document.getElementById("state");
     var stickyDrop = document.getElementById("dropCheck").value;
 

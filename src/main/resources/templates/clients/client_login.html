@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="partials/header :: header" />
+<head th:replace="partials/header :: header"/>
 <body>
 
 <h1 class="client_profile">Login</h1>
@@ -9,12 +9,12 @@
     <h5 th:text="${error}"></h5>
     <form th:action="@{/client_login}" method="post">
         <input class="form-control" id="username" name="username" type="text" placeholder="Username"/>
-        <br />
+        <br/>
         <input class="form-control" id="password" name="password" type="password" placeholder="Password"/>
-        <br />
-        <input class="btn btn-primary" type="submit" value="Log In" />
+        <br/>
+        <input class="btn btn-primary" type="submit" value="Log In"/>
     </form>
 </div>
-<footer th:replace="partials/footer :: footer" />
+<footer th:replace="partials/footer :: footer"/>
 </body>
 </html>
