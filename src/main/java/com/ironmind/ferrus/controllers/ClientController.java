@@ -61,13 +61,18 @@ public class ClientController {
         System.out.println(clientSession.getEmail());
         Client test = clientDao.findOne(clientSession.getId());
         clientSession.setRole(test.getRole());
+        List<Program> program = programDao.getPrograms().findAllByClient_Id(clientSession.getId());
+
+
         if (clientSession.getRole().equals("Coach")){
                 view.addAttribute("client", clientSession);
                 System.out.println("is a coach");
-            List<Program> program = programDao.getPrograms().findAllByClient_Id(clientSession.getId());
                 view.addAttribute("programs", program);
+            List<Client> client = clientDao.findAllByCoachId(clientSession.getId());
+                view.addAttribute("clients", client);
                 return "coaches/coach_profile";
         }else{
+                view.addAttribute("programs", program);
                 view.addAttribute("client", clientSession);
                 return "clients/client_profile_page";
             }
