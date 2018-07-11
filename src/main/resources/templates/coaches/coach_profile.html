@@ -2,15 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="partials/header :: header"/>
 <body>
-
-<div>
-
-    <div th:replace="partials/profilenavbar :: profilenavbar"></div>
+<div th:replace="partials/profilenavbar :: profilenavbar"></div>
     <div th:replace="partials/sidebar :: sidebar"></div>
+<input th:value="${selectId}" id="selector" type="hidden"/>
 
     <h1>Coach Dashboard</h1>
-    <div class="card w-75" style="float: right;">
+    <div class="card w-45" style="float: right;">
         <div class="card-body">
+
             <form class="form-group" th:action="@{/client_profile_page/create_program}" method="get">
                 <button type="submit" class="btn btn-primary btn-block btn-md" id="createplan" name="createplan">Create a
                     program
@@ -18,23 +17,25 @@
             </form>
             <form th:action="@{/client_profile_page}" method="Get">
 
+            <form th:action="@{/assign_program}" method="post">
+
+
                 <div class="form-group">
                     <label for="exampleFormControlSelect1"> Select a client</label>
-                    <select class="form-control" id="exampleFormControlSelect1" onchange="this.form.submit()">
+                    <select class="form-control" id="exampleFormControlSelect1">
                         <option value="nochange" disabled="disabled" selected="selected" id="defaultOption">
                             clients
                         </option>
                         <div th:each="client : ${clients}">
-                            <option th:value="${client.id}" th:text="${client.name}">
-                                <a href="">view progress</a>
-                            </option>
+                            <option th:value="${client.id}" th:text="${client.name}" th:id="${client.id}" name="clientId"></option>
                         </div>
 
                     </select>
                 </div>
 
                 <div>
-                    <a href="">View Progress</a>
+                    <input type="radio" text="View Client Progress" value="1" name="viewProgress"
+                    onchange="this.form.submit()">
                 </div>
                 <div>
                     <p style="color: #7FB800">Current program: P90X</p>
@@ -42,12 +43,11 @@
 
                 <div class="form-group">
                     <label for="exampleFormControlSelect2">Assign a Program</label>
-                    <select multiple="multiple" class="form-control" id="exampleFormControlSelect2"
-                            onchange="this.form.submit()" style="text-align: center">
+                    <select multiple="multiple" class="form-control" id="exampleFormControlSelect2" style="text-align: center">
                         <option value="nochange" disabled="disabled" selected="selected" id="programSelector">
                         </option>
                         <div th:each="program : ${programs}">
-                            <option th:value="${program.id}" th:text="${program.name}">
+                            <option th:value="${program.id}" th:text="${program.name}" name="programId">
                             </option>
 
                         </div>
@@ -68,9 +68,30 @@
             </div>
         </div>
     </div>
-</div>
+    <br/>
+    <br/>
+    <div class="card border-secondary  w-35" >
+        <div class="card-header">Client requests</div>
+        <div class="card-body text-secondary">
+
+            <p class="card-text">Tom would like to hire you</p>
+        </div>
+    </div>
 
 <div th:replace="partials/footer :: footer"></div>
+
+<script>
+    "use strict";
+    var id = document.getElementById("selector").value;
+
+    function select(id) {
+        if (id > 0) {
+            document.getElementById("defaultOption").selected = "none";
+            document.getElementById(id).selected = "selected";
+        }
+    }
+    select(id);
+</script>
 
 
 </body>
