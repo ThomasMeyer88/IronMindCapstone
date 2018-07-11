@@ -6,8 +6,6 @@ import com.ironmind.ferrus.Services.programService;
 import com.ironmind.ferrus.repositiories.Clients;
 
 
-import org.hibernate.validator.constraints.Email;
-
 import org.simplejavamail.email.Email;
 import org.simplejavamail.email.EmailBuilder;
 import org.simplejavamail.mailer.MailerBuilder;
