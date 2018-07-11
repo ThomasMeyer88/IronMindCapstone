@@ -1,101 +1,50 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:replace="partials/header :: header" />
 
 <body>
-
+<div th:replace="partials/profilenavbar :: profilenavbar" />
+<div th:replace="partials/sidebar :: sidebar" />
 <input th:value="${selectId}" id="selector" type="hidden" />
+
 
 <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
     <a class="navbar-brand col-sm-3 col-md-2 " href="#"><img  src="/images/llogo.png" height="70" width="70" class="pic" /></a>
 
     <ul class="navbar-nav px-3" >
 
-        <li class="nav-item text-nowrap">
-            <a class="nav-link" href="#">Sign out</a>
-        </li>
-    </ul>
-</nav>
 
 
 <div class="container-fluid">
-    <div class="row">
-        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-            <div class="sidebar-sticky">
-                <br/>
 
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                    <li class="nav-item">
-                        <a class="nav-link " href="#">
-                            <span data-feather="home"></span>
-                            Dashboard
-                        </a>
-                        <a class="nav-link" href="#">
-                            <span data-feather="file"></span>
-                            Workout Plans
-                        </a>
-                    </li>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="book"></span>
-                            Workout Log
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="activity"></span>
-                            Your Progress
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="calendar"></span>
-                            Schedule
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="user"></span>
-                            Coach
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="settings"></span>
-                            Edit Profile
-                        </a>
-                    </li>
-
-                </ul>
-
-            </div>
-        </nav>
-
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
                 <h1 class="h2">Progress Report</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <select name="Exercise" id="choice">
                         <option value="nochange" disabled="disabled" selected="selected">Statistic Type</option>
-                                <option value="1">1 Rep Max</option>
-                                <option value="2">Volume</option>
-                                <option value="3">Total Reps</option>
-                                <option value="4">Intensity</option>
-                                <option value="5">Volume and Intensity</option>
+                        <option value="1">1 Rep Max</option>
+                        <option value="2">Volume</option>
+                        <option value="3">Total Reps</option>
+                        <option value="4">Intensity</option>
+                        <option value="5">Volume and Intensity</option>
                     </select>
-                            <br/>
-                    <form  th:action="@{/client_progress/} + ${id}" method="post">
-                    <select name="exerciseId" onchange="this.form.submit()">
-                        <option value="nochange" disabled="disabled" selected="selected" id="defaultOption">Exercises</option>
+                    <br/>
+                    <form th:action="@{/client_progress/} + ${id}" method="post">
+                        <select name="exerciseId" onchange="this.form.submit()">
+                            <option value="nochange" disabled="disabled" selected="selected" id="defaultOption">
+                                Exercises
+                            </option>
                             <div th:each="exercise : ${exerciseList}">
-                                <option th:text="${exercise.name}" th:value="${exercise.id}" th:id="${exercise.id}"></option>
+                                <option th:text="${exercise.name}" th:value="${exercise.id}"
+                                        th:id="${exercise.id}"></option>
                             </div>
-                    </select>
+                        </select>
 
                     </form>
                 </div>
+
                 </div>
 <div id="chart_div" >
             <canvas class="my-4" id="myChart" width="900" height="380">
@@ -111,15 +60,15 @@
 </div>
             </canvas>
 </div>
- </main>
-    </div>
+</main>
 </div>
 
 <script>
     "use strict";
     var id = document.getElementById("selector").value;
-    function select(id){
-        if(id > 0){
+
+    function select(id) {
+        if (id > 0) {
             document.getElementById("defaultOption").selected = "none";
             document.getElementById(id).selected = "selected";
         }
@@ -141,19 +90,19 @@
         data.addColumn('number', 'Intensity');
 
         data.addRows([
-            [0,0,0,0,0]
+            [0, 0, 0, 0, 0]
         ]);
 
         Array.from(document.getElementsByClassName("day")).forEach(
-            function(element, index, array) {
-               var day = Number(element.value);
-               console.log(element.value);
+            function (element, index, array) {
+                var day = Number(element.value);
+                console.log(element.value);
 
-               var weight = Number(element.nextElementSibling.value);
-               var volume = (Number(element.nextElementSibling.nextElementSibling.value))/100;
-               var reps = Number(element.nextElementSibling.nextElementSibling.nextElementSibling.value);
-               var intensity = Number(element.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.value);
-               data.addRows([[day, weight, volume, reps, intensity]]);
+                var weight = Number(element.nextElementSibling.value);
+                var volume = (Number(element.nextElementSibling.nextElementSibling.value)) / 100;
+                var reps = Number(element.nextElementSibling.nextElementSibling.nextElementSibling.value);
+                var intensity = Number(element.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.value);
+                data.addRows([[day, weight, volume, reps, intensity]]);
 
 
             }
@@ -181,39 +130,39 @@
         var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
         chart.draw(data, options);
 
-        document.getElementById("choice").onchange = function(){
-            if(document.getElementById("choice").value == 1) {
+        document.getElementById("choice").onchange = function () {
+            if (document.getElementById("choice").value == 1) {
                 console.log("clicked 1");
                 var view = new google.visualization.DataView(data);
                 options.vAxis.title = "Estimated 1 Rep Max (lbs)";
 
-                view.hideColumns([2,3,4]);
+                view.hideColumns([2, 3, 4]);
                 chart.draw(view, options);
             }
-            if(document.getElementById("choice").value == 2) {
+            if (document.getElementById("choice").value == 2) {
                 view = new google.visualization.DataView(data);
                 options.vAxis.title = "Total Weight Lifted";
-                view.hideColumns([1,3,4]);
+                view.hideColumns([1, 3, 4]);
                 chart.draw(view, options);
 
             }
-            if(document.getElementById("choice").value == 3){
+            if (document.getElementById("choice").value == 3) {
                 view = new google.visualization.DataView(data);
                 options.vAxis.title = "Reps Completed";
-                view.hideColumns([1,2,4]);
-                chart.draw(view,options);
+                view.hideColumns([1, 2, 4]);
+                chart.draw(view, options);
             }
-            if(document.getElementById("choice").value == 4){
+            if (document.getElementById("choice").value == 4) {
                 view = new google.visualization.DataView(data);
                 options.vAxis.title = "Average Intensity";
-                view.hideColumns([1,2,3]);
-                chart.draw(view,options);
+                view.hideColumns([1, 2, 3]);
+                chart.draw(view, options);
             }
-            if(document.getElementById("choice").value == 5){
+            if (document.getElementById("choice").value == 5) {
                 view = new google.visualization.DataView(data);
                 options.vAxis.title = "Volume and Average Intensity";
-                view.hideColumns([1,3]);
-                chart.draw(view,options);
+                view.hideColumns([1, 3]);
+                chart.draw(view, options);
             }
         };
 
@@ -224,7 +173,6 @@
 
 
 <div th:replace="partials/footer :: footer"></div>
-
 
 
 </body>
