@@ -4,7 +4,13 @@ import com.ironmind.ferrus.Services.*;
 import com.ironmind.ferrus.model.*;
 import com.ironmind.ferrus.Services.programService;
 import com.ironmind.ferrus.repositiories.Clients;
+
+import org.simplejavamail.email.Email;
+import org.simplejavamail.email.EmailBuilder;
+import org.simplejavamail.mailer.MailerBuilder;
+
 import com.ironmind.ferrus.repositiories.Programs;
+
 import org.springframework.security.access.method.P;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
@@ -14,6 +20,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.simplejavamail.mailer.config.TransportStrategy.SMTP_TLS;
 
 
 @Controller
@@ -48,6 +56,25 @@ public class ClientController {
     @PostMapping("/client_registration")
     public String saveClient(@ModelAttribute Client client){
         String hash = passwordEncoder.encode(client.getPassword());
+        String emailAddress = client.getEmail();
+        Email email = EmailBuilder.startingBlank()
+                .from("Irondmind Notification", "ironmind2018@hotmail.com")
+                .to("Noah", emailAddress)
+                .withSubject(client.getName() + ", thank you for registering with Ironmind")
+                .withHTMLText("<div style='text-align:center'><h2> Welcome to Ironmind </h2>" +
+                        "<h3>Features</h3>" +
+                        "<ul style='list-style: none'><li>Create a custom program to suit your needs</li>"
+                        +"<li>Log your workouts</li>"+
+                        "<li>View your progress overtime</li>"+
+                        "<li>Find a coach to help guide your progress</li></ul>"+
+                        "<a href='localhost:8080'>ironmind.app</a></div>")
+                .buildEmail();
+
+        MailerBuilder
+                .withSMTPServer("smtp.live.com", 587, "ironmind2018@hotmail.com", "Finale1!")
+                .withTransportStrategy(SMTP_TLS)
+                .buildMailer()
+                .sendMail(email);
         client.setPassword(hash);
         client.setRole("Client");
         clientDao.save(client);
