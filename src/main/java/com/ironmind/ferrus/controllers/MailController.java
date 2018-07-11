@@ -23,15 +23,16 @@ public class MailController{
         //ConfigLoader.loadProperties("overrides.properties"); // optional extra
 
         Email email = EmailBuilder.startingBlank()
-                .from("Thomas Meyer", "naxral@hotmail.com")
+                .from("Irondmind Notification", "ironmind2018@hotmail.com")
                 .to("Noah", "noahjdc92@gmail.com")
                 .to("John", "jnwywe@gmail.com")
-                .withSubject("John just pissed himself")
-                .withPlainText("omg so gross guyz.  i dun even")
+                .to("Thomas", "trexmeyer@gmail.com")
+                .withSubject("Welcome to the Iron Mind Team")
+                .withPlainText("You are now on the team!")
                 .buildEmail();
 
         MailerBuilder
-                .withSMTPServer("smtp.live.com", 587, "naxral@hotmail.com", "Luvlove2!")
+                .withSMTPServer("smtp.live.com", 587, "ironmind2018@hotmail.com", "Finale1!")
                 .withTransportStrategy(SMTP_TLS)
                 .buildMailer()
                 .sendMail(email);
