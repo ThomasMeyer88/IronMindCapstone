@@ -40,13 +40,13 @@ public class ClientController {
 
 
     @GetMapping("/client_registration")
-    public String showSignUpForm(Model model){
+    public String showSignUpForm(Model model) {
         model.addAttribute("client", new Client());
         return "clients/client_registration";
     }
 
     @PostMapping("/client_registration")
-    public String saveClient(@ModelAttribute Client client){
+    public String saveClient(@ModelAttribute Client client) {
         String hash = passwordEncoder.encode(client.getPassword());
         client.setPassword(hash);
         client.setRole("Client");
@@ -55,37 +55,37 @@ public class ClientController {
     }
 
     @GetMapping("/client_profile_page")
-    public String clientPage(Model view){
+    public String clientPage(Model view) {
         Client clientSession = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         System.out.println(clientSession.getRole());
         System.out.println(clientSession.getEmail());
         Client test = clientDao.findOne(clientSession.getId());
         clientSession.setRole(test.getRole());
-        if (clientSession.getRole().equals("Coach")){
-                view.addAttribute("client", clientSession);
-                System.out.println("is a coach");
+        if (clientSession.getRole().equals("Coach")) {
+            view.addAttribute("client", clientSession);
+            System.out.println("is a coach");
             List<Program> program = programDao.getPrograms().findAllByClient_Id(clientSession.getId());
-                view.addAttribute("programs", program);
-                return "coaches/coach_profile";
-        }else{
-                view.addAttribute("client", clientSession);
-                return "clients/client_profile_page";
-            }
+            view.addAttribute("programs", program);
+            return "coaches/coach_profile";
+        } else {
+            view.addAttribute("client", clientSession);
+            return "clients/client_profile_page";
+        }
     }
 
     @GetMapping("/coach_profile")
-    public String coachPage(Model view){
+    public String coachPage(Model view) {
         return "coaches/coach_profile";
     }
 
     @GetMapping("/client_profile_page/{id}/edit")
-    public String viewEdit(@PathVariable long id, Model model){
+    public String viewEdit(@PathVariable long id, Model model) {
         model.addAttribute("client", clientDao.findOne(id));
         return "clients/edit";
     }
 
     @PostMapping("/client_profile_page/{id}/edit")
-    public String updateProfile(@PathVariable long id, @ModelAttribute Client client){
+    public String updateProfile(@PathVariable long id, @ModelAttribute Client client) {
         Client clientSession = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         clientSession.setEmail(client.getEmail());
         String hash = passwordEncoder.encode(client.getPassword());
@@ -97,53 +97,55 @@ public class ClientController {
     }
 
     @PostMapping("/client_profile_page/{id}/delete")
-    public String delete(@PathVariable long id){
+    public String delete(@PathVariable long id) {
         clientDao.delete(id);
         return "redirect:/client_profile_page";
     }
 
     @GetMapping("/client_progress/{id}")
-    public String viewProgress(@PathVariable long id, Model view){
+    public String viewProgress(@PathVariable long id, Model view) {
         List<Exercise> exercises = exerciseService.getExercises().findAll();
         view.addAttribute("exerciseList", exercises);
         return "clients/client_progress";
     }
 
+//    @PostMapping("/exercise/{id}")
+//    public String viewProgram(@PathVariable long id, )
+
     @RequestMapping(value = "/client_progress/{id}", method = RequestMethod.POST)
-    public String switchProgress(@PathVariable long id, @RequestParam long exerciseId){
+    public String switchProgress(@PathVariable long id, @RequestParam long exerciseId) {
         System.out.println("Id = " + exerciseId);
         return "redirect:/client_progress/" + id + "/" + exerciseId;
     }
 
     @GetMapping("/client_progress/{id}/{Exercise}")
-    public String viewSwitchProgress(@PathVariable long id, @PathVariable long Exercise, Model view){
+    public String viewSwitchProgress(@PathVariable long id, @PathVariable long Exercise, Model view) {
         List<CompletedSet> maxes = new ArrayList<>();
         List<CompletedSet> volume = new ArrayList<>();
         List<CompletedSet> absMax = compDao.getCompSets().findAllByExerciseIdAndClient_IdOrderByEstimated1RMDesc(Exercise, id);
 
-        for(long i = 0; i < 180; i++){
+        for (long i = 0; i < 180; i++) {
             long volSum = 0;
             long repSum = 0;
             long intensity = 0;
             long intSum = 0;
             List<CompletedSet> max = compDao.getCompSets().findAllByClient_IdAndExerciseIdAndDayOrderByEstimated1RMDesc(id, Exercise, i);
-            for(int x = 0; x < max.size(); x++){
+            for (int x = 0; x < max.size(); x++) {
                 volSum += max.get(x).getTotalweight();
                 repSum += max.get(x).getReps();
-                intensity = (max.get(x).getEstimated1RM()*100)/absMax.get(0).getEstimated1RM();
+                intensity = (max.get(x).getEstimated1RM() * 100) / absMax.get(0).getEstimated1RM();
                 intSum += intensity;
             }
             try {
                 CompletedSet volSet = new CompletedSet(max.get(0).getDay(), max.get(0).getExerciseId(), volSum, max.get(0).getEstimated1RM());
 
-                if(max.size() > 0) {
+                if (max.size() > 0) {
                     intensity = intSum / max.size();
                     System.out.println(intensity);
                 } else {
                     intensity = 0;
                 }
-                    volSet.setIntensity(intensity);
-
+                volSet.setIntensity(intensity);
 
 
                 volSet.setReps(repSum);
@@ -151,7 +153,7 @@ public class ClientController {
 
                 maxes.add(max.get(0));
                 max.clear();
-            } catch (IndexOutOfBoundsException e){
+            } catch (IndexOutOfBoundsException e) {
 
             }
         }
@@ -164,7 +166,7 @@ public class ClientController {
     }
 
     @GetMapping("/client_profile_page/create_program")
-    public String viewCreateProgram(Model view){
+    public String viewCreateProgram(Model view) {
 
         Program create = new Program("enter name here", new Client());
         create.setProgramDays(0);
@@ -173,7 +175,7 @@ public class ClientController {
     }
 
     @PostMapping("/client_profile_page/create_program")
-    public String CreateProgram(Program program){
+    public String CreateProgram(Program program) {
         Client clientSession = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         program.setClient(clientSession);
         program.setName(program.getName());
@@ -181,8 +183,9 @@ public class ClientController {
         programDao.getPrograms().save(program);
         return "redirect:/client_profile_page";
     }
+
     @PostMapping("/coach_profile/{progId}/{id}")
-    public String assignProgram(@PathVariable long id, @PathVariable long progId){
+    public String assignProgram(@PathVariable long id, @PathVariable long progId) {
         Client clientSession = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Program program = programDao.getPrograms().findById(progId);
         Program newProgram = new Program();
@@ -193,21 +196,21 @@ public class ClientController {
 
         List<template> templates = tempDao.getTemplates().findAllByProgram_Id(progId);
 
-        for(template temp: templates){
+        for (template temp : templates) {
             template newTemp = new template();
             newTemp.setDay(newTemp.getDay());
             newTemp.setProgram(newProgram);
             tempDao.getTemplates().save(newTemp);
             List<WorkSet> workSets = workDao.getWork().findAllByTemplate(temp);
 
-            for(WorkSet work: workSets){
+            for (WorkSet work : workSets) {
                 WorkSet wS = new WorkSet();
                 wS.setTemplate(newTemp);
                 wS.setExercise(work.getExercise());
                 wS.setExerciseName(work.getExerciseName());
                 workDao.getWork().save(wS);
                 List<SubSet> sets = setDao.getSets().findAllByWorkSet_Id(work.getId());
-                for(SubSet set: sets){
+                for (SubSet set : sets) {
                     SubSet newSet = new SubSet();
                     newSet.setExerciseName(set.getExerciseName());
                     newSet.setReps(set.getReps());

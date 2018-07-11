@@ -1,60 +1,59 @@
 <!DOCTYPE html>
 
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:replace="partials/header :: header" />
+<head th:replace="partials/header :: header"/>
 
 <body>
-<div th:replace="partials/profilenavbar :: profilenavbar" />
-<div th:replace="partials/sidebar :: sidebar" />
-<input th:value="${selectId}" id="selector" type="hidden" />
-
+<div th:replace="partials/profilenavbar :: profilenavbar"/>
+<div th:replace="partials/sidebar :: sidebar"/>
+<input th:value="${selectId}" id="selector" type="hidden"/>
 
 
 <div class="container-fluid">
 
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                <h1 class="h2">Progress Report</h1>
-                <div class="btn-toolbar mb-2 mb-md-0">
-                    <select name="Exercise" id="choice">
-                        <option value="nochange" disabled="disabled" selected="selected">Statistic Type</option>
-                        <option value="1">1 Rep Max</option>
-                        <option value="2">Volume</option>
-                        <option value="3">Total Reps</option>
-                        <option value="4">Intensity</option>
-                        <option value="5">Volume and Intensity</option>
+            <h1 class="h2">Progress Report</h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
+                <select name="Exercise" id="choice">
+                    <option value="nochange" disabled="disabled" selected="selected">Statistic Type</option>
+                    <option value="1">1 Rep Max</option>
+                    <option value="2">Volume</option>
+                    <option value="3">Total Reps</option>
+                    <option value="4">Intensity</option>
+                    <option value="5">Volume and Intensity</option>
+                </select>
+                <br/>
+                <form th:action="@{/client_progress/} + ${id}" method="post">
+                    <select name="exerciseId" onchange="this.form.submit()">
+                        <option value="nochange" disabled="disabled" selected="selected" id="defaultOption">
+                            Exercises
+                        </option>
+                        <div th:each="exercise : ${exerciseList}">
+                            <option th:text="${exercise.name}" th:value="${exercise.id}"
+                                    th:id="${exercise.id}"></option>
+                        </div>
                     </select>
-                    <br/>
-                    <form th:action="@{/client_progress/} + ${id}" method="post">
-                        <select name="exerciseId" onchange="this.form.submit()">
-                            <option value="nochange" disabled="disabled" selected="selected" id="defaultOption">
-                                Exercises
-                            </option>
-                            <div th:each="exercise : ${exerciseList}">
-                                <option th:text="${exercise.name}" th:value="${exercise.id}"
-                                        th:id="${exercise.id}"></option>
-                            </div>
-                        </select>
 
-                    </form>
-                </div>
+                </form>
+            </div>
 
-                </div>
-<div id="chart_div" >
+        </div>
+        <div id="chart_div">
             <canvas class="my-4" id="myChart" width="900" height="380">
 
-<div style="width: 100%; float: left">
-       <div th:each="set : ${sets}">
-           <input th:value="${set.day}" type="hidden" class="day"/>
-           <input th:value="${set.estimated1RM}" type="hidden" />
-           <input th:value="${set.totalweight}" type="hidden" />
-           <input th:value="${set.reps}" type="hidden" />
-           <input th:value="${set.intensity}" type="hidden" />
-       </div>
-</div>
+                <div style="width: 100%; float: left">
+                    <div th:each="set : ${sets}">
+                        <input th:value="${set.day}" type="hidden" class="day"/>
+                        <input th:value="${set.estimated1RM}" type="hidden"/>
+                        <input th:value="${set.totalweight}" type="hidden"/>
+                        <input th:value="${set.reps}" type="hidden"/>
+                        <input th:value="${set.intensity}" type="hidden"/>
+                    </div>
+                </div>
             </canvas>
-</div>
-</main>
+        </div>
+    </main>
 </div>
 
 <script>
