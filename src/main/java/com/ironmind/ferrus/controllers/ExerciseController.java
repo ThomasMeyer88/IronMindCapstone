@@ -54,11 +54,11 @@ public class ExerciseController {
 
     @GetMapping("/logplan/{id}")
     public String loadLog(@PathVariable long id, Model view) {
-        List<Program> programs = programDao.getPrograms().findAllByClient_Id(id);
-        String name = programs.get(0).getName();
-        view.addAttribute("progId", id);
-
-        return "redirect:/log/" + id + "/1";
+        Client client = clientDao.findOne(id);
+        Program program = programDao.getPrograms().findById(client.getActiveprogram());
+        long progId = program.getId();
+        view.addAttribute("progid", id);
+        return "redirect:/log/" + progId + "/1";
     }
 
     @GetMapping("/log/{id}/{day}")
@@ -95,11 +95,14 @@ public class ExerciseController {
 
     @GetMapping("/exercises/{id}")
     public String loadProgram(@PathVariable long id, Model view) {
-        List<Program> program = programDao.getPrograms().findAllByClient_Id(id);
-        long progId = program.get(0).getId();
+        Client client = clientDao.findOne(id);
+        Program program = programDao.getPrograms().findById(client.getActiveprogram());
+        long progId = program.getId();
         view.addAttribute("progId", id);
         return "redirect:/exercises/" + progId + "/1";
     }
+
+
 
     @GetMapping("/exercises/{id}/{day}")
     public String exercisesIndex(@PathVariable int day, @PathVariable long id, Model view) {

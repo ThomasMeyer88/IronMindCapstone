@@ -96,10 +96,23 @@ public class ClientController {
                 view.addAttribute("programs", program);
                 return "coaches/coach_profile";
         }else{
-                view.addAttribute("client", clientSession);
-                return "clients/client_profile_page";
+            List<Program> program = programDao.getPrograms().findAllByClient_Id(clientSession.getId());
+            view.addAttribute("programs", program);
+            return "clients/client_profile_page";
             }
     }
+
+    @RequestMapping(value = "/change_program", method = RequestMethod.POST)
+    public String setActiveProgram(@RequestParam long program){
+        Client clientSession = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Client client = clientDao.findOne(clientSession.getId());
+        Program activeProgram = programDao.getPrograms().findByClient_IdAndId(clientSession.getId(), program);
+        client.setActiveprogram(activeProgram.getId());
+        clientDao.save(client);
+        return "clients/client_profile_page";
+    }
+
+
 
     @GetMapping("/coach_profile")
     public String coachPage(Model view){
