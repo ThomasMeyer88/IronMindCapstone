@@ -1,21 +1,26 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="partials/header :: header" />
-<body>
-<h1 class="client_profile">Register an account!</h1>
-<div class="container">
-    <form th:action="@{/client_registration}" method="POST" th:object="${client}">
-        <input class="form-control" id="name" th:field="*{name}" placeholder="Name"/>
-        <br />
-        <input class="form-control" id="username" th:field="*{username}" placeholder="Username" />
-        <br />
-        <input class="form-control" id="email" th:field="*{email}" placeholder="Email"/>
-        <br />
-        <input class="form-control" id="phonenumber" th:field="*{phonenumber}" placeholder="Phone Number" />
-        <input class="form-control" id="password" type="password" th:field="*{password}" placeholder="Password"/>
-        <br />
-        <input class="btn btn-primary" type="submit" value="Submit" />
+<head th:replace="partials/header :: header"/>
+<body class="registerbody">
+
+<div class="registerbox">
+    <h1 class="logintitle">Start here</h1>
+    <form th:action="@{/client_registration}" method="post" th:object="${client}">
+        <p>Full Name</p>
+        <input type="text" id="name" name="name" th:field="*{name}" placeholder="Enter Full Name"/>
+        <p>Username</p>
+        <input type="text" id="username" name="username" th:field="*{username}" placeholder="Enter Username"/>
+        <p>Email</p>
+        <input type="text" id="email" name="email" th:field="*{email}" placeholder="Enter Email"/>
+        <p>Phone Number</p>
+        <input type="text" id="phonenumber" name="phonenumber" th:field="*{phonenumber}" placeholder="Enter Phone Number"/>
+        <p>Password</p>
+        <input type="password" id="password" th:field="*{password}" placeholder="Password"/>
+        <input type="submit" value="Register"/>
+        <a href="/client_login">Go to login.</a>
     </form>
 </div>
+
+
 </body>
 </html>

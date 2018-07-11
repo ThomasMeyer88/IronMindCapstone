@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="partials/header :: header" />
+<head th:replace="partials/header :: header"/>
 <body>
+<div th:replace="partials/profilenavbar :: profilenavbar"/>
+<div th:replace="partials/sidebar :: sidebar"/>
 <div class="container">
     <form th:action="@{/client_profile_page/create_program}" method="POST" th:object="${program}">
         <label for="name">Name your program</label>
-        <input class="form-control" id="name" th:value="${name}" th:field="*{name}" type="text" />
-        <br />
+        <input class="form-control" id="name" th:value="${name}" th:field="*{name}" type="text"/>
+        <br/>
         <label for="days">How long is the program?</label>
-        <input class="form-control" id="days" th:value="${programDays}" th:field="*{programDays}" type="text" />
-        <br />
-        <input class="btn btn-primary" type="submit" value="Submit" />
+        <input class="form-control" id="days" th:value="${programDays}" th:field="*{programDays}" type="text"/>
+        <br/>
+        <input class="btn btn-primary" type="submit" value="Submit"/>
     </form>
 </div>
+<footer th:replace="partials/footer :: footer"/>
 </body>
 </html>

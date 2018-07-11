@@ -45,6 +45,9 @@ public class Client {
     @Column(length = 1000)
     private String bio;
 
+    @Column(length= 100)
+    private Long activeprogram;
+
 
     @Column(nullable = false)
     private String role;
@@ -200,7 +203,13 @@ public class Client {
         this.coachId = coachId;
     }
 
+    public Long getActiveprogram() {
+        return activeprogram;
+    }
 
+    public void setActiveprogram(Long activeprogram) {
+        this.activeprogram = activeprogram;
+    }
 
     public Long getPhonenumber() {
         return phonenumber;
