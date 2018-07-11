@@ -2,7 +2,9 @@ package com.ironmind.ferrus.controllers;
 
 import com.ironmind.ferrus.model.Client;
 import com.ironmind.ferrus.repositiories.Clients;
+
 import java.util.List;
+
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -26,15 +28,14 @@ public class CoachController {
     }
 
 
-
     @GetMapping("/coaches_registration")
-    public String showSignUpForm(Model view){
+    public String showSignUpForm(Model view) {
         view.addAttribute("Coach", new Client());
         return "coaches/coaches_registration";
     }
 
     @PostMapping("/coaches_registration")
-    public String saveCoach(@ModelAttribute Client coach){
+    public String saveCoach(@ModelAttribute Client coach) {
         String hash = passwordEncoder.encode(coach.getPassword());
         coach.setPassword(hash);
         coach.setRole("Coach");
@@ -44,13 +45,14 @@ public class CoachController {
     }
 
     @GetMapping("/coach_profile/{id}/edit")
-    public String showEditPage(@PathVariable Long id, Model view){
+    public String showEditPage(@PathVariable Long id, Model view) {
         view.addAttribute("coach", coachDao.findOne(id));
         return "coaches/edit";
     }
 
+
     @PostMapping("/coach_profile/{id}/edit")
-    public String updateProfile(@PathVariable Long id, @ModelAttribute Client coach){
+    public String updateProfile(@PathVariable Long id, @ModelAttribute Client coach) {
         Client coachSession = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         coachSession.setEmail(coach.getEmail());
         String hash = passwordEncoder.encode(coach.getPassword());
@@ -64,13 +66,13 @@ public class CoachController {
     }
 
     @PostMapping("/coach_profile/{id}/delete")
-    public String delete(@PathVariable long id){
+    public String delete(@PathVariable long id) {
         coachDao.delete(id);
         return "redirect:/coach_profile";
     }
 
     @GetMapping("/coach_list")
-    public String coachList(@PathVariable Long id, Model view){
+    public String coachList(@PathVariable Long id, Model view) {
         List<Client> coachList = coachDao.findAllByCoachId(id);
         view.addAttribute("coachList", coachList);
         return "/coach_list";
