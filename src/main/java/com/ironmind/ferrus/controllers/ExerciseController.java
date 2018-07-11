@@ -276,6 +276,7 @@ public class ExerciseController {
 //        }
 //        return "redirect:/log/" + name + "/" + day ;
 //    }
+    //
 
     @RequestMapping(value = "/deleteset/{progId}/{day}", method = RequestMethod.POST)
     public String deleteSet(@PathVariable long day, @PathVariable long progId, @RequestParam long id, @RequestParam long setId) {
