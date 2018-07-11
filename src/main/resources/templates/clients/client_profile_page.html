@@ -1,18 +1,31 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:replace="partials/header :: header" />
+<head th:replace="partials/header :: header"/>
 <body>
 <div th:replace="partials/profilenavbar :: profilenavbar"/>
 <div th:replace="partials/sidebar :: sidebar"/>
-
-<h1 class="client_profile">Greetings, <span th:text="${client.username}">!</span></h1>
 <div class="container">
-
-    <form class="form-group" th:action="@{/client_profile_page/create_program}" method="get">
-        <button type="submit" class="btn btn-primary btn-block btn-md" id="createplan" name="createplan">Create a program</button>
+    <div class="container">
+        <form class="form-group" th:action="@{/client_profile_page/create_program}" method="get">
+            <button type="submit" class="btn btn-primary btn-block btn-md" id="createplan" name="createplan">Create a
+                program
+            </button>
+        </form>
+    </div>
+    <form th:action="@{/change_program}" method="post">
+            <label for="exampleFormControlSelect2">Programs</label>
+            <select id="exampleFormControlSelect2"  name="program"
+                    onchange="this.form.submit()" style="text-align: center" >
+                <option value="nochange" disabled="disabled" selected="selected" id="programSelector">
+                    Programs
+                </option>
+                <div th:each="program : ${programs}">
+                    <option th:value="${program.id}" th:text="${program.name}">
+                    </option>
+                </div>
+            </select>
     </form>
-
 </div>
-    <footer th:replace="partials/footer :: footer" />
+<footer th:replace="partials/footer :: footer"/>
 </body>
 </html>

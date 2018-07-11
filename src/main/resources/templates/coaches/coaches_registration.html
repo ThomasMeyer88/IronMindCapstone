@@ -18,29 +18,9 @@
         <textarea name="bio" id="bio" cols="30" rows="3" th:field="*{bio}" placeholder="Enter description about yourself"></textarea>
         <p>Password</p>
         <input type="password" id="password" th:field="*{password}" placeholder="Password"/>
-        <input type="submit" value="Log in"/>
+        <input type="submit" value="Register"/>
         <a href="/client_login">Go to login.</a>
     </form>
 </div>
-<!--<body>-->
-<!--<h1>Register as a coach</h1>-->
-<!--<div class="container">-->
-    <!--<form th:action="@{/coaches_registration}" method="POST" th:object="${Coach}">-->
-        <!--<input class="form-control" id="name" th:field="*{name}" placeholder="Name"/>-->
-        <!--<br/>-->
-        <!--<input class="form-control" id="username" th:field="*{username}" placeholder="Username"/>-->
-        <!--<br/>-->
-        <!--<input class="form-control" id="email" th:field="*{email}" placeholder="Email"/>-->
-        <!--<br/>-->
-        <!--<input class="form-control" id="phonenumber" th:field="*{phonenumber}" placeholder="Phone Number"/>-->
-        <!--<br/>-->
-        <!--<textarea class="form-control" id="bio" cols="30" rows="10" th:field="*{bio}"-->
-                  <!--placeholder="Description"></textarea>-->
-        <!--<br/>-->
-        <!--<input class="form-control" id="password" type="password" th:field="*{password}" placeholder="Password"/>-->
-        <!--<input class="btn btn-primary" type="submit" value="Submit"/>-->
-    <!--</form>-->
-<!--</div>-->
-
 </body>
 </html>
