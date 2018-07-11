@@ -94,6 +94,8 @@ public class ClientController {
                 System.out.println("is a coach");
             List<Program> program = programDao.getPrograms().findAllByClient_Id(clientSession.getId());
                 view.addAttribute("programs", program);
+                List<Client> client = clientDao.findAllByCoachId(clientSession.getId());
+                view.addAttribute("clients", client);
                 return "coaches/coach_profile";
         }else{
             List<Program> program = programDao.getPrograms().findAllByClient_Id(clientSession.getId());
