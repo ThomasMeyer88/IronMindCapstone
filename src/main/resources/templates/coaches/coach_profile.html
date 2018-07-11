@@ -11,6 +11,11 @@
     <h1>Coach Dashboard</h1>
     <div class="card w-75" style="float: right;">
         <div class="card-body">
+            <form class="form-group" th:action="@{/client_profile_page/create_program}" method="get">
+                <button type="submit" class="btn btn-primary btn-block btn-md" id="createplan" name="createplan">Create a
+                    program
+                </button>
+            </form>
             <form th:action="@{/client_profile_page}" method="Get">
 
                 <div class="form-group">

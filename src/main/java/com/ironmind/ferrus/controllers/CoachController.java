@@ -3,6 +3,7 @@ package com.ironmind.ferrus.controllers;
 import com.ironmind.ferrus.model.Client;
 import com.ironmind.ferrus.repositiories.Clients;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -72,10 +73,17 @@ public class CoachController {
     }
 
     @GetMapping("/coach_list")
-    public String coachList(@PathVariable Long id, Model view) {
-        List<Client> coachList = coachDao.findAllByCoachId(id);
-        view.addAttribute("coachList", coachList);
-        return "/coach_list";
+    public String coachList(Model view) {
+        List <Client> coaches = new ArrayList<>();
+        List <Client> allUsers = coachDao.findAll();
+        for(Client user: allUsers){
+            if(user.getRole().equalsIgnoreCase("coach")){
+                coaches.add(user);
+            }
+        }
+        view.addAttribute("coachlist", coaches);
+        return "clients/coach_list";
     }
 
 }
+
