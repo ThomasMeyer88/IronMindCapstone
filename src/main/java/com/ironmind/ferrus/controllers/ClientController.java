@@ -78,6 +78,7 @@ public class ClientController {
                 .sendMail(email);
         client.setPassword(hash);
         client.setRole("Client");
+        client.setLoginCounter(0L);
         clientDao.save(client);
         return "redirect:/client_login";
     }
@@ -110,15 +111,20 @@ public class ClientController {
         System.out.println(clientSession.getEmail());
         Client test = clientDao.findOne(clientSession.getId());
         clientSession.setRole(test.getRole());
+        Client client = clientDao.findOne(clientSession.getId());
+        client.setLoginCounter(clientSession.getLoginCounter() + 1L);
         if (clientSession.getRole().equals("Coach")){
                 view.addAttribute("client", clientSession);
                 System.out.println("is a coach");
             List<Program> program = programDao.getPrograms().findAllByClient_Id(clientSession.getId());
                 view.addAttribute("programs", program);
-                List<Client> client = clientDao.findAllByCoachId(clientSession.getId());
-                view.addAttribute("clients", client);
+                List<Client> clients = clientDao.findAllByCoachId(clientSession.getId());
+                view.addAttribute("clients", clients);
                 return "coaches/coach_profile";
-        }else{
+        } else if(clientSession.getLoginCounter() < 2){
+            return "clients/onboarding";
+        }
+        else{
             List<Program> program = programDao.getPrograms().findAllByClient_Id(clientSession.getId());
             view.addAttribute("programs", program);
             return "clients/client_profile_page";

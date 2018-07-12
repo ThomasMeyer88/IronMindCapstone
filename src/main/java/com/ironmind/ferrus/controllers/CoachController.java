@@ -40,6 +40,7 @@ public class CoachController {
         String hash = passwordEncoder.encode(coach.getPassword());
         coach.setPassword(hash);
         coach.setRole("Coach");
+        coach.setLoginCounter(0L);
         coachDao.save(coach);
         return "redirect:/client_login";
 
