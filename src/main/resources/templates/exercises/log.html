@@ -6,6 +6,8 @@
 <div th:replace="partials/profilenavbar :: profilenavbar"/>
 <div th:replace="partials/sidebar :: sidebar"/>
 
+<input id="dropCheck" th:value="${dropId}" type="hidden" />
+
 <div class="plannerContainer container-fluid">
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
         <!--<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">-->
@@ -72,6 +74,9 @@
             document.getElementById(id).nextElementSibling.style.display = "none";
         }
     }
+    var state = document.getElementById("state");
+
+    showState(state);
 
     function showState(state) {
         console.log(state);
@@ -84,12 +89,8 @@
         }
     }
 
-    var state = document.getElementById("state");
-    var stickyDrop = document.getElementById("dropCheck").value;
 
     dropdown(stickyDrop);
-    document.onload(showState(state));
 
-    document.onload(dropdown(stickyDrop));
 </script>
 </html>

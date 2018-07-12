@@ -58,28 +58,50 @@ public class ClientController {
     public String saveClient(@ModelAttribute Client client){
         String hash = passwordEncoder.encode(client.getPassword());
         String emailAddress = client.getEmail();
-        Email email = EmailBuilder.startingBlank()
-                .from("Irondmind Notification", "ironmind2018@hotmail.com")
-                .to("Noah", emailAddress)
-                .withSubject(client.getName() + ", thank you for registering with Ironmind")
-                .withHTMLText("<div style='text-align:center'><h2> Welcome to Ironmind </h2>" +
-                        "<h3>Features</h3>" +
-                        "<ul style='list-style: none'><li>Create a custom program to suit your needs</li>"
-                        +"<li>Log your workouts</li>"+
-                        "<li>View your progress overtime</li>"+
-                        "<li>Find a coach to help guide your progress</li></ul>"+
-                        "<a href='localhost:8080'>ironmind.app</a></div>")
-                .buildEmail();
+//        Email email = EmailBuilder.startingBlank()
+//                .from("Irondmind Notification", "ironmind2018@hotmail.com")
+//                .to(client.getName(), emailAddress)
+//                .withSubject(client.getName() + ", thank you for registering with Ironmind")
+//                .withHTMLText("<div style='text-align:center'><h2> Welcome to Ironmind </h2>" +
+//                        "<h3>Features</h3>" +
+//                        "<ul style='list-style: none'><li>Create a custom program to suit your needs</li>"
+//                        +"<li>Log your workouts</li>"+
+//                        "<li>View your progress overtime</li>"+
+//                        "<li>Find a coach to help guide your progress</li></ul>"+
+//                        "<a href='localhost:8080'>ironmind.app</a></div>")
+//                .buildEmail();
+//
+//        MailerBuilder
+//                .withSMTPServer("smtp.live.com", 587, "ironmind2018@hotmail.com", "Finale1!")
+//                .withTransportStrategy(SMTP_TLS)
+//                .buildMailer()
+//                .sendMail(email);
+        client.setPassword(hash);
+        client.setRole("Client");
+        client.setLoginCounter(0L);
+        clientDao.save(client);
+        return "redirect:/client_login";
+    }
 
+    @PostMapping("/request_coach")
+    public String requestCoach(@RequestParam long coachId){
+        Client coach = clientDao.findOne(coachId);
+        Client client =  (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String name = coach.getName();
+        String emailAddress = coach.getEmail();
+        Email email = EmailBuilder.startingBlank()
+                .from("Ironmind Client Request", "ironmind2018@hotmail.com")
+                .to(name, emailAddress)
+                .withSubject(name + ", you have a new coaching opportunity!")
+                .withPlainText(name + ", " + client.getUsername() + " has requested that you be their coach on their" +
+                        "IronMind experience.  Please log in to confirm or deny.")
+                .buildEmail();
         MailerBuilder
                 .withSMTPServer("smtp.live.com", 587, "ironmind2018@hotmail.com", "Finale1!")
                 .withTransportStrategy(SMTP_TLS)
                 .buildMailer()
                 .sendMail(email);
-        client.setPassword(hash);
-        client.setRole("Client");
-        clientDao.save(client);
-        return "redirect:/client_login";
+        return "redirect:/client_profile_page";
     }
 
     @GetMapping("/client_profile_page")
@@ -87,19 +109,31 @@ public class ClientController {
         Client clientSession = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         System.out.println(clientSession.getRole());
         System.out.println(clientSession.getEmail());
+<<<<<<< HEAD
         Client client = clientDao.findOne(clientSession.getId());
         clientSession.setRole(client.getRole());
                 view.addAttribute("clientId", client.getId());
         if (clientSession.getRole().equals("Coach")){
+=======
+        Client test = clientDao.findOne(clientSession.getId());
+        clientSession.setRole(test.getRole());
+        Client client = clientDao.findOne(clientSession.getId());
+        System.out.println("Number of logins is " + client.getLoginCounter());
+        clientDao.save(client);
+        if (client.getRole().equals("Coach")){
+>>>>>>> 51cc572522ad8250587c751c58d008da550684af
                 view.addAttribute("client", clientSession);
                 System.out.println("is a coach");
             List<Program> program = programDao.getPrograms().findAllByClient_Id(clientSession.getId());
                 view.addAttribute("programs", program);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 51cc572522ad8250587c751c58d008da550684af
                 List<Client> clients = clientDao.findAllByCoachId(clientSession.getId());
                 view.addAttribute("clients", clients);
                 return "coaches/coach_profile";
-        }else{
+        } else{
             List<Program> program = programDao.getPrograms().findAllByClient_Id(clientSession.getId());
             view.addAttribute("programs", program);
             return "clients/client_profile_page";

@@ -52,6 +52,8 @@ public class Client {
     @Column(nullable = false)
     private String role;
 
+    @Column(nullable = false)
+    private Long loginCounter;
 
 
     @OneToMany (mappedBy = "client")
@@ -225,5 +227,13 @@ public class Client {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public Long getLoginCounter() {
+        return loginCounter;
+    }
+
+    public void setLoginCounter(Long loginCounter) {
+        this.loginCounter = loginCounter;
     }
 }

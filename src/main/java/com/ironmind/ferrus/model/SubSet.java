@@ -38,6 +38,11 @@ public class SubSet {
         this.workSet = WorkSet;
     }
 
+    public SubSet(SubSet subSet){
+        this.weight = subSet.weight;
+        this.reps = subSet.reps;
+        this.exerciseName = subSet.exerciseName;
+    }
 
     public int getWeight() {
         return weight;

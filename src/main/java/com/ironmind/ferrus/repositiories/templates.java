@@ -12,6 +12,8 @@ public interface templates extends CrudRepository<template, Long> {
 
     List<template> findAllByProgram_Id(long id);
 
+    List<template> findAllByUsable(long use);
+
 
     template findByProgram_Id(long id);
 
