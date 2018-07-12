@@ -5,16 +5,13 @@
 <div class="container">
     <h3>List of all coaches</h3>
     <div th:each="coach : ${coachlist}">
-        <form th:action="@{/request_coach}" method="post" th:object="${Client}">
+        <form th:action="@{/request_coach/} + ${coach.id}" method="post" th:object="${Client}">
         <h1 th:text="${coach.username}"></h1>
         <h3 th:text="${coach.bio}"></h3>
-            <input type="hidden" th:value="${coach.id}" name="coachId" />
         <input type="submit" value="Connect" />
         </form>
     </div>
 
 </div>
-
-
 </body>
 </html>

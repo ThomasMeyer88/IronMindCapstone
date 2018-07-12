@@ -38,7 +38,6 @@ public class CoachController {
         String hash = passwordEncoder.encode(coach.getPassword());
         coach.setPassword(hash);
         coach.setRole("Coach");
-        coach.setLoginCounter(0L);
         coachDao.save(coach);
         return "redirect:/client_login";
 
@@ -73,6 +72,8 @@ public class CoachController {
 
     @GetMapping("/coach_list")
     public String coachList(Model view) {
+        Client clientsession = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        view.addAttribute("Client", clientsession);
         List <Client> coaches = new ArrayList<>();
         List <Client> allUsers = coachDao.findAll();
         for(Client user: allUsers){

@@ -78,22 +78,25 @@ public class ClientController {
 //                .sendMail(email);
         client.setPassword(hash);
         client.setRole("Client");
-        client.setLoginCounter(0L);
         clientDao.save(client);
         return "redirect:/client_login";
     }
 
-    @PostMapping("/request_coach")
-    public String requestCoach(@RequestParam long coachId){
+    @PostMapping("/request_coach/{coachId}")
+    public String requestCoach(@PathVariable long coachId){
+        Client sessionUser = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Client loggedInUser = clientDao.findOne(sessionUser.getId());
+        loggedInUser.setRequestCoachId(coachId);
+        clientDao.save(loggedInUser);
+
         Client coach = clientDao.findOne(coachId);
-        Client client =  (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String name = coach.getName();
         String emailAddress = coach.getEmail();
         Email email = EmailBuilder.startingBlank()
                 .from("Ironmind Client Request", "ironmind2018@hotmail.com")
                 .to(name, emailAddress)
                 .withSubject(name + ", you have a new coaching opportunity!")
-                .withPlainText(name + ", " + client.getUsername() + " has requested that you be their coach on their" +
+                .withPlainText(name + ", " + loggedInUser.getUsername() + " has requested that you be their coach on their" +
                         "IronMind experience.  Please log in to confirm or deny.")
                 .buildEmail();
         MailerBuilder
@@ -101,8 +104,10 @@ public class ClientController {
                 .withTransportStrategy(SMTP_TLS)
                 .buildMailer()
                 .sendMail(email);
+
         return "redirect:/client_profile_page";
     }
+
 
     @GetMapping("/client_profile_page")
     public String clientPage(Model view){
@@ -111,8 +116,8 @@ public class ClientController {
         System.out.println(clientSession.getEmail());
         Client test = clientDao.findOne(clientSession.getId());
         clientSession.setRole(test.getRole());
+
         Client client = clientDao.findOne(clientSession.getId());
-        System.out.println("Number of logins is " + client.getLoginCounter());
         clientDao.save(client);
         if (client.getRole().equals("Coach")){
                 view.addAttribute("client", clientSession);
@@ -160,6 +165,7 @@ public class ClientController {
         client.setPassword(hash);
         clientSession.setUsername(client.getUsername());
         clientSession.setName(client.getName());
+        client.setRole(clientSession.getRole());
         clientDao.save(client);
         return "redirect:/client_profile_page/";
     }
