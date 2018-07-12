@@ -122,13 +122,7 @@ public class ClientController {
                 List<Client> clients = clientDao.findAllByCoachId(clientSession.getId());
                 view.addAttribute("clients", clients);
                 return "coaches/coach_profile";
-        } else if(client.getLoginCounter() < 2){
-
-            client.setLoginCounter(client.getLoginCounter() + 1L);
-            view.addAttribute("client", client);
-            return "clients/onboarding";
-        }
-        else{
+        } else{
             List<Program> program = programDao.getPrograms().findAllByClient_Id(clientSession.getId());
             view.addAttribute("programs", program);
             return "clients/client_profile_page";
