@@ -129,7 +129,7 @@
 
     var dropId = document.getElementById("dropCheck").value;
     console.log(dropId);
-    dropdown(dropId);
+    stickyDropdown(dropId);
 
     var subSet = document.getElementById("set1");
     var search = document.getElementById("searchEx");
@@ -231,7 +231,18 @@
         console.log(targetvalue);
     }
 
+
     function dropdown(id) {
+
+            if (document.getElementById(id).nextElementSibling.style.display == "none") {
+                document.getElementById(id).nextElementSibling.style.display = "inline-block";
+            }
+            else {
+                document.getElementById(id).nextElementSibling.style.display = "none";
+            }
+
+    }
+    function stickyDropdown(id) {
         if(id > 0){
 
             if (document.getElementById(id).nextElementSibling.style.display == "none") {
