@@ -52,16 +52,14 @@ public class Client {
     @Column(nullable = false)
     private String role;
 
-    @Column(nullable = false)
-    private Long loginCounter;
-
+    @Column(length= 100)
+    private Long requestCoachId;
 
     @OneToMany (mappedBy = "client")
     private List<Program> programs;
 
     @OneToMany (mappedBy = "client")
     private List<CompletedSet> completedSets;
-
 
 
 
@@ -177,6 +175,13 @@ public class Client {
         this.bio = bio;
     }
 
+    public Long getRequestCoachId() {
+        return requestCoachId;
+    }
+
+    public void setRequestCoachId(Long requestCoachId) {
+        this.requestCoachId = requestCoachId;
+    }
 
 
 
@@ -229,11 +234,7 @@ public class Client {
         this.role = role;
     }
 
-    public Long getLoginCounter() {
-        return loginCounter;
-    }
 
-    public void setLoginCounter(Long loginCounter) {
-        this.loginCounter = loginCounter;
-    }
+
+
 }
