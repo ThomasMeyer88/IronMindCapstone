@@ -134,6 +134,74 @@ public class ExerciseController {
         return ("exercises/exercises");
     }
 
+    @PostMapping("/addtemplate/{id}/{day}")
+    public String addTemplate(@PathVariable long id, @PathVariable int day, @RequestParam long tempId){
+        template copyTemp = tempDao.getTemplates().findOne(tempId);
+
+        try{
+            template baseTemp = tempDao.getTemplates().findByProgram_IdAndDay(id, day);
+            System.out.println("1st Try temp id and day are " + baseTemp.getId() + baseTemp.getDay());
+            tempDao.getTemplates().save(baseTemp);
+            List<WorkSet> workSets = workDao.getWork().findAllByTemplate(copyTemp);
+            try{
+                for(WorkSet wS:workSets){
+                    WorkSet work = workDao.getWork().findByTemplate_IdAndExerciseName(baseTemp.getId(), wS.getExerciseName());
+                    System.out.println("2nd Try workset exercise is " + work.getExerciseName());
+                    List<SubSet> subSets = setDao.getSets().findAllByWorkSet_Id(wS.getId());
+                    workDao.getWork().save(work);
+                    for(SubSet set: subSets){
+                        SubSet newSet = new SubSet();
+                        newSet.setWorkSet(work);
+                        newSet.setReps(set.getReps());
+                        newSet.setExerciseName(set.getExerciseName());
+                        newSet.setWeight(set.getWeight());
+                        setDao.getSets().save(newSet);
+                    }
+                    }
+                } catch (NullPointerException e) {
+                for(WorkSet work : workSets){
+                    WorkSet newWork = new WorkSet();
+                    newWork.setTemplate(baseTemp);
+                    newWork.setExercise(work.getExercise());
+                    newWork.setExerciseName(work.getExerciseName());
+                    System.out.println("2nd try FAILED newWork exercise is " + work.getExerciseName());
+                    workDao.getWork().save(newWork);
+                    List<SubSet> subSets = setDao.getSets().findAllByWorkSet_Id(work.getId());
+                    for(SubSet set : subSets){
+                        SubSet newSet = new SubSet(set);
+                        System.out.println(newSet.getExerciseName() + newSet.getReps());
+
+                        newSet.setWorkSet(newWork);
+                        setDao.getSets().save(newSet);
+                    }
+                }
+                return "redirect:/exercises/" + id + "/" + day;
+                }
+                }catch(NullPointerException e){
+            template temp = new template();
+            temp.setProgram(programDao.getPrograms().findById(id));
+            temp.setDay(day);
+            System.out.println("1st Try Failed new temp day is " + temp.getDay());
+            tempDao.getTemplates().save(temp);
+            List<WorkSet> workSets = workDao.getWork().findAllByTemplate(copyTemp);
+            for(WorkSet work : workSets){
+                WorkSet newWork = new WorkSet(work);
+                newWork.setTemplate(temp);
+                workDao.getWork().save(newWork);
+                List<SubSet> subSets = setDao.getSets().findAllByWorkSet_Id(work.getId());
+                for(SubSet set : subSets){
+                    SubSet newSet = new SubSet(set);
+                    System.out.println(newSet.getExerciseName() + newSet.getReps());
+
+                    newSet.setWorkSet(newWork);
+                    setDao.getSets().save(newSet);
+                }
+            }
+            return "redirect:/exercises/" + id + "/" + day;
+        }
+        return "redirect:/exercises/" + id + "/" + day;
+
+    }
     @PostMapping("/savetemplate/{id}/{day}")
     public String saveTemplate(@PathVariable long id, @PathVariable int day, @RequestParam String tempName){
         template temp = tempDao.getTemplates().findByProgram_IdAndDay(id, day);
@@ -188,6 +256,9 @@ public class ExerciseController {
         view.addAttribute("day", day);
         view.addAttribute("name", program.getName());
         view.addAttribute("progId", program.getId());
+        List<template> templates = tempDao.getTemplates().findAllByUsable(1);
+
+        view.addAttribute("tempList", templates);
 
         return ("exercises/exercises");
     }

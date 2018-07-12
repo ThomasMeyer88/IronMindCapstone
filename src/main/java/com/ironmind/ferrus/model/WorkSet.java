@@ -35,6 +35,11 @@ public class WorkSet {
         this.exercise = exercise;
     }
 
+    public WorkSet(WorkSet workSet){
+        this.exerciseName = workSet.exerciseName;
+        this.exercise = workSet.exercise;
+    }
+
     public WorkSet(String exerciseName){
         this.exerciseName = exerciseName;
     }

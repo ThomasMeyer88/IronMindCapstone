@@ -35,6 +35,8 @@ public class template {
 
     }
 
+
+
     public template(int day){
         this.day = day;
     }

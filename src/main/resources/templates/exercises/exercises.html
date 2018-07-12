@@ -98,11 +98,13 @@
         <input type="text" placeholder="Search Templates" id="searchTemp" class="searchBar" />
         <div class="scrollable">
             <div th:each="template : ${tempList}">
-                <div class="setForm" draggable="false" th:id="${template.id}">
-                    <form th:action="@{/addtemplate}" method="post">
-                        <label th:text="${template.name}"></label>
-                        <input type="hidden" th:value="${template.id}" name="tempId" />
-                        <input type="submit" value="Add This Template" />
+                <div class="tempForm" draggable="false" th:id="${template.id}">
+                    <form th:action="@{/addtemplate/} + ${progId} + @{/} + ${day}" method="post">
+                        <div class="tempHolder">
+                            <label th:text="${template.name}"></label>
+                            <input type="hidden" th:value="${template.id}" name="tempId" />
+                            <input type="submit" value="Add This Template" />
+                        </div>
                     </form>
                 </div>
             </div>
@@ -126,11 +128,14 @@
     builderDisplay(builder);
 
     var dropId = document.getElementById("dropCheck").value;
+    console.log(dropId);
     dropdown(dropId);
 
     var subSet = document.getElementById("set1");
     var search = document.getElementById("searchEx");
+    var searchTemp = document.getElementById("searchTemp");
     search.addEventListener("keyup", runSearch, false);
+    searchTemp.addEventListener("keyup", runSearchTemp, false);
 
     function runSearch() {
         var search = document.getElementById("searchEx").value.toString();
@@ -140,6 +145,28 @@
                 console.log(element.childNodes[1].childNodes[1]);
                 console.log(element.childNodes[1].childNodes[1].childNodes[3]);
                 var stringDos = element.childNodes[1].childNodes[1].childNodes[3].textContent.toString();
+
+                console.log(string);
+                if (string.toLowerCase().includes(search.toLowerCase())) {
+                    element.style.display = "block";
+                } else if (stringDos.toLowerCase().includes(search.toLowerCase())) {
+                    element.style.display = "block";
+                }
+                else {
+                    element.style.display = "none";
+                }
+            }
+        );
+    }
+
+    function runSearchTemp() {
+        var search = document.getElementById("searchTemp").value.toString();
+        Array.from(document.getElementsByClassName("tempForm")).forEach(
+            function (element, index, array) {
+                var string = element.id.toString();
+                console.log(element.childNodes[1].childNodes[1]);
+                console.log(element.childNodes[1].childNodes[1].childNodes[1]);
+                var stringDos = element.childNodes[1].childNodes[1].childNodes[1].textContent.toString();
 
                 console.log(string);
                 if (string.toLowerCase().includes(search.toLowerCase())) {
@@ -205,11 +232,14 @@
     }
 
     function dropdown(id) {
-        if (document.getElementById(id).nextElementSibling.style.display == "none") {
-            document.getElementById(id).nextElementSibling.style.display = "inline-block";
-        }
-        else {
-            document.getElementById(id).nextElementSibling.style.display = "none";
+        if(id > 0){
+
+            if (document.getElementById(id).nextElementSibling.style.display == "none") {
+                document.getElementById(id).nextElementSibling.style.display = "inline-block";
+            }
+            else {
+                document.getElementById(id).nextElementSibling.style.display = "none";
+            }
         }
     }
 
