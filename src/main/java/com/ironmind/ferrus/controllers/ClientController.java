@@ -112,8 +112,9 @@ public class ClientController {
         Client test = clientDao.findOne(clientSession.getId());
         clientSession.setRole(test.getRole());
         Client client = clientDao.findOne(clientSession.getId());
-        client.setLoginCounter(clientSession.getLoginCounter() + 1L);
-        if (clientSession.getRole().equals("Coach")){
+        System.out.println("Number of logins is " + client.getLoginCounter());
+        clientDao.save(client);
+        if (client.getRole().equals("Coach")){
                 view.addAttribute("client", clientSession);
                 System.out.println("is a coach");
             List<Program> program = programDao.getPrograms().findAllByClient_Id(clientSession.getId());
@@ -121,7 +122,9 @@ public class ClientController {
                 List<Client> clients = clientDao.findAllByCoachId(clientSession.getId());
                 view.addAttribute("clients", clients);
                 return "coaches/coach_profile";
-        } else if(clientSession.getLoginCounter() < 2){
+        } else if(client.getLoginCounter() < 2){
+            client.setLoginCounter(client.getLoginCounter() + 1L);
+
             return "clients/onboarding";
         }
         else{
