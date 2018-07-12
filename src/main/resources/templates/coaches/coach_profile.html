@@ -36,29 +36,6 @@
     </div>
 </div>
 
-<!--<form th:action="@{/change_program}" method="post">-->
-<!--<label for="exampleFormControlSelect3">Programs</label>-->
-<!--<select id="exampleFormControlSelect3"  name="program"-->
-<!--onchange="this.form.submit()" style="text-align: center" >-->
-<!--<option value="nochange" disabled="disabled" selected="selected" id="programSelector3">-->
-<!--Programs-->
-<!--</option>-->
-<!--<div th:each="program : ${programs}">-->
-<!--<option th:value="${program.id}" th:text="${program.name}">-->
-<!--</option>-->
-<!--</div>-->
-<!--</select>-->
-<!--</form>-->
-<!--<div class="card w-45" >-->
-<!--<div class="card-body">-->
-
-<!--<form class="form-group" th:action="@{/client_profile_page/create_program}" method="get">-->
-<!--<button type="submit" class="btn btn-primary btn-block btn-md" id="createplan" name="createplan">Create Custom-->
-<!--program-->
-<!--</button>-->
-<!--</form>-->
-<!--</div>-->
-<!--</div>-->
 <div class="row">
     <div class="col-md-6 mb-3">
         <div class="card ">
@@ -74,7 +51,8 @@
                                 clients
                             </option>
                             <div th:each="client : ${clients}">
-                                <option th:value="${client.id}" th:text="${client.name} " th:id="${client.id}" name="clientId"></option>
+                                <option th:value="${client.id}" th:text="${client.name} " th:id="${client.id}"
+                                        name="clientId"></option>
                                 <input type="hidden" th:value="${client.activeprogram}"/>
                             </div>
                         </select>
@@ -87,40 +65,25 @@
                             <option value="nochange" disabled="disabled" selected="selected" id="programSelector">
                             </option>
                             <div th:each="program : ${programs}">
-                                <option th:value="${program.id}" th:text="${program.name}">
-                                </option>
-
+                                <option th:value="${program.id}" th:text="${program.name}"></option>
                             </div>
-
                             <div style="margin-left: 500px">
-
                                 <input type="submit" value="assign program"/>
-
                             </div>
-
-
                         </select>
                     </div>
-
                 </form>
-
-            </div>
             </div>
         </div>
     </div>
+</div>
 
 <div class="row">
     <div class="col-md-6 mb-3">
         <div class="card">
             <div class="card-body">
                 <h2>Client Progress</h2>
-                    <!--<div>-->
-                    <!--<input type="radio" text="View Client Progress" value="1" name="viewProgress"-->
-                    <!--onchange="this.form.submit()"/>-->
-                    <!--</div>-->
                 <form th:action="@{/coachviewclient_progress}" method="post">
-
-
                     <div class="form-group">
                         <label for="exampleFormControlSelect2">Choose a Client</label>
                         <select multiple="multiple" class="form-control" id="exampleFormControlSelect2"
@@ -128,17 +91,11 @@
                             <option value="nochange" disabled="disabled" selected="selected" id="defaultOption">
                             </option>
                             <div th:each="client : ${clients}">
-                                <option th:value="${client.id}" th:text="${client.name}" name="clientId">
-                                </option>
-
+                                <option th:value="${client.id}" th:text="${client.name}" name="clientId"></option>
                             </div>
                             <div style="margin-left: 500px">
-
-                                    <input type="submit" value="view progress"/>
-
+                                <input type="submit" value="view progress"/>
                             </div>
-
-
                         </select>
                     </div>
 
