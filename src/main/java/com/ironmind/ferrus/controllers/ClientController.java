@@ -136,7 +136,7 @@ public class ClientController {
         Program activeProgram = programDao.getPrograms().findByClient_IdAndId(clientSession.getId(), program);
         client.setActiveprogram(activeProgram.getId());
         clientDao.save(client);
-        return "clients/client_profile_page";
+        return "redirect:/clients/client_profile_page";
     }
 
 
