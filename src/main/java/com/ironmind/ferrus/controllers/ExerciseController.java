@@ -116,9 +116,14 @@ public class ExerciseController {
         for (long i = 1; i <= days; i++) {
             progDays.add(i);
         }
+
         List<WorkSet> daySet = workDao.getWork().findAllByTemplate(temp);
         System.out.println(daySet.size());
         SubSet subSet = new SubSet(0, 0, " ", null);
+
+        List<template> templates = tempDao.getTemplates().findAllByUsable(1);
+
+        view.addAttribute("tempList", templates);
         view.addAttribute("days", progDays);
         view.addAttribute("workSets", daySet);
         view.addAttribute("subSet", subSet);
@@ -127,6 +132,35 @@ public class ExerciseController {
         view.addAttribute("name", program.getName());
         view.addAttribute("progId", program.getId());
         return ("exercises/exercises");
+    }
+
+    @PostMapping("/savetemplate/{id}/{day}")
+    public String saveTemplate(@PathVariable long id, @PathVariable int day, @RequestParam String tempName){
+        template temp = tempDao.getTemplates().findByProgram_IdAndDay(id, day);
+        template newTemp = new template();
+        newTemp.setDay(day);
+        newTemp.setName(tempName);
+        newTemp.setUsable(1L);
+        tempDao.getTemplates().save(newTemp);
+        List<WorkSet> workSets = workDao.getWork().findAllByTemplate(temp);
+
+        for(WorkSet set: workSets){
+            List<SubSet> sets = setDao.getSets().findAllByWorkSet_Id(set.getId());
+            WorkSet newWork = new WorkSet();
+            newWork.setExercise(set.getExercise());
+            newWork.setExerciseName(set.getExerciseName());
+            newWork.setTemplate(newTemp);
+            workDao.getWork().save(newWork);
+            for(SubSet subSet: sets){
+                SubSet newSet = new SubSet();
+                newSet.setWorkSet(newWork);
+                newSet.setWeight(subSet.getWeight());
+                newSet.setReps(subSet.getReps());
+                newSet.setExerciseName(subSet.getExerciseName());
+                setDao.getSets().save(newSet);
+            }
+        }
+        return "redirect:/exercises/" + id + "/" + day;
     }
 
     @RequestMapping(value = "/exercises/{id}", method = RequestMethod.POST)

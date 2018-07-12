@@ -18,7 +18,7 @@
 </div>
 
 
-<div class="plannerContainer col-md-7">
+<div class="plannerContainer">
     <h1 class="dayHeader">
             <output th:text="${name}"></output>
         </h1>
@@ -26,8 +26,12 @@
             <output th:text="${day}"></output>
         </h3>
         <p onclick="myCalender()">Calendar</p>
+        <form th:action="@{/savetemplate/} + ${progId} + @{/} + ${day}" method="post">
+            <input type="text" value="Name this Template" name="tempName" />
+            <input type="submit" value="Save Template" />
+        </form>
     <div class="searchContainer">
-            <input type="text" placeholder="Search" id="searchEx" class="searchBar"/>
+            <input type="text" placeholder="Search Exercises" id="searchEx" class="searchBar"/>
             <div class="scrollable">
                 <div th:each="exercise : ${exercises}">
                     <div class="setForm" draggable="true" ondragstart="drag(event)" th:id="${exercise.name}">
@@ -60,7 +64,7 @@
             </div>
         </div>
 
-        <div class="builder" id="builder" ondrop="drop(event)" ondragover="allowDrop(event)">
+    <div class="builder" id="builder" ondrop="drop(event)" ondragover="allowDrop(event)">
             <div th:each="workSet :${workSets}">
                 <h3 class="buildItem" th:text="${workSet.exerciseName}"></h3>
                 <button onclick="dropdown(this.id)" th:id="${workSet.id}" class="dropBtn"></button>
@@ -89,6 +93,21 @@
             </div>
 
         </div>
+
+    <div class="searchContainer">
+        <input type="text" placeholder="Search Templates" id="searchTemp" class="searchBar" />
+        <div class="scrollable">
+            <div th:each="template : ${tempList}">
+                <div class="setForm" draggable="false" th:id="${template.id}">
+                    <form th:action="@{/addtemplate}" method="post">
+                        <label th:text="${template.name}"></label>
+                        <input type="hidden" th:value="${template.id}" name="tempId" />
+                        <input type="submit" value="Add This Template" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 
