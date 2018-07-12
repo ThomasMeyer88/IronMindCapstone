@@ -109,27 +109,16 @@ public class ClientController {
         Client clientSession = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         System.out.println(clientSession.getRole());
         System.out.println(clientSession.getEmail());
-<<<<<<< HEAD
-        Client client = clientDao.findOne(clientSession.getId());
-        clientSession.setRole(client.getRole());
-                view.addAttribute("clientId", client.getId());
-        if (clientSession.getRole().equals("Coach")){
-=======
         Client test = clientDao.findOne(clientSession.getId());
         clientSession.setRole(test.getRole());
         Client client = clientDao.findOne(clientSession.getId());
         System.out.println("Number of logins is " + client.getLoginCounter());
         clientDao.save(client);
         if (client.getRole().equals("Coach")){
->>>>>>> 51cc572522ad8250587c751c58d008da550684af
                 view.addAttribute("client", clientSession);
                 System.out.println("is a coach");
             List<Program> program = programDao.getPrograms().findAllByClient_Id(clientSession.getId());
                 view.addAttribute("programs", program);
-<<<<<<< HEAD
-
-=======
->>>>>>> 51cc572522ad8250587c751c58d008da550684af
                 List<Client> clients = clientDao.findAllByCoachId(clientSession.getId());
                 view.addAttribute("clients", clients);
                 return "coaches/coach_profile";
