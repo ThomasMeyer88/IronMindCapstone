@@ -112,11 +112,8 @@ public class ClientController {
     @GetMapping("/client_profile_page")
     public String clientPage(Model view){
         Client clientSession = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        System.out.println(clientSession.getRole());
-        System.out.println(clientSession.getEmail());
         Client test = clientDao.findOne(clientSession.getId());
         clientSession.setRole(test.getRole());
-
         Client client = clientDao.findOne(clientSession.getId());
         clientDao.save(client);
         if (client.getRole().equals("Coach")){
@@ -130,9 +127,26 @@ public class ClientController {
         } else{
             List<Program> program = programDao.getPrograms().findAllByClient_Id(clientSession.getId());
             view.addAttribute("programs", program);
-            return "clients/client_profile_page";
+            try{
+                Program active = programDao.getPrograms().findById(client.getActiveprogram());
+                String progName = active.getName();
+                view.addAttribute("activeId", active.getId());
+                view.addAttribute("state", "Your active program is " + progName);
+                return "clients/client_profile_page";
+
+            } catch (NullPointerException e) {
+                if(program.size() < 1){
+                    view.addAttribute("state", "You haven't created a program yet");
+                } else {
+                    view.addAttribute("state", "You do not have an active program");
+                }
+                return "clients/client_profile_page";
+
             }
+            }
+
     }
+
 
     @RequestMapping(value = "/change_program", method = RequestMethod.POST)
     public String setActiveProgram(@RequestParam long program){
@@ -141,7 +155,7 @@ public class ClientController {
         Program activeProgram = programDao.getPrograms().findByClient_IdAndId(clientSession.getId(), program);
         client.setActiveprogram(activeProgram.getId());
         clientDao.save(client);
-        return "redirect:/clients/client_profile_page";
+        return "redirect:/client_profile_page";
     }
 
 

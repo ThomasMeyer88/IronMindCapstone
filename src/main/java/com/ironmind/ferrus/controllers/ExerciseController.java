@@ -76,6 +76,8 @@ public class ExerciseController {
         return ("exercises/log");
     }
 
+
+
     @GetMapping("/log/{progId}/{day}/{id}")
     public String dayLogDropDown(@PathVariable int day, @PathVariable long progId, @PathVariable long id, Model view) {
         Program program = programDao.getPrograms().findById(progId);

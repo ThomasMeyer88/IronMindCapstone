@@ -5,6 +5,7 @@
 <div th:replace="partials/profilenavbar :: profilenavbar"/>
 <div th:replace="partials/sidebar :: sidebar"/>
 <div class="container">
+    <h3 class="buildItem" th:text="${state}"  ></h3>
 
     <div class="container">
         <form class="form-group" th:action="@{/client_profile_page/create_program}" method="get">
