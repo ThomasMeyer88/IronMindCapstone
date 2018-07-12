@@ -224,14 +224,14 @@ public class ClientController {
         programDao.getPrograms().save(program);
         return "redirect:/client_profile_page";
     }
-    @PostMapping("/coach_profile/{progId}/{id}")
-    public String assignProgram(@PathVariable long id, @PathVariable long progId){
+    @PostMapping("/coach_profile/{progId}/{clientId}")
+    public String assignProgram(@PathVariable long clientId, @PathVariable long progId){
         Client clientSession = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Program program = programDao.getPrograms().findById(progId);
         Program newProgram = new Program();
         newProgram.setProgramDays(program.getProgramDays());
         newProgram.setName(program.getName());
-        newProgram.setClient(clientDao.findOne(id));
+        newProgram.setClient(clientDao.findOne(clientId));
         programDao.getPrograms().save(newProgram);
 
         List<template> templates = tempDao.getTemplates().findAllByProgram_Id(progId);
@@ -267,11 +267,3 @@ public class ClientController {
 
 
 }
-//    coach dashboard
-//coach-client view
-//        Add partials to views-nah
-//        Create a program-
-//        Have a list of programs
-//        Have a list of clients
-//        ---Be able to designate a program to a client
-//        Each client view is everything except edit profile for that that client

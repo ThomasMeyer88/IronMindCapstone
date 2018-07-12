@@ -1,6 +1,7 @@
 package com.ironmind.ferrus.controllers;
 
 import com.ironmind.ferrus.model.Client;
+import com.ironmind.ferrus.model.Program;
 import com.ironmind.ferrus.repositiories.Clients;
 
 import java.util.ArrayList;
@@ -9,11 +10,8 @@ import java.util.List;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 
 
 @Controller
@@ -63,7 +61,7 @@ public class CoachController {
         coachSession.setBio(coach.getBio());
         coachSession.setPhonenumber(coach.getPhonenumber());
         coachDao.save(coach);
-        return "redirect:/coaches_profile";
+        return "redirect:/coach_profile";
     }
 
     @PostMapping("/coach_profile/{id}/delete")
@@ -85,5 +83,22 @@ public class CoachController {
         return "clients/coach_list";
     }
 
+    @RequestMapping( value = "/assign_program", method = RequestMethod.POST)
+    public String assignProgram(@RequestParam long clientId, @RequestParam long viewProgress, @RequestParam long programId) {
+        if (viewProgress == 1) {
+            return "redirect:/client_progress/" + clientId ;
+        }
+        return "/coach_profile";
+    }
+//
+//    @RequestMapping(value = "/change_program", method = RequestMethod.POST)
+//    public String setActiveProgram(@RequestParam long program){
+//        Client clientSession = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        Client client = clientDao.findOne(clientSession.getId());
+//        Program activeProgram = programDao.getPrograms().findByClient_IdAndId(clientSession.getId(), program);
+//        client.setActiveprogram(activeProgram.getId());
+//        clientDao.save(client);
+//        return "clients/client_profile_page";
+//    }
 }
 
