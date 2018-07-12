@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="partials/onboardheader :: header"/>
 
 <body>
@@ -7,16 +7,16 @@
 <div>
 
     <input checked="checked" id="one" name="multiples" type="radio" value="1" />
-    <label for="one">1</label>
+    <label for="one">Welcome</label>
 
     <input id="two" name="multiples" type="radio" value="2" />
-    <label for="two">2</label>
+    <label for="two">Bio</label>
 
     <input id="three" name="multiples" type="radio" value="3" />
-    <label for="three">3</label>
+    <label for="three"></label>
 
     <input id="four" name="multiples" type="radio" value="4" />
-    <label for="four">4</label>
+    <label for="four"></label>
 
     <input id="five" name="multiples" type="radio" value="5" />
     <label for="five">5</label>
@@ -32,14 +32,49 @@
 
     <div class="container">
         <div class="carousel">
-            <img src="images/1.jpg" alt="Landscape 1" />
-            <img src="images/2.jpg" alt="Landscape 2" />
-            <img src="images/3.jpg" alt="Landscape 3" />
-            <img src="images/4.jpg" alt="Landscape 4" />
-            <img src="images/5.jpg" alt="Landscape 5" />
-            <img src="images/6.jpg" alt="Landscape 6" />
-            <img src="images/7.jpg" alt="Landscape 7" />
-            <img src="images/8.jpg" alt="Landscape 8" />
+            <div>
+                <h3> Welcome to IronMind </h3>
+                <h5> Features</h5>
+                <ul>
+                   <li>Expedite your gym time by creating a custom workout routine</li>
+                    <li>Log your workouts and view your progress over time</li>
+                    <li>Connect with experienced coaches for veteran guidance</li>
+                </ul>
+            </div>
+            <div>
+                <h3> Basic Information </h3>
+                <form th:action="@{/client_update}" method="post" th:object="${client}">
+                    <input type="text" th:value="${phonenumber}" th:field="*{phonenumber}" />
+                    <input type="text" th:value="${email}" th:field="*{email}" />
+                    <input type="submit" value="UPDATE" />
+                </form>
+            </div>
+            <div>
+                <h3> Tell Us About Yourself </h3>
+                <form th:action="@{/client_bio}" method="post" th:object="${client}">
+                    <textarea name="bio" rows="50" cols="50" th:value="${bio}" th:field="*{bio}"></textarea>
+                    <input type="submit" value="UPDATE" />
+                </form>
+            </div>
+            <div>
+                <h3> Additional Information </h3>
+                <form th:action="@{/client_info}" method="post" th:object="${client}">
+                    <input type="text" th:value="${height}" th:field="*{height}" />
+                    <input type="text" th:value="${weight}" th:field="*{weight}" />
+                    <input type="radio" value="Male" />
+                    <input type="radio" value="Female" />
+                </form>
+            </div>
+            <div>
+                <h3> Get Started </h3>
+                <form th:action="@{/coach_list}" method="post">
+                    <input type="submit" value="Find a coach for you today!" />
+                </form>
+                <form th:action="@{/client_profile_page/create_program}">
+                    <input type="submit" value="Create your own custom program" />
+                </form>
+            </div>
+
         </div>
     </div>
 
