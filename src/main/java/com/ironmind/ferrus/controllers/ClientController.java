@@ -60,7 +60,7 @@ public class ClientController {
         String emailAddress = client.getEmail();
         Email email = EmailBuilder.startingBlank()
                 .from("Irondmind Notification", "ironmind2018@hotmail.com")
-                .to("Noah", emailAddress)
+                .to(client.getName(), emailAddress)
                 .withSubject(client.getName() + ", thank you for registering with Ironmind")
                 .withHTMLText("<div style='text-align:center'><h2> Welcome to Ironmind </h2>" +
                         "<h3>Features</h3>" +
@@ -80,6 +80,27 @@ public class ClientController {
         client.setRole("Client");
         clientDao.save(client);
         return "redirect:/client_login";
+    }
+
+    @PostMapping("/request_coach")
+    public String requestCoach(@RequestParam long coachId){
+        Client coach = clientDao.findOne(coachId);
+        Client client =  (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String name = coach.getName();
+        String emailAddress = coach.getEmail();
+        Email email = EmailBuilder.startingBlank()
+                .from("Ironmind Client Request", "ironmind2018@hotmail.com")
+                .to(name, emailAddress)
+                .withSubject(name + ", you have a new coaching opportunity!")
+                .withPlainText(name + ", " + client.getUsername() + " has requested that you be their coach on their" +
+                        "IronMind experience.  Please log in to confirm or deny.")
+                .buildEmail();
+        MailerBuilder
+                .withSMTPServer("smtp.live.com", 587, "ironmind2018@hotmail.com", "Finale1!")
+                .withTransportStrategy(SMTP_TLS)
+                .buildMailer()
+                .sendMail(email);
+        return "redirect:/client_profile_page";
     }
 
     @GetMapping("/client_profile_page")

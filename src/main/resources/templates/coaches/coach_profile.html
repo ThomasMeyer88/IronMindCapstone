@@ -3,80 +3,78 @@
 <head th:replace="partials/header :: header"/>
 <body>
 <div th:replace="partials/profilenavbar :: profilenavbar"></div>
-    <div th:replace="partials/sidebar :: sidebar"></div>
+<div th:replace="partials/sidebar :: sidebar"></div>
 <input th:value="${selectId}" id="selector" type="hidden"/>
 
-    <h1>Coach Dashboard</h1>
-    <div class="card w-45" style="float: right;">
-        <div class="card-body">
+<h1>Coach Dashboard</h1>
+<div class="card w-45" style="float: right;">
+    <div class="card-body">
 
-            <form class="form-group" th:action="@{/client_profile_page/create_program}" method="get">
-                <button type="submit" class="btn btn-primary btn-block btn-md" id="createplan" name="createplan">Create a
-                    program
-                </button>
-            </form>
-            <form th:action="@{/client_profile_page}" method="Get">
+        <form class="form-group" th:action="@{/client_profile_page/create_program}" method="get">
+            <button type="submit" class="btn btn-primary btn-block btn-md" id="createplan" name="createplan">Create a
+                program
+            </button>
+        </form>
 
-            <form th:action="@{/assign_program}" method="post">
-
-
-                <div class="form-group">
-                    <label for="exampleFormControlSelect1"> Select a client</label>
-                    <select class="form-control" id="exampleFormControlSelect1">
-                        <option value="nochange" disabled="disabled" selected="selected" id="defaultOption">
-                            clients
-                        </option>
-                        <div th:each="client : ${clients}">
-                            <option th:value="${client.id}" th:text="${client.name}" th:id="${client.id}" name="clientId"></option>
-                        </div>
-
-                    </select>
-                </div>
-
-                <div>
-                    <input type="radio" text="View Client Progress" value="1" name="viewProgress"
-                    onchange="this.form.submit()">
-                </div>
-                <div>
-                    <p style="color: #7FB800">Current program: P90X</p>
-                </div>
-
-                <div class="form-group">
-                    <label for="exampleFormControlSelect2">Assign a Program</label>
-                    <select multiple="multiple" class="form-control" id="exampleFormControlSelect2" style="text-align: center">
-                        <option value="nochange" disabled="disabled" selected="selected" id="programSelector">
-                        </option>
-                        <div th:each="program : ${programs}">
-                            <option th:value="${program.id}" th:text="${program.name}" name="programId">
-                            </option>
-
-                        </div>
-                        <div style="margin-left: 500px">
-                            <form th:action="@{coach_profile/1/1}" method="post">
-                                <input type="submit" value="assign program"/>
-                            </form>
-                        </div>
-
-
-                    </select>
-                </div>
-
-            </form>
-        </div>
-        <div>
-            <div>
+        <form th:action="@{/assign_program}" method="post">
+            <div class="form-group">
+                <label for="exampleFormControlSelect1"> Select a client</label>
+                <select class="form-control" id="exampleFormControlSelect1">
+                    <option value="nochange" disabled="disabled" selected="selected" id="defaultOption">
+                        clients
+                    </option>
+                    <div th:each="client : ${clients}">
+                        <option th:value="${client.id}" th:text="${client.name}" th:id="${client.id}"
+                                name="clientId"></option>
+                    </div>
+                </select>
             </div>
-        </div>
-    </div>
-    <br/>
-    <br/>
-    <div class="card border-secondary  w-35" >
-        <div class="card-header">Client requests</div>
-        <div class="card-body text-secondary">
 
-            <p class="card-text">Tom would like to hire you</p>
+            <div>
+                <input type="radio" text="View Client Progress" value="1" name="viewProgress"
+                       onchange="this.form.submit()">
+            </div>
+            <div>
+                <p style="color: #7FB800">Current program: P90X</p>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleFormControlSelect2">Assign a Program</label>
+                <select multiple="multiple" class="form-control" id="exampleFormControlSelect2"
+                        style="text-align: center">
+                    <option value="nochange" disabled="disabled" selected="selected" id="programSelector">
+                    </option>
+                    <div th:each="program : ${programs}">
+                        <option th:value="${program.id}" th:text="${program.name}" name="programId">
+                        </option>
+
+                    </div>
+                    <div style="margin-left: 500px">
+                        <form th:action="@{coach_profile/1/1}" method="post">
+                            <input type="submit" value="assign program"/>
+                        </form>
+                    </div>
+
+
+                </select>
+            </div>
+
+        </form>
+    </div>
+    <div>
+        <div>
         </div>
     </div>
+</div>
+<br/>
+<br/>
+<div class="card border-secondary  w-35">
+    <div class="card-header">Client requests</div>
+    <div class="card-body text-secondary">
+
+        <p class="card-text">Tom would like to hire you</p>
+    </div>
+</div>
 
 <div th:replace="partials/footer :: footer"></div>
 
@@ -90,6 +88,7 @@
             document.getElementById(id).selected = "selected";
         }
     }
+
     select(id);
 </script>
 
