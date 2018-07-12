@@ -65,37 +65,29 @@
             <div class="card-body">
                 <h2>Client Programs</h2>
 
-                <form th:action="@{/coach_profile/} + ${progId} + @{/} + ${clientId}" method="post">
+                <form th:action="@{/coach_profile}" method="post">
                     <div class="form-group">
-                        <label for="exampleFormControlSelect1"> Select a client</label>
-                        <select class="form-control" id="exampleFormControlSelect1" style="text-align: center">
+                        <label for="clientSelect"> Select a client</label>
+                        <select class="form-control" id="clientSelect" style="text-align: center"
+                                name="clientId">
                             <option value="nochange" disabled="disabled" selected="selected" id="defaultOption">
                                 clients
                             </option>
                             <div th:each="client : ${clients}">
-                                <option th:value="${client.id}" th:text="${client.name}" th:id="${client.id}"
-                                        name="clientId"></option>
+                                <option th:value="${client.id}" th:text="${client.name} " th:id="${client.id}" name="clientId"></option>
+                                <input type="hidden" th:value="${client.activeprogram}"/>
                             </div>
-
                         </select>
-                    </div>
-
-                    <!--<div>-->
-                    <!--<input type="radio" text="View Client Progress" value="1" name="viewProgress"-->
-                    <!--onchange="this.form.submit()"/>-->
-                    <!--</div>-->
-                    <div>
-                        <p style="color: #7FB800">Current program: P90X</p>
                     </div>
 
                     <div class="form-group">
                         <label for="exampleFormControlSelect2">Assign a Program</label>
                         <select multiple="multiple" class="form-control" id="exampleFormControlSelect2"
-                                style="text-align: center">
+                                style="text-align: center" name="progId">
                             <option value="nochange" disabled="disabled" selected="selected" id="programSelector">
                             </option>
                             <div th:each="program : ${programs}">
-                                <option th:value="${program.id}" th:text="${program.name}" name="progId">
+                                <option th:value="${program.id}" th:text="${program.name}">
                                 </option>
 
                             </div>
@@ -111,22 +103,28 @@
                     </div>
 
                 </form>
+
+            </div>
             </div>
         </div>
     </div>
-</div>
+
 <div class="row">
     <div class="col-md-6 mb-3">
         <div class="card">
             <div class="card-body">
                 <h2>Client Progress</h2>
-                <form th:action="@{/view_progress}" method="post">
+                    <!--<div>-->
+                    <!--<input type="radio" text="View Client Progress" value="1" name="viewProgress"-->
+                    <!--onchange="this.form.submit()"/>-->
+                    <!--</div>-->
+                <form th:action="@{/coachviewclient_progress}" method="post">
 
 
                     <div class="form-group">
                         <label for="exampleFormControlSelect2">Choose a Client</label>
                         <select multiple="multiple" class="form-control" id="exampleFormControlSelect2"
-                                style="text-align: center">
+                                style="text-align: center" name="clientId">
                             <option value="nochange" disabled="disabled" selected="selected" id="defaultOption">
                             </option>
                             <div th:each="client : ${clients}">
@@ -135,9 +133,9 @@
 
                             </div>
                             <div style="margin-left: 500px">
-                                <form th:action="@{coach_profile/1/1}" method="post">
+
                                     <input type="submit" value="view progress"/>
-                                </form>
+
                             </div>
 
 

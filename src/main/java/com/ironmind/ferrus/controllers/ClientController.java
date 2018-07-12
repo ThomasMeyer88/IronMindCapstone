@@ -87,15 +87,17 @@ public class ClientController {
         Client clientSession = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         System.out.println(clientSession.getRole());
         System.out.println(clientSession.getEmail());
-        Client test = clientDao.findOne(clientSession.getId());
-        clientSession.setRole(test.getRole());
+        Client client = clientDao.findOne(clientSession.getId());
+        clientSession.setRole(client.getRole());
+                view.addAttribute("clientId", client.getId());
         if (clientSession.getRole().equals("Coach")){
                 view.addAttribute("client", clientSession);
                 System.out.println("is a coach");
             List<Program> program = programDao.getPrograms().findAllByClient_Id(clientSession.getId());
                 view.addAttribute("programs", program);
-                List<Client> client = clientDao.findAllByCoachId(clientSession.getId());
-                view.addAttribute("clients", client);
+
+                List<Client> clients = clientDao.findAllByCoachId(clientSession.getId());
+                view.addAttribute("clients", clients);
                 return "coaches/coach_profile";
         }else{
             List<Program> program = programDao.getPrograms().findAllByClient_Id(clientSession.getId());
@@ -143,6 +145,11 @@ public class ClientController {
     public String delete(@PathVariable long id){
         clientDao.delete(id);
         return "redirect:/client_profile_page";
+    }
+
+    @PostMapping("/coachviewclient_progress")
+    public  String coachtoClientProgress(@RequestParam long clientId){
+        return "redirect:/client_progress/" + clientId;
     }
 
     @GetMapping("/client_progress/{id}")
@@ -224,8 +231,8 @@ public class ClientController {
         programDao.getPrograms().save(program);
         return "redirect:/client_profile_page";
     }
-    @PostMapping("/coach_profile/{progId}/{clientId}")
-    public String assignProgram(@PathVariable long clientId, @PathVariable long progId){
+    @PostMapping("/coach_profile")
+    public String assignProgram( @RequestParam long clientId, @RequestParam long progId){
         Client clientSession = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Program program = programDao.getPrograms().findById(progId);
         Program newProgram = new Program();
@@ -262,7 +269,7 @@ public class ClientController {
             }
         }
 
-        return "coaches/coach_profile";
+        return "redirect:/client_profile_page";
     }
 
 
