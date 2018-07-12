@@ -52,8 +52,9 @@
                             </option>
                             <div th:each="client : ${clients}">
                                 <option th:value="${client.id}" th:text="${client.name} " th:id="${client.id}"
-                                        name="clientId"></option>
-                                <input type="hidden" th:value="${client.activeprogram}"/>
+                                        name="clientId">
+                                    <input type="hidden" th:value="${client.activeprogram}"/>
+                                </option>
                             </div>
                         </select>
                     </div>
