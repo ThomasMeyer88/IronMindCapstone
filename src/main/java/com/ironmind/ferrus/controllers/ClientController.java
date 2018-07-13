@@ -54,6 +54,11 @@ public class ClientController {
         return "clients/client_registration";
     }
 
+    @GetMapping("/testprofile")
+    public String testProfile(){
+        return "clients/testProfile";
+    }
+
     @PostMapping("/client_registration")
     public String saveClient(@ModelAttribute Client client){
         String hash = passwordEncoder.encode(client.getPassword());
@@ -145,10 +150,12 @@ public class ClientController {
                 }
                 return "clients/client_profile_page";
 
+
             }
         }
 
     }
+
 
     @RequestMapping(value = "/change_program", method = RequestMethod.POST)
     public String setActiveProgram(@RequestParam long program){
@@ -157,7 +164,7 @@ public class ClientController {
         Program activeProgram = programDao.getPrograms().findByClient_IdAndId(clientSession.getId(), program);
         client.setActiveprogram(activeProgram.getId());
         clientDao.save(client);
-        return "redirect:/clients/client_profile_page";
+        return "redirect:/client_profile_page";
     }
 
 

@@ -827,3 +827,27 @@ html,body{
 .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
 
 .lh-condensed { line-height: 1.25; }
+
+
+.profileBody{
+    background: ghostwhite;
+    width: 100%;
+    padding: 0;
+    border-left: 0.1em solid darkblue;
+    border-right: 0.1em solid darkblue;
+}
+
+.profileBox{
+    padding: 3em;
+    border: 0.1em solid black;
+    border-radius: 5%;
+    background-color: #9ae2ff;
+    color: darkblue;
+    margin-left: 5.6%;
+    opacity: 0.65;
+    margin-bottom: 5%;
+}
+
+.profileBox:hover{
+    opacity: 1.0;
+}
