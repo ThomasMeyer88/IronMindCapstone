@@ -54,6 +54,11 @@ public class ClientController {
         return "clients/client_registration";
     }
 
+    @GetMapping("/testprofile")
+    public String testProfile(){
+        return "clients/testProfile";
+    }
+
     @PostMapping("/client_registration")
     public String saveClient(@ModelAttribute Client client){
         String hash = passwordEncoder.encode(client.getPassword());

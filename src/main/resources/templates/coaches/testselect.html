@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Testing</title>
+    <style>
+        .name{
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+<select id="selector" onchange="logSelect(this.value)">
+    <option value="1">Option 1</option>
+    <option value="2">Option 2</option>
+    <option value="3">Option 3</option>
+</select>
+
+<div>
+    <div class="name" id="1"> name 1</div>
+    <div class="name" id="2"> name 2</div>
+    <div class="name" id="3"> name 3</div>
+</div>
+
+
+</body>
+<script>
+    function logSelect(value) {
+
+        console.log(value);
+        var ele = document.getElementById("selector");
+        console.log(ele.childNodes);
+        console.log(ele.nextElementSibling);
+
+        Array.from(document.getElementsByClassName("name")).forEach(
+            function (element, index, array) {
+                if(element.id == value){
+                    element.style.display = "block";
+                } else {
+                    element.style.display = "none";
+                }
+            }
+        );
+
+    }
+</script>
+</html>
