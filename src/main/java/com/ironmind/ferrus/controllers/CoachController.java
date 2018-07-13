@@ -92,15 +92,9 @@ public class CoachController {
         }
         return "/coach_profile";
     }
-//
-//    @RequestMapping(value = "/change_program", method = RequestMethod.POST)
-//    public String setActiveProgram(@RequestParam long program){
-//        Client clientSession = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        Client client = clientDao.findOne(clientSession.getId());
-//        Program activeProgram = programDao.getPrograms().findByClient_IdAndId(clientSession.getId(), program);
-//        client.setActiveprogram(activeProgram.getId());
-//        clientDao.save(client);
-//        return "clients/client_profile_page";
-//    }
+
+
+
 }
+
 
