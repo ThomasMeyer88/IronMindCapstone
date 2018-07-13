@@ -9,6 +9,25 @@
 <h1>Coach Dashboard</h1>
 <div class="container-fluid" style="align-content: center">
     <div class="row">
+    <div class="col">
+        <form class="form-group" th:action="@{/client_profile_page/create_program}" method="get">
+            <button type="submit" class="btn btn-primary btn-block btn-md" id="createplan" name="createplan">Create a program
+            </button>
+        </form>
+        <form th:action="@{/change_program}" method="post">
+            <label for="exampleFormControlSelect3">Programs</label>
+            <select id="exampleFormControlSelect3"  name="program"
+                    onchange="this.form.submit()" style="text-align: center" >
+                <option value="nochange" disabled="disabled" selected="selected" id="programSelector">
+                    Programs
+                </option>
+                <div th:each="program : ${programs}">
+                    <option th:value="${program.id}" th:text="${program.name}">
+                    </option>
+                </div>
+            </select>
+        </form>
+    </div>
         <div class="col">
             <h4><span class="text-muted">Client Requests</span></h4>
 
