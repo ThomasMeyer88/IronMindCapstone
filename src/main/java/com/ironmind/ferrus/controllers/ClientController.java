@@ -122,13 +122,16 @@ public class ClientController {
         Client client = clientDao.findOne(clientSession.getId());
         clientDao.save(client);
         if (client.getRole().equals("Coach")){
-                view.addAttribute("client", clientSession);
-                System.out.println("is a coach");
-                List<Program> program = programDao.getPrograms().findAllByClient_Id(clientSession.getId());
-                view.addAttribute("programs", program);
-                List<Client> clients = clientDao.findAllByCoachId(clientSession.getId());
-                view.addAttribute("clients", clients);
-                return "coaches/coach_profile";
+            view.addAttribute("client", clientSession);
+            System.out.println("is a coach");
+            List<Program> program = programDao.getPrograms().findAllByClient_Id(clientSession.getId());
+            view.addAttribute("programs", program);
+            List<Client> clients = clientDao.findAllByCoachId(clientSession.getId());
+            view.addAttribute("clients", clients);
+            List<Client> clientRequests = clientDao.findAllByRequestCoachId(clientSession.getId());
+            view.addAttribute("clientRequests", clientRequests);
+
+            return "coaches/coach_profile";
         } else{
             List<Program> program = programDao.getPrograms().findAllByClient_Id(clientSession.getId());
             view.addAttribute("programs", program);
@@ -147,8 +150,9 @@ public class ClientController {
                 }
                 return "clients/client_profile_page";
 
+
             }
-            }
+        }
 
     }
 
@@ -167,6 +171,7 @@ public class ClientController {
 
     @GetMapping("/coach_profile")
     public String coachPage(Model view){
+
         return "coaches/coach_profile";
     }
 
@@ -319,6 +324,35 @@ public class ClientController {
 
         return "redirect:/client_profile_page";
     }
+    @PostMapping("/coach_approval")
+    public String Accept (@RequestParam String user){
+        Client coach = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        System.out.println(coach.getId());
+        Client client = clientDao.findByUsername(user);
+
+        client.setRequestCoachId(null);
+        client.setCoachId(coach.getId());
+        clientDao.save(client);
+            return "redirect:/client_profile_page" ;
+
+        }
+
+        @PostMapping("/coach_reject")
+    public String Decline (@RequestParam String user){
+            Client coach = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            System.out.println(coach.getId());
+            Client client = clientDao.findByUsername(user);
 
 
-}
+            client.setRequestCoachId(null);
+            clientDao.save(client);
+            return "redirect:/client_profile_page" ;
+
+        }
+
+
+
+
+    }
+
+
