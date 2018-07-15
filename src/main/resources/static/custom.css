@@ -119,6 +119,16 @@ body{
 }
 
 .buildItem{
+    width: 500px;
+    margin: 0;
+    height: 1.6em;
+    float: left;
+    font-size: 1.5em;
+    text-align: center;
+    padding-top: 0.2em;
+}
+
+.programcurrently{
     width: 700px;
     margin: 0;
     height: 1.6em;
@@ -126,7 +136,6 @@ body{
     font-size: 1.5em;
     text-align: center;
     padding-top: 0.2em;
-    padding-left: 50px;
 }
 
 .buildDrop{
@@ -1004,7 +1013,7 @@ nav::after {
 
     .site-nav a {
         padding: 5px;
-        margin-left: 3em;
+        margin-left: 0;
         margin-right: 25px
     }
 
@@ -1186,6 +1195,11 @@ p {
 .cardreadme {
     color: rgb(150, 150, 150);
 }
+
+.cardreadme:hover{
+    background: #72CCAA;
+    color: black;
+}
 .cardcontent p:nth-child(1) {
     font-size: 0.8em;
 }
@@ -1194,5 +1208,9 @@ p {
 }
 .cardcontent p:nth-child(2) {
     font-size: 0.9em;
+}
+
+.currentprogram{
+    padding-left: 290px;
 }
 

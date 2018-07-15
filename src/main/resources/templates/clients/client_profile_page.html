@@ -3,10 +3,9 @@
 <head th:replace="partials/header :: header"/>
 <body>
 <div th:replace="partials/profilenavbar :: profilenavbar"/>
+<!--<h3 class="programcurrently" th:text="${state}"></h3>-->
 <div class="container">
-    <h3 class="buildItem" th:text="${state}"></h3>
-
-    <form th:action="@{/change_program}" method="post">
+    <form class="currentprogram" th:action="@{/change_program}" method="post">
         <label for="exampleFormControlSelect2">Programs</label>
         <select id="exampleFormControlSelect2" name="program"
                 onchange="this.form.submit()" style="text-align: center">
@@ -40,7 +39,7 @@
                     </form>
                 </div>
                 <div class="cardbutton">
-                    <i data-feather="activity" style="font-size: 24px"></i>
+                    <i data-feather="file" style="font-size: 24px"></i>
                 </div>
             </div>
         </div>
