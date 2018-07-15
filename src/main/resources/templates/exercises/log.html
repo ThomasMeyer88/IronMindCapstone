@@ -23,7 +23,6 @@
                 <button onclick="dropdown(this.id)" th:id="${workSet.id}" class="dropBtn"></button>
                 <div class="buildDrop" style="display:none" th:id="${workSet}">
                     <ul th:each="subSet : ${workSet.subSets}">
-                        <ul th:each="subSet : ${workSet.subSets}">
                             <form th:action="@{/logset/} + ${progId} + @{/} + ${day}" method="post">
                                 <input th:value="${workSet.id}" name="id" type="hidden"/>
                                 <input th:value="${subSet.id}" name="setId" type="hidden"/>
@@ -36,19 +35,6 @@
                                 <input th:value="${subSet.id}" name="setId" type="hidden"/>
                                 <input type="submit" value=" " class="dropBtnDel"/>
                             </form>
-
-                        </ul>
-
-
-
-
-                        <!--<form th:action="@{/deleteset/} + ${name} + @{/} + ${day}" method="post">-->
-                        <!--<input th:value="${workSet.id}" name = "id" type="hidden"/>-->
-                        <!--<input th:value="${subSet.id}" name = "setId" type="hidden" />-->
-                        <!--<input type="submit" value=" " class="dropBtnDel" />-->
-                        <!--</form>-->
-
-
                     </ul>
                 </div>
 
