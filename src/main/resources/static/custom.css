@@ -112,6 +112,15 @@ body{
     overflow-y: scroll;
 }
 
+.logger{
+    float: left;
+    margin-left: 28.5%;
+    height: 350px;
+    width: 450px;
+    border: 1px solid black;
+    overflow-y: scroll;
+}
+
 .buildItem{
     width: 400px;
     background-color: slategray;
@@ -130,6 +139,25 @@ body{
     margin:0;
 
 
+}
+
+.tempHolder {
+    width: 100%;
+    padding: 0.5em;
+    float: left;
+    background-color: gainsboro;
+    height: 38px;
+}
+
+.tempHolder h5{
+    width: 170px;
+    overflow-x: scroll;
+    margin-right: 10px;
+    float: left;
+}
+
+.tempHolder input{
+    margin-top: 0;
 }
 
 .buildDrop ul{
@@ -156,7 +184,7 @@ body{
 .dropBtn{
     width: 48px;
     background-image: url("images/drop.png");
-    height: 38.5px;
+    height: 38px;
     background-size: 45px;
     background-color: slategrey;
     display: inline-block;
@@ -165,7 +193,6 @@ body{
     border-left: 0;
     border-right: 0;
     border-top: 1px solid slategrey;
-
 }
 
 .dropBtnSave{
@@ -175,9 +202,10 @@ body{
     background-size: 1.4em;
     background-color: gainsboro;
     display: inline-block;
-    margin: 5px;
+    margin-top: 5px;
     float: left;
     border: none;
+    margin-right: 20px;
 }
 
 .dropBtnEdit{
@@ -187,22 +215,29 @@ body{
     background-size: 1.4em;
     background-color: gainsboro;
     display: inline-block;
-    margin: 5px;
+    margin-top: 5px;
     float: left;
     border: none;
+    margin-right: 20px;
+
+
 }
 
 .dropBtnDel{
     background-image: url("images/delete.png");
     height: 1.3em;
     width: 1.4em;
+    margin-left: 10px;
 
     background-size: 1.4em;
     background-color: gainsboro;
     display: inline-block;
-    margin: 5px;
+    margin-top: 5px;
     float: left;
     border: none;
+    margin-right: 20px;
+
+
 }
 
 .dropBtnCopy{
@@ -213,9 +248,10 @@ body{
     background-size: 1.4em;
     background-color: gainsboro;
     display: inline-block;
-    margin: 5px;
+    margin-top: 5px;
     float: left;
     border: none;
+
 
 }
 

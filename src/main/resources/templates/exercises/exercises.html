@@ -101,9 +101,9 @@
                 <div class="tempForm" draggable="false" th:id="${template.id}">
                     <form th:action="@{/addtemplate/} + ${progId} + @{/} + ${day}" method="post">
                         <div class="tempHolder">
-                            <label th:text="${template.name}"></label>
+                            <h5 th:text="${template.name}"></h5>
                             <input type="hidden" th:value="${template.id}" name="tempId" />
-                            <input type="submit" value="Add This Template" />
+                            <input type="submit" value=" " class="dropBtnSave" />
                         </div>
                     </form>
                 </div>

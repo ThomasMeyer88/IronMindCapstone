@@ -8,8 +8,7 @@
 
 <input id="dropCheck" th:value="${dropId}" type="hidden" />
 
-<div class="plannerContainer container-fluid">
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+<div class="plannerContainer">
         <!--<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">-->
         <h1 class="dayHeader">
             <output th:text="${name}"></output>
@@ -17,26 +16,30 @@
         <h3 class="dayHeader"> sets for day:
             <output th:text="${day}"></output>
         </h3>
-        <div class="builder" id="builder" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <div class="logger" id="builder" ondrop="drop(event)" ondragover="allowDrop(event)">
             <h3 class="buildItem" th:text="${done}" style="display: none" id="state"></h3>
             <div th:each="workSet :${workSets}">
                 <h3 class="buildItem" th:text="${workSet.exerciseName}"></h3>
                 <button onclick="dropdown(this.id)" th:id="${workSet.id}" class="dropBtn"></button>
                 <div class="buildDrop" style="display:none" th:id="${workSet}">
                     <ul th:each="subSet : ${workSet.subSets}">
+                        <ul th:each="subSet : ${workSet.subSets}">
+                            <form th:action="@{/logset/} + ${progId} + @{/} + ${day}" method="post">
+                                <input th:value="${workSet.id}" name="id" type="hidden"/>
+                                <input th:value="${subSet.id}" name="setId" type="hidden"/>
+                                <li>Weight: <input th:value="${subSet.weight}" type="text" name="weight"/></li>
+                                <li>Reps: <input th:value="${subSet.reps}" type="text" name="reps"/></li>
+                                <input type="submit" value=" " class="dropBtnSave"/>
+                            </form>
+                            <form th:action="@{/deletelogset/} + ${progId} + @{/} + ${day}" method="post">
+                                <input th:value="${workSet.id}" name="id" type="hidden"/>
+                                <input th:value="${subSet.id}" name="setId" type="hidden"/>
+                                <input type="submit" value=" " class="dropBtnDel"/>
+                            </form>
+
+                        </ul>
 
 
-                        <form th:action="@{/logset/} + ${progId} + @{/} + ${day}" method="post">
-                            <input th:value="${workSet.id}" name="id" type="hidden"/>
-                            <input th:value="${subSet.id}" name="setId" type="hidden"/>
-                            <li>Weight:
-                                <output th:text="${subSet.weight}"></output>
-                            </li>
-                            <li>Reps:
-                                <output th:text="${subSet.reps}"></output>
-                            </li>
-                            <input type="submit" value="" class="dropBnSave"/>
-                        </form>
 
 
                         <!--<form th:action="@{/deleteset/} + ${name} + @{/} + ${day}" method="post">-->
@@ -52,7 +55,6 @@
             </div>
         </div>
         <!--</div>-->
-    </main>
 </div>
 
 <footer th:replace="partials/footer :: footer"/>
