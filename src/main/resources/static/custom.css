@@ -89,7 +89,7 @@ body{
     width: 250px;
     margin-top: 0.5em;
     margin-bottom: 0;
-    background-color: gainsboro;
+    background-color: #7aa983;
     border: 1px solid black;
     text-align: left;
     height: 1.5em;
@@ -104,7 +104,7 @@ body{
 }
 .searchItem p {
     font-size: 0.8em;
-    color: slategrey;
+    color: #55775C;
     text-align: right;
     margin-right: 0.5em;
 }
@@ -118,7 +118,17 @@ body{
     overflow-y: scroll;
 }
 
+.logger{
+    float: left;
+    margin-left: 28.5%;
+    height: 350px;
+    width: 450px;
+    border: 1px solid black;
+    overflow-y: scroll;
+}
+
 .buildItem{
+
     width: 700px;
     margin: 0;
     height: 1.6em;
@@ -131,16 +141,35 @@ body{
 
 .buildDrop{
     width: 448px;
-    background-color: gainsboro;
+    background-color: #7aa983;
     margin:0;
 
 
 }
 
+.tempHolder {
+    width: 100%;
+    padding: 0.5em;
+    float: left;
+    background-color: #7aa983;
+    height: 38px;
+}
+
+.tempHolder h5{
+    width: 170px;
+    overflow-x: scroll;
+    margin-right: 10px;
+    float: left;
+}
+
+.tempHolder input{
+    margin-top: 0;
+}
+
 .buildDrop ul{
     list-style: none;
     width: 448px;
-    background-color: gainsboro;
+    background-color: #7aa983;
     padding: 0;
 
 }
@@ -152,8 +181,8 @@ body{
 }
 
 .buildDrop input[type=text]{
-    background-color: lightgray;
-    border-color: lightgray;
+    background-color: #95d0a0;
+    border-color: #95d0a0;
     width: 40px;
     text-align: center;
 }
@@ -161,49 +190,74 @@ body{
 .dropBtn{
     width: 48px;
     background-image: url("images/drop.png");
-    height: 38px;
+    height: 39px;
     background-size: 45px;
-    background-color: slategrey;
+    background-color: #55775C;
     display: inline-block;
     float: left;
     border-bottom: 1px solid black;
     border-left: 0;
     border-right: 0;
-    border-top: 1px solid black;
+    border-top: 1px solid #55775C;
+}
 
+.dropBtnSave{
+    background-image: url("images/save.svg");
+    height: 1.3em;
+    width: 1.4em;
+    background-size: 1.4em;
+    background-color: #7aa983;
+    display: inline-block;
+    margin-top: 5px;
+    float: left;
+    border: none;
+    margin-right: 20px;
 }
 
 .dropBtnEdit{
-    background-image: url("images/edit.png");
+    background-image: url("images/edit.svg");
     height: 1.3em;
-    background-size: 1.3em;
-    background-color: gainsboro;
-    border: 1px solid black;
+    width: 1.4em;
+    background-size: 1.4em;
+    background-color: #7aa983;
     display: inline-block;
-    margin: 5px;
+    margin-top: 5px;
     float: left;
+    border: none;
+    margin-right: 20px;
+
+
 }
 
 .dropBtnDel{
     background-image: url("images/delete.png");
     height: 1.3em;
-    background-size: 1.3em;
-    background-color: gainsboro;
-    border: 1px solid black;
+    width: 1.4em;
+    margin-left: 10px;
+
+    background-size: 1.4em;
+    background-color: #7aa983;
     display: inline-block;
-    margin: 5px;
+    margin-top: 5px;
     float: left;
+    border: none;
+    margin-right: 20px;
+
+
 }
 
 .dropBtnCopy{
-    background: url("images/save.png");
+    background: url("images/copy.png");
     height: 1.3em;
-    background-size: 1.3em;
-    background-color: gainsboro;
-    border: 1px solid black;
+    width: 1.4em;
+
+    background-size: 1.4em;
+    background-color: #7aa983;
     display: inline-block;
-    margin: 5px;
+    margin-top: 5px;
     float: left;
+    border: none;
+
 
 }
 
@@ -446,12 +500,10 @@ html, body {
     height: 60px;
     width: 60px;
     border: 1px solid black;
-    background-color: papayawhip;
     text-align: left;
 }
 
 .day input{
-    background-color: papayawhip;
     border: none;
     padding-bottom: 35px;
     padding-right:40px;
@@ -843,7 +895,6 @@ dropdown-submenu {
 }
 
 .profileBox{
-    padding: 3em;
     border: 0.1em solid black;
     border-radius: 5%;
     background-color: #9ae2ff;
@@ -1194,5 +1245,18 @@ p {
 }
 .cardcontent p:nth-child(2) {
     font-size: 0.9em;
+}
+
+
+.profileBox h5 {
+    height: 50px;
+    width: 100%;
+    background-color: lightskyblue;
+    border-bottom: 0.1em solid black;
+    padding: 0.5em;
+}
+
+.profileBox h5:hover {
+    height: 75px;
 }
 
