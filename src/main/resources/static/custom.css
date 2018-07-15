@@ -114,7 +114,7 @@ body{
     margin-left: 3%;
     height: 350px;
     width: 450px;
-    border: 1px solid black;
+    border: inset 2px black;
     overflow-y: scroll;
 }
 
@@ -138,7 +138,11 @@ body{
     text-align: center;
     padding-top: 0.3em;
     padding-left: 50px;
+    border-bottom: 1px solid black;
+
 }
+
+
 
 .buildDrop{
     width: 448px;
@@ -196,7 +200,7 @@ body{
     background-color: #55775C;
     display: inline-block;
     float: left;
-    border-bottom: 0;
+    border-bottom: 1px solid black;
     border-left: 0;
     border-right: 0;
     border-top: 1px solid #55775C;
