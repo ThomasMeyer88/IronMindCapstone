@@ -1,32 +1,142 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:replace="partials/header :: header"/>
 <body>
 <div th:replace="partials/profilenavbar :: profilenavbar"/>
-<div th:replace="partials/sidebar :: sidebar"/>
 <div class="container">
-    <h3 class="buildItem" th:text="${state}"  ></h3>
+    <h3 class="buildItem" th:text="${state}"></h3>
 
-    <div class="container">
-        <form class="form-group" th:action="@{/client_profile_page/create_program}" method="get">
-            <button type="submit" class="btn btn-primary btn-block btn-md" id="createplan" name="createplan">Create a
-                program
-            </button>
-        </form>
-    </div>
-    <form th:action="@{/change_program}" method="post">
-            <label for="exampleFormControlSelect2">Programs</label>
-            <select id="exampleFormControlSelect2"  name="program"
-                    onchange="this.form.submit()" style="text-align: center" >
-                <option value="nochange" disabled="disabled" selected="selected" id="programSelector">
-                    Programs
-                </option>
-                <div th:each="program : ${programs}">
-                    <option th:value="${program.id}" th:text="${program.name}">
-                    </option>
-                </div>
-            </select>
+    <form class="form-group" th:action="@{/client_profile_page/create_program}" method="get">
+        <button type="submit" class="btn btn-primary btn-block btn-md" id="createplan" name="createplan">Create a
+            program
+        </button>
     </form>
+
+    <form th:action="@{/change_program}" method="post">
+        <label for="exampleFormControlSelect2">Programs</label>
+        <select id="exampleFormControlSelect2" name="program"
+                onchange="this.form.submit()" style="text-align: center">
+            <option value="nochange" disabled="disabled" selected="selected" id="programSelector">
+                Programs
+            </option>
+            <div th:each="program : ${programs}">
+                <option th:value="${program.id}" th:text="${program.name}">
+                </option>
+            </div>
+        </select>
+    </form>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <img class="cardimg"
+                     src="https://croatia.hr/sites/default/files/styles/image_full_width/public/2017-08/02_01_slide_nature.jpg?itok=ItAHmLlp"
+                     width="100%" height="50%"/>
+                <div class="cardcontent">
+                    <h3 style="text-align: center;">Update Program</h3>
+                    <p>Once you create a program<br/>you can edit your program with exercises
+                        <br/> and adjust the weight and reps for <br/> the specific program</p>
+                </div>
+                <div class="cardfooter">
+                    <form sec:authorize="isAuthenticated()"
+                          th:action="@{/exercises/{id}(id=${#authentication.principal.id})}" method="get">
+                        <input value="UPDATE" type="submit" id="program" name="program"
+                               class="fa fa-arrow-circle-right cardreadme" style="font-size:20px; border:none"/>
+                    </form>
+                </div>
+
+                <div class="cardbutton">
+                    <i data-feather="activity" style="font-size: 24px"></i>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div class="col">
+            <div class="card">
+                <img class="cardimg"
+                     src="https://croatia.hr/sites/default/files/styles/image_full_width/public/2017-08/02_01_slide_nature.jpg?itok=ItAHmLlp"
+                     width="100%" height="50%"/>
+                <div class="cardcontent">
+                    <h3 style="text-align: center;">Log Workout</h3>
+                    <p>Once you finish a workout, you are able to
+                        <br/>log each of the workouts within the program. <br/>Once you log them, you can go to the
+                        <br/> "View Progress" section and see your results
+                    </p>
+                </div>
+                <div class="cardfooter">
+                    <!--<h3>Read More</h3>-->
+                    <form sec:authorize="isAuthenticated()"
+                          th:action="@{/logplan/{id}(id=${#authentication.principal.id})}" method="get">
+                        <input value="LOG" type="submit" id="log" name="log"
+                               class="fa fa-arrow-circle-right cardreadme"
+                               style="font-size:20px; border:none"/>
+                    </form>
+                </div>
+
+
+                <div class="cardbutton">
+                    <i data-feather="user" style="font-size: 24px"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <img class="cardimg"
+                     src="https://croatia.hr/sites/default/files/styles/image_full_width/public/2017-08/02_01_slide_nature.jpg?itok=ItAHmLlp"
+                     width="100%" height="50%"/>
+                <div class="cardcontent">
+                    <h3 style="text-align: center;">View Progress</h3>
+                    <p>After you log your workout you are able <br/>to see a graph of the completed workout
+                        <br/> and choose either volume, intensity or both <br/> for that finished workout.</p>
+                </div>
+                <div class="cardfooter">
+                    <form sec:authorize="isAuthenticated()"
+                          th:action="@{/client_progress/{id}(id=${#authentication.principal.id})}" method="get">
+                        <input value="PROGRESS" type="submit" id="progress" name="progress"
+                               class="fa fa-arrow-circle-right cardreadme" style="font-size:20px; border:none"/>
+                    </form>
+                </div>
+
+                <div class="cardbutton">
+                    <i data-feather="activity" style="font-size: 24px"></i>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div class="col">
+            <div class="card">
+                <img class="cardimg"
+                     src="https://croatia.hr/sites/default/files/styles/image_full_width/public/2017-08/02_01_slide_nature.jpg?itok=ItAHmLlp"
+                     width="100%" height="50%"/>
+                <div class="cardcontent">
+                    <h3 style="text-align: center;">Coaches</h3>
+                    <p>You are able to search for a professional coach
+                        <br/>that can guide you to be the best you can be. <br/>From here you will be able to see
+                        the coach
+                        <br/> and
+                        a description of themselves. </p>
+                </div>
+                <div class="cardfooter">
+                    <!--<h3>Read More</h3>-->
+                    <form sec:authorize="isAuthenticated()"
+                          th:action="@{/coach_list}" method="get">
+                        <input value="COACH" type="submit" id="coach" name="coach"
+                               class="fa fa-arrow-circle-right cardreadme"
+                               style="font-size:20px; border:none"/>
+                    </form>
+                </div>
+
+
+                <div class="cardbutton">
+                    <i data-feather="user" style="font-size: 24px"></i>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <footer th:replace="partials/footer :: footer"/>
 </body>
