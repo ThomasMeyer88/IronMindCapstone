@@ -233,7 +233,7 @@ public class ClientController {
             for(int x = 0; x < max.size(); x++){
                 volSum += max.get(x).getTotalweight();
                 repSum += max.get(x).getReps();
-                intensity = (max.get(x).getEstimated1RM()*100)/absMax.get(0).getEstimated1RM();
+                intensity = (max.get(x).getWeight()*100)/absMax.get(0).getEstimated1RM();
                 intSum += intensity;
             }
             try {

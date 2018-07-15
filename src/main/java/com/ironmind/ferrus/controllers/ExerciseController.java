@@ -370,6 +370,23 @@ public class ExerciseController {
     }
 
 
+    @RequestMapping(value = "/deletelogset/{progId}/{day}", method = RequestMethod.POST)
+    public String deleteLogSet(@PathVariable long day, @PathVariable long progId, @RequestParam long id, @RequestParam long setId) {
+        SubSet checkSet = setDao.getSets().findOne(setId);
+        //I am checking the workSet to see if it has an subsets
+        //connected to it.  If not I delete the workSet from the database
+        System.out.println(id);
+        WorkSet checkWork = checkSet.getWorkSet();
+        setDao.getSets().delete(checkSet.getId());
+        List<SubSet> subSets = setDao.getSets().findAllByWorkSet_Id(checkWork.getId());
+        if (subSets.size() == 0) {
+            workDao.getWork().delete(checkWork.getId());
+        }
+        return "redirect:/log/" + progId + "/" + day + "/" + id;
+    }
+
+
+
 //    @RequestMapping(value = "/logset/{name}/{day}", method = RequestMethod.POST)
 //    public String deleteLogset(@PathVariable long day, @PathVariable String name, @RequestParam long id, @RequestParam long setId){
 //        SubSet checkSet = setDao.getSets().findOne(setId);
