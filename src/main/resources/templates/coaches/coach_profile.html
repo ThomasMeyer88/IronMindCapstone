@@ -7,9 +7,13 @@
 <div th:replace="partials/sidebar :: sidebar"></div>
 <input th:value="${selectId}" id="selector" type="hidden"/>
 <h1>Coach Dashboard</h1>
-<div class="container-fluid" style="align-content: center">
-    <div class="row">
-    <div class="col">
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+<div class="container-fluid main-content" style="align-content: center">
+
+
+
+
         <form class="form-group" th:action="@{/client_profile_page/create_program}" method="get">
             <button type="submit" class="btn btn-primary btn-block btn-md" id="createplan" name="createplan">Create a program
             </button>
@@ -27,18 +31,20 @@
                 </div>
             </select>
         </form>
-    </div>
-        <div class="col">
-            <h4><span class="text-muted">Client Requests</span></h4>
 
+    <div class="card" style="max-width: 20rem;">
 
+        <div class="card-header">
+            Client Requests
+        </div>
 
             <ul th:each="client : ${clientRequests}" class="list-group mb-3">
 
  <form th:action="@{/coach_approval}" method="post">
-     <li th:value="${client.id}" th:text="${client.username}" class="list-group-item d-flex justify-content-between lh-condensed"></li>
+     <li th:value="${client.id}" th:text="${client.username}" class="list-group-item d-flex justify-content-between lh-condensed">
                 <input type="hidden" th:value="${client.username}" name="user" />
     <input value="ACCEPT" type="submit" name="choice"/>
+</li>
  </form>
                 <form th:action="@{/coach_reject}" method="post">
                     <input type="hidden" th:value="${client.username}" name="user" />
@@ -46,15 +52,15 @@
                 </form>
 
 
-
             </ul>
         </div>
-    </div>
 
 
 
 
-    <div class="col">
+
+
+
         <div class="card ">
             <div class="card-body">
                 <h2>Client Programs</h2>
@@ -97,11 +103,10 @@
                 </form>
             </div>
         </div>
-    </div>
 </div>
 
 
-    <div class="col">
+
         <div class="card">
             <div class="card-body">
                 <h2>Client Progress</h2>
@@ -129,6 +134,8 @@
             </div>
         </div>
     </div>
+
+</main>
 
 
 

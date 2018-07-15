@@ -3,53 +3,48 @@
 <head></head>
 <link rel="stylesheet" type="text/css" href="/custom.css"/>
 <body>
-<div th:fragment="sidebar" class="container-fluid">
+<div th:fragment="sidebar" class="container-fluid sidebarr">
     <div class="row">
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
             <div class="sidebar-sticky">
                 <br/>
 
                 <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link " href="/client_profile_page">
-                            <span data-feather="home"></span>
-                            Dashboard
-                        </a>
+                    <li class="nav-item sidems">
+                        <a class="nav-link  sideBarButtons anchors" href="/client_profile_page">
+                            <span data-feather="home"></span>  DASHBOARD</a>
                     </li>
-                    <li>
+                    <li class="sidems">
                         <form class="form-group nav-link" sec:authorize="isAuthenticated()"
                               th:action="@{/exercises/{id}(id=${#authentication.principal.id})}" method="get">
-                            <span data-feather="file"></span>
-                            <button type="submit" class="sideBarButtons" id="plan" name="plan">Program</button>
+
+                            <button type="submit" class="sideBarButtons" id="plan" name="plan"> <span data-feather="file"></span>  PROGRAM</button>
                         </form>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item sidems">
                         <form class="form-group nav-link" sec:authorize="isAuthenticated()"
                               th:action="@{/logplan/{id}(id=${#authentication.principal.id})}" method="get">
-                            <span data-feather="book"></span>
-                            <button type="submit" class="sideBarButtons" id="log" name="log">Log Worksets</button>
+
+                            <button type="submit" class="sideBarButtons" id="log" name="log"> <span data-feather="book"></span>  LOG</button>
                         </form>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item sidems">
                         <form class="form-group nav-link" sec:authorize="isAuthenticated()"
                               th:action="@{/client_progress/{id}(id=${#authentication.principal.id})}" method="get">
-                            <span data-feather="activity"></span>
-                            <button type="submit" class="sideBarButtons" id="progress" name="progress">View Progress
-                            </button>
+                            <button type="submit" class="sideBarButtons" id="progress" name="progress"> <span data-feather="activity"></span>  PROGRESS</button>
+                            <!--<span data-feather="activity"></span>-->
                         </form>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/coach_list">
-                            <span data-feather="user"></span>
-                            Coach
-                        </a>
+                    <li class="nav-item sidems">
+
+                        <a class="nav-link sideBarButtons anchors" href="/coach_list">
+                            <span data-feather="user"></span>  COACH</a>
+
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item sidems">
                         <form class="form-group nav-link" sec:authorize="isAuthenticated()"
-                              th:action="@{/client_profile_page/{id}/edit(id=${#authentication.principal.id})}"
-                              method="get">
-                            <span data-feather="settings"></span>
-                            <button class="sideBarButtons" type="submit" id="edit" name="edit">Edit Profile</button>
+                              th:action="@{/client_profile_page/{id}/edit(id=${#authentication.principal.id})}" method="get">
+                            <button class="sideBarButtons" type="submit" id="edit" name="edit"> <span data-feather="settings"></span>  EDIT PROFILE</button>
                         </form>
                     </li>
                 </ul>
