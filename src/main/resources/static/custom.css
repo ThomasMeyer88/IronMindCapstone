@@ -128,14 +128,15 @@ body{
 }
 
 .buildItem{
+    background-color: #55775C;
 
-    width: 700px;
+    width: 400px;
     margin: 0;
-    height: 1.6em;
+    height: 39px;
     float: left;
     font-size: 1.5em;
     text-align: center;
-    padding-top: 0.2em;
+    padding-top: 0.3em;
     padding-left: 50px;
 }
 
@@ -195,7 +196,7 @@ body{
     background-color: #55775C;
     display: inline-block;
     float: left;
-    border-bottom: 1px solid black;
+    border-bottom: 0;
     border-left: 0;
     border-right: 0;
     border-top: 1px solid #55775C;
