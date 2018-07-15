@@ -811,14 +811,14 @@ dropdown-submenu {
     border-radius: 6px 0 6px 6px;
 }
 
-html,body{
-    text-align: center;
+/*html,body{*/
+    /*text-align: center;*/
 
-}
+/*}*/
 
-.container {
-    max-width: 960px;
-}
+/*.container {*/
+    /*max-width: 960px;*/
+/*}*/
 
 .border-top { border-top: 1px solid #e5e5e5; }
 .border-bottom { border-bottom: 1px solid #e5e5e5; }
@@ -850,4 +850,266 @@ html,body{
 
 .profileBox:hover{
     opacity: 1.0;
+}
+
+
+.container {
+    width: 95%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+nav {
+    background: #333B34;
+    color: #72CCAA;
+    padding: 10px 0;
+    position: relative;
+}
+
+nav::after {
+    content: '';
+    clear: both;
+    display: block;
+}
+
+.logo {
+    float: left;
+    font-size: 2rem;
+    margin: 7px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.logo span {
+    font-weight: 400;
+}
+
+.site-nav {
+    position: absolute;
+    top: 100%;
+    right: 0%;
+    background: #464655;
+    clip-path: circle(0px at top right);
+    transition: clip-path ease-in-out 700ms;
+    /*   display: none; */
+}
+
+.site-nav--open {
+    clip-path: circle(250% at top right);
+    /*   display: block; */
+}
+
+.site-nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.site-nav li {
+    border-bottom: 1px solid #575766;
+}
+
+.site-nav li:last-child {
+    border-bottom: none;
+}
+
+.site-nav a {
+    color: #EBEBD3;
+    display: block;
+    padding: 2em 4em 2em 1.5em;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.site-nav a:hover,
+.site-nav a:focus {
+    background: #E4B363;
+    color: #464655;
+}
+
+.site-nav--icon {
+    display: inline-block;
+    font-size: 1.5em;
+    margin-right: 1em;
+    width: 1.1em;
+    text-align: right;
+    color: rgba(255,255,255,.4);
+}
+
+.menu-toggle {
+    padding: 1em;
+    position: absolute;
+    top: .5em;
+    right: .5em;
+    cursor: pointer;
+}
+
+.hamburger,
+.hamburger::before,
+.hamburger::after {
+    content: '';
+    display: block;
+    background: #EBEBD3;
+    height: 3px;
+    width: 1.75em;
+    border-radius: 3px;
+    transition: all ease-in-out 500ms;
+}
+
+.hamburger::before {
+    transform: translateY(-6px);
+}
+
+.hamburger::after {
+    transform: translateY(3px);
+}
+
+.open .hamburger {
+    transform: rotate(45deg);
+}
+
+.open .hamburger::before {
+    opacity: 0;
+}
+
+.open .hamburger::after {
+    transform: translateY(-3px) rotate(-90deg);
+}
+
+@media (min-width: 700px) {
+
+    .menu-toggle {
+        display: none;
+    }
+
+    .site-nav {
+        height: auto;
+        position: relative;
+        background: transparent;
+        float: right;
+        clip-path: initial;
+    }
+
+    .site-nav li {
+        display: inline-block;
+        border: none;
+    }
+
+    .site-nav a {
+        padding: 5px;
+        margin-left: 3em;
+    }
+
+    .site-nav a:hover,
+    .site-nav a:focus {
+        background: transparent;
+    }
+
+    .site-nav--icon {
+        display: none;
+    }
+
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size:14px;
+}
+
+
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+
+
+.sidebar {
+    list-style-type:none;
+//background-color:#333;
+
+    top:0;
+    float:left;
+    bottom:0;
+    left:0;
+    text-align:left;
+//position: absolute;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    transition:1s ease;
+}
+
+.sidebar a {
+    text-decoration:none;
+    color:black;
+    transition:1s ease;
+}
+
+.sidebar li {
+    text-indent: 2px;
+    line-height: 40px;
+    transition:0.5s ease;
+
+}
+
+.sidebar li:hover {
+    color:white;
+    background-color:green;
+    cursor:pointer;
+    text-indent: 3px;
+
+}
+.sidebar li:hover a{
+    color:white;
+}
+.sidebar li span{
+    color:green;
+}
+.sidebar li .glyphicon-off{
+    color:black;
+}
+.sidebar li:hover span{
+    color:white;
+}
+
+
+.wrapper {
+    position: relative;
+    width: 100%;
+    min-height: 50px;
+    margin: 0 auto;
+}
+.box {
+    background: blue;
+}
+p {
+//padding-left: 50px;
+}
+@media only screen and (max-width: 989px) {
+    .sidebar{
+        width:100%;
+        margin:0 auto;
+        text-align:center;
+    }
+}
+.underlinename{
+    border-bottom: 3px solid black;
+    max-width: 100%;
+
 }

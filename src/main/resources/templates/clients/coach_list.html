@@ -2,15 +2,29 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="partials/header :: header"/>
 <body>
-<div class="container">
-    <h3>List of all coaches</h3>
-    <div th:each="coach : ${coachlist}">
-        <form th:action="@{/request_coach/} + ${coach.id}" method="post" th:object="${Client}">
-        <h1 th:text="${coach.username}"></h1>
-        <h3 th:text="${coach.bio}"></h3>
-        <input type="submit" value="Connect" />
-        </form>
+<div th:replace="partials/profilenavbar :: profilenavbar"/>
+
+<div class="container-fluid">
+<div th:each="coach : ${coachlist}">
+    <div class="row">
+        <div class="col-md-8 col-xs-12">
+                <form th:action="@{/request_coach/} + ${coach.id}" method="post" th:object="${Client}">
+                    <h1 class="underlinename" th:text="${coach.username}"></h1>
+                    <div class="wrapper">
+                        <div class="box"><img style="float:left;margin-right:10px;width:150px"
+                                              src="/images/coachavatar2.png"/>
+                        </div>
+                        <p style="margin:5px" th:text="${coach.bio}"></p>
+                        <button type="submit" class="btn btn-success" style="float:right;margin-right:20px">Connect
+                        </button>
+                        <br />
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
+
+
 </body>
 </html>
