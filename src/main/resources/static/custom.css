@@ -5,6 +5,22 @@ body{
     z-index: 1;
 }
 
+@font-face {
+    font-family:'geomanist';
+    src: url("/fonts/Geomanist-Regular.otf");
+}
+@font-face {
+    font-family: 'bebas';
+    src: url("/fonts/BEBAS.ttf");
+}
+
+p, h3, h4, h5 {
+    font-family: "geomanist", "sans-serif";
+}
+
+h1, h2{
+    font-family: "bebas", "sans-serif";
+}
 
 .plannerContainer{
     width: 85%;
@@ -19,9 +35,8 @@ body{
 .dayHeader{
     width: 100%;
     text-align: center;
-    font-family: "Lucida Grande", "monospace";
+    font-family: "geomanist", "sans-serif";
     font-size: 1.5em;
-    color: #72CCAA;
     border-bottom: 1px solid black;
     height: 1.5em;
     padding-top: 0.2em;
@@ -65,7 +80,7 @@ body{
     width: 250px;
     margin-top: 0.5em;
     margin-bottom: 0;
-    background-color: #7aa983;
+    background-color: #C0CFE9;
     border: 1px solid black;
     text-align: left;
     height: 1.5em;
@@ -80,7 +95,7 @@ body{
 }
 .searchItem p {
     font-size: 0.8em;
-    color: #55775C;
+    color: black;
     text-align: right;
     margin-right: 0.5em;
 }
@@ -104,7 +119,7 @@ body{
 }
 
 .buildItem{
-    background-color: #55775C;
+    background-color: #C0CFE9;
     float: left;
     width: 400px;
     margin: 0;
@@ -172,7 +187,7 @@ body{
     background-image: url("images/drop.png");
     height: 39px;
     background-size: 45px;
-    background-color: #55775C;
+    background-color: #C0CFE9;
     display: inline-block;
     float: left;
     border-bottom: 1px solid black;

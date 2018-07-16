@@ -4,8 +4,7 @@
 <body class="clientdashboardbackground">
 <div th:replace="partials/profilenavbar :: profilenavbar"/>
 <div class="container">
-    <h4 class="activeprogram" th:text="${state}"></h4>
-
+    <h3 class="activeprogram" th:text="${state}"></h3>
     <form class="currentprogram" th:action="@{/change_program}" method="post">
         <label for="exampleFormControlSelect2">Programs</label>
         <select id="exampleFormControlSelect2" name="program"
@@ -29,7 +28,8 @@
                      width="100%" height="50%"/>
                 <div class="cardcontent">
                     <h3 style="text-align: center;">Update Program</h3>
-                    <p>After you create a program, you are able to <br/> make any adjustments for them. That includes adding, editing, <br/> and removing any exercises for that active program. </p>
+                    <p>After you create a program, you are able to <br/> make any adjustments for them. That includes
+                        adding, editing, <br/> and removing any exercises for that active program. </p>
                 </div>
                 <div class="cardfooter">
                     <form sec:authorize="isAuthenticated()"
@@ -51,10 +51,11 @@
                      src="/images/card3.jpg"
                      width="100%" height="50%"/>
                 <div class="cardcontent">
-                    <br />
+                    <br/>
                     <h3 style="text-align: center;">Log Workout</h3>
-                    <p>You are able to log each of the workouts within the<br/> program. This will allow you to keep track of your daily <br/> routine.
-                    You can now proceed to the "View Progress" <br/> section for detailed progress.
+                    <p>You are able to log each of the workouts within the<br/> program. This will allow you to keep
+                        track of your daily <br/> routine.
+                        You can now proceed to the "View Progress" <br/> section for detailed progress.
                     </p>`
                 </div>
                 <div class="cardfooter">
@@ -82,7 +83,8 @@
                      width="100%" height="50%"/>
                 <div class="cardcontent">
                     <h3 style="text-align: center;">View Progress</h3>
-                    <p>Users are able to see a graph that will <br/> show volume, intensity or both for each workout you have <br/>
+                    <p>Users are able to see a graph that will <br/> show volume, intensity or both for each workout you
+                        have <br/>
                         completed. This is a great way to see that you are moving <br/> forward to you ultimate goal!
                     </p>
                 </div>
