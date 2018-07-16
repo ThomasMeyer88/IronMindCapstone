@@ -48,6 +48,7 @@ public class ClientController {
     }
 
 
+
     @GetMapping("/client_registration")
     public String showSignUpForm(Model model){
         model.addAttribute("client", new Client());
