@@ -6,19 +6,13 @@
 <div th:replace="partials/profilenavbar :: profilenavbar"></div>
 <div th:replace="partials/sidebar :: sidebar"></div>
 <input th:value="${selectId}" id="selector" type="hidden"/>
-<h1>Coach Dashboard</h1>
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
 <div class="container-fluid main-content" style="align-content: center">
+<h1 style="text-align: center">Coach Dashboard</h1>
 
 
-
-
-        <form class="form-group" th:action="@{/client_profile_page/create_program}" method="get">
-            <button type="submit" class="btn btn-primary btn-block btn-md" id="createplan" name="createplan">Create a program
-            </button>
-        </form>
-        <form th:action="@{/change_program}" method="post">
+    <form th:action="@{/change_program}" method="post">
             <label for="exampleFormControlSelect3">Programs</label>
             <select id="exampleFormControlSelect3"  name="program"
                     onchange="this.form.submit()" style="text-align: center" >
@@ -32,27 +26,27 @@
             </select>
         </form>
 
-    <div class="card" style="max-width: 20rem;">
+    <div class="card coachCard" style="width: auto; height: auto">
 
         <div class="card-header">
             Client Requests
         </div>
 
-            <ul th:each="client : ${clientRequests}" class="list-group mb-3">
 
- <form th:action="@{/coach_approval}" method="post">
-     <li th:value="${client.id}" th:text="${client.username}" class="list-group-item d-flex justify-content-between lh-condensed">
-                <input type="hidden" th:value="${client.username}" name="user" />
-    <input value="ACCEPT" type="submit" name="choice"/>
-</li>
- </form>
-                <form th:action="@{/coach_reject}" method="post">
-                    <input type="hidden" th:value="${client.username}" name="user" />
-                    <input value="REJECT" type="submit" name="choice"/>
-                </form>
+        <ul th:each="client : ${clientRequests}" class="list-group mb-3">
+
+             <form th:action="@{/coach_approval}" method="post">
+                 <li th:value="${client.id}" th:text="${client.username}" class="list-group-item d-flex justify-content-between lh-condensed"></li>
+                            <input type="hidden" th:value="${client.username}" name="user" />
+                <input value="ACCEPT" type="submit" name="choice"/>
+             </form>
+                            <form th:action="@{/coach_reject}" method="post">
+                                <input type="hidden" th:value="${client.username}" name="user" />
+                                <input value="REJECT" type="submit" name="choice"/>
+                            </form>
 
 
-            </ul>
+        </ul>
         </div>
 
 
@@ -61,7 +55,7 @@
 
 
 
-        <div class="card ">
+        <div class="card coachCard" style="width: auto; height: auto">
             <div class="card-body">
                 <h2>Client Programs</h2>
 
@@ -107,7 +101,7 @@
 
 
 
-        <div class="card">
+        <div class="card coachCard" style="width: auto; height: auto">
             <div class="card-body">
                 <h2>Client Progress</h2>
                 <form th:action="@{/coachviewclient_progress}" method="post">
