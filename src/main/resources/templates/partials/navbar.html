@@ -1,48 +1,86 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head></head>
 <body>
-<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light" style="background-color: white;">
-    <div class="navbar-collapse collapse w-100 dual-collapse2 order-1 order-md-0">
-        <ul class="navbar-nav ml-auto text-center">
-            <li class="nav-item ">
-                <a class="nav-link" href="#">About</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Hire a Coach</a>
-            </li>
+<div class="container navfix">
+    <nav th:fragment="navbar" style="z-index: 3;">
+        <h1 class="logo">IRON<span>MIND</span></h1>
+        <nav class="site-nav">
+            <ul>
+                <li>
+                    <a href="/client_registration">REGISTER</a>
+                </li>
+                <li>
+                    <a href="/client_login">LOGIN</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="menu-toggle">
+            <div class="hamburger"></div>
+        </div>
+    </nav>
+</div>
 
-        </ul>
-    </div>
-    <div class="mx-auto my-2 order-0 order-md-1 position-absolute ">
-        <a class="mx-auto " href="#">
-            <img src="/images/llogo.png" height="70" width="70" class="pic"/>
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </div>
-    <div class="navbar-collapse collapse w-100 dual-collapse2 order-3 ">
-        <ul class="navbar-nav mr-auto text-center">
-            <li class="nav-item">
-                <a class="nav-link" href="/client_login">Login</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" sec:authorize="!isAuthenticated()" href="/client_registration">Sign-Up</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" sec:authorize="isAuthenticated()" href="/client_login?logout">Logout</a>
-            </li>
-            <!--<li>-->
-            <!--<form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post">-->
-            <!--<button class="btn-link btn" style="margin-top: 8px">Logout</button>-->
-            <!--</form>-->
-            <!--</li>-->
 
-        </ul>
-    </div>
-</nav>
+
 
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">-->
+<!--<head></head>-->
+<!--<body>-->
+<!--<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light" style="background-color: white;">-->
+    <!--<div class="navbar-collapse collapse w-100 dual-collapse2 order-1 order-md-0">-->
+        <!--<ul class="navbar-nav ml-auto text-center">-->
+            <!--<li class="nav-item ">-->
+                <!--<a class="nav-link" href="#">About</a>-->
+            <!--</li>-->
+            <!--<li class="nav-item">-->
+                <!--<a class="nav-link" href="#">Hire a Coach</a>-->
+            <!--</li>-->
+
+        <!--</ul>-->
+    <!--</div>-->
+    <!--<div class="mx-auto my-2 order-0 order-md-1 position-absolute ">-->
+        <!--<a class="mx-auto " href="#">-->
+            <!--<img src="/images/llogo.png" height="70" width="70" class="pic"/>-->
+        <!--</a>-->
+        <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">-->
+            <!--<span class="navbar-toggler-icon"></span>-->
+        <!--</button>-->
+    <!--</div>-->
+    <!--<div class="navbar-collapse collapse w-100 dual-collapse2 order-3 ">-->
+        <!--<ul class="navbar-nav mr-auto text-center">-->
+            <!--<li class="nav-item">-->
+                <!--<a class="nav-link" href="/client_login">Login</a>-->
+            <!--</li>-->
+            <!--<li class="nav-item">-->
+                <!--<a class="nav-link" sec:authorize="!isAuthenticated()" href="/client_registration">Sign-Up</a>-->
+            <!--</li>-->
+            <!--<li class="nav-item">-->
+                <!--<a class="nav-link" sec:authorize="isAuthenticated()" href="/client_login?logout">Logout</a>-->
+            <!--</li>-->
+            <!--&lt;!&ndash;<li>&ndash;&gt;-->
+            <!--&lt;!&ndash;<form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post">&ndash;&gt;-->
+            <!--&lt;!&ndash;<button class="btn-link btn" style="margin-top: 8px">Logout</button>&ndash;&gt;-->
+            <!--&lt;!&ndash;</form>&ndash;&gt;-->
+            <!--&lt;!&ndash;</li>&ndash;&gt;-->
+
+        <!--</ul>-->
+    <!--</div>-->
+<!--</nav>-->
+
+
+<!--</body>-->
+<!--</html>-->
