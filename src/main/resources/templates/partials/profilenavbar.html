@@ -22,8 +22,14 @@
 
 
 
-
 </body>
+<script>
+    "use strict";
+
+    $('#myModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
+    })
+</script>
 </html>
 
 

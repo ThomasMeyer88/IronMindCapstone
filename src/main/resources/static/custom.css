@@ -6,6 +6,10 @@ body{
 }
 
 @font-face {
+    font-family: 'sansation';
+    src: url("/fonts/Sansation_Regular.ttf");
+}
+@font-face {
     font-family:'geomanist';
     src: url("/fonts/Geomanist-Regular.otf");
 }
@@ -1195,7 +1199,7 @@ p {
 
 
 
-.card {
+.cardprofilepage{
     width: 300px;
     height: 300px;
     display: flex;
@@ -1310,4 +1314,48 @@ coachCard{
     min-height: 100%;
     padding: 0.5em;
     height: 500px;
+}
+
+.d-block{
+    height: 650px;
+}
+
+.car1{
+    padding-bottom: 100px;
+    padding-left: 500px;
+    color: black;
+    font-family: "sansation", "sans-serif";
+}
+
+.car2{
+    padding-bottom: 250px;
+    color: white;
+    font-family: "sansation", "sans-serif";
+}
+
+.car3{
+    padding-left: 300px;
+    padding-bottom: 500px;
+    color: white;
+    font-family: "sansation", "sans-serif";
+}
+
+.car4{
+    padding-bottom: 525px;
+    padding-right: 150px;
+}
+
+.car5{
+    padding-bottom: 300px;
+    padding-right: 350px;
+    color: black;
+}
+.cartitle{
+    font-family: "sansation", "sans-serif";
+    font-size: 20px
+}
+
+.carbio{
+    font-family: "geomanist", "sans-serif";
+    font-size: 15px;
 }
