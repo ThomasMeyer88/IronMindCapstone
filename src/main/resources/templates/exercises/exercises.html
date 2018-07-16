@@ -43,8 +43,7 @@
                             <input th:value="*{exercise.name}" type="hidden"/>
                             <div style="display: none">
                                 <h3 th:text="${exercise.name}" class="buildItem"></h3>
-                                <button onclick="dropdown(this.id)" id="drop" style="float: left"
-                                        class="dropBtn"></button>
+                                <button onclick="dropdown(this.id)" id="drop" class="dropBtn"></button>
                                 <div class="buildDrop" style="display:none">
                                     <ul>
                                         <form th:action="@{/createplan/} + ${progId} + @{/} + ${day}" method="post"

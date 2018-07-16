@@ -106,11 +106,10 @@ body{
 
 .buildItem{
     background-color: #55775C;
-
+    float: left;
     width: 400px;
     margin: 0;
     height: 39px;
-    float: left;
     font-size: 1.5em;
     text-align: center;
     padding-top: 0.3em;
@@ -170,7 +169,7 @@ body{
 }
 
 .dropBtn{
-    width: 48px;
+    width: 46px;
     background-image: url("images/drop.png");
     height: 39px;
     background-size: 45px;
