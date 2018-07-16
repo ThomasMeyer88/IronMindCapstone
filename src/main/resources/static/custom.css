@@ -1289,11 +1289,13 @@ coachCard{
 }
 
 .currentprogram{
-    padding-left: 250px;
+    margin-top: 1em;
+    padding-left: 2em;
 }
 
-.activeprogram{
-    padding-left: 185px
+.currentprogram select{
+    margin-top: 1.1em;
+    padding-left: 1em;
 }
 
 

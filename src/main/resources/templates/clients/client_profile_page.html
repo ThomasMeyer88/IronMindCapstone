@@ -4,20 +4,23 @@
 <body class="clientdashboardbackground">
 <div th:replace="partials/profilenavbar :: profilenavbar"/>
 <div class="container">
-    <h3 class="activeprogram" th:text="${state}"></h3>
-    <form class="currentprogram" th:action="@{/change_program}" method="post">
-        <label for="exampleFormControlSelect2">Programs</label>
-        <select id="exampleFormControlSelect2" name="program"
+    <div class="col-lg-12">
+        <div class="row">
+            <h3 class="currentprogram" th:text="${state}"></h3>
+            <form class="currentprogram" th:action="@{/change_program}" method="post">
+             <select id="exampleFormControlSelect2" name="program"
                 onchange="this.form.submit()" style="text-align: center">
-            <option value="nochange" disabled="disabled" selected="selected" id="programSelector">
+                <option value="nochange" disabled="disabled" selected="selected" id="programSelector">
                 Programs
-            </option>
-            <div th:each="program : ${programs}">
+                </option>
+                <div th:each="program : ${programs}">
                 <option th:value="${program.id}" th:text="${program.name}">
                 </option>
             </div>
-        </select>
-    </form>
+            </select>
+        </form>
+        </div>
+    </div>
 </div>
 <div class="container">
     <div class="row">
