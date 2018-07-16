@@ -3,8 +3,9 @@
 <head th:replace="partials/header :: header"/>
 <body>
 <div th:replace="partials/profilenavbar :: profilenavbar"/>
+<div th:replace="partials/sidebar :: sidebar"/>
 
-<div class="container-fluid">
+<div class="coachlistcontainer" style="align-content: center;">
 <div th:each="coach : ${coachlist}">
     <div class="row">
         <div class="col-md-8 col-xs-12">
