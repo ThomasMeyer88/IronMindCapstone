@@ -1270,3 +1270,11 @@ coachCard{
     z-index: 3;
     position: fixed;
 }
+
+.containercoachprofile{
+    width: 85%;
+    margin-left: 25%;
+    min-height: 100%;
+    padding: 0.5em;
+    height: 500px;
+}

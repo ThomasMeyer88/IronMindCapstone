@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import static javax.mail.Message.RecipientType.BCC;
+//import static javax.mail.Message.RecipientType.BCC;
 import static org.simplejavamail.mailer.config.TransportStrategy.SMTP_TLS;
 
 
