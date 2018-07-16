@@ -768,7 +768,7 @@ html, body {
     margin: 0;
     padding: 0;
     background-size: cover;
-    background: url("images/weights1.jpg") center;
+    background: url("images/client_dashboard_background.jpg") center;
     font-family: sans-serif;
 }
 
@@ -913,10 +913,13 @@ dropdown-submenu {
 
 
 .container {
-    width: 95%;
+    width: 100%;
     max-width: 1000px;
     margin: 0 auto;
     padding-left: 150px;
+    padding-right:110px;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
 }
 
 nav {
@@ -938,7 +941,7 @@ nav::after {
     margin: 7px;
     text-transform: uppercase;
     font-weight: 700;
-    padding-left: 25px;
+    padding-left: 10px;
 }
 
 .logo span {
@@ -1058,7 +1061,6 @@ nav::after {
 
     .site-nav a {
         padding: 5px;
-        margin-left: 3em;
         margin-right: 25px
     }
 
@@ -1179,12 +1181,11 @@ p {
 
 
 .card {
-    width: 275px;
+    width: 300px;
     height: 300px;
     display: flex;
     flex-direction: column;
     font-family: sans-serif;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.9);
     white-space: nowrap;
 }
 .cardimg {
@@ -1218,11 +1219,12 @@ p {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    transform: translate(232px, 128px);
+    transform: translate(257px, 128px);
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .cardbutton i {
     color: white;
     transform: translateY(-2px);
@@ -1269,4 +1271,28 @@ coachCard{
 .navfix{
     z-index: 3;
     position: fixed;
+}
+
+.currentprogram{
+    padding-left: 250px;
+}
+
+.activeprogram{
+    padding-left: 185px
+}
+
+
+.clientdashboardbackground{
+    margin: 0;
+    padding: 0;
+    background-size: cover;
+    background: url("images/login_background.jpg") center;
+    font-family: sans-serif;
+}
+.coachlistcontainer{
+    width: 85%;
+    margin-left: 25%;
+    min-height: 100%;
+    padding: 0.5em;
+    height: 500px;
 }
