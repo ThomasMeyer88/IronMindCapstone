@@ -12,7 +12,6 @@ body{
     margin-top: 5%;
     min-height: 100%;
     padding: 0.5em;
-    background-color: whitesmoke;
     height: 500px;
 
 }
@@ -22,14 +21,14 @@ body{
     text-align: center;
     font-family: "Lucida Grande", "monospace";
     font-size: 1.5em;
-    color: darkblue;
-    border-bottom: 1px solid gray;
+    color: #72CCAA;
+    border-bottom: 1px solid black;
     height: 1.5em;
     padding-top: 0.2em;
 }
 
 .dayHeader h1{
-    color: darkblue;
+    color: #72CCAA;
 }
 
 .nav-link{
@@ -1135,7 +1134,6 @@ body {
     color:white;
     cursor:pointer;
     text-indent: 3px;
-
 }
 .sidebar li:hover a{
     color:white;
