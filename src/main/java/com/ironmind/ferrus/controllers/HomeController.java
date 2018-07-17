@@ -9,5 +9,12 @@ public class HomeController {
     public String home(){
         return "clients/landing";
     }
+
+
+    @GetMapping("/about")
+    public String about(){
+        return "coaches/about";
+    }
+
 }
 

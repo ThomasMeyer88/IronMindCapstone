@@ -4,17 +4,22 @@
 <body>
 <div th:replace="partials/profilenavbar :: profilenavbar"/>
 <div th:replace="partials/sidebar :: sidebar"/>
-<div class="containercreate" style="float: right;">
+<div class="containercreate" style="margin-left: 255px; text-align: center; align-items: center; margin-top: 10px;">
+    <h1 style="margin-bottom: 10px;">Create Program</h1>
+    <div class="card coachcard" style="clear: left; border: 7px solid #353B35;">
+        <div class="card-body" style="background-color: #B8E4D1; ;">
     <form th:action="@{/client_profile_page/create_program}" method="POST" th:object="${program}">
-        <label for="name">Name your program</label>
-        <input class="form-control" id="name" th:value="${name}" th:field="*{name}" type="text"/>
+        <label for="name" style="align-items: center;" ><h4>Name your program</h4></label>
+        <input class="form-control" id="name" th:value="${name}" th:field="*{name}" type="text" style="text-align: center; border: 1px solid black;"/>
         <br/>
-        <label for="days">How long is the program?</label>
-        <input class="form-control" id="days" th:value="${programDays}" th:field="*{programDays}" type="text"/>
+        <label for="days" style="align-items: center;"><h4>How many days is the program?</h4></label>
+        <input class="form-control" id="days" th:value="${programDays}" th:field="*{programDays}" type="text" style="text-align: center; border: 1px solid black;"/>
         <br/>
         <input class="btn btn-primary" type="submit" value="Submit"/>
     </form>
 </div>
+    </div>
+    </div>
 <footer th:replace="partials/footer :: footer"/>
 </body>
 </html>
