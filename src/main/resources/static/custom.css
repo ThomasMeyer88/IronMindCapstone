@@ -1001,6 +1001,15 @@ dropdown-submenu {
     border-right: 2px solid black;
 }
 
+.containercreate {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-left: 150px;
+    padding-right:110px;
+
+}
+
 nav {
     background: #333B34;
     color: #72CCAA;
@@ -1356,7 +1365,7 @@ p {
     height: 75px;
 
 }
-coachCard{
+.coachCard{
     margin-bottom: 15px;
 
 }
@@ -1393,45 +1402,46 @@ coachCard{
 }
 
 .d-block{
-    height: 650px;
+    height: 95vh;
 }
 
 .car1{
     padding-bottom: 100px;
-    padding-left: 500px;
+    padding-left: 530px;
     color: black;
     font-family: "sansation", "sans-serif";
 }
 
 .car2{
-    padding-bottom: 250px;
+    padding-bottom: 400px;
     color: white;
     font-family: "sansation", "sans-serif";
 }
 
 .car3{
-    padding-left: 300px;
-    padding-bottom: 500px;
+    padding-left: 340px;
+    padding-bottom: 580px;
     color: white;
     font-family: "sansation", "sans-serif";
 }
 
 .car4{
     padding-bottom: 525px;
-    padding-right: 150px;
+    padding-right: 300px;
+    color: black;
 }
 
 .car5{
     padding-bottom: 300px;
-    padding-right: 350px;
+    padding-right: 380px;
     color: black;
 }
 .cartitle{
     font-family: "sansation", "sans-serif";
-    font-size: 20px
+    font-size: 60px
 }
 
 .carbio{
     font-family: "geomanist", "sans-serif";
-    font-size: 15px;
+    font-size: 20px;
 }
