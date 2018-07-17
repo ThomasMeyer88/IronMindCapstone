@@ -417,7 +417,7 @@ html, body {
  */
 
 .sidebar {
-    position: absolute
+    position: fixed
 ;
     top: 0;
     bottom: 0;
@@ -428,19 +428,19 @@ html, body {
     overflow-x: hidden;
     text-align:left;
     width: 175px;
-    margin-top: 72px
+
 }
 
 .sidebar-sticky {
-    position: -webkit-sticky;
-    position: sticky;
+
+    position: relative;
     top: 48px; /* Height of navbar */
     height: calc(100vh - 48px);
     padding-top: 2rem;
     overflow-x: hidden;
-    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-    background-color: #55775C;
-    margin-top: 72px
+    /*overflow-y: auto; !* Scrollable contents if viewport is shorter than content. *!*/
+    background-color: #ACE6D0;
+    /*margin-top: 40px*/
 
 }
 
@@ -462,7 +462,7 @@ html, body {
 
 .sidebar .nav-link:hover .feather,
 .sidebar .nav-link.active .feather {
-    color: greenyellow;
+    color: #6573e5;
 
 }
 .sidebar .anchors:hover{
@@ -546,7 +546,7 @@ html, body {
 
 .sideBarButtons{
     border: none;
-    background-color: #55775C;
+    background-color: #ACE6D0;
     font-size: 15px;
     cursor: pointer;
 
@@ -983,10 +983,24 @@ nav::after {
     font-weight: 700;
     padding-left: 10px;
 }
+.logoinverse {
+    font-size: 2rem;
+    margin: 7px;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding-left: 10px;
+    color: #333b35;
+}
 
 .logo span {
     font-weight: 400;
 }
+.logoinverse span {
+    font-weight: 400;
+    color: #333b35;
+
+}
+
 
 .site-nav {
     position: absolute;
@@ -1143,21 +1157,21 @@ body {
 
 
 
-.sidebar {
-    list-style-type:none;
-//background-color:#333;
+/*.sidebar {*/
+    /*list-style-type:none;*/
+/*//background-color:#333;*/
 
-    top:0;
-    float:left;
-    bottom:0;
-    left:0;
-    text-align:left;
-//position: absolute;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    transition:1s ease;
-}
+    /*top:0;*/
+    /*float:left;*/
+    /*bottom:0;*/
+    /*left:0;*/
+    /*text-align:left;*/
+/*//position: absolute;*/
+    /*margin: 0;*/
+    /*padding: 0;*/
+    /*list-style: none;*/
+    /*transition:1s ease;*/
+/*}*/
 
 .sidebar a {
     text-decoration:none;
@@ -1167,7 +1181,7 @@ body {
 
 .sidebar li {
     text-indent: 2px;
-    line-height: 40px;
+    line-height: 8px;
     transition:0.5s ease;
 
 }
