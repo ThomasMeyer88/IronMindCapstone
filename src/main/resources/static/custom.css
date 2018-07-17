@@ -377,8 +377,7 @@ html, body {
  */
 
 .sidebar {
-    position: absolute
-;
+    position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
@@ -391,15 +390,28 @@ html, body {
     margin-top: 72px
 }
 
+
+@supports ((position: -webkit-sticky) or (position: sticky)) {
+    .sidebar-sticky {
+        position: -webkit-sticky;
+        position: sticky;
+    }
+}
+
+
+
+
+
 .sidebar-sticky {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 48px; /* Height of navbar */
+    /*position: -webkit-sticky;*/
+    /*position: sticky;*/
+    position: relative;
+    top: 0; /* Height of navbar */
     height: calc(100vh - 48px);
     padding-top: 2rem;
     overflow-x: hidden;
-    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-    background-color: #55775C;
+    overflow-y:auto ; /* Scrollable contents if viewport is shorter than content. */
+    background-color: #ACE6D0;
     margin-top: 72px
 
 }
@@ -506,7 +518,7 @@ html, body {
 
 .sideBarButtons{
     border: none;
-    background-color: #55775C;
+    background-color: #ACE6D0;
     font-size: 15px;
     cursor: pointer;
 
@@ -1174,11 +1186,7 @@ p {
 
 }
 
-
-
-
-
-.card {
+.cardprofilepage {
     width: 275px;
     height: 300px;
     display: flex;
@@ -1261,9 +1269,14 @@ p {
     height: 75px;
 
 }
-coachCard{
+.coachCard{
     margin-bottom: 15px;
-
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    font-family: sans-serif;
+    white-space: nowrap;
 }
 
 .navfix{

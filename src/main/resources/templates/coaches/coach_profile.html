@@ -6,130 +6,137 @@
 <div th:replace="partials/profilenavbar :: profilenavbar"></div>
 <div th:replace="partials/sidebar :: sidebar"></div>
 <input th:value="${selectId}" id="selector" type="hidden"/>
-
 <h1 style="text-align: center">Coach Dashboard</h1>
-<form th:action="@{/change_program}" method="post">
-    <label for="exampleFormControlSelect3">Programs</label>
-    <select id="exampleFormControlSelect3" name="program"
-            onchange="this.form.submit()" style="text-align: center">
-        <option value="nochange" disabled="disabled" selected="selected" id="programSelector">
-            Programs
-        </option>
-        <div th:each="program : ${programs}">
-            <option th:value="${program.id}" th:text="${program.name}">
-            </option>
-        </div>
-    </select>
-</form>
-
-<div class="container">
-    <div class="row">
-
-
-<div class="card coachCard" style="width: 580px; height: auto;">
-    <div class="card-body">
-        <h2>Client Programs</h2>
-        <form th:action="@{/coach_profile}" method="post">
-            <div class="form-group">
-                <label for="clientSelect"> Select a client</label>
-                <select class="form-control" style="text-align: center" id="clientSelect" name="clientId"
-                        onchange="showProgram(this.value)">
-
-                    <option value="nochange" disabled="disabled" selected="selected" id="defaultOption">
-                        clients
-                    </option>
-
-                    <div th:each="client : ${clients}">
-                        <div>
-                            <option th:value="${client.id}" th:text="${client.username} " th:id="${client.id}">
-                            </option>
-                            <option style="display: none" th:value="${client.activeprogram}"></option>
-                        </div>
-                    </div>
-
-                </select>
-            </div>
-
-
-            <div class="form-group">
-                <label for="exampleFormControlSelect2">Assign a Program</label>
-                <select multiple="multiple" class="form-control" id="exampleFormControlSelect2"
-                        style="text-align: center" name="progId">
+            <form th:action="@{/change_program}" method="post" style="text-align: center">
+                <label for="exampleFormControlSelect3">Programs</label>
+                <select id="exampleFormControlSelect3"  name="program"
+                        onchange="this.form.submit()" style="text-align: center" >
                     <option value="nochange" disabled="disabled" selected="selected" id="programSelector">
+                        Programs
                     </option>
                     <div th:each="program : ${programs}">
-                        <option th:value="${program.id}" th:text="${program.name}"></option>
-                    </div>
-                    <div style="margin-left: 500px">
-                        <input type="submit" value="assign program"/>
+                        <option th:value="${program.id}" th:text="${program.name}">
+                        </option>
                     </div>
                 </select>
+            </form>
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 ">
+        <div class="container-fluid main-content" style="align-content: center" >
+
+
+
+
+            <div class="card coachcard" style="width: 20rem;  float: right; margin-left: 15px; align-items: center; ">
+
+                <h2 class="card-header" style="background-color: inherit">
+                    Client Requests
+                </h2>
+
+                <div th:each="client : ${clientRequests}" class="row mb-3">
+
+
+                     <form th:action="@{/coach_approval}" method="post" style="width: 125px; float: left;">
+                         <h6 th:value="${client.id}" th:text="${client.username}" class="list-group-item d-flex                                         justify-content-between lh-condensed" style=" padding: 0.3em;width: 50px;text-align: center;float: left;"> </h6>
+                         <input type="hidden" th:value="${client.username}" name="user" style="float: left;"/>
+                        <input value="ACCEPT" type="submit" name="choice" style="float: left; height: 32px;"/>
+                     </form>
+                    <form th:action="@{/coach_reject}" method="post" >
+                        <input type="hidden" th:value="${client.username}" name="user" style="float: left;"  />
+                        <input value="REJECT" type="submit" name="choice" style="float: left; height: 32px;"/>
+                    </form>
+
+
+
+                </div>
+
             </div>
-        </form>
-    </div>
-</div>
-    </div>
-<div class="card coachCard" style="width: 580px; height: auto;">
-    <div class="card-body">
-        <h2>Client Progress</h2>
-        <form th:action="@{/coachviewclient_progress}" method="post">
-            <div class="form-group">
-                <label for="exampleFormControlSelect2">Choose a Client</label>
-                <select multiple="multiple" class="form-control" id="exampleFormControlSelect2"
-                        style="text-align: center" name="clientId">
-                    <option value="nochange" disabled="disabled" selected="selected" id="defaultOption">
-                    </option>
-                    <div th:each="client : ${clients}">
-                        <option th:value="${client.id}" th:text="${client.name}" name="clientId"></option>
-                    </div>
-                    <div style="margin-left: 500px">
-                        <input type="submit" value="view progress"/>
-                    </div>
-                </select>
+
+            <div class="card coachcard" style="clear: left;">
+                <div class="card-body">
+                    <h2>Client Programs</h2>
+
+                    <form th:action="@{/coach_profile}" method="post">
+                        <div class="form-group">
+                            <label for="clientSelect"> Select a client</label>
+                            <select class="form-control" style="text-align: center" id="clientSelect" name="clientId" onchange="showProgram(this.value)">
+
+                                <option value="nochange" disabled="disabled" selected="selected" id="defaultOption">
+                                    clients
+                                </option>
+
+                                <div th:each="client : ${clients}"  >
+                                    <div>
+                                        <option th:value="${client.id}" th:text="${client.username} " th:id="${client.id}">
+                                        </option>
+                                        <option style="display: none" th:value="${client.activeprogram}"> </option>
+                                    </div>
+                                </div>
+
+                            </select>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect2">Assign a Program</label>
+                            <select multiple="multiple" class="form-control" id="exampleFormControlSelect2"
+                                    style="text-align: center" name="progId">
+                                <option value="nochange" disabled="disabled" selected="selected" id="programSelector">
+                                </option>
+                                <div th:each="program : ${programs}">
+                                    <option th:value="${program.id}" th:text="${program.name}"></option>
+                                </div>
+                                <div style="margin-left: 500px">
+                                    <input type="submit" value="assign program"/>
+                                </div>
+                            </select>
+                        </div>
+                    </form>
+                </div>
             </div>
+        </div>
 
-        </form>
+
+
+        <div class="card coachcard">
+            <div class="card-body">
+                <h2>Client Progress</h2>
+                <form th:action="@{/coachviewclient_progress}" method="post">
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect2">Choose a Client</label>
+                        <select multiple="multiple" class="form-control" id="exampleFormControlSelect2"
+                                style="text-align: center" name="clientId">
+                            <option value="nochange" disabled="disabled" selected="selected" id="defaultOption">
+                            </option>
+                            <div th:each="client : ${clients}">
+                                <option th:value="${client.id}" th:text="${client.name}" name="clientId"></option>
+                            </div>
+                            <div style="margin-left: 500px">
+                                <input type="submit" value="view progress"/>
+                            </div>
+                        </select>
+                    </div>
+
+                </form>
+            </div>
+            <div>
+                <div>
+                </div>
+            </div>
+        </div>
     </div>
 
-</div>
-<div class="card coachCard" style="width: 580px; height: auto; border-bottom: 0;">
-
-    <div class="card-header">
-        Client Requests
-    </div>
+</main>
 
 
-
-
-
-    <ul th:each="client : ${clientRequests}" class="list-group mb-3">
-
-        <form th:action="@{/coach_approval}" method="post">
-            <li th:value="${client.id}" th:text="${client.username}"
-                class="list-group-item d-flex justify-content-between lh-condensed"></li>
-            <input type="hidden" th:value="${client.username}" name="user"/>
-            <input value="ACCEPT" type="submit" name="choice"/>
-        </form>
-        <form th:action="@{/coach_reject}" method="post">
-            <input type="hidden" th:value="${client.username}" name="user"/>
-            <input value="REJECT" type="submit" name="choice"/>
-        </form>
-
-
-    </ul>
-</div>
-</div>
 
 <div th:replace="partials/footer :: footer"></div>
 
 <script>
     "use strict";
     var id = document.getElementById("selector").value;
-
     var clientChoice = document.getElementById("clientSelect");
-
-
-    function showProgram(id) {
+    function showProgram(id){
         console.log(id);
         console.log(document.getElementById(id).nextElementSibling);
         var choice = document.getElementById(id).nextElementSibling;
@@ -138,7 +145,7 @@
                 console.log(element.nextElementSibling);
                 var picker = element.nextElementSibling;
                 console.log(choice.value);
-                if (picker.value == choice.value) {
+                if (picker.value == choice.value){
                     picker.style.display = "block";
                 } else {
                     picker.style.display = "none";
@@ -146,14 +153,12 @@
             }
         );
     }
-
     function select(id) {
         if (id > 0) {
             document.getElementById("defaultOption").selected = "none";
             document.getElementById(id).selected = "selected";
         }
     }
-
     select(id);
 </script>
 
