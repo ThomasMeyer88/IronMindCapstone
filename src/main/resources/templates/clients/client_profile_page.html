@@ -4,25 +4,10 @@
 <body class="clientdashboardbackground">
 <div th:replace="partials/profilenavbar :: profilenavbar"/>
 <div class="container">
-    <div class="col-lg-12">
-        <div class="row">
-            <h3 class="currentprogram" th:text="${state}"></h3>
-            <form class="currentprogram" th:action="@{/change_program}" method="post">
-             <select id="exampleFormControlSelect2" name="program"
-                onchange="this.form.submit()" style="text-align: center">
-                <option value="nochange" disabled="disabled" selected="selected" id="programSelector">
-                Programs
-                </option>
-                <div th:each="program : ${programs}">
-                <option th:value="${program.id}" th:text="${program.name}">
-                </option>
-            </div>
-            </select>
-        </form>
-        </div>
-    </div>
+    <h1>Hello, <span th:text="${username}"></span>!</h1>
+
 </div>
-<div class="container">
+<div class="container whitebackground">
     <div class="row">
         <div class="col">
             <div class="card cardprofilepage">
@@ -30,15 +15,14 @@
                      src="/images/card2.jpg"
                      width="100%" height="50%"/>
                 <div class="cardcontent">
-                    <h3 style="text-align: center;">Update Program</h3>
-                    <p>After you create a program, you are able to <br/> make any adjustments for them. That includes
+                    <h3 style="text-align: center">Update Program</h3>
+                    <p>After you create a program, you are able to make any <br/> adjustments for them. That includes
                         adding, editing, <br/> and removing any exercises for that active program. </p>
                 </div>
                 <div class="cardfooter">
                     <form sec:authorize="isAuthenticated()"
                           th:action="@{/exercises/{id}(id=${#authentication.principal.id})}" method="get">
-                        <input value="UPDATE" type="submit" id="program" name="program"
-                               class="fa fa-arrow-circle-right cardreadme" style="font-size:20px; border:none"/>
+                        <button class="btn btn-sm" type="submit" id="program" name="program" >UPDATE</button>
                     </form>
                 </div>
 
@@ -55,7 +39,7 @@
                      width="100%" height="50%"/>
                 <div class="cardcontent">
                     <br/>
-                    <h3 style="text-align: center;">Log Workout</h3>
+                    <h3 style="text-align: center">Log Workout</h3>
                     <p>You are able to log each of the workouts within the<br/> program. This will allow you to keep
                         track of your daily <br/> routine.
                         You can now proceed to the "View Progress" <br/> section for detailed progress.
@@ -64,9 +48,8 @@
                 <div class="cardfooter">
                     <form sec:authorize="isAuthenticated()"
                           th:action="@{/logplan/{id}(id=${#authentication.principal.id})}" method="get">
-                        <input value="LOG" type="submit" id="log" name="log"
-                               class="fa fa-arrow-circle-right cardreadme"
-                               style="font-size:20px; border:none"/>
+                        <button class="btn btn-sm " type="submit" id="log" name="log" >LOG</button>
+
                     </form>
                 </div>
 
@@ -75,6 +58,10 @@
                     <i data-feather="book" style="font-size: 24px"></i>
                 </div>
             </div>
+        </div>
+        <div class="col">
+            <h3 style="border-bottom: 2px solid black">Active Program</h3>
+            <h3 class="currentprogram" th:text="${state}"></h3>
         </div>
     </div>
     <br/>
@@ -85,17 +72,15 @@
                      src="/images/carddata.jpg"
                      width="100%" height="50%"/>
                 <div class="cardcontent">
-                    <h3 style="text-align: center;">View Progress</h3>
-                    <p>Users are able to see a graph that will <br/> show volume, intensity or both for each workout you
-                        have <br/>
-                        completed. This is a great way to see that you are moving <br/> forward to you ultimate goal!
+                    <h3 style="text-align: center">View Progress</h3>
+                    <p>Users are able to see a graph that will show volume, <br/> intensity or both for each workout you
+                        have completed. <br/> This is a great way to see that you are moving forward to your <br/> ultimate goal!
                     </p>
                 </div>
                 <div class="cardfooter">
                     <form sec:authorize="isAuthenticated()"
                           th:action="@{/client_progress/{id}(id=${#authentication.principal.id})}" method="get">
-                        <input value="PROGRESS" type="submit" id="progress" name="progress"
-                               class="fa fa-arrow-circle-right cardreadme" style="font-size:20px; border:none"/>
+                        <button class="btn btn-sm" type="submit" id="progress" name="progress">PROGRESS</button>
                     </form>
                 </div>
 
@@ -105,24 +90,23 @@
             </div>
         </div>
         <br/>
+
         <div class="col">
             <div class="card cardprofilepage">
                 <img class="cardimg"
                      src="/images/card1.jpg"
                      width="100%" height="50%"/>
                 <div class="cardcontent">
-                    <h3 style="text-align: center;">Coaches</h3>
+                    <h3 style="text-align: center">Coaches</h3>
                     <p>You are able to search for a professional coach
                         that can <br/>guide you to be the best you can be.From here <br/> you will be able to see
-                        the coach and a <br/>description of themselves. </p>
+                        the coach and a description<br/> of themselves. </p>
                 </div>
                 <div class="cardfooter">
-                    <!--<h3>Read More</h3>-->
                     <form sec:authorize="isAuthenticated()"
                           th:action="@{/coach_list}" method="get">
-                        <input value="COACH" type="submit" id="coach" name="coach"
-                               class="fa fa-arrow-circle-right cardreadme"
-                               style="font-size:20px; border:none"/>
+                        <button class="btn btn-sm" type="submit" id="coach" name="coach" >SEARCH</button>
+
                     </form>
                 </div>
 
@@ -131,6 +115,23 @@
                     <i data-feather="user" style="font-size: 24px"></i>
                 </div>
             </div>
+        </div>
+        <div class="col">
+            <form class="currentprogram" th:action="@{/change_program}" method="post">
+                <div class="form-group">
+                    <label for="exampleFormControlSelect2"><h3 style="border-bottom: 2px solid black">Change Program</h3></label>
+            <select class="form-control" id="exampleFormControlSelect2" name="program"
+            onchange="this.form.submit()" style="text-align: center">
+            <option value="nochange" disabled="disabled" selected="selected" id="programSelector">
+            Programs
+            </option>
+            <div th:each="program : ${programs}">
+            <option th:value="${program.id}" th:text="${program.name}">
+            </option>
+            </div>
+            </select>
+                </div>
+            </form>
         </div>
     </div>
 </div>
