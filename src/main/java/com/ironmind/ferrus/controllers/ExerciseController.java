@@ -83,7 +83,7 @@ public class ExerciseController {
         long totalSets = setsDone.size();
         for(CompletedSet set: setsDone){
             totalReps += set.getReps();
-            totalWeight += set.getReps();
+            totalWeight += set.getTotalweight();
         }
         long days = program.getProgramDays();
         List<Long> progDays = new ArrayList<>();
@@ -120,7 +120,7 @@ public class ExerciseController {
         long totalSets = setsDone.size();
         for(CompletedSet set: setsDone){
             totalReps += set.getReps();
-            totalWeight += set.getReps();
+            totalWeight += set.getTotalweight();
         }
         long days = program.getProgramDays();
         List<Long> progDays = new ArrayList<>();
