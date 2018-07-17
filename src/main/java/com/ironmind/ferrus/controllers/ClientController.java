@@ -97,19 +97,19 @@ public class ClientController {
 
         Client coach = clientDao.findOne(coachId);
         String name = coach.getName();
-        String emailAddress = coach.getEmail();
-        Email email = EmailBuilder.startingBlank()
-                .from("Ironmind Client Request", "ironmind2018@hotmail.com")
-                .to(name, emailAddress)
-                .withSubject(name + ", you have a new coaching opportunity!")
-                .withPlainText(name + ", " + loggedInUser.getUsername() + " has requested that you be their coach on their" +
-                        "IronMind experience.  Please log in to confirm or deny.")
-                .buildEmail();
-        MailerBuilder
-                .withSMTPServer("smtp.live.com", 587, "ironmind2018@hotmail.com", "Finale1!")
-                .withTransportStrategy(SMTP_TLS)
-                .buildMailer()
-                .sendMail(email);
+//        String emailAddress = coach.getEmail();
+//        Email email = EmailBuilder.startingBlank()
+//                .from("Ironmind Client Request", "ironmind2018@hotmail.com")
+//                .to(name, emailAddress)
+//                .withSubject(name + ", you have a new coaching opportunity!")
+//                .withPlainText(name + ", " + loggedInUser.getUsername() + " has requested that you be their coach on their" +
+//                        "IronMind experience.  Please log in to confirm or deny.")
+//                .buildEmail();
+//        MailerBuilder
+//                .withSMTPServer("smtp.live.com", 587, "ironmind2018@hotmail.com", "Finale1!")
+//                .withTransportStrategy(SMTP_TLS)
+//                .buildMailer()
+//                .sendMail(email);
 
         return "redirect:/client_profile_page";
     }
