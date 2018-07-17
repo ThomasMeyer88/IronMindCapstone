@@ -423,9 +423,9 @@ html, body {
     opacity: 0.85;
 }
 
-#coach{
-    background-color: lightgrey;
-}
+/*#coach{*/
+    /*background-color: lightgrey;*/
+/*}*/
 
 .testimonial {
     display: table-cell;
@@ -993,12 +993,9 @@ dropdown-submenu {
 
 .container {
     width: 100%;
-    max-width: 1000px;
     margin: 0 auto;
     padding-left: 150px;
     padding-right:110px;
-    border-left: 2px solid black;
-    border-right: 2px solid black;
 }
 
 .containercreate {
@@ -1294,21 +1291,22 @@ p {
 }
 
 .cardcontent {
-    height: 39%;
+    height: 60%;
     background: white;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     padding-left: 15px;
     padding-right: 15px;
+    font-family: "geomanist", "sans-serif";
 }
 
 .cardcontent {
     font-size: 0.8em;
 }
 .cardfooter {
-    height: 12%;
-    background: rgb(235, 235, 235);
+    height: 20%;
+    background-color:#333B35;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -1348,9 +1346,9 @@ p {
 .cardcontent h3 {
     font-size: 1.4em;
 }
-.cardcontent p:nth-child(2) {
-    font-size: 0.9em;
-}
+/*.cardcontent p:nth-child(2) {*/
+    /*font-size: 0.9em;*/
+/*}*/
 
 
 .profileBox h5 {
@@ -1375,22 +1373,14 @@ p {
     position: fixed;
 }
 
-.currentprogram{
-    margin-top: 1em;
-    padding-left: 2em;
-}
 
-.currentprogram select{
-    margin-top: 1.1em;
-    padding-left: 1em;
-}
 
 
 .clientdashboardbackground{
     margin: 0;
     padding: 0;
     background-size: cover;
-    background: url("images/login_background.jpg") center;
+    background: url("images/squared_metal.png") center;
     font-family: sans-serif;
 }
 .coachlistcontainer{
@@ -1413,22 +1403,23 @@ p {
 }
 
 .car2{
-    padding-bottom: 400px;
+    padding-bottom: 370px;
     color: white;
     font-family: "sansation", "sans-serif";
 }
 
 .car3{
-    padding-left: 340px;
-    padding-bottom: 580px;
+    padding-left: 280px;
+    padding-bottom: 500px;
     color: white;
     font-family: "sansation", "sans-serif";
 }
 
 .car4{
-    padding-bottom: 525px;
-    padding-right: 300px;
-    color: black;
+    padding-bottom: 420px;
+    padding-right: 360px;
+    margin-right: 250px;
+    color: white;
 }
 
 .car5{
@@ -1438,10 +1429,22 @@ p {
 }
 .cartitle{
     font-family: "sansation", "sans-serif";
-    font-size: 60px
+    font-size: 50px
 }
 
 .carbio{
     font-family: "geomanist", "sans-serif";
     font-size: 20px;
+}
+
+.btn-sm{
+    background-color: #333B36;
+    color: #6ACCAD;
+    font-family: "geomanist", "sans-serif";
+}
+
+.btn-sm:hover{
+    background-color: #6ACCAD;
+    color: #333B36;
+    font-family: "geomanist", "sans-serif";
 }

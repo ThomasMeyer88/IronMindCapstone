@@ -118,6 +118,8 @@ public class ClientController {
     @GetMapping("/client_profile_page")
     public String clientPage(Model view){
         Client clientSession = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Client username = clientDao.findOne(clientSession.getId());
+        view.addAttribute("username", username.getUsername());
         Client test = clientDao.findOne(clientSession.getId());
         clientSession.setRole(test.getRole());
         Client client = clientDao.findOne(clientSession.getId());
@@ -140,7 +142,7 @@ public class ClientController {
                 Program active = programDao.getPrograms().findById(client.getActiveprogram());
                 String progName = active.getName();
                 view.addAttribute("activeId", active.getId());
-                view.addAttribute("state", "Your active program is " + progName);
+                view.addAttribute("state",  progName);
                 return "clients/client_profile_page";
 
             } catch (NullPointerException e) {
