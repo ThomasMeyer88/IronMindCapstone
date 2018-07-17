@@ -58,6 +58,12 @@ public class ExerciseController {
         Program program = programDao.getPrograms().findById(client.getActiveprogram());
         long progId = program.getId();
         view.addAttribute("progid", id);
+        long days = program.getProgramDays();
+        List<Long> progDays = new ArrayList<>();
+        for (long i = 1; i <= days; i++) {
+            progDays.add(i);
+        }
+        view.addAttribute("days", progDays);
         return "redirect:/log/" + progId + "/1";
     }
 
@@ -79,6 +85,12 @@ public class ExerciseController {
             totalReps += set.getReps();
             totalWeight += set.getReps();
         }
+        long days = program.getProgramDays();
+        List<Long> progDays = new ArrayList<>();
+        for (long i = 1; i <= days; i++) {
+            progDays.add(i);
+        }
+        view.addAttribute("days", progDays);
         view.addAttribute("totalReps", totalReps);
         view.addAttribute("totalWeight", totalWeight);
         view.addAttribute("totalSets", totalSets);
@@ -110,6 +122,12 @@ public class ExerciseController {
             totalReps += set.getReps();
             totalWeight += set.getReps();
         }
+        long days = program.getProgramDays();
+        List<Long> progDays = new ArrayList<>();
+        for (long i = 1; i <= days; i++) {
+            progDays.add(i);
+        }
+        view.addAttribute("days", progDays);
         view.addAttribute("totalReps", totalReps);
         view.addAttribute("totalWeight", totalWeight);
         view.addAttribute("totalSets", totalSets);
@@ -145,6 +163,8 @@ public class ExerciseController {
         for (long i = 1; i <= days; i++) {
             progDays.add(i);
         }
+        view.addAttribute("days", progDays);
+
 
         List<WorkSet> daySet = workDao.getWork().findAllByTemplate(temp);
         System.out.println(daySet.size());
@@ -153,7 +173,6 @@ public class ExerciseController {
         List<template> templates = tempDao.getTemplates().findAllByUsable(1);
 
         view.addAttribute("tempList", templates);
-        view.addAttribute("days", progDays);
         view.addAttribute("workSets", daySet);
         view.addAttribute("subSet", subSet);
         view.addAttribute("exercises", exerciseService.getExercises().findAll());
@@ -450,6 +469,11 @@ public class ExerciseController {
             workDao.getWork().delete(checkWork.getId());
         }
         return "redirect:/exercises/" + progId + "/" + day + "/" + id;
+    }
+
+    @PostMapping(value = "/log/{progId}")
+    public String logCalendar(@PathVariable long progId, @RequestParam long daychoice){
+        return "redirect:/log/" + progId + "/" + daychoice;
     }
 
 

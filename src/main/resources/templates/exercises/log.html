@@ -8,6 +8,17 @@
 
 <input id="dropCheck" th:value="${dropId}" type="hidden" />
 
+
+
+<div id="calender" class="calenderModel" style="display: none">
+    <div onclick="closeCalender()">Close!</div>
+    <form th:action="@{/log/} + ${progId}" method="post">
+        <div class="day" id="baseDay" th:each="day: ${days}">
+            <input name="daychoice" type="submit" th:value="${day}"/>
+        </div>
+    </form>
+</div>
+
 <div class="plannerContainer">
         <!--<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">-->
         <h1 class="dayHeader">
@@ -16,7 +27,9 @@
         <h3 class="dayHeader"> sets for day:
             <output th:text="${day}"></output>
         </h3>
-        <div class="logger" id="builder" ondrop="drop(event)" ondragover="allowDrop(event)">
+    <p onclick="myCalender()" style="margin-left: 50%">Calendar</p>
+
+    <div class="logger" id="builder" ondrop="drop(event)" ondragover="allowDrop(event)">
             <h3 class="buildItem" th:text="${done}" style="display: none" id="state"></h3>
             <div th:each="workSet :${workSets}">
                 <h3 class="buildItem" th:text="${workSet.exerciseName}"></h3>
@@ -87,9 +100,17 @@
         console.log(text);
         if (text.includes("finished")) {
             state.style.display = "block";
-            state.style.backgroundColor = "gold";
+            state.style.backgroundColor = "darkblue";
             state.style.width = "448px";
         }
+    }
+
+    function myCalender() {
+        document.getElementById("calender").style.display = "block";
+    }
+
+    function closeCalender() {
+        document.getElementById("calender").style.display = "none";
     }
 
 
