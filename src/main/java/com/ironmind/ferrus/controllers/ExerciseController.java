@@ -63,12 +63,26 @@ public class ExerciseController {
 
     @GetMapping("/log/{id}/{day}")
     public String dayLog(@PathVariable int day, @PathVariable long id, Model view) {
+        Client clientSession = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
         Program program = programDao.getPrograms().findById(id);
         template temp = tempDao.getTemplates().findByProgram_IdAndDay(id, day);
         List<WorkSet> daySet = workDao.getWork().findAllByTemplate(temp);
         if (daySet.size() == 0) {
             view.addAttribute("done", "You've finished all of today's sets!");
         }
+        List<CompletedSet> setsDone = compDao.getCompSets().findAllByClient_IdAndDayOrderByExerciseName(clientSession.getId(), (long) day);
+        long totalReps = 0;
+        long totalWeight = 0;
+        long totalSets = setsDone.size() + 1;
+        for(CompletedSet set: setsDone){
+            totalReps += set.getReps();
+            totalWeight += set.getReps();
+        }
+        view.addAttribute("totalReps", totalReps);
+        view.addAttribute("totalWeight", totalWeight);
+        view.addAttribute("totalSets", totalSets);
+        view.addAttribute("setsDone", setsDone);
         view.addAttribute("workSets", daySet);
         view.addAttribute("name", program.getName());
         view.addAttribute("day", day);
@@ -80,12 +94,26 @@ public class ExerciseController {
 
     @GetMapping("/log/{progId}/{day}/{id}")
     public String dayLogDropDown(@PathVariable int day, @PathVariable long progId, @PathVariable long id, Model view) {
+        Client clientSession = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
         Program program = programDao.getPrograms().findById(progId);
         template temp = tempDao.getTemplates().findByProgram_IdAndDay(progId, day);
         List<WorkSet> daySet = workDao.getWork().findAllByTemplate(temp);
         if (daySet.size() == 0) {
             view.addAttribute("done", "You've finished all of today's sets!");
         }
+        List<CompletedSet> setsDone = compDao.getCompSets().findAllByClient_IdAndDayOrderByExerciseName(clientSession.getId(), (long) day);
+        long totalReps = 0;
+        long totalWeight = 0;
+        long totalSets = setsDone.size() + 1;
+        for(CompletedSet set: setsDone){
+            totalReps += set.getReps();
+            totalWeight += set.getReps();
+        }
+        view.addAttribute("totalReps", totalReps);
+        view.addAttribute("totalWeight", totalWeight);
+        view.addAttribute("totalSets", totalSets);
+        view.addAttribute("setsDone", setsDone);
         view.addAttribute("dropId", id);
         view.addAttribute("workSets", daySet);
         view.addAttribute("name", program.getName());
@@ -110,7 +138,6 @@ public class ExerciseController {
     public String exercisesIndex(@PathVariable int day, @PathVariable long id, Model view) {
         Program program = programDao.getPrograms().findOne(id);
         template temp = tempDao.getTemplates().findByProgram_IdAndDay(id, day);
-        Client clientSession = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         //Program program = programDao.getPrograms().findByClient_IdAndName(clientSession.getId(), name);
         long days = program.getProgramDays();

@@ -40,6 +40,21 @@
 
             </div>
         </div>
+        <div class="logDisplay">
+            <h3>Today's Statistics</h3>
+            <h5>You've completed <output th:text="${totalSets}"></output> total sets!</h5>
+            <h5>You've completed <output th:text="${totalReps}"></output> total reps!</h5>
+            <h5>You've lifted a total of <output th:text="${totalWeight}"></output> pounds!</h5>
+            <h3>Today's Completed exercises</h3>
+            <div class="setInfoContainer">
+            <div th:each = "Set : ${setsDone}">
+                <div class = "setInfo">
+                <h6 th:text="${Set.exerciseName}"></h6><p><output th:text="${Set.reps}"></output> reps at
+                    <output th:text="${Set.weight}"></output> pounds</p>
+                </div>
+            </div>
+            </div>
+        </div>
         <!--</div>-->
 </div>
 

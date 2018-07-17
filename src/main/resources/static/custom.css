@@ -120,7 +120,7 @@ h1, h2{
 
 .logger{
     float: left;
-    margin-left: 28.5%;
+    margin-left: 3%;
     height: 350px;
     width: 450px;
     border: none;
@@ -216,7 +216,7 @@ h1, h2{
     height: 1.3em;
     width: 1.4em;
     background-size: 1.4em;
-    background-color: rgba(187, 226, 228, 0.64);
+    background-color: rgb(209, 233, 236);
     display: inline-block;
     margin-top: 5px;
     float: left;
@@ -239,7 +239,7 @@ h1, h2{
     height: 1.3em;
     width: 1.4em;
     background-size: 1.4em;
-    background-color: rgba(187, 226, 228, 0.64);
+    background-color: rgb(209, 233, 236);
     display: inline-block;
     margin-top: 5px;
     float: left;
@@ -256,7 +256,7 @@ h1, h2{
     margin-left: 10px;
 
     background-size: 1.4em;
-    background-color: rgba(187, 226, 228, 0.64);
+    background-color: rgb(209, 233, 236);
     display: inline-block;
     margin-top: 5px;
     float: left;
@@ -272,7 +272,7 @@ h1, h2{
     width: 1.4em;
 
     background-size: 1.4em;
-    background-color: rgba(187, 226, 228, 0.64);
+    background-color: rgb(209, 233, 236);
     display: inline-block;
     margin-top: 5px;
     float: left;
@@ -291,6 +291,42 @@ h1, h2{
     border-top: 0;
     border-left: 0;
     border-right: 0;
+}
+
+.logDisplay {
+    margin-left: 2%;
+    text-align: center;
+    width: 450px;
+    float: left;
+}
+
+.logDisplay h3 {
+    border-bottom: 1px solid darkblue;
+    width: 100%;
+    background-color: rgba(128, 104, 127, 0.33);
+    padding-bottom: 0.5em;
+    padding-top: 0.5em;
+
+    margin-bottom: 0.5em;
+}
+
+.setInfoContainer {
+    height: 250px;
+    overflow-y: scroll;
+    background-color: white;
+}
+
+.setInfo {
+    width: 100%;
+    background-color: rgba(128, 104, 127, 0.33);
+    padding: 0.2em;
+    margin-bottom: 0.2em;
+}
+
+.setInfo h6{
+    width: 200px;
+    float: left;
+    text-align: center;
 }
 
 .grid-container {
