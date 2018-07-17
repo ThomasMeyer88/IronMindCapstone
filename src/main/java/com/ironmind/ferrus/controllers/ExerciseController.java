@@ -74,7 +74,7 @@ public class ExerciseController {
         List<CompletedSet> setsDone = compDao.getCompSets().findAllByClient_IdAndDayOrderByExerciseName(clientSession.getId(), (long) day);
         long totalReps = 0;
         long totalWeight = 0;
-        long totalSets = setsDone.size() + 1;
+        long totalSets = setsDone.size();
         for(CompletedSet set: setsDone){
             totalReps += set.getReps();
             totalWeight += set.getReps();
@@ -105,7 +105,7 @@ public class ExerciseController {
         List<CompletedSet> setsDone = compDao.getCompSets().findAllByClient_IdAndDayOrderByExerciseName(clientSession.getId(), (long) day);
         long totalReps = 0;
         long totalWeight = 0;
-        long totalSets = setsDone.size() + 1;
+        long totalSets = setsDone.size();
         for(CompletedSet set: setsDone){
             totalReps += set.getReps();
             totalWeight += set.getReps();
@@ -278,6 +278,14 @@ public class ExerciseController {
         template temp = tempDao.getTemplates().findByProgram_IdAndDay(progId, day);
         List<WorkSet> daySet = workDao.getWork().findAllByTemplate(temp);
         SubSet subSet = new SubSet(0, 0, " ", null);
+        long days = program.getProgramDays();
+
+        List<Long> progDays = new ArrayList<>();
+        for (long i = 1; i <= days; i++) {
+            progDays.add(i);
+        }
+        view.addAttribute("days", progDays);
+
         view.addAttribute("dropId", id);
         view.addAttribute("workSets", daySet);
         view.addAttribute("subSet", subSet);
