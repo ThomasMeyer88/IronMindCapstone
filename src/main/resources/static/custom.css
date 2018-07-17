@@ -5,24 +5,43 @@ body{
     z-index: 1;
 }
 
+@font-face {
+    font-family: 'sansation';
+    src: url("/fonts/Sansation_Regular.ttf");
+}
+@font-face {
+    font-family:'geomanist';
+    src: url("/fonts/Geomanist-Regular.otf");
+}
+@font-face {
+    font-family: 'bebas';
+    src: url("/fonts/BEBAS.ttf");
+}
+
+p, h3, h4, h5 {
+    font-family: "geomanist", "sans-serif";
+}
+
+h1, h2{
+    font-family: "bebas", "sans-serif";
+}
 
 .plannerContainer{
     width: 85%;
     margin-left: 15%;
-    margin-top: 5%;
+    margin-top: 1%;
     min-height: 100%;
     padding: 0.5em;
     height: 500px;
 
 }
 
+
 .dayHeader{
     width: 100%;
     text-align: center;
-    font-family: "Lucida Grande", "monospace";
+    font-family: "geomanist", "sans-serif";
     font-size: 1.5em;
-    color: #72CCAA;
-    border-bottom: 1px solid black;
     height: 1.5em;
     padding-top: 0.2em;
 }
@@ -48,7 +67,7 @@ body{
 .searchContainer{
     height: 300px;
     width: 250px;
-    border: 1px solid gray;
+    border: none;
     align-content: center;
     float: left;
     padding: 0;
@@ -65,11 +84,11 @@ body{
     width: 250px;
     margin-top: 0.5em;
     margin-bottom: 0;
-    background-color: #7aa983;
-    border: 1px solid black;
+    background-color: rgba(187, 226, 228, 0.64);
+    border: none;
     text-align: left;
     height: 1.5em;
-    padding: 0.1em;
+    padding: 0.2em;
 }
 
 .searchItem h3{
@@ -80,7 +99,7 @@ body{
 }
 .searchItem p {
     font-size: 0.8em;
-    color: #55775C;
+    color: black;
     text-align: right;
     margin-right: 0.5em;
 }
@@ -90,8 +109,13 @@ body{
     margin-left: 3%;
     height: 350px;
     width: 450px;
-    border: inset 2px black;
+    border: none;
     overflow-y: scroll;
+    background-color: rgba(211, 211, 211, 0.17);
+}
+
+.builder h3 {
+    text-align: center;
 }
 
 .logger{
@@ -99,12 +123,13 @@ body{
     margin-left: 28.5%;
     height: 350px;
     width: 450px;
-    border: 1px solid black;
+    border: none;
     overflow-y: scroll;
 }
 
 .buildItem{
-    background-color: #55775C;
+    background-color: rgba(16, 27, 228, 0.64);
+    color: #d5eef4;
     float: left;
     width: 400px;
     margin: 0;
@@ -113,7 +138,7 @@ body{
     text-align: center;
     padding-top: 0.3em;
     padding-left: 50px;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid rgba(187, 226, 228, 0.64);
 
 }
 
@@ -121,7 +146,8 @@ body{
 
 .buildDrop{
     width: 448px;
-    background-color: #7aa983;
+    background-color: rgba(187, 226, 228, 0.64);
+    color: black;
     margin:0;
 
 
@@ -129,27 +155,31 @@ body{
 
 .tempHolder {
     width: 100%;
-    padding: 0.5em;
+    padding-left: 0.5em;
     float: left;
-    background-color: #7aa983;
+    background-color: rgba(187, 226, 228, 0.64);
     height: 38px;
+    margin-bottom: 0.5em;
 }
 
 .tempHolder h5{
     width: 170px;
     overflow-x: scroll;
     margin-right: 10px;
+    margin-top: 0.4em;
     float: left;
 }
 
 .tempHolder input{
-    margin-top: 0;
+    margin-top: 0.5em;
 }
+
+
 
 .buildDrop ul{
     list-style: none;
     width: 448px;
-    background-color: #7aa983;
+    background-color: rgba(187, 226, 228, 0.64);
     padding: 0;
 
 }
@@ -157,28 +187,28 @@ body{
 .buildDrop ul li{
     width: 150px;
     float: left;
-    padding: 0;
+    padding-left: 1em;
 }
 
 .buildDrop input[type=text]{
-    background-color: #95d0a0;
-    border-color: #95d0a0;
+    background-color: rgba(187, 226, 228, 0.52);
+    border-color: rgba(187, 226, 228, 0.64);
     width: 40px;
     text-align: center;
 }
 
 .dropBtn{
-    width: 46px;
+    width: 48px;
     background-image: url("images/drop.png");
     height: 39px;
     background-size: 45px;
-    background-color: #55775C;
+    background-color: rgba(187, 226, 228, 0.64);
     display: inline-block;
     float: left;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid rgba(187, 226, 228, 0.64);
     border-left: 0;
     border-right: 0;
-    border-top: 1px solid #55775C;
+    border-top: 0;
 }
 
 .dropBtnSave{
@@ -186,7 +216,7 @@ body{
     height: 1.3em;
     width: 1.4em;
     background-size: 1.4em;
-    background-color: #7aa983;
+    background-color: rgba(187, 226, 228, 0.64);
     display: inline-block;
     margin-top: 5px;
     float: left;
@@ -194,12 +224,22 @@ body{
     margin-right: 20px;
 }
 
+.templateSave{
+    background-color: rgba(187, 226, 228, 0.64);
+    background-image: url("images/save.svg");
+    border: none;
+    float: none;
+    background-color: white;
+    height: 1.6em;
+    width: 1.6em;
+    background-size: 1.6em;
+}
 .dropBtnEdit{
     background-image: url("images/edit.svg");
     height: 1.3em;
     width: 1.4em;
     background-size: 1.4em;
-    background-color: #7aa983;
+    background-color: rgba(187, 226, 228, 0.64);
     display: inline-block;
     margin-top: 5px;
     float: left;
@@ -216,7 +256,7 @@ body{
     margin-left: 10px;
 
     background-size: 1.4em;
-    background-color: #7aa983;
+    background-color: rgba(187, 226, 228, 0.64);
     display: inline-block;
     margin-top: 5px;
     float: left;
@@ -232,7 +272,7 @@ body{
     width: 1.4em;
 
     background-size: 1.4em;
-    background-color: #7aa983;
+    background-color: rgba(187, 226, 228, 0.64);
     display: inline-block;
     margin-top: 5px;
     float: left;
@@ -377,7 +417,8 @@ html, body {
  */
 
 .sidebar {
-    position: fixed;
+    position: absolute
+;
     top: 0;
     bottom: 0;
     left: 0;
@@ -390,28 +431,15 @@ html, body {
     margin-top: 72px
 }
 
-
-@supports ((position: -webkit-sticky) or (position: sticky)) {
-    .sidebar-sticky {
-        position: -webkit-sticky;
-        position: sticky;
-    }
-}
-
-
-
-
-
 .sidebar-sticky {
-    /*position: -webkit-sticky;*/
-    /*position: sticky;*/
-    position: relative;
-    top: 0; /* Height of navbar */
+    position: -webkit-sticky;
+    position: sticky;
+    top: 48px; /* Height of navbar */
     height: calc(100vh - 48px);
     padding-top: 2rem;
     overflow-x: hidden;
-    overflow-y:auto ; /* Scrollable contents if viewport is shorter than content. */
-    background-color: #ACE6D0;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    background-color: #55775C;
     margin-top: 72px
 
 }
@@ -518,7 +546,7 @@ html, body {
 
 .sideBarButtons{
     border: none;
-    background-color: #ACE6D0;
+    background-color: #55775C;
     font-size: 15px;
     cursor: pointer;
 
@@ -780,7 +808,7 @@ html, body {
     margin: 0;
     padding: 0;
     background-size: cover;
-    background: url("images/weights1.jpg") center;
+    background: url("images/client_dashboard_background.jpg") center;
     font-family: sans-serif;
 }
 
@@ -925,10 +953,13 @@ dropdown-submenu {
 
 
 .container {
-    width: 95%;
+    width: 100%;
     max-width: 1000px;
     margin: 0 auto;
     padding-left: 150px;
+    padding-right:110px;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
 }
 
 nav {
@@ -950,7 +981,7 @@ nav::after {
     margin: 7px;
     text-transform: uppercase;
     font-weight: 700;
-    padding-left: 25px;
+    padding-left: 10px;
 }
 
 .logo span {
@@ -1070,7 +1101,6 @@ nav::after {
 
     .site-nav a {
         padding: 5px;
-        margin-left: 3em;
         margin-right: 25px
     }
 
@@ -1186,13 +1216,16 @@ p {
 
 }
 
-.cardprofilepage {
-    width: 275px;
+
+
+
+
+.cardprofilepage{
+    width: 300px;
     height: 300px;
     display: flex;
     flex-direction: column;
     font-family: sans-serif;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.9);
     white-space: nowrap;
 }
 .cardimg {
@@ -1226,11 +1259,12 @@ p {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    transform: translate(232px, 128px);
+    transform: translate(257px, 128px);
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .cardbutton i {
     color: white;
     transform: translateY(-2px);
@@ -1269,14 +1303,9 @@ p {
     height: 75px;
 
 }
-.coachCard{
+coachCard{
     margin-bottom: 15px;
-    width: auto;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    font-family: sans-serif;
-    white-space: nowrap;
+
 }
 
 .navfix{
@@ -1284,10 +1313,72 @@ p {
     position: fixed;
 }
 
-.containercoachprofile{
+.currentprogram{
+    margin-top: 1em;
+    padding-left: 2em;
+}
+
+.currentprogram select{
+    margin-top: 1.1em;
+    padding-left: 1em;
+}
+
+
+.clientdashboardbackground{
+    margin: 0;
+    padding: 0;
+    background-size: cover;
+    background: url("images/login_background.jpg") center;
+    font-family: sans-serif;
+}
+.coachlistcontainer{
     width: 85%;
     margin-left: 25%;
     min-height: 100%;
     padding: 0.5em;
     height: 500px;
+}
+
+.d-block{
+    height: 650px;
+}
+
+.car1{
+    padding-bottom: 100px;
+    padding-left: 500px;
+    color: black;
+    font-family: "sansation", "sans-serif";
+}
+
+.car2{
+    padding-bottom: 250px;
+    color: white;
+    font-family: "sansation", "sans-serif";
+}
+
+.car3{
+    padding-left: 300px;
+    padding-bottom: 500px;
+    color: white;
+    font-family: "sansation", "sans-serif";
+}
+
+.car4{
+    padding-bottom: 525px;
+    padding-right: 150px;
+}
+
+.car5{
+    padding-bottom: 300px;
+    padding-right: 350px;
+    color: black;
+}
+.cartitle{
+    font-family: "sansation", "sans-serif";
+    font-size: 20px
+}
+
+.carbio{
+    font-family: "geomanist", "sans-serif";
+    font-size: 15px;
 }
