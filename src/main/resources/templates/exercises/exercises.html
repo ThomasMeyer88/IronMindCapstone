@@ -29,7 +29,7 @@
         <p onclick="myCalender()">Calendar</p>
         <form th:action="@{/savetemplate/} + ${progId} + @{/} + ${day}" method="post">
             <input type="text" value="Name this Template" name="tempName" />
-            <input type="submit" value="Save Template" />
+            <input type="submit" value=" " class="templateSave" />
         </form>
     </div>
     <div class="searchContainer">

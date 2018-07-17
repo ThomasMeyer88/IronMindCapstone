@@ -25,19 +25,19 @@ h1, h2{
 .plannerContainer{
     width: 85%;
     margin-left: 15%;
-    margin-top: 5%;
+    margin-top: 1%;
     min-height: 100%;
     padding: 0.5em;
     height: 500px;
 
 }
 
+
 .dayHeader{
     width: 100%;
     text-align: center;
     font-family: "geomanist", "sans-serif";
     font-size: 1.5em;
-    border-bottom: 1px solid black;
     height: 1.5em;
     padding-top: 0.2em;
 }
@@ -63,7 +63,7 @@ h1, h2{
 .searchContainer{
     height: 300px;
     width: 250px;
-    border: 1px solid gray;
+    border: none;
     align-content: center;
     float: left;
     padding: 0;
@@ -80,11 +80,11 @@ h1, h2{
     width: 250px;
     margin-top: 0.5em;
     margin-bottom: 0;
-    background-color: #C0CFE9;
-    border: 1px solid black;
+    background-color: rgba(187, 226, 228, 0.64);
+    border: none;
     text-align: left;
     height: 1.5em;
-    padding: 0.1em;
+    padding: 0.2em;
 }
 
 .searchItem h3{
@@ -105,8 +105,13 @@ h1, h2{
     margin-left: 3%;
     height: 350px;
     width: 450px;
-    border: inset 2px black;
+    border: none;
     overflow-y: scroll;
+    background-color: rgba(211, 211, 211, 0.17);
+}
+
+.builder h3 {
+    text-align: center;
 }
 
 .logger{
@@ -114,12 +119,13 @@ h1, h2{
     margin-left: 28.5%;
     height: 350px;
     width: 450px;
-    border: 1px solid black;
+    border: none;
     overflow-y: scroll;
 }
 
 .buildItem{
-    background-color: #C0CFE9;
+    background-color: rgba(16, 27, 228, 0.64);
+    color: #d5eef4;
     float: left;
     width: 400px;
     margin: 0;
@@ -128,7 +134,7 @@ h1, h2{
     text-align: center;
     padding-top: 0.3em;
     padding-left: 50px;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid rgba(187, 226, 228, 0.64);
 
 }
 
@@ -136,7 +142,8 @@ h1, h2{
 
 .buildDrop{
     width: 448px;
-    background-color: #7aa983;
+    background-color: rgba(187, 226, 228, 0.64);
+    color: black;
     margin:0;
 
 
@@ -144,27 +151,31 @@ h1, h2{
 
 .tempHolder {
     width: 100%;
-    padding: 0.5em;
+    padding-left: 0.5em;
     float: left;
-    background-color: #7aa983;
+    background-color: rgba(187, 226, 228, 0.64);
     height: 38px;
+    margin-bottom: 0.5em;
 }
 
 .tempHolder h5{
     width: 170px;
     overflow-x: scroll;
     margin-right: 10px;
+    margin-top: 0.4em;
     float: left;
 }
 
 .tempHolder input{
-    margin-top: 0;
+    margin-top: 0.5em;
 }
+
+
 
 .buildDrop ul{
     list-style: none;
     width: 448px;
-    background-color: #7aa983;
+    background-color: rgba(187, 226, 228, 0.64);
     padding: 0;
 
 }
@@ -172,28 +183,28 @@ h1, h2{
 .buildDrop ul li{
     width: 150px;
     float: left;
-    padding: 0;
+    padding-left: 1em;
 }
 
 .buildDrop input[type=text]{
-    background-color: #95d0a0;
-    border-color: #95d0a0;
+    background-color: rgba(187, 226, 228, 0.52);
+    border-color: rgba(187, 226, 228, 0.64);
     width: 40px;
     text-align: center;
 }
 
 .dropBtn{
-    width: 46px;
+    width: 48px;
     background-image: url("images/drop.png");
     height: 39px;
     background-size: 45px;
-    background-color: #C0CFE9;
+    background-color: rgba(187, 226, 228, 0.64);
     display: inline-block;
     float: left;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid rgba(187, 226, 228, 0.64);
     border-left: 0;
     border-right: 0;
-    border-top: 1px solid #55775C;
+    border-top: 0;
 }
 
 .dropBtnSave{
@@ -201,7 +212,7 @@ h1, h2{
     height: 1.3em;
     width: 1.4em;
     background-size: 1.4em;
-    background-color: #7aa983;
+    background-color: rgba(187, 226, 228, 0.64);
     display: inline-block;
     margin-top: 5px;
     float: left;
@@ -209,12 +220,22 @@ h1, h2{
     margin-right: 20px;
 }
 
+.templateSave{
+    background-color: rgba(187, 226, 228, 0.64);
+    background-image: url("images/save.svg");
+    border: none;
+    float: none;
+    background-color: white;
+    height: 1.6em;
+    width: 1.6em;
+    background-size: 1.6em;
+}
 .dropBtnEdit{
     background-image: url("images/edit.svg");
     height: 1.3em;
     width: 1.4em;
     background-size: 1.4em;
-    background-color: #7aa983;
+    background-color: rgba(187, 226, 228, 0.64);
     display: inline-block;
     margin-top: 5px;
     float: left;
@@ -231,7 +252,7 @@ h1, h2{
     margin-left: 10px;
 
     background-size: 1.4em;
-    background-color: #7aa983;
+    background-color: rgba(187, 226, 228, 0.64);
     display: inline-block;
     margin-top: 5px;
     float: left;
@@ -247,7 +268,7 @@ h1, h2{
     width: 1.4em;
 
     background-size: 1.4em;
-    background-color: #7aa983;
+    background-color: rgba(187, 226, 228, 0.64);
     display: inline-block;
     margin-top: 5px;
     float: left;
