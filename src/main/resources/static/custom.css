@@ -473,7 +473,7 @@ html, body {
 .sidebar-sticky {
 
     position: relative;
-    top: 48px; /* Height of navbar */
+    top: 0px; /* Height of navbar */
     height: calc(100vh - 48px);
     padding-top: 2rem;
     overflow-x: hidden;

@@ -27,23 +27,26 @@
 
 
 
-            <div class="card coachcard" style="width: 20rem;  float: right; margin-left: 15px; align-items: center; ">
+            <div class="card coachcard" style="width: 20rem;  float: right; margin-left: 15px; align-items: center;   background-color: #B8E4D1; border: 7px solid #353B35;">
 
-                <h2 class="card-header" style="background-color: inherit">
+                <h2 class="card-header" style="background-color: inherit; margin-bottom: 4px;">
                     Client Requests
                 </h2>
 
                 <div th:each="client : ${clientRequests}" class="row mb-3">
 
 
-                     <form th:action="@{/coach_approval}" method="post" style="width: 125px; float: left;">
-                         <h6 th:value="${client.id}" th:text="${client.username}" class="list-group-item d-flex                                         justify-content-between lh-condensed" style=" padding: 0.3em;width: 50px;text-align: center;float: left;"> </h6>
+                     <form th:action="@{/coach_approval}" method="post" style="width: 200px; float: left;">
+                         <h6 th:value="${client.id}" th:text="${client.username}" class="list-group-item d-flex                                         justify-content-between lh-condensed" style=" padding: 0.3em;width: 100px;text-align: center;float: left; background-color: #B8E4D1; border:none; "> </h6>
                          <input type="hidden" th:value="${client.username}" name="user" style="float: left;"/>
-                        <input value="ACCEPT" type="submit" name="choice" style="float: left; height: 32px;"/>
+
+                         <button class="btn btn-success" value="ACCEPT" type="submit" name="choice" style="float: left; height: 32px; margin-left: 55px;"> <span data-feather="check"></span></button>
                      </form>
                     <form th:action="@{/coach_reject}" method="post" >
                         <input type="hidden" th:value="${client.username}" name="user" style="float: left;"  />
-                        <input value="REJECT" type="submit" name="choice" style="float: left; height: 32px;"/>
+
+                        <button class="btn btn-danger" value="REJECT" type="submit" name="choice" style="float: left; height: 32px; margin-left: 15px;"><span data-feather="x"></span> </button>
+
                     </form>
 
 
@@ -52,14 +55,14 @@
 
             </div>
 
-            <div class="card coachcard" style="clear: left;">
-                <div class="card-body">
+            <div class="card coachcard" style="clear: left; border: 7px solid #353B35;">
+                <div class="card-body" style="background-color: #B8E4D1;">
                     <h2>Client Programs</h2>
 
                     <form th:action="@{/coach_profile}" method="post">
                         <div class="form-group">
                             <label for="clientSelect"> Select a client</label>
-                            <select class="form-control" style="text-align: center" id="clientSelect" name="clientId" onchange="showProgram(this.value)">
+                            <select class="form-control" style="text-align: center; border: 1px solid black; " id="clientSelect" name="clientId" onchange="showProgram(this.value)">
 
                                 <option value="nochange" disabled="disabled" selected="selected" id="defaultOption">
                                     clients
@@ -80,14 +83,14 @@
                         <div class="form-group">
                             <label for="exampleFormControlSelect2">Assign a Program</label>
                             <select multiple="multiple" class="form-control" id="exampleFormControlSelect2"
-                                    style="text-align: center" name="progId">
+                                    style="text-align: center; border: 1px solid black; " name="progId">
                                 <option value="nochange" disabled="disabled" selected="selected" id="programSelector">
                                 </option>
                                 <div th:each="program : ${programs}">
                                     <option th:value="${program.id}" th:text="${program.name}"></option>
                                 </div>
-                                <div style="margin-left: 500px">
-                                    <input type="submit" value="assign program"/>
+                                <div style="margin-left: 500px;">
+                                    <input type="submit" value="Assign" style="margin-top: 10px; float: right;" />
                                 </div>
                             </select>
                         </div>
@@ -99,20 +102,20 @@
 
 
         <div class="card coachcard">
-            <div class="card-body">
+            <div class="card-body" style="background-color: #B8E4D1; border: 7px solid #353B35;">
                 <h2>Client Progress</h2>
                 <form th:action="@{/coachviewclient_progress}" method="post">
                     <div class="form-group">
                         <label for="exampleFormControlSelect2">Choose a Client</label>
                         <select multiple="multiple" class="form-control" id="exampleFormControlSelect2"
-                                style="text-align: center" name="clientId">
+                                style="text-align: center; border: 1px solid black;" name="clientId">
                             <option value="nochange" disabled="disabled" selected="selected" id="defaultOption">
                             </option>
                             <div th:each="client : ${clients}">
                                 <option th:value="${client.id}" th:text="${client.name}" name="clientId"></option>
                             </div>
                             <div style="margin-left: 500px">
-                                <input type="submit" value="view progress"/>
+                                <input type="submit" value="View Progress" style="margin-top: 10px; float: right;"/>
                             </div>
                         </select>
                     </div>
