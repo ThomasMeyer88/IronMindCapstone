@@ -996,9 +996,11 @@ dropdown-submenu {
     margin: 0 auto;
     padding-left: 150px;
     padding-right:110px;
+
 }
 
 .containercreate {
+    align-items: center;
     width: 100%;
     max-width: 1000px;
     margin: 0 auto;

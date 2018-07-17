@@ -19,6 +19,7 @@
 
 
 <div class="plannerContainer">
+        <i onclick="myCalender()" class="far fa-calendar-alt fa-5x"></i>
     <h1 class="dayHeader" style="padding-right: 100px">
             <output th:text="${name}"></output>
         </h1>
@@ -26,7 +27,7 @@
             <output th:text="${day}"></output>
         </h3>
     <div class="col-lg-12" style="text-align: center; margin-bottom: 1.5em; padding-right: 120px">
-        <p onclick="myCalender()">Calendar</p>
+        <!--<span onclick="myCalender()" data-feather="calendar"></span>-->
         <form th:action="@{/savetemplate/} + ${progId} + @{/} + ${day}" method="post">
             <input type="text" placeholder=" " name="tempName" />
             <input type="submit" value=" " class="templateSave" />
