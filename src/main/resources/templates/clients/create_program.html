@@ -4,7 +4,7 @@
 <body>
 <div th:replace="partials/profilenavbar :: profilenavbar"/>
 <div th:replace="partials/sidebar :: sidebar"/>
-<div class="container" style="float: right;">
+<div class="containercreate" style="float: right;">
     <form th:action="@{/client_profile_page/create_program}" method="POST" th:object="${program}">
         <label for="name">Name your program</label>
         <input class="form-control" id="name" th:value="${name}" th:field="*{name}" type="text"/>
