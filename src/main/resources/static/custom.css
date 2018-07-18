@@ -1476,6 +1476,16 @@ p {
     font-family: "geomanist", "sans-serif";
 }
 
+
+.ironmindlogo{
+    color: #6ACCAD;
+}
+
+.ironmindlogo:hover{
+    color: #6ACCAD;
+}
+
+
 @media only screen and (min-width: 1440px) and (max-width: 1759px) {
     .builder {
         margin-left: 7%;
@@ -1538,7 +1548,6 @@ p {
         margin-left: 10%;
     }
 }
-
 
 
 
