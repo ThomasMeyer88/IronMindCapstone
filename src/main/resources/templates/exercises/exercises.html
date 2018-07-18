@@ -9,7 +9,7 @@
 <input id="dropCheck" th:value="${dropId}" type="hidden" />
 
 <div id="calender" class="calenderModel" style="display: none">
-    <div onclick="closeCalender()">Close!</div>
+    <div onclick="closeCalender()">X</div>
     <form th:action="@{/exercises/} + ${progId}" method="post">
         <div class="day" id="baseDay" th:each="day: ${days}">
             <input name="daychoice" type="submit" th:value="${day}"/>
