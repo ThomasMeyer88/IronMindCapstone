@@ -27,7 +27,7 @@
         <h3 class="dayHeader"> sets for day:
             <output th:text="${day}"></output>
         </h3>
-    <p onclick="myCalender()" style="margin-left: 50%">Calendar</p>
+    <i onclick="myCalender()" class="far fa-calendar-alt fa-5x" style="font-size: 3em; float:left"></i>
 
     <div class="logger" id="builder" ondrop="drop(event)" ondragover="allowDrop(event)">
             <h3 class="buildItem" th:text="${done}" style="display: none" id="state"></h3>
