@@ -44,6 +44,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutSuccessUrl("/client_login?logout") // append a query string value
+                .invalidateHttpSession(true)
                 /* Pages that can be viewed without having to log in */
                 .and()
                 .authorizeRequests()
@@ -59,6 +60,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/coach_list",
                         "/client_profile_page/create_program?createplan",
                         "/logplan"
+
+
                 )
                 .authenticated()
         ;
