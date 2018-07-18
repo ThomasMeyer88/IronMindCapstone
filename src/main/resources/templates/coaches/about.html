@@ -7,32 +7,42 @@
     .rounded-circle {
         box-shadow: #808080 2px 2px 6px;
     }
+    .mx-2, .card-title{
+        color: #72CCAA;
+    }
+    .card-footer{
+        background-color: #353B35 ;
+    }
+    .card{
+        border: none;
+    }
+
 </style>
-<body>
+<body style="align-items: center;">
 <div th:replace="partials/profilenavbar :: profilenavbar"></div>
 
-<div id="about" class="fluid-container mx-4">
-    <div class="row d-flex">
+<div id="about" class="fluid-container mx-4" style="text-align: center;">
+    <div class="row ">
         <div class="col-12">
             <h1 class="display-4">About Us</h1>
         </div>
-        <div class="col-xs-12 col-lg-4 d-flex">
+        <div class="col-xs-12 col-lg-4 d-flex" style="margin-left: 81px;">
             <div class="card">
                 <div class="card-body">
-                    <img th:src="@{/images/Thomas.jpg}" class="w-50 rounded-circle"/>
+                    <img th:src="@{/images/Thomas.jpg}" class="w-60 rounded-circle"/>
                     <hr/>
-                    <h5 class="card-title text-primary">Thomas Meyer</h5>
+                    <h5 class="card-title">Thomas Meyer</h5>
                     <p class="card-text text-muted">Software Developer</p>
 
                 </div>
                 <div class="card-footer">
-                    <a target="_blank" href="https://www.linkedin.com/in/tristanthtcrawford/">
-                        <i class="mx-2 fa fa-3x fa-linkedin-square"></i>
+                    <a target="_blank" href="https://www.linkedin.com/in/thomas-m-meyer/">
+                        <i class="mx-2 fab fa-3x fa-linkedin-in"></i>
                     </a>
-                    <a target="_blank" href="https://www.github.com/TristanCrawford">
-                        <i class="mx-2 fa fa-3x fa-github-square"></i>
+                    <a target="_blank" href="https://www.github.com/ThomasMeyer88">
+                        <i class="mx-2 fab fa-3x fa-github"></i>
                     </a>
-                    <a target="_blank" href="mailto:tristanthtcrawford@gmail.com">
+                    <a target="_blank" href="mailto:thomasmeyer88@gmail.com">
                         <i class="mx-2 fa fa-3x fa-envelope"></i>
                     </a>
                 </div>
@@ -41,57 +51,51 @@
         <div class="col-xs-12 col-lg-4 d-flex">
             <div class="card">
                 <div class="card-body">
-                    <img th:src="@{/images/Noah.jpg}" class="w-50 rounded-circle"/>
+                    <img th:src="@{/images/Noah.jpg}" class="w-60 rounded-circle"/>
                     <hr/>
-                    <h5 class="card-title text-primary">Noah Delacruz</h5>
+                    <h5 class="card-title">Noah Delacruz</h5>
                     <p class="card-text text-muted">Software Developer</p>
 
                 </div>
                 <div class="card-footer">
-                    <a target="_blank" href="https://www.linkedin.com/in/edwin-o-gonzales/">
-                        <i class="mx-2 fa fa-3x fa-linkedin-square"></i>
+                    <a target="_blank" href="https://www.linkedin.com/in/noah-dela-cruz/">
+                        <i class="mx-2 fab fa-3x fa-linkedin-in"></i>
                     </a>
-                    <a target="_blank" href="https://github.com/edwin-gonzales-n">
-                        <i class="mx-2 fa fa-3x fa-github-square"></i>
+                    <a target="_blank" href="https://github.com/NoahJDC">
+                        <i class="mx-2 fab fa-3x fa-github"></i>
                     </a>
-                    <a target="_blank" href="mailto:edwin.gonzales.n@gmail.com">
+                    <a target="_blank" href="mailto:noahjdc92@gmail.com@gmail.com">
                         <i class="mx-2 fa fa-3x fa-envelope"></i>
                     </a>
                 </div>
             </div>
         </div>
-        <div class="col-xs-12 col-lg-4 d-flex">
+        <div class="col-xs-12">
             <div class="card">
                 <div class="card-body">
-                    <img th:src="@{/images/John.jpg}" class="w-50 rounded-circle"/>
+                    <img th:src="@{/images/John.jpg}" class="w-60 rounded-circle"/>
                     <hr/>
-                    <h5 class="card-title text-primary">John Wallace</h5>
+                    <h5 class="card-title">John Wallace</h5>
                     <p class="card-text text-muted">Software Developer</p>
 
                 </div>
                 <div class="card-footer">
-                    <a target="_blank" href="https://www.linkedin.com/in/james-a-fowler/">
-                        <i class="mx-2 fa fa-3x fa-linkedin-square"></i>
+                    <a target="_blank" href="https://www.linkedin.com/in/mr-john-wallace/">
+                        <i class="mx-2 fab fa-3x fa-linkedin-in"></i>
                     </a>
-                    <a target="_blank" href="https://github.com/JamesFowler3">
-                        <i class="mx-2 fa fa-3x fa-github-square"></i>
+                    <a target="_blank" href="https://github.com/JohnWallace21">
+                        <i class="mx-2 fab fa-3x fa-github"></i>
                     </a>
-                    <a target="_blank" href="mailto:jamesfowler033@gmail.com">
+                    <a target="_blank" href="mailto:mr.johnwallace88@gmail.com">
                         <i class="mx-2 fa fa-3x fa-envelope"></i>
                     </a>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row mt-4">
-        <div class="col-xs-12 col-lg-4 offset-lg-4">
-            <a id="sauce" href="https://github.com/theeventaid/theeventaid" class="btn btn-outline-primary">
-                See The Code
-                <i class="fa fa-code"></i>
-            </a>
-        </div>
+
     </div>
-</div>
+<!--</div>-->
 <script th:replace="partials/navbar :: scripts"></script>
 </body>
 </html>
