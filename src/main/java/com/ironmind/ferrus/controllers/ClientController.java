@@ -281,10 +281,14 @@ public class ClientController {
     @PostMapping("/client_profile_page/create_program")
     public String CreateProgram(Program program){
         Client clientSession = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Client clientAdd = clientDao.findOne(clientSession.getId());
         program.setClient(clientSession);
         program.setName(program.getName());
         program.setProgramDays(program.getProgramDays());
         programDao.getPrograms().save(program);
+        Program programAdd = programDao.getPrograms().findById(program.getId());
+        clientAdd.setActiveprogram(programAdd.getId());
+        clientDao.save(clientAdd);
         return "redirect:/client_profile_page";
     }
     @PostMapping("/coach_profile")

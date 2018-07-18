@@ -19,8 +19,9 @@
 
 
 <div class="plannerContainer">
-    <div class = "col-lg-12" style="padding-right: 120px; height: 85px">
+    <div class = "row" style="padding-right: 120px; height: 85px">
         <h1 class="dayHeader">
+            Current Program:
             <output th:text="${name}"></output>
         </h1>
         <h3 class="dayHeader"> Workouts for day:
@@ -28,7 +29,7 @@
         </h3>
         <i onclick="myCalender()" class="far fa-calendar-alt fa-5x" style="font-size: 3em; float:left"></i>
     </div>
-    <div class ="col-lg-12">
+    <div class ="row">
     <div class="searchContainer">
             <input type="text" placeholder="Search Exercises" id="searchEx" class="searchBar"/>
             <div class="scrollable">
@@ -106,7 +107,7 @@
                         <div class="tempHolder">
                             <h5 th:text="${template.name}"></h5>
                             <input type="hidden" th:value="${template.id}" name="tempId" />
-                            <input type="submit" value=" " class="dropBtnSave" />
+                            <input type="submit" value=" " class="dropBtnCopy" />
                         </div>
                     </form>
                 </div>

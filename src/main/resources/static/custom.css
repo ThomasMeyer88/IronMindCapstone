@@ -1,5 +1,6 @@
 
 
+
 body{
     background-color: white;
     z-index: 1;
@@ -38,7 +39,7 @@ h1, h2{
 
 
 .dayHeader{
-    width: 33%;
+    width: 45%;
     float: left;
     text-align: center;
     font-family: "geomanist", "sans-serif";
@@ -46,7 +47,6 @@ h1, h2{
     font-weight: bold;
     padding-top: 0.2em;
     color: darkblue;
-    margin-right: 4%;
     height: 75px;
 }
 
@@ -86,7 +86,6 @@ h1, h2{
     align-content: center;
     float: left;
     padding: 0;
-    margin-left: 3%;
 }
 
 .scrollable{
@@ -102,18 +101,18 @@ h1, h2{
     background-color: rgba(187, 226, 228, 0.64);
     border: none;
     text-align: left;
-    height: 1.5em;
-    padding: 0.2em;
+    height: 2.5em;
+    padding-top: 0.5em;
 }
 
 .searchItem h3{
-    font-size: 1em;
+    font-size: 1.3em;
     float: left;
     text-align: center;
-    margin-left: 1em;
+    margin-left: 0.5em;
 }
 .searchItem p {
-    font-size: 0.8em;
+    font-size: 1em;
     color: black;
     text-align: right;
     margin-right: 0.5em;
@@ -121,9 +120,10 @@ h1, h2{
 
 .builder{
     float: left;
-    margin-left: 3%;
+    margin-left: 5%;
+    margin-right: 5%;
     height: 350px;
-    width: 450px;
+    width: 600px;
     border: none;
     overflow-y: scroll;
     background-color: rgba(211, 211, 211, 0.17);
@@ -137,7 +137,7 @@ h1, h2{
     float: left;
     margin-left: 3%;
     height: 350px;
-    width: 450px;
+    width: 600px;
     border: none;
     overflow-y: scroll;
 }
@@ -146,12 +146,12 @@ h1, h2{
     background-color: rgba(16, 27, 228, 0.64);
     color: #d5eef4;
     float: left;
-    width: 400px;
+    width: 550px;
     margin: 0;
-    height: 39px;
-    font-size: 1.5em;
+    height: 49px;
+    font-size: 1.7em;
     text-align: center;
-    padding-top: 0.3em;
+    padding-top: 0.4em;
     padding-left: 50px;
     border-bottom: 1px solid rgba(187, 226, 228, 0.64);
 
@@ -160,7 +160,7 @@ h1, h2{
 
 
 .buildDrop{
-    width: 448px;
+    width: 598px;
     background-color: rgba(187, 226, 228, 0.64);
     color: black;
     margin:0;
@@ -193,29 +193,31 @@ h1, h2{
 
 .buildDrop ul{
     list-style: none;
-    width: 448px;
-    background-color: rgba(187, 226, 228, 0.64);
+    width: 598px;
     padding: 0;
+    padding-top: 0.6em;
 
 }
 
 .buildDrop ul li{
-    width: 150px;
+    width: 200px;
     float: left;
     padding-left: 3.5em;
+    height: 50px;
+    font-size: 1.3em;
 }
 
 .buildDrop input[type=text]{
     background-color: rgba(187, 226, 228, 0.52);
     border-color: rgba(187, 226, 228, 0.64);
-    width: 40px;
+    width: 50px;
     text-align: center;
 }
 
 .dropBtn{
     width: 48px;
     background-image: url("images/drop.png");
-    height: 39px;
+    height: 49px;
     background-size: 45px;
     background-color: rgba(187, 226, 228, 0.64);
     display: inline-block;
@@ -228,9 +230,9 @@ h1, h2{
 
 .dropBtnSave{
     background-image: url("images/save.svg");
-    height: 1.3em;
-    width: 1.4em;
-    background-size: 1.4em;
+    height: 1.5em;
+    width: 1.5em;
+    background-size: 1.5em;
     background-color: rgb(209, 233, 236);
     display: inline-block;
     margin-top: 5px;
@@ -251,9 +253,9 @@ h1, h2{
 }
 .dropBtnEdit{
     background-image: url("images/edit.svg");
-    height: 1.3em;
-    width: 1.4em;
-    background-size: 1.4em;
+    height: 1.5em;
+    width: 1.5em;
+    background-size: 1.6em;
     background-color: rgb(209, 233, 236);
     display: inline-block;
     margin-top: 5px;
@@ -266,10 +268,10 @@ h1, h2{
 
 .dropBtnDel{
     background-image: url("images/delete.png");
-    height: 1.3em;
-    width: 1.4em;
+    height: 1.5em;
+    width: 1.5em;
 
-    background-size: 1.4em;
+    background-size: 1.5em;
     background-color: rgb(209, 233, 236);
     display: inline-block;
     margin-top: 5px;
@@ -282,10 +284,10 @@ h1, h2{
 
 .dropBtnCopy{
     background: url("images/copy.png");
-    height: 1.3em;
-    width: 1.4em;
+    height: 1.5em;
+    width: 1.5em;
 
-    background-size: 1.4em;
+    background-size: 1.5em;
     background-color: rgb(209, 233, 236);
     display: inline-block;
     margin-top: 5px;
@@ -305,6 +307,7 @@ h1, h2{
     border-top: 0;
     border-left: 0;
     border-right: 0;
+    font-size: 1.1em;
 }
 
 .logDisplay {
@@ -1473,6 +1476,7 @@ p {
     font-family: "geomanist", "sans-serif";
 }
 
+
 .ironmindlogo{
     color: #6ACCAD;
 }
@@ -1480,5 +1484,72 @@ p {
 .ironmindlogo:hover{
     color: #6ACCAD;
 }
+
+
+@media only screen and (min-width: 1440px) and (max-width: 1759px) {
+    .builder {
+        margin-left: 7%;
+        margin-right: 7%;
+    }
+}
+
+@media only screen and (min-width: 1760px ) {
+    .builder {
+        margin-left: 10%;
+        margin-right: 10%
+    }
+
+    .logger {
+        margin-left: 5%;
+        margin-right: 7%;
+    }
+}
+
+
+@media only screen and (min-width: 1024px) and (max-width: 1439px){
+    .logDisplay {
+        margin-left: 18%;
+    }
+
+    .logger {
+        margin-left: 12%;
+    }
+
+    .searchContainer {
+        margin-left: 3.5%;
+        margin-top: 5%;
+        margin-bottom: 3%;
+    }
+
+    .builder {
+        margin-right: 0;
+        margin-left: 0;
+        margin-top: 5%;
+    }
+}
+
+@media only screen and (min-width: 420px) and (max-width: 1023px){
+    .logDisplay {
+        margin-left: 18%;
+    }
+
+    .logger {
+        margin-left: 12%;
+    }
+
+    .searchContainer {
+        margin-left: 30%;
+        margin-top: 5%;
+        margin-bottom: 3%;
+    }
+
+    .builder {
+        margin-right: 0;
+        margin-left: 10%;
+    }
+}
+
+
+
 
 
