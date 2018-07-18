@@ -6,7 +6,7 @@
 <div th:replace="partials/profilenavbar :: profilenavbar"></div>
 <div th:replace="partials/sidebar :: sidebar"></div>
 <input th:value="${selectId}" id="selector" type="hidden"/>
-<h1 style="text-align: center">Coach Dashboard</h1>
+<h1 style="text-align: center; margin-top: 10px;">Coach<i class="mx-2 far fa-clipboard"></i> Dashboard</h1>
             <form th:action="@{/change_program}" method="post" style="text-align: center">
                 <label for="exampleFormControlSelect3">Programs</label>
                 <select id="exampleFormControlSelect3"  name="program"
@@ -20,14 +20,14 @@
                     </div>
                 </select>
             </form>
-<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+<main role="main" class="col-md-9 ml-sm-12 col-lg-10 pt-3 px-4"   style="margin-left: 203px">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 ">
         <div class="container-fluid main-content" style="align-content: center" >
 
 
 
 
-            <div class="card coachcard" style="width: 20rem;  float: right; margin-left: 15px; align-items: center;   background-color: #B8E4D1; border: 7px solid #353B35;">
+            <div class="card coachcard" style="width: 20rem;  float: right; margin-left: 15px; align-items: center;   background-color: #B8E4D1; border: 4px solid #353B35;">
 
                 <h2 class="card-header" style="background-color: inherit; margin-bottom: 4px;">
                     Client Requests
@@ -45,7 +45,7 @@
                     <form th:action="@{/coach_reject}" method="post" >
                         <input type="hidden" th:value="${client.username}" name="user" style="float: left;"  />
 
-                        <button class="btn btn-danger" value="REJECT" type="submit" name="choice" style="float: left; height: 32px; margin-left: 15px;"><span data-feather="x"></span> </button>
+                        <button class="btn btn-danger" value="REJECT" type="submit" name="choice" style="float: left; height: 32px; margin-left: 15px; "><span data-feather="x"></span> </button>
 
                     </form>
 
@@ -55,7 +55,7 @@
 
             </div>
 
-            <div class="card coachcard" style="clear: left; border: 7px solid #353B35;">
+            <div class="card coachcard" style="clear: left; border: 4px solid #353B35;">
                 <div class="card-body" style="background-color: #B8E4D1;">
                     <h2>Client Programs</h2>
 
@@ -90,7 +90,7 @@
                                     <option th:value="${program.id}" th:text="${program.name}"></option>
                                 </div>
                                 <div style="margin-left: 500px;">
-                                    <input type="submit" value="Assign" style="margin-top: 10px; float: right;" />
+                                    <input type="submit" value="Assign" style="margin-top: 10px; float: right; border: 1px solid black; background-color: inherit; font-size: large; font-family: bebas; border-radius: 5px;" />
                                 </div>
                             </select>
                         </div>
@@ -102,7 +102,7 @@
 
 
         <div class="card coachcard">
-            <div class="card-body" style="background-color: #B8E4D1; border: 7px solid #353B35;">
+            <div class="card-body" style="background-color: #B8E4D1; border: 4px solid #353B35;">
                 <h2>Client Progress</h2>
                 <form th:action="@{/coachviewclient_progress}" method="post">
                     <div class="form-group">
@@ -115,7 +115,7 @@
                                 <option th:value="${client.id}" th:text="${client.name}" name="clientId"></option>
                             </div>
                             <div style="margin-left: 500px">
-                                <input type="submit" value="View Progress" style="margin-top: 10px; float: right;"/>
+                                <input type="submit" value="View Progress" style="margin-top: 10px; float: right; border: 1px solid black; background-color: inherit; font-size: large; font-family: bebas; border-radius: 5px; "/>
                             </div>
                         </select>
                     </div>
