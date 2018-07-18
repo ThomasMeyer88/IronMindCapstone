@@ -1,5 +1,6 @@
 
 
+
 body{
     background-color: white;
     z-index: 1;
@@ -38,7 +39,7 @@ h1, h2{
 
 
 .dayHeader{
-    width: 33%;
+    width: 45%;
     float: left;
     text-align: center;
     font-family: "geomanist", "sans-serif";
@@ -46,7 +47,6 @@ h1, h2{
     font-weight: bold;
     padding-top: 0.2em;
     color: darkblue;
-    margin-right: 4%;
     height: 75px;
 }
 
@@ -86,7 +86,6 @@ h1, h2{
     align-content: center;
     float: left;
     padding: 0;
-    margin-left: 3%;
 }
 
 .scrollable{
@@ -121,7 +120,8 @@ h1, h2{
 
 .builder{
     float: left;
-    margin-left: 3%;
+    margin-left: 5%;
+    margin-right: 5%;
     height: 350px;
     width: 600px;
     border: none;
@@ -1475,5 +1475,72 @@ p {
     color: #333B36;
     font-family: "geomanist", "sans-serif";
 }
+
+@media only screen and (min-width: 1440px) and (max-width: 1759px) {
+    .builder {
+        margin-left: 7%;
+        margin-right: 7%;
+    }
+}
+
+@media only screen and (min-width: 1760px ) {
+    .builder {
+        margin-left: 10%;
+        margin-right: 10%
+    }
+
+    .logger {
+        margin-left: 5%;
+        margin-right: 7%;
+    }
+}
+
+
+@media only screen and (min-width: 1024px) and (max-width: 1439px){
+    .logDisplay {
+        margin-left: 18%;
+    }
+
+    .logger {
+        margin-left: 12%;
+    }
+
+    .searchContainer {
+        margin-left: 3.5%;
+        margin-top: 5%;
+        margin-bottom: 3%;
+    }
+
+    .builder {
+        margin-right: 0;
+        margin-left: 0;
+        margin-top: 5%;
+    }
+}
+
+@media only screen and (min-width: 420px) and (max-width: 1023px){
+    .logDisplay {
+        margin-left: 18%;
+    }
+
+    .logger {
+        margin-left: 12%;
+    }
+
+    .searchContainer {
+        margin-left: 30%;
+        margin-top: 5%;
+        margin-bottom: 3%;
+    }
+
+    .builder {
+        margin-right: 0;
+        margin-left: 10%;
+    }
+}
+
+
+
+
 
 
