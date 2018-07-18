@@ -1413,37 +1413,44 @@ p {
 }
 
 .car1{
-    padding-bottom: 100px;
-    padding-left: 530px;
+    padding-top: 30%;
+    padding-left: 45%;
     color: black;
     font-family: "sansation", "sans-serif";
 }
 
 .car2{
-    padding-bottom: 370px;
+    padding-top: 22%;
     color: white;
     font-family: "sansation", "sans-serif";
 }
 
-.car3{
-    padding-left: 280px;
-    padding-bottom: 500px;
-    color: white;
-    font-family: "sansation", "sans-serif";
-}
+/*.car3{*/
+    /*padding-left: 280px;*/
+    /*padding-bottom: 500px;*/
+    /*color: white;*/
+    /*font-family: "sansation", "sans-serif";*/
+/*}*/
 
 .car4{
-    padding-bottom: 420px;
-    padding-right: 360px;
-    margin-right: 250px;
+    padding-top:2%;
+    padding-right: 45%;
+
     color: white;
 }
 
 .car5{
-    padding-bottom: 300px;
-    padding-right: 380px;
+    padding-top: 20%;
+    padding-right: 28%;
     color: black;
 }
+
+.carousel-caption {
+    position:center;
+    top: 0;
+    bottom: auto;
+}
+
 .cartitle{
     font-family: "sansation", "sans-serif";
     font-size: 50px
