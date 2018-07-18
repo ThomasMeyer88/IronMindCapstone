@@ -19,20 +19,16 @@
 
 
 <div class="plannerContainer">
-        <i onclick="myCalender()" class="far fa-calendar-alt fa-5x"></i>
-    <h1 class="dayHeader" style="padding-right: 100px">
+    <div class = "col-lg-12" style="padding-right: 120px; height: 85px">
+        <h1 class="dayHeader">
             <output th:text="${name}"></output>
         </h1>
         <h3 class="dayHeader"> Workouts for day:
             <output th:text="${day}"></output>
         </h3>
-    <div class="col-lg-12" style="text-align: center; margin-bottom: 1.5em; padding-right: 120px">
-        <!--<span onclick="myCalender()" data-feather="calendar"></span>-->
-        <form th:action="@{/savetemplate/} + ${progId} + @{/} + ${day}" method="post">
-            <input type="text" placeholder=" " name="tempName" />
-            <input type="submit" value=" " class="templateSave" />
-        </form>
+        <i onclick="myCalender()" class="far fa-calendar-alt fa-5x" style="font-size: 3em; float:left"></i>
     </div>
+    <div class ="col-lg-12">
     <div class="searchContainer">
             <input type="text" placeholder="Search Exercises" id="searchEx" class="searchBar"/>
             <div class="scrollable">
@@ -96,8 +92,13 @@
 
         </div>
 
+
+
     <div class="searchContainer">
-        <input type="text" placeholder="Search Templates" id="searchTemp" class="searchBar" />
+        <form th:action="@{/savetemplate/} + ${progId} + @{/} + ${day}" method="post">
+            <input type="text" placeholder="Search Templates" id="searchTemp" class="searchBar" name="tempName" style="width:207px"/>
+            <input type="submit" value=" " class="templateSave" />
+        </form>
         <div class="scrollable">
             <div th:each="template : ${tempList}">
                 <div class="tempForm" draggable="false" th:id="${template.id}">
@@ -112,6 +113,8 @@
             </div>
         </div>
     </div>
+    </div>
+
 </div>
 
 
