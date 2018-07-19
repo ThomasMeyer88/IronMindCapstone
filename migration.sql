@@ -32,3 +32,5 @@ insert into completedsets (day, estimated1rm, exercise_id, exercise_name, reps, 
 VALUES (1, 200, 1, 'Deadlift', 20, 2000, 100, 1);
 
 describe users;
+
+update users set bio = "My name is Andre" where id = 3;

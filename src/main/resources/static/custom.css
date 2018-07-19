@@ -1470,7 +1470,8 @@ p {
     font-family: "geomanist", "sans-serif";
 }
 
-.btn-sm:hover{
+
+                                .btn-sm:hover{
     background-color: #6ACCAD;
     color: #333B36;
     font-family: "geomanist", "sans-serif";
@@ -1539,7 +1540,14 @@ p {
     }
 }
 
+.ironmindlogo{
+    color: #6ACCAD;
+}
 
+.ironmindlogo:hover{
+    color: #6ACCAD;
+
+}
 
 
 
